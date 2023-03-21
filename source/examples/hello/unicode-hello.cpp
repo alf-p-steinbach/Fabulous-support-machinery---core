@@ -1,4 +1,4 @@
-﻿#include <fabulous_support_machinery/core.hpp>
+﻿#include <fsm/core.hpp>
 namespace fsm = fabulous_support_machinery;
 
 auto main() -> int

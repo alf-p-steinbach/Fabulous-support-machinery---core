@@ -1,4 +1,4 @@
-﻿#include <fabulous_support_machinery/all.hpp>
+﻿#include <fsm/all.hpp>
 namespace fsm = fabulous_support_machinery;
 
 #include <string>

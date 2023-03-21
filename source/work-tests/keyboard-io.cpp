@@ -1,6 +1,6 @@
 ﻿// The keyboard message hook in a distinct thread is not called.
 
-#include <fabulous_support_machinery/core.hpp>
+#include <fsm/core.hpp>
 namespace fsm = fabulous_support_machinery;
 using   fsm::in_, fsm::hopefully;
 

@@ -13,7 +13,7 @@ FSM uses an as yet still rare model of simple /single file build/ for a simple l
 
 Compiling the examples folder's “fabulous_support_machinery.cpp” file builds the whole FSM library, because the file `#include`s all of the FSM library's separately compiled code for this system and compiler.
 
-You can make your own such file by `#include`-ing the implementation source aggregation file `<fabulous_support_machinery/_impl.core.cpp-include>`.
+You can make your own such file by `#include`-ing the implementation source aggregation file `<fsm/_impl.core.cpp-include>`.
 
 ---
 
