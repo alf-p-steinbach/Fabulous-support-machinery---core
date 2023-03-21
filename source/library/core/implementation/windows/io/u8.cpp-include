@@ -1,0 +1,4 @@
+﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+
+#include "u8/console.cpp-include"
+#include "u8/std_streams.cpp"

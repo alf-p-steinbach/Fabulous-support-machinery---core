@@ -1,0 +1,5 @@
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <fsm/core/exports/+std-cpp-language.hpp>
+
+#include <fsm/core/exports/text/unicode/monospaced-display-width.hpp>
+#include <fsm/core/exports/text/unicode/to_spec.hpp>

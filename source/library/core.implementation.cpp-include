@@ -1,0 +1,10 @@
+#include <fsm/core/exports/+std-cpp-language/versions.hpp>
+#ifndef FSM_NO_FMT_HEADER_ONLY_PLEASE
+#   if FSM_CPP_VERSION < FSM_CPP20
+#       undef   FMT_HEADER_ONLY
+#       define  FMT_HEADER_ONLY
+#   endif
+#endif
+
+#include <fsm/core/implementation/os-specific.cpp-include>
+#include <fsm/core/implementation/common-portable.cpp-include>
