@@ -1,7 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/basic-types/byte-types/byte-info.hpp>        // bits_per_byte
 #include <fsm/core/exports/meta-type/class-kinds/Non_instantiable.hpp>  // Non_instantiable
 
 #include <type_traits>
