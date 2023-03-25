@@ -19,8 +19,9 @@ namespace app {
 
         // Display one line for each code point with string index, symbol and code point value.
         for( const auto code_point: u8::Code_points_view( text ) ) {
+            const auto index = code_point.char_pointer() - text.data();
             output( ""s
-                << right( 2, code_point.char_pointer() - text.data() ) << ": "
+                << right( 2, index ) << ": "
                 << right( 6, ""s << "‘" << code_point.sv() << "’" ) << " "
                 << right( 9, to_spec( code_point.codepoint() ) )
                 << "\n"
@@ -29,4 +30,4 @@ namespace app {
     }
 }  // namespace app
 
-auto main() -> int { return fsm::with_exceptions_displayed( app::run ); }
+auto main() -> int { return fsm::with_exception_info_to_stderr( app::run ); }

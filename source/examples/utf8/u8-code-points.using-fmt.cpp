@@ -18,13 +18,14 @@ namespace app {
         
         // Display one line for each code point with string index, symbol and code point value.
         for( const auto code_point: u8::Code_points_view( text ) ) {
+            const auto index = code_point.char_pointer() - text.data();
             print( "{:2}: {:>6} {:>9}\n",
-                code_point.char_pointer() - text.data(),    // Index in string.
-                format( "‘{}’", code_point.sv() ),          // E.g. "‘日’".
-                to_spec( code_point.codepoint() )              // E.g. "u65E5".
+                index,                                  // Index in string.
+                format( "‘{}’", code_point.sv() ),      // E.g. "‘日’".
+                to_spec( code_point.codepoint() )       // E.g. "u65E5".
                 );
         }
     }
 }  // namespace app
 
-auto main() -> int { return fsm::with_exceptions_displayed( app::run ); }
+auto main() -> int { return fsm::with_exception_info_to_stderr( app::run ); }

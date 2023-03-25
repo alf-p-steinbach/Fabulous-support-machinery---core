@@ -2,7 +2,7 @@
 // (2) the original `fmt` library as a header only library, i.e. with `FMT_HEADER_ONLY`
 // defined, depending on the version of the C++ standard. You can define the
 // preprocessor symbol `FSM_NO_FMT_HEADER_ONLY_PLEASE` to avoid the 2nd possibility.
-#if 10
+#if 0
 #   define  FSM_NO_FMT_HEADER_ONLY_PLEASE
 #endif
 
