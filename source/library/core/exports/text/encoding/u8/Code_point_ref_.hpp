@@ -35,7 +35,7 @@ namespace fabulous_support_machinery::u8::_definitions {
         using Unit              = typename iterator_traits<Unit_iterator>::value_type;
 
     private:
-        using Base = Code_point_inspectors_mixin_< Code_point_ref_ >;
+        using Inspectors = Code_point_inspectors_mixin_< Code_point_ref_ >;
 
         Unit_iterator   m_it_first;
 
@@ -50,9 +50,9 @@ namespace fabulous_support_machinery::u8::_definitions {
  
         constexpr auto unit_iterator() const -> Unit_iterator { return m_it_first; }
 
-        using   Base::first_unit, Base::n_bytes,
-                Base::begin, Base::end, Base::unit_pointer, Base::char_pointer,
-                Base::codepoint, Base::sv, Base::str;
+        using   Inspectors::first_unit, Inspectors::n_bytes,
+                Inspectors::begin, Inspectors::end, Inspectors::unit_pointer, Inspectors::char_pointer,
+                Inspectors::cp_number, Inspectors::sv, Inspectors::str;
     };
     
     using Code_point_ref = Code_point_ref_<const char*>;

@@ -17,9 +17,11 @@
 #   undef   FSM_USE_ORIGINAL_FMTLIB_PLEASE
 #   define  FSM_USE_ORIGINAL_FMTLIB_PLEASE
 #endif
+
 #if defined( __cpp_lib_format ) and not defined( FSM_USE_ORIGINAL_FMTLIB_PLEASE )
 #   undef   FSM_USING_ORIGINAL_FMTLIB
 #else
+#   undef   FSM_USING_ORIGINAL_FMTLIB
 #   define  FSM_USING_ORIGINAL_FMTLIB
 #endif
 

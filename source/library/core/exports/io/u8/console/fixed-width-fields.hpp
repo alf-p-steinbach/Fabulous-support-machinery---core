@@ -74,7 +74,7 @@ namespace fabulous_support_machinery::console::_definitions {
             const auto it_beyond    = u8::Code_point_iterator( p_beyond );
 
             for( auto it_back = prev( it_beyond ); true; --it_back ) {
-                m_display_width -= display_width_of( it_back->codepoint() );
+                m_display_width -= display_width_of( it_back->cp_number() );
                 const_<const char*> p_cropped_beyond = it_back.unit_iterator();
                 if( p_cropped_beyond == p_first ) {
                     m_text = {};
@@ -104,7 +104,7 @@ namespace fabulous_support_machinery::console::_definitions {
         }
         const auto  cropped_s           = rightcropped_to_width( w, s );
         const int   text_display_width  = cropped_s.display_width();
-        const int   n_spaces            = w - text_display_width;   // Guaranteed ≥ 0.
+        const int   n_spaces            = w - text_display_width;               // Guaranteed ≥ 0.
 
         buffer.reserve( cropped_s.sv().length() + n_spaces );
         buffer = cropped_s.sv();
@@ -112,10 +112,7 @@ namespace fabulous_support_machinery::console::_definitions {
         return move( buffer );
     }
 
-    template<
-        class tp_Number,
-        FSM_ENABLE_IF_( is_arithmetic_v< tp_Number > )
-        >
+    template< class tp_Number, FSM_ENABLE_IF_( is_arithmetic_v< tp_Number > ) >
     inline auto left( const int w, const tp_Number value )
         -> string
     { return left( w, to_string( value ) ); }   // TODO: replace `to_string`
@@ -128,7 +125,7 @@ namespace fabulous_support_machinery::console::_definitions {
         }
         const auto  cropped_s           = rightcropped_to_width( w, s );        // TODO: left-cropped.
         const int   text_display_width  = cropped_s.display_width();
-        const int   n_spaces            = w - text_display_width;   // Guaranteed ≥ 0.
+        const int   n_spaces            = w - text_display_width;               // Guaranteed ≥ 0.
 
         buffer.reserve( n_spaces + cropped_s.sv().length() );
         buffer.clear();
@@ -137,13 +134,10 @@ namespace fabulous_support_machinery::console::_definitions {
         return move( buffer );
     }
     
-    template<
-        class tp_Number,
-        FSM_ENABLE_IF_( is_arithmetic_v< tp_Number > )
-        >
+    template< class tp_Number, FSM_ENABLE_IF_( is_arithmetic_v< tp_Number > ) >
     inline auto right( const int w, const tp_Number value )
         -> string
-    { return right( w, to_string( value ) ); }   // TODO: replace `to_string`
+    { return right( w, to_string( value ) ); }                                  // TODO: replace `to_string`
 
     namespace d = _definitions;
     namespace exports{ using

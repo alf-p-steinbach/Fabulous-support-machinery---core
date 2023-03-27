@@ -47,7 +47,7 @@ namespace fabulous_support_machinery::u8::_definitions {
         auto unit_pointer() const -> const Unit*    { return &*it_start(); }
         auto char_pointer() const -> const char*    { return reinterpret_cast<const char*>( unit_pointer() ); }
 
-        auto codepoint() const     -> char32_t         { return byte_sequences::to_codepoint( it_start() ); }
+        auto cp_number() const     -> char32_t         { return byte_sequences::to_codepoint( it_start() ); }
         auto sv() const         -> string_view      { return string_view( char_pointer(), n_bytes() ); }
         auto str() const        -> string           { return string( char_pointer(), n_bytes() ); }
     };

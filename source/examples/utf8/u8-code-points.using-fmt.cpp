@@ -1,28 +1,28 @@
 ﻿#include <fsm/all.hpp>
 namespace fsm = fabulous_support_machinery;
+#define NS FSM_USING_NSNAME
 
-#include <string>
 #include <string_view>
 
 namespace app {
-    using namespace fsm::console::useful_ns_names;      // console, fmtlib, u8, unicode
-    using   console::clear_screen, console::print, fmtlib::format, unicode::to_spec;
+    NS( fsm, console );  NS( fsm, u8 );  NS( fsm, unicode );  NS( fsm, fmtlib );
 
     void run()
     {
-        clear_screen();
         constexpr auto text = "Every 日本国 кошка loves blåbærsyltetøy!"sv;
 
         // Just display the message.
-        print( "{}\n", text );
+        console::clear_screen();
+        console::print( "{}\n", text );
         
         // Display one line for each code point with string index, symbol and code point value.
-        for( const auto code_point: u8::Code_points_view( text ) ) {
-            const auto index = code_point.char_pointer() - text.data();
-            print( "{:2}: {:>6} {:>9}\n",
+        const auto u8_text = u8::Code_points_view( text );
+        for( const u8::Code_point_ref seq: u8_text ) {
+            const auto index = seq.char_pointer() - text.data();
+            console::print( "{:2}: {:>6} {:>9}\n",
                 index,                                  // Index in string.
-                format( "‘{}’", code_point.sv() ),      // E.g. "‘日’".
-                to_spec( code_point.codepoint() )       // E.g. "u65E5".
+                fmtlib::format( "‘{}’", seq.sv() ),     // E.g. "‘日’".
+                unicode::to_spec( seq.cp_number() )     // E.g. "u65E5".
                 );
         }
     }

@@ -136,6 +136,6 @@ namespace fabulous_support_machinery::console::_definitions {
         d::Event_holder,
         d::event_is_available, d::next_event;
     }  // namespace exports
-}  // namespace fabulous_support_machinery::console::events::_definitions
+}  // namespace fabulous_support_machinery::console::_definitions
 
 namespace fabulous_support_machinery::console   { using namespace _definitions::exports; }

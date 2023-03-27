@@ -32,9 +32,9 @@ namespace fabulous_support_machinery::text {
         FSM_STATIC_ASSERT( bits_per_<Unit> == 16 );
         buffer.clear();  buffer.reserve( s.size() );
         
-        for( in_<u8::Code_point_ref> seq: u8::to_code_point_iterators( s ) ) {
+        for( const u8::Code_point_ref seq: u8::to_code_point_iterators( s ) ) {
             // TODO: surrogate pairs
-            buffer.push_back( static_cast<Unit>( seq.codepoint() ) );
+            buffer.push_back( static_cast<Unit>( seq.cp_number() ) );
         }
 
         return buffer;

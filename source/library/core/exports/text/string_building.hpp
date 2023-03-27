@@ -7,28 +7,42 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
+#include <utility>
 
-namespace fabulous_support_machinery::string_building {
+namespace fabulous_support_machinery::string_building::_definitions {
     using namespace std::string_literals;
     using   std::string, std::to_string,    // <string>
             std::string_view,               // <string_view>
             std::is_arithmetic_v,           // <type_traits>
-            std::enable_if_t;               // <utility>
+            std::forward, std::move;        // <utility>
 
     inline auto operator<<( string& destination, in_<string_view> source )
         -> string&
     { return destination.append( source ); }
 
-    template<
-        class tp_Number,
-        FSM_ENABLE_IF_( is_arithmetic_v< tp_Number > )
-        >
-    inline auto left( const int w, const tp_Number value )
-        -> string
-    { return left( w, to_string( value ) ); }
+    // TODO: overloads for numbers etc.
 
     template< class tp_T >
     inline auto operator<<( string&& destination, in_<tp_T> source )
         -> string&&
     { return move( destination << source ); }
-}  // namespace fabulous_support_machinery::string_building
+    
+    template< class... Args >
+    inline auto string_from( string&& destination, Args&&... args )
+        -> string&&
+    { return move( (destination << ... << args) ); }
+    
+    template< class... Args >
+    inline auto string_from( Args&&... args )
+        -> string
+    { return string_from( string(), forward<Args>( args )... ); }
+    
+    namespace d = _definitions;
+    namespace exports { using
+        d::operator<<,
+        d::string_from;
+    }  // namespace exports
+}  // namespace fabulous_support_machinery::string_building::_definitions
+
+namespace fabulous_support_machinery::string_building   { using namespace _definitions::exports; }
+namespace fabulous_support_machinery                    { using string_building::string_from; }

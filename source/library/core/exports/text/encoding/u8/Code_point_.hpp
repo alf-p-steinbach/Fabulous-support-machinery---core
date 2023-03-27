@@ -45,7 +45,7 @@ namespace fabulous_support_machinery::u8::_definitions {
         FSM_STATIC_ASSERT( max_length == byte_sequences::max_length );
 
     private:
-        using Base = Code_point_inspectors_mixin_< Code_point_ >;
+        using Inspectors = Code_point_inspectors_mixin_< Code_point_ >;
         array_of_<max_length, Unit>     m_units;
 
     public:
@@ -75,11 +75,12 @@ namespace fabulous_support_machinery::u8::_definitions {
             byte_sequences::to_sequence_at( m_units, code );
         }
 
+        // CRTP callback for inspectors:
         auto unit_iterator() const -> const Unit* { return &m_units[0]; }
 
-        using   Base::first_unit, Base::n_bytes,
-                Base::begin, Base::end, Base::unit_pointer, Base::char_pointer,
-                Base::codepoint, Base::sv, Base::str;
+        using   Inspectors::first_unit, Inspectors::n_bytes,
+                Inspectors::begin, Inspectors::end, Inspectors::unit_pointer, Inspectors::char_pointer,
+                Inspectors::cp_number, Inspectors::sv, Inspectors::str;
     };
     
     using Code_point = Code_point_<const char*>;
