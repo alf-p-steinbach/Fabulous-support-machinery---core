@@ -20,9 +20,9 @@ namespace app {
         for( const u8::Code_point_ref seq: u8_text ) {
             const auto index = seq.char_pointer() - text.data();
             console::output(
-                console::right( 2, index ), ": ",
-                console::right( 6, fsm::string_from( "‘", seq.sv(), "’" ) ), " ",
-                console::right( 9, unicode::to_spec( seq.cp_number() ) ),
+                console::right( 2, index ), ": ",                                   // Index in string.
+                console::right( 6, fsm::string_from( "‘", seq.sv(), "’" ) ), " ",   // E.g. "‘日’".
+                console::right( 9, unicode::to_spec( seq.cp_number() ) ),           // E.g. "u65E5".
                 "\n"
                 );
         }
