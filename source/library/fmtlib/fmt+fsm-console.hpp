@@ -24,7 +24,7 @@ namespace fabulous_support_machinery::console::_definitions {
     inline auto string_view_of( in_<string> s ) -> auto { return string_view( s ); }
 
     template< class Buffer, class... Args >
-    void print_using_buffer(
+    void print_fmt_using_buffer(
         Buffer&&                                buffer,
         const Output_stream_id                  stream_id,
         in_<fmtlib::format_string< Args...>>    fmt,
@@ -37,23 +37,23 @@ namespace fabulous_support_machinery::console::_definitions {
     }
 
     template< class... Args >
-    void print_to(
+    void print_fmt_to(
         const Output_stream_id                  stream_id,
         in_<fmtlib::format_string< Args...>>    fmt,
         Args&&...                               args
         )
     {
-        print_using_buffer( string(), stream_id, fmt, forward< Args >( args )... );
+        print_fmt_using_buffer( string(), stream_id, fmt, forward< Args >( args )... );
     }
     
     template< class... Args >
-    void print( in_<fmtlib::format_string< Args...>> fmt, Args&&... args )
+    void print_fmt( in_<fmtlib::format_string< Args...>> fmt, Args&&... args )
     {
-        print_to( Stream_id::out, fmt, forward< Args >( args )... );
+        print_fmt_to( Stream_id::out, fmt, forward< Args >( args )... );
     }
 
     template< class... Args >
-    void print_err( in_<fmtlib::format_string< Args...>> fmt, Args&&... args )
+    void print_fmt_err( in_<fmtlib::format_string< Args...>> fmt, Args&&... args )
     {
         output_to( Stream_id::err, fmt, forward< Args >( args )... );
     }
@@ -68,10 +68,10 @@ namespace fabulous_support_machinery::console::_definitions {
 
     namespace d = _definitions;
     namespace exports{ using
-        d::print_using_buffer,
-        d::print_to,
-        d::print,
-        d::print_err;
+        d::print_fmt_using_buffer,
+        d::print_fmt_to,
+        d::print_fmt,
+        d::print_fmt_err;
         namespace useful_ns_names = d::useful_ns_names;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::console::_definitions
