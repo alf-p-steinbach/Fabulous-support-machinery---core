@@ -12,7 +12,7 @@
 #include <assert.h>     // assert
 
 namespace fabulous_support_machinery::console::_definitions {
-    using   std::variant, std::visit, std::holds_alternative;       // <variant>
+    using   std::get_if, std::variant, std::visit, std::holds_alternative;  // <variant>
 
     //------------------------------------- Hierarchy:
     class Event;
@@ -77,16 +77,15 @@ namespace fabulous_support_machinery::console::_definitions {
 
     inline Mouse_event::~Mouse_event() {}
 
-    // TODO: factor out generic polymorphic variant.
     class Event_holder
     {
-        using Types = Typelist_<
+        using Type_list = Typelist_<
             Keyboard_character_event,
             Keyboard_modal_action_event,
             Keyboard_keypress_event
             // Mouse_event
             >;
-        using Variant = Types::Specialization_of_<variant>;
+        using Variant = Type_list::Specialization_of_<variant>;
             
         Variant m_variant;
 
@@ -100,32 +99,38 @@ namespace fabulous_support_machinery::console::_definitions {
         auto variant_is_a() const
             -> bool
         {
-            if( m_variant.index() == Types::index_of_<Type> ) {
+            if( m_variant.index() == Type_list::index_of_<Type> ) {
                 return true;
             } else {
-                const auto is_specified_type = []( const auto& e ) -> bool
+                const auto is_specified_type = []( const auto& e )
+                    -> bool
                 {
                     return are_derived_and_base_< Bare_<decltype( e )>, Type >;
                 };
                 return visit( is_specified_type, m_variant );
             }
         }
-        
+
         template< class Type >
         auto variant_as() const
             -> const Type&
         {
-            // TODO: optimize via compile time decisions (type lists)?
+            if constexpr( Type_list::contains_<Type> ) {
+                if( const Type* p = get_if<Type>( m_variant ) ) {
+                    return *p;
+                }
+            }
+
             const auto get_p_event = []( const auto& e )
                 -> const Type*
             {
                 const auto result = dynamic_cast<const Type*>( &e );
-                assert( result or !"Unrelated retrieval type." );
+                assert( result or !"Retrieval type is not base of or same as variant." );
                 return result;
             };
             return *visit( get_p_event, m_variant );
         }
-        
+
         auto variant_as_base() const -> const Event& { return variant_as<Event>(); }
     };
 
