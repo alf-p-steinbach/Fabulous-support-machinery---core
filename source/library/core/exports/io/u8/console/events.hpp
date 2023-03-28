@@ -5,6 +5,7 @@
 #include <fsm/core/exports/io/keyboard/key_codes.hpp>                                   // Key code names.
 #include <fsm/core/exports/text/encoding/u8/Code_point_.hpp>                            // Code_point_
 #include <fsm/core/exports/meta-type/type-inspectors/compile-time-type-inspectors.hpp>  // are_derived_and_base_, Bare_
+#include <fsm/core/exports/meta-type/Typelist_.hpp>                                     // Typelist_
 
 #include <variant>
 
@@ -79,12 +80,13 @@ namespace fabulous_support_machinery::console::_definitions {
     // TODO: factor out generic polymorphic variant.
     class Event_holder
     {
-        using Variant = variant<
+        using Types = Typelist_<
             Keyboard_character_event,
             Keyboard_modal_action_event,
             Keyboard_keypress_event
             // Mouse_event
             >;
+        using Variant = Types::Specialization_of_<variant>;
             
         Variant m_variant;
 
@@ -98,20 +100,24 @@ namespace fabulous_support_machinery::console::_definitions {
         auto variant_is_a() const
             -> bool
         {
-            // TODO: optimize via compile time decisions (type lists).
-            const auto is_specified_type = []( const auto& e ) -> bool
-            {
-                return are_derived_and_base_< Bare_<decltype( e )>, Type >;
-            };
-            return visit( is_specified_type, m_variant );
+            if( m_variant.index() == Types::index_of_<Type> ) {
+                return true;
+            } else {
+                const auto is_specified_type = []( const auto& e ) -> bool
+                {
+                    return are_derived_and_base_< Bare_<decltype( e )>, Type >;
+                };
+                return visit( is_specified_type, m_variant );
+            }
         }
         
         template< class Type >
         auto variant_as() const
             -> const Type&
         {
-            // TODO: optimize via compile time decisions (type lists).
-            const auto get_p_event = []( const auto& e ) -> const Type*
+            // TODO: optimize via compile time decisions (type lists)?
+            const auto get_p_event = []( const auto& e )
+                -> const Type*
             {
                 const auto result = dynamic_cast<const Type*>( &e );
                 assert( result or !"Unrelated retrieval type." );

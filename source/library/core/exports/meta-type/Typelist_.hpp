@@ -1,14 +1,13 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/meta-type/class-kinds/Non_instantiable.hpp>  // Non_instantiable
+#include <fsm/core/exports/meta-type/class-kinds/Non_instantiable.hpp>                  // Non_instantiable
+#include <fsm/core/exports/meta-type/type-inspectors/compile-time-type-inspectors.hpp>  // is_same_
 
-#include <type_traits>
 #include <tuple>
 
 namespace fabulous_support_machinery::_definitions {
-    using   std::is_same_v,
-            std::tuple_element_t, std::tuple;
+    using   std::tuple_element_t, std::tuple;
 
     template< class... Types > struct Typelist_;
 
@@ -49,6 +48,23 @@ namespace fabulous_support_machinery::_definitions {
     };
 
 
+    // index_of_:
+
+    template< class X, class... Types >
+    constexpr auto index_of_t_in_list_()
+        -> int
+    {
+        using List = Typelist_<Types...>;
+        constexpr bool is_in_list = (is_same_<X, Types> or ...);
+        return (0?0
+            : not is_in_list?                       -1
+            : is_same_<X, Typelist_head_<List>>?     0
+            : // default:
+                1 + index_of_t_in_list_<X, Typelist_tail_<List>>
+            );
+    }
+
+ 
     // Typelist_:
     
     template< class... Types >
@@ -64,10 +80,16 @@ namespace fabulous_support_machinery::_definitions {
         using Tail = Typelist_tail_<Self>;              // A Typelist_<...>
         
         template< class T >
-        static constexpr bool contains_         = (is_same_v<T, Types> or ...);
+        static constexpr bool contains_         = (is_same_<T, Types> or ...);
         
         template< class T >
-        static constexpr bool all_types_are_    = (is_same_v<T, Types> and ...);
+        static constexpr bool all_types_are_    = (is_same_<T, Types> and ...);
+        
+        template< class T >
+        static constexpr int index_of_          = index_of_t_in_list_<T, Self>;
+        
+        template< template< class... Args > class Foo_ >
+        using Specialization_of_                = Foo_<Types...>;
     };
 
     template<>
@@ -83,6 +105,12 @@ namespace fabulous_support_machinery::_definitions {
         
         template< class T >
         static constexpr bool all_types_are_    = true;
+        
+        template< class T >
+        static constexpr int index_of_          = -1;
+
+        template< template< class... Args > class Foo_ >
+        using Specialization_of_                = Foo_<>;
     };
 
 
