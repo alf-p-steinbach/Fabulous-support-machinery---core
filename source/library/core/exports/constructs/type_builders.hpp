@@ -14,7 +14,5 @@ namespace fabulous_support_machinery {
         template< class T >                 using ref_          = T&;
 
         template< const int n, class Item > using array_of_     = Item[n];
-        
-        // template< class... T >  using Common_type_of_   = std::common_type_t< T... >;
     }
 }  // namespace fabulous_support_machinery
