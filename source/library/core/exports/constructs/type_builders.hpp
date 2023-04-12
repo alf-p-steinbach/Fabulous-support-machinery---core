@@ -10,8 +10,8 @@ namespace fabulous_support_machinery {
         template< class T >                 using type_         = T;
         template< class T >                 using const_        = const T;
 
-        template< class T >                 using in_           = const_<T>&;
         template< class T >                 using ref_          = T&;
+        template< class T >                 using in_           = ref_<const T>;
 
         template< const int n, class Item > using array_of_     = Item[n];
     }
