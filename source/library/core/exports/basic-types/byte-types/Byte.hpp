@@ -13,7 +13,7 @@
 #include <stddef.h> // Avoids problems with /inadvertent/ use of stuff from `::`.
 
 #include <fsm/core/exports/basic-types/byte-types/byte-info.hpp>     // bits_per_byte
-#include <fsm/core/exports/basic-types/byte-types/Byte_number.hpp>   // Byte_number
+#include <fsm/core/exports/basic-types/byte-types/Numeric_byte.hpp>   // Numeric_byte
 #include <fsm/core/exports/basic-types/Literal_null.hpp>             // Literal_null
 
 namespace fabulous_support_machinery {
@@ -27,8 +27,8 @@ namespace fabulous_support_machinery {
     //
     inline namespace byte_as_integer {
         constexpr auto operator+( const Byte v )
-            -> Byte_number
-        { return std::to_integer<Byte_number>( v ); }
+            -> Numeric_byte
+        { return std::to_integer<Numeric_byte>( v ); }
 
         constexpr auto operator==( const Byte v, Literal_null )
             -> bool

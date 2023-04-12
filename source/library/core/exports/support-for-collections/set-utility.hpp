@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/basic-types/size-types.hpp>                  // Size
-#include <fsm/core/exports/collections-support/FSM_AS_ITERATORS.hpp>    // FSM_AS_ITERATORS    
+#include <fsm/core/exports/basic-types/Size+Index.hpp>                  // Size
+#include <fsm/core/exports/support-for-collections/FSM_AS_ITERATORS.hpp>    // FSM_AS_ITERATORS    
 #include <fsm/core/exports/constructs/failure-handling/hopefully.hpp>   // hopefully
 #include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>    // FSM_FAIL_
 #include <fsm/core/exports/constructs/type_builders.hpp>                // in_, array_of

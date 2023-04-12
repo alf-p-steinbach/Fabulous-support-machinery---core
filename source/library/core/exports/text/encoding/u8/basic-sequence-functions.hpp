@@ -1,10 +1,10 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/basic-types/byte-types/Byte.hpp>              // Byte
-#include <fsm/core/exports/collections-support/size-functions.hpp>       // int_size_of
-#include <fsm/core/exports/constructs/failure-handling/hopefully.hpp>    // hopefully
-#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>     // FSM_FAIL
+#include <fsm/core/exports/basic-types/byte-types/Byte.hpp>                 // Byte
+#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of
+#include <fsm/core/exports/constructs/failure-handling/hopefully.hpp>       // hopefully
+#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>        // FSM_FAIL
 
 #include <iterator>
 

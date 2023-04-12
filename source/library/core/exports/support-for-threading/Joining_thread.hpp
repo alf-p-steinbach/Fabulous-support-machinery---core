@@ -29,9 +29,9 @@ namespace fabulous_support_machinery::_definitions {
         ~Joining_thread() { if( joinable() ) { join(); } }
 
         template< class Func, class... Args >
-        Joining_thread( const Func f, const Args... args ):
+        Joining_thread( Func f_arg, Args&&... args ):
             Joining_thread_state(),
-            thread( [this, f, args...]   // Capturing by reference would yield dangling arg-refs.
+            thread( [this, f = move( f_arg ), args...]  // Capturing by reference would yield dangling arg-refs.
             {
                 try {
                     f( args... );

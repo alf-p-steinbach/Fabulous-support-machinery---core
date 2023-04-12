@@ -5,6 +5,6 @@
 
 namespace fabulous_support_machinery {
 
-    using Byte_number   = unsigned char;
+    using Numeric_byte   = unsigned char;
 
 }  // namespace fabulous_support_machinery

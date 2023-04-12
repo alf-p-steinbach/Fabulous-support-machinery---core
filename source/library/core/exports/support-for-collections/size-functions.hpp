@@ -3,7 +3,7 @@
 
 #include <fsm/core/exports/constructs/failure-handling/FSM_STATIC_ASSERT.hpp>    // FSM_STATIC_ASSERT
 #include <fsm/core/exports/constructs/type_builders.hpp>                         // in_
-#include <fsm/core/exports/basic-types/size-types.hpp>                // Size (as ptrdiff_t)
+#include <fsm/core/exports/basic-types/Size+Index.hpp>                // Size (as ptrdiff_t)
 
 #include    <iterator>      // std::(distance, size)
 

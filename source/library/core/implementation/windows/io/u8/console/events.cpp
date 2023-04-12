@@ -3,10 +3,10 @@
 
 #include <fsm/core/implementation/windows/io/u8/stream_handle.hpp>
 #include <fsm/core/implementation/windows/_winapi/windows-h.for-u16.hpp>
-#include <fsm/core/exports/collections-support/set-utility.hpp>         // contains
-#include <fsm/core/exports/collections-support/size-functions.hpp>      // is_empty
+#include <fsm/core/exports/support-for-collections/set-utility.hpp>         // contains
+#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // is_empty
 #include <fsm/core/exports/constructs/failure-handling.hpp>             // hopefully, FSM_FAIL
-#include <fsm/core/exports/collections-support/queue-utility.hpp>       // popped_front_of
+#include <fsm/core/exports/support-for-collections/queue-utility.hpp>       // popped_front_of
 #include <fsm/core/exports/constructs/loops/repeat_times.hpp>           // repeat_times
 
 namespace fsm       = fabulous_support_machinery;

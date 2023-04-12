@@ -33,9 +33,7 @@ namespace fabulous_support_machinery {
     template< class T>      using Bare_                 = Uncv_<Unref_<T>>;
 
 
-    // Numerical type classifiers.
-    // std::is_signed etc. can't be specialized for user defined types, formal UB.
-    // The following `Is_integer_` and `Is_signed_` can be specialized.
+    // Built-in type detectors for foundation functionality.
 
     template< class T >
     constexpr bool  is_builtin_integral_type_   = std::is_integral_v<T>;
@@ -55,6 +53,11 @@ namespace fabulous_support_machinery {
     template< class T >
     constexpr bool  is_builtin_unsigned_integer_ = is_builtin_integer_<T> and is_builtin_unsigned_<T>;
     
+
+    // Numerical type classifiers.
+    // std::is_signed etc. can't be specialized for user defined types, formal UB.
+    // The following `Is_integer_` and `Is_signed_` can be specialized.
+
     template< class T >
     struct Is_integer_{ static inline constexpr bool yes = is_builtin_integer_<T>; };
     

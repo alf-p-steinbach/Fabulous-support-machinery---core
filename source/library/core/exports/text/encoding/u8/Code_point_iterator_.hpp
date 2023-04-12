@@ -2,14 +2,14 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/basic-types/byte-types/Byte.hpp>                             // Byte
-#include <fsm/core/exports/collections-support/Iterator_pair_.hpp>                      // Iterator_pair_
-#include <fsm/core/exports/collections-support/size-functions.hpp>                      // int_size_of
+#include <fsm/core/exports/support-for-collections/Iterator_pair_.hpp>                      // Iterator_pair_
+#include <fsm/core/exports/support-for-collections/size-functions.hpp>                      // int_size_of
 #include <fsm/core/exports/mixins/Relational_operators_mixin_.hpp>                      // Relational_operators_mixin_
 #include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>                    // FSM_FAIL
 #include <fsm/core/exports/constructs/failure-handling/FSM_STATIC_ASSERT.hpp>           // FSM_STATIC_ASSERT
 #include <fsm/core/exports/text/encoding/u8/Code_point_ref_.hpp>                        // u8::Code_point_ref_, tag::*
 #include <fsm/core/exports/text/encoding/u8/basic-sequence-functions.hpp>               // u8::*
-#include <fsm/core/exports/meta-type/type-inspectors/compile-time-type-inspectors.hpp>  // bits_per_
+#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>  // bits_per_
 
 #include <iterator>
 #include <string>

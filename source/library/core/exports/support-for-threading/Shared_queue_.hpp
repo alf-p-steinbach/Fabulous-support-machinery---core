@@ -1,15 +1,15 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/collections-support/queue-utility.hpp>    // popped_front_of
-#include <fsm/core/exports/collections-support/size-functions.hpp>   // int_size_of
-#include <fsm/core/exports/constructs/type_builders.hpp>             // in_, ref_
-#include <fsm/core/exports/constructs/declarations/FSM_WITH.hpp>     // FSM_WITH
-#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp> // FSM_FAIL
-#include <fsm/core/exports/constructs/loops/repeat_times.hpp>        // repeat_times
-#include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>        // Movable
-#include <fsm/core/exports/misc/Duration.hpp>                        // Duration
-#include <fsm/core/exports/threading/Mutex_locker.hpp>               // Mutex_locker
+#include <fsm/core/exports/support-for-collections/queue-utility.hpp>       // popped_front_of
+#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of
+#include <fsm/core/exports/constructs/type_builders.hpp>                    // in_, ref_
+#include <fsm/core/exports/constructs/declarations/FSM_WITH.hpp>            // FSM_WITH
+#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>        // FSM_FAIL
+#include <fsm/core/exports/constructs/loops/repeat_times.hpp>               // repeat_times
+#include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>               // Movable
+#include <fsm/core/exports/support-for-threading/Mutex_locker.hpp>          // Mutex_locker
+#include <fsm/core/exports/support-for-time/Duration.hpp>                   // Duration
 
 #include <condition_variable>
 #include <mutex>

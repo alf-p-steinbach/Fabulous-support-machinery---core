@@ -6,7 +6,7 @@
 // In particular, `nullptr` is not accepted (causes compilation error).
     
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>
-#include <fsm/core/exports/meta-type/type-inspectors/compile-time-type-inspectors.hpp>  // is_builtin_integral_type_
+#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>  // is_builtin_integral_type_
 
 #include <type_traits>
 

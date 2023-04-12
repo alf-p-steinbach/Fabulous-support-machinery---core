@@ -2,7 +2,6 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/basic-types.hpp>
-#include <fsm/core/exports/collections-support.hpp>
 #include <fsm/core/exports/constructs.hpp>
 #include <fsm/core/exports/constructs/failure-handling.hpp>
 #include <fsm/core/exports/failure-handling.hpp>
@@ -10,5 +9,7 @@
 #include <fsm/core/exports/meta-type.hpp>
 #include <fsm/core/exports/misc.hpp>
 #include <fsm/core/exports/mixins.hpp>
+#include <fsm/core/exports/support-for-collections.hpp>
+#include <fsm/core/exports/support-for-threading.hpp>
+#include <fsm/core/exports/support-for-time.hpp>
 #include <fsm/core/exports/text.hpp>
-#include <fsm/core/exports/threading.hpp>
