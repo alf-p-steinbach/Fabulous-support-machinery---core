@@ -22,6 +22,11 @@ namespace fabulous_support_machinery::_definitions {
             // TODO: exception name
             operator()( x.what() );
         }
+        
+        virtual void operator()() const
+        {
+            operator()( "An unexpected failure (a non-standard exception was thrown)." );
+        }
     };
 
     // namespace d = _definitions;

@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/support-for-collections/FSM_AS_ITERATORS.hpp>
-#define $as_iterators   FSM_AS_ITERATORS
+#include <fsm/core/exports/support-for-collections/FSM_ITS_RANGE.hpp>
+#define $its_range      FSM_ITS_RANGE
 
 #include <fsm/core/exports/constructs/declarations/FSM_TYPE_OF.hpp>
 #define $type_of        FSM_TYPE_OF
