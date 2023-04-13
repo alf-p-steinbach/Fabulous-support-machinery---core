@@ -19,7 +19,7 @@ namespace fabulous_support_machinery::_definitions {
     using Basic_main_func           = function<void()>;
 
     inline auto with_exception_info_to(
-        in_<Failure_reporter>       report_failure,
+        in_<Failure_reporter>       reporter,
         in_<Basic_main_func>        main_func
         )
         -> int
@@ -31,9 +31,9 @@ namespace fabulous_support_machinery::_definitions {
         // TODO: use terminal aware output.
         // TODO: nested exceptions' messages.
         } catch( in_<exception> x ) {
-            report_failure( x );
+            reporter.report( x );
         } catch( ... ) {
-            report_failure( "An unexpected failure (a non-standard exception was thrown)." );
+            reporter.report_unexpected();
         }
         return EXIT_FAILURE;
     }

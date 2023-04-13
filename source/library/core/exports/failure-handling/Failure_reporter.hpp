@@ -14,18 +14,18 @@ namespace fabulous_support_machinery::_definitions {
     {
         virtual ~Failure_reporter() {}
 
-        virtual void operator()( in_<string_view> text ) const = 0;
+        virtual void report( in_<string_view> text ) const = 0;
 
-        virtual void operator()( in_<exception> x ) const
+        virtual void report_unexpected() const
+        {
+            report( "An unexpected failure (a non-standard exception was thrown)." );
+        }
+
+        virtual void report( in_<exception> x ) const
         {
             // TODO: nested exceptions
             // TODO: exception name
-            operator()( x.what() );
-        }
-        
-        virtual void operator()() const
-        {
-            operator()( "An unexpected failure (a non-standard exception was thrown)." );
+            report( x.what() );
         }
     };
 

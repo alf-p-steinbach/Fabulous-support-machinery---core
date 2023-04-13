@@ -15,7 +15,7 @@ namespace fabulous_support_machinery::_definitions {
     struct Failure_reporter_using_stderr:
         Failure_reporter
     {
-        void operator()( in_<string_view> text ) const override
+        void report( in_<string_view> text ) const override
         {
             // TODO: only add newline to stdout if both stdout and stderr go to terminal.
             // TODO: use UTF-8 i/o.
