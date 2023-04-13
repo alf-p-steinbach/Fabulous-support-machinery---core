@@ -4,6 +4,9 @@
 #include <fsm/core/exports/support-for-collections/FSM_AS_ITERATORS.hpp>
 #define $as_iterators   FSM_AS_ITERATORS
 
+#include <fsm/core/exports/constructs/declarations/FSM_TYPE_OF.hpp>
+#define $type_of        FSM_TYPE_OF
+
 #include <fsm/core/exports/constructs/declarations/FSM_WITH.hpp>
 #define $using_nsname   FSM_USING_NSNAME
 #define $with           FSM_WITH
