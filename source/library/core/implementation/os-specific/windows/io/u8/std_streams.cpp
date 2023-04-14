@@ -1,8 +1,8 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/io/u8/std_streams.hpp>
 
-#include <fsm/core/implementation/windows/io/u8/stream_handle.hpp>
-#include <fsm/core/implementation/windows/_winapi/windows-h.for-u16.hpp>
+#include <fsm/core/implementation/os-specific/windows/io/u8/stream_handle.hpp>
+#include <fsm/core/implementation/os-specific/windows/_winapi/windows-h.for-u16.hpp>
 
 #include <fsm/core/exports/basic-types/byte-types/Byte.hpp>
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>

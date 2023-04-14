@@ -1,8 +1,8 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/io/u8/console/events.hpp>
 
-#include <fsm/core/implementation/windows/io/u8/stream_handle.hpp>
-#include <fsm/core/implementation/windows/_winapi/windows-h.for-u16.hpp>
+#include <fsm/core/implementation/os-specific/windows/io/u8/stream_handle.hpp>
+#include <fsm/core/implementation/os-specific/windows/_winapi/windows-h.for-u16.hpp>
 #include <fsm/core/exports/support-for-collections/set-utility.hpp>         // contains
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>      // is_empty
 #include <fsm/core/exports/constructs/failure-handling.hpp>             // hopefully, FSM_FAIL
@@ -59,7 +59,7 @@ namespace fabulous_support_machinery::console::_definitions {
             const bool ctrl_pressed = !!(ev.dwControlKeyState & ctrl_mask);
 
             if( alt_pressed == ctrl_pressed ) {
-                translated_events().emplace( Keyboard_character_event{ code } );
+                translated_events().emplace( Keyboard_code_event{ code } );
             } else {
                 // "is pressed" continuous effect Backspace, Delete, PgUp, PgDn, left, up, down, right:
                 static constexpr WORD modal_keys[] =
