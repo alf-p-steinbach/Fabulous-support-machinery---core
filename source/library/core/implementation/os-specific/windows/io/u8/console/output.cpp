@@ -107,6 +107,6 @@ namespace fabulous_support_machinery::console {
             {}      // reserved
             );
         hopefully( success )
-            or FSM_FAIL( "Failed to output to the console." );
+            or FSM_FAIL( "Failed to output to the console via WriteConsole." );
     }
 }  // namespace fabulous_support_machinery::console
