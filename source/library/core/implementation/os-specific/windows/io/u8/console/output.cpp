@@ -79,13 +79,13 @@ namespace fabulous_support_machinery::console {
             std::wstring,
             std::wstring_view;
 
-    extern void _definitions::clear_screen()
+    void _definitions::clear_screen()
     {
         system( "cls" );
     }
 
     // TODO: colorization depending on stream id
-    extern void _definitions::output_to( const Output_stream_id stream_id, in_<string_view> s )
+    void _definitions::output_to( const Output_stream_id stream_id, in_<string_view> s )
     {
         (void) stream_id;
         #ifndef __GNUC__
