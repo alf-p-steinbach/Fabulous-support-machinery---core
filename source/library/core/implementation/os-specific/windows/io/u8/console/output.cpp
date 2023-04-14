@@ -93,11 +93,11 @@ namespace fabulous_support_machinery::console {
         #endif
         if( s.empty() ) { return; }
 
-        constexpr auto largest_dword = DWORD( -1 );
+        constexpr auto max_dword = DWORD( -1 );
 
         const auto ws = text::to_utf_16_as_<wstring>( s );
         const Size ws_len = size_of( ws );
-        assert( ws_len <= largest_dword );
+        assert( ws_len <= max_dword );
         DWORD n_units_written = 0;
         const bool success = ::WriteConsole(
             impl::console_output_handle(),
