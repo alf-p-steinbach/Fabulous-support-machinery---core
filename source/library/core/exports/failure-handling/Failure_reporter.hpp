@@ -20,7 +20,7 @@ namespace fabulous_support_machinery::_definitions {
 
         virtual void report( in_<string_view> text ) const
         {
-            const auto s =  string( not is_empty( text )? text : "No failure information available." );
+            const auto s =  string( is_empty( text )? "No failure information available." : text );
             output( string() + "!" + s + "\n" );
         }
 
