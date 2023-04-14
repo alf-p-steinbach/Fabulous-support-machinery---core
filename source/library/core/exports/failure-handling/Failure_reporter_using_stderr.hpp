@@ -15,17 +15,13 @@ namespace fabulous_support_machinery::_definitions {
     struct Failure_reporter_using_stderr:
         Failure_reporter
     {
-        void report( in_<string_view> text ) const override
+        void output( in_<string_view> text ) const override
         {
             // TODO: only add newline to stdout if both stdout and stderr go to terminal.
             // TODO: use UTF-8 i/o.
             fprintf( stdout, "\n" );
             fflush( stdout );
-            if( not is_empty( text ) ) {
-                fprintf( stderr, "!%.*s\n", int_size_of( text ), text.data() );
-            } else {
-                fprintf( stderr, "!No failure information available.\n" );
-            }
+            fprintf( stderr, "%.*s\n", int_size_of( text ), text.data() );
             fflush( stderr );
         }
     };

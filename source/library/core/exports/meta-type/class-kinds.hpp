@@ -3,3 +3,4 @@
 
 #include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>
 #include <fsm/core/exports/meta-type/class-kinds/Non_instantiable.hpp>
+#include <fsm/core/exports/meta-type/class-kinds/Polymorphic.hpp>
