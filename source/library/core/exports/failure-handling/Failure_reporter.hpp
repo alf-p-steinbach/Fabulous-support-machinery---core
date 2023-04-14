@@ -3,6 +3,7 @@
 
 #include <fsm/core/exports/constructs/type_builders.hpp>                // in_
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>  // is_empty
+#include <fsm/core/exports/meta-type/class-kinds/Polymorphic.hpp>       // Polymorphic
 
 #include <exception>
 #include <string>
@@ -13,10 +14,8 @@ namespace fabulous_support_machinery::_definitions {
             std::string,            // <string>
             std::string_view;       // <stringview>
 
-    struct Failure_reporter
+    struct Failure_reporter: Polymorphic
     {
-        virtual ~Failure_reporter() {}
-
         virtual void output( in_<string_view> text ) const = 0;
 
         virtual void report( in_<string_view> text ) const

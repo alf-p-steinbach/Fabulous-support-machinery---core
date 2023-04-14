@@ -4,7 +4,9 @@
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>                  // FSM_ENABLE_IF_
 #include <fsm/core/exports/io/keyboard/key_codes.hpp>                                   // Key code names.
 #include <fsm/core/exports/text/encoding/u8/Code_point_.hpp>                            // Code_point_
-#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>  // are_derived_and_base_, Bare_
+#include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>                           // Movable
+#include <fsm/core/exports/meta-type/class-kinds/Polymorphic.hpp>                       // Polymorphic
+#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>   // are_derived_and_base_, Bare_
 #include <fsm/core/exports/meta-type/Typelist_.hpp>                                     // Typelist_
 
 #include <variant>
@@ -25,35 +27,32 @@ namespace fabulous_support_machinery::console::_definitions {
 
     //-------------------------------------:
     
-    class Event
+    class Event:
+        // public Movable,      // ???
+        public Polymorphic
     {
-        auto operator=( in_<Event> ) -> Event& = delete;
-
     protected:
-        inline virtual ~Event() = 0;
+        Event() {}
         
         // TODO: common timestamp?
     };
-    
-    inline Event::~Event() {}
     
     class Keyboard_event:
         public Event
     {
     protected:
-        inline virtual ~Keyboard_event() = 0;
+        Keyboard_event() {}
     };
 
-    inline Keyboard_event::~Keyboard_event() {}
-
     // Unicode code points, not /characters/ like the double code-point flags, but:
-    class Keyboard_character_event:
+    class Keyboard_code_event:
         public Keyboard_event
     {
+        const u8::Code_point    m_code_point;
+
     public:
-        const u8::Code_point    code_point;
-        
-        Keyboard_character_event( const u8::Code_point value ): code_point( value ) {}
+        Keyboard_code_event( const u8::Code_point value ): m_code_point( value ) {}
+        auto code_point() const -> const u8::Code_point& { return m_code_point; }
     };
 
     // "is pressed" continuous effect Backspace, Delete, PgUp, PgDn, left, up, down, right:
@@ -72,15 +71,13 @@ namespace fabulous_support_machinery::console::_definitions {
         public Event
     {
     protected:
-        inline virtual ~Mouse_event() = 0;
+        Mouse_event() {}
     };
-
-    inline Mouse_event::~Mouse_event() {}
 
     class Event_holder
     {
         using Type_list = Typelist_<
-            Keyboard_character_event,
+            Keyboard_code_event,
             Keyboard_modal_action_event,
             Keyboard_keypress_event
             // Mouse_event
