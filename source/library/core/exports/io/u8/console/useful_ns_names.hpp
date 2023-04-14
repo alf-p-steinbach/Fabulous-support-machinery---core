@@ -10,3 +10,6 @@ namespace fabulous_support_machinery::console {
         namespace fmtlib    = fabulous_support_machinery::fmtlib;
     }  // namespace useful_ns_names
 }  // namespace fabulous_support_machinery::console
+
+// Replaced with NS FSM_USING_NSNAME
+// TODO: consider `nsname` nested namespaces.

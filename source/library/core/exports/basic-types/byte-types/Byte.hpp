@@ -12,9 +12,9 @@
 #include <cstddef>  // Supplies `<std::byte>`.
 #include <stddef.h> // Avoids problems with /inadvertent/ use of stuff from `::`.
 
-#include <fsm/core/exports/basic-types/byte-types/byte-info.hpp>     // bits_per_byte
-#include <fsm/core/exports/basic-types/byte-types/Numeric_byte.hpp>   // Numeric_byte
-#include <fsm/core/exports/basic-types/Literal_null.hpp>             // Literal_null
+#include <fsm/core/exports/basic-types/byte-types/byte-info.hpp>        // bits_per_byte
+#include <fsm/core/exports/basic-types/byte-types/Numeric_byte.hpp>     // Numeric_byte
+#include <fsm/core/exports/misc/Literal_null.hpp>                       // Literal_null
 
 namespace fabulous_support_machinery {
 
@@ -25,10 +25,16 @@ namespace fabulous_support_machinery {
     //
     // The following are convenience ops for dealing with bytes as numbers:
     //
-    inline namespace byte_as_integer {
+    // +x, -x, (x == 0), (x != 0)
+    
+    inline namespace byte_as_integer_ops {
         constexpr auto operator+( const Byte v )
             -> Numeric_byte
         { return std::to_integer<Numeric_byte>( v ); }
+
+        constexpr auto operator-( const Byte v )
+            -> Numeric_byte
+        { return -std::to_integer<Numeric_byte>( v ); }
 
         constexpr auto operator==( const Byte v, Literal_null )
             -> bool
@@ -45,6 +51,6 @@ namespace fabulous_support_machinery {
         constexpr auto operator!=( Literal_null, const Byte v )
             -> bool
         { return (+v != 0); }
-    }  // namespace byte_as_integer
+    }  // namespace byte_as_integer_ops
 
 }  // namespace fabulous_support_machinery
