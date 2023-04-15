@@ -1,11 +1,11 @@
 ﻿#include <fsm/core.hpp>
+#include <fsm/$-macros.hpp>
 namespace fsm = fabulous_support_machinery;
-#define NS FSM_USING_NSNAME
 
 #include <string_view>
 
 namespace app {
-    NS( fsm, console );  NS( fsm, u8 );  NS( fsm, unicode );
+    $nsname_from( fsm, console );  $nsname_from( fsm, u8 );  $nsname_from( fsm, unicode );
 
     void run()
     {

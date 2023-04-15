@@ -1,6 +1,6 @@
 ﻿#include <fsm/all.hpp>
 namespace fsm = fabulous_support_machinery;
-#define NS FSM_USING_NSNAME
+#define NS FSM_NSNAME_FROM
 
 #include <string_view>
 

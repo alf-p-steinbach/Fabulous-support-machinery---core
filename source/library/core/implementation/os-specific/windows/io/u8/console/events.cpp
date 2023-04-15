@@ -7,7 +7,7 @@
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>      // is_empty
 #include <fsm/core/exports/constructs/failure-handling.hpp>             // hopefully, FSM_FAIL
 #include <fsm/core/exports/support-for-collections/queue-utility.hpp>       // popped_front_of
-#include <fsm/core/exports/constructs/loops/repeat_times.hpp>           // repeat_times
+#include <fsm/core/exports/constructs/flow-control/repeat_times.hpp>           // repeat_times
 
 namespace fsm       = fabulous_support_machinery;
 

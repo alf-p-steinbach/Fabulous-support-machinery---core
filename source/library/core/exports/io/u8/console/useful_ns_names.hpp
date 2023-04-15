@@ -11,5 +11,5 @@ namespace fabulous_support_machinery::console {
     }  // namespace useful_ns_names
 }  // namespace fabulous_support_machinery::console
 
-// Replaced with NS FSM_USING_NSNAME
+// Replaced with NS FSM_NSNAME_FROM
 // TODO: consider `nsname` nested namespaces.
