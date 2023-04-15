@@ -17,14 +17,14 @@
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>
 #define $enable_if_     FSM_ENABLE_IF_
 
-#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>
+#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>
 #define $fail           FSM_FAIL
 #define $fail_          FSM_FAIL_
 
-#include <fsm/core/exports/constructs/failure-handling/FSM_EXPECT.hpp>
+#include <fsm/core/exports/failure/detecting/FSM_EXPECT.hpp>
 #define $expect         FSM_EXPECT
 
-#include <fsm/core/exports/constructs/failure-handling/FSM_STATIC_ASSERT.hpp>
+#include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>
 #define $static_assert  FSM_STATIC_ASSERT
 
 #include <fsm/core/exports/constructs/flow-control/FSM_IF.hpp>

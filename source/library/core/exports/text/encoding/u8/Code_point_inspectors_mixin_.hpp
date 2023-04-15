@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/failure-handling/FSM_STATIC_ASSERT.hpp>               // FSM_STATIC_ASSERT
+#include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>               // FSM_STATIC_ASSERT
 #include <fsm/core/exports/mixins/Relational_operators_mixin_.hpp>               // Relational_operators_mixin_
 #include <fsm/core/exports/text/encoding/u8/basic-sequence-functions.hpp>        // u8::*
 

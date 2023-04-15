@@ -5,8 +5,8 @@
 #include <fsm/core/implementation/os-specific/windows/_winapi/windows-h.for-u16.hpp>
 
 #include <fsm/core/exports/basic-types/byte-types/Byte.hpp>
+#include <fsm/core/exports/failure.hpp>
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>
-#include <fsm/core/exports/constructs/failure-handling.hpp>
 #include <fsm/core/exports/text/encoding-conversions.hpp>
 #include <fsm/core/exports/constructs/type_builders.hpp>
 

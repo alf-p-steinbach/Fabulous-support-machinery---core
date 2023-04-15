@@ -5,7 +5,7 @@
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of
 #include <fsm/core/exports/constructs/type_builders.hpp>                    // in_, ref_
 #include <fsm/core/exports/constructs/declarations/FSM_WITH.hpp>            // FSM_WITH
-#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>        // FSM_FAIL
+#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>        // FSM_FAIL
 #include <fsm/core/exports/constructs/flow-control/repeat_times.hpp>               // repeat_times
 #include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>               // Movable
 #include <fsm/core/exports/support-for-threading/Mutex_locker.hpp>          // Mutex_locker

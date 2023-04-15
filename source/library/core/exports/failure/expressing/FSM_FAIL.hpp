@@ -10,7 +10,7 @@
 //      delete_file( path ) or $fail( "delete_file failed" );
 
 
-#include <fsm/core/exports/constructs/failure-handling/fail.hpp>
+#include <fsm/core/exports/failure/expressing/fail.hpp>
 
 // TODO: pick up namespace/class via __FUNCTION__ or the like.
 #define FSM_FUNCTION_NAME   __func__

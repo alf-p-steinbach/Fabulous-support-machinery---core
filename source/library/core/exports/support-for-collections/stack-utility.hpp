@@ -2,8 +2,8 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/basic-types/Size+Index.hpp>       // Index
-#include <fsm/core/exports/constructs/failure-handling/hopefully.hpp>   // hopefully
-#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>    // FSM_FAIL_
+#include <fsm/core/exports/failure/detecting/hopefully.hpp>   // hopefully
+#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>    // FSM_FAIL_
 #include <fsm/core/exports/constructs/type_builders.hpp>                // in_
 
 #include <stack>

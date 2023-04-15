@@ -2,8 +2,8 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/constructs/type_builders.hpp>                         // in_
-#include <fsm/core/exports/failure-handling/Failure_reporter_using_stderr.hpp>   // Failure_reporter
-#include <fsm/core/exports/failure-handling/with_exception_info_to.hpp>          // with_exception_info_to
+#include <fsm/core/exports/failure/handling/Failure_reporter_using_stderr.hpp>   // Failure_reporter
+#include <fsm/core/exports/failure/handling/with_exception_info_to.hpp>          // with_exception_info_to
 
 #include <exception>
 #include <functional>

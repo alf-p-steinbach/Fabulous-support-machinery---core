@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/failure-handling/FSM_STATIC_ASSERT.hpp>           // FSM_STATIC_ASSERT
+#include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>           // FSM_STATIC_ASSERT
 #include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>   // is_same_
 
 #define FSM_EXPANDED( ... )      __VA_ARGS__

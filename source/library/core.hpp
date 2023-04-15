@@ -3,8 +3,7 @@
 
 #include <fsm/core/exports/basic-types.hpp>
 #include <fsm/core/exports/constructs.hpp>
-#include <fsm/core/exports/constructs/failure-handling.hpp>
-#include <fsm/core/exports/failure-handling.hpp>
+#include <fsm/core/exports/failure.hpp>
 #include <fsm/core/exports/io.hpp>
 #include <fsm/core/exports/meta-type.hpp>
 #include <fsm/core/exports/misc.hpp>

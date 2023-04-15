@@ -3,8 +3,8 @@
 
 #include <fsm/core/exports/basic-types/Size+Index.hpp>                  // Size
 #include <fsm/core/exports/support-for-collections/FSM_ITS_RANGE.hpp>   // FSM_ITS_RANGE    
-#include <fsm/core/exports/constructs/failure-handling/hopefully.hpp>   // hopefully
-#include <fsm/core/exports/constructs/failure-handling/FSM_FAIL.hpp>    // FSM_FAIL_
+#include <fsm/core/exports/failure/detecting/hopefully.hpp>   // hopefully
+#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>    // FSM_FAIL_
 #include <fsm/core/exports/constructs/type_builders.hpp>                // in_, array_of
 
 #include <algorithm>
