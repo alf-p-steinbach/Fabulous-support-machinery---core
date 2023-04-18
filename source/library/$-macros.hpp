@@ -14,6 +14,9 @@
 #define $with           FSM_WITH
 #define $with_mutable   FSM_WITH_MUTABLE
 
+#include <fsm/core/exports/constructs/declarations/FSM_WITHOUT_USING.hpp>
+#define $without_using  FSM_WITHOUT_USING
+
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>
 #define $enable_if_     FSM_ENABLE_IF_
 

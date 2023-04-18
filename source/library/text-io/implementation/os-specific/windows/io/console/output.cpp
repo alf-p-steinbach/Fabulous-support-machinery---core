@@ -4,9 +4,10 @@
 #include <fsm/text-io/implementation/os-specific/windows/io/stream_handle.hpp>
 
 #include <fsm/core/exports/basic-types/byte-types/Byte.hpp>
-#include <fsm/core/exports/failure.hpp>                                 // hopefully, FSM_FAIL
+#include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>
 #include <fsm/core/exports/text/encoding-conversions.hpp>
+#include <fsm/core/exports/constructs/declarations/FSM_WITHOUT_USING.hpp>   // FSM_WITHOUT_USING
 #include <fsm/core/exports/constructs/type_builders.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
@@ -88,26 +89,24 @@ namespace fabulous_support_machinery::console {
     // TODO: colorization depending on stream id
     void _definitions::output_to( const Output_stream_id stream_id, in_<string_view> s )
     {
-        (void) stream_id;
-        #ifndef __GNUC__
-            struct stream_id;
-        #endif
-        if( s.empty() ) { return; }
+        FSM_WITHOUT_USING( stream_id ) {
+            if( s.empty() ) { return; }
 
-        constexpr auto max_dword = DWORD( -1 );
+            constexpr auto max_dword = DWORD( -1 );
 
-        const auto ws = text::to_utf_16_as_<wstring>( s );
-        const Size ws_len = size_of( ws );
-        assert( ws_len <= max_dword );
-        DWORD n_units_written = 0;
-        const bool success = ::WriteConsole(
-            impl::console_output_handle(),
-            ws.data(),
-            static_cast<DWORD>( ws_len ),
-            &n_units_written,
-            {}      // reserved
-            );
-        hopefully( success )
-            or FSM_FAIL( "Failed to output to the console via WriteConsole." );
+            const auto ws = text::to_utf_16_as_<wstring>( s );
+            const Size ws_len = size_of( ws );
+            assert( ws_len <= max_dword );
+            DWORD n_units_written = 0;
+            const bool success = ::WriteConsole(
+                impl::console_output_handle(),
+                ws.data(),
+                static_cast<DWORD>( ws_len ),
+                &n_units_written,
+                {}      // reserved
+                );
+            hopefully( success )
+                or FSM_FAIL( "Failed to output to the console via WriteConsole." );
+        }
     }
 }  // namespace fabulous_support_machinery::console

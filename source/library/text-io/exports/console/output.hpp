@@ -4,18 +4,22 @@
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>      // FSM_ENABLE_IF_
 #include <fsm/core/exports/constructs/type_builders.hpp>                    // in_
 #include <fsm/core/exports/text/string_building.hpp>                        // string_from
-#include <fsm/text-io/exports/Stream_id.hpp>                             // Stream_id
+#include <fsm/text-io/exports/Stream_id.hpp>                                // Stream_id
 
 #include <string_view>
 #include <utility>
 
 namespace fabulous_support_machinery::console::_definitions {
-    namespace fsm = fabulous_support_machinery;
     using   std::string_view,                       // <string_view>
             std::forward;                           // <utility>
 
+    // System-specific implementations:
+
     extern void clear_screen();
     extern void output_to( Output_stream_id, in_<string_view> );
+
+
+    // Wrappers:
 
     inline void output( in_<string_view> s )
     {

@@ -1,5 +1,5 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include "all.hpp"
+#include <fsm/@wrapped/3rd-party-lib/widechar_wcwidth/exports/all.hpp>
 
 // A slightly edited (anon namespace removed, .h changed to .cpp) version of generated:
 /**
