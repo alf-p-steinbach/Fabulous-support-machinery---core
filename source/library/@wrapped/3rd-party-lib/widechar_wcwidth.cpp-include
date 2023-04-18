@@ -1,0 +1,3 @@
+﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+
+#include "widechar_wcwidth/implementation/all.cpp"

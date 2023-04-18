@@ -1,4 +1,3 @@
-﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 #include "common-portable/core.cpp-include"
-#include "common-portable/widechar_wcwidth.cpp-include"

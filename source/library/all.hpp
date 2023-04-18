@@ -2,7 +2,8 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core.hpp>
+#include <fsm/text-io.hpp>
 
 #ifndef FSM_NO_FMT_LIB_PLEASE
-#   include <fsm/fmtlib.hpp>
+#   include <fsm/@wrapped/3rd-party-lib/fmtlib.hpp>
 #endif

@@ -1,0 +1,7 @@
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+
+#include "text-io/implementation/os-specific.cpp-include"
+
+// Dependencies:
+#include "core.implementation.cpp-include"
+#include "@wrapped/3rd-party-lib/widechar_wcwidth.cpp-include"

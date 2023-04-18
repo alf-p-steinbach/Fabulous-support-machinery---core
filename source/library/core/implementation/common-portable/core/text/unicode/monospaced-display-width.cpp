@@ -1,7 +1,7 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/text/unicode/monospaced-display-width.hpp>
 
-#include <fsm/core/implementation/common-portable/widechar_wcwidth/all.hpp>
+#include <fsm/@wrapped/3rd-party-lib/widechar_wcwidth/exports/all.hpp>
 
 namespace fabulous_support_machinery::unicode::_definitions {
 

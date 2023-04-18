@@ -26,10 +26,10 @@ namespace fabulous_support_machinery::_definitions {
         }
     };
 
-    // namespace d = _definitions;
+    namespace d = _definitions;
     namespace exports { using
         d::Failure_reporter_using_stderr;
     }  // namespace exports
-}  // namespace fabluous_support_machinery::_definitions
+}  // namespace fabulous_support_machinery::_definitions
 
 namespace fabulous_support_machinery    { using namespace _definitions::exports; }

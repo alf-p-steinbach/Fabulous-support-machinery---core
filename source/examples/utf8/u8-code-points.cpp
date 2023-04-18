@@ -1,5 +1,5 @@
-﻿#include <fsm/core.hpp>
-#include <fsm/$-macros.hpp>
+﻿#include <fsm/all.hpp>
+#include <fsm/$-macros.hpp>     // $nsname_from
 namespace fsm = fabulous_support_machinery;
 
 #include <string_view>
@@ -12,10 +12,10 @@ namespace app {
         constexpr auto text = "Every 日本国 кошка loves blåbærsyltetøy!"sv;
 
         // Just display the message.
-        console::clear_screen();
         console::output( text, "\n" );
 
-        // Display one line for each code point with string index, symbol and code point value.
+        // Display one line for each code point with string index, symbol and code point value,
+        // all nicely aligned vertically.
         const auto u8_text = u8::Code_points_view( text );
         for( const u8::Code_point_ref seq: u8_text ) {
             const auto index = seq.char_pointer() - text.data();
