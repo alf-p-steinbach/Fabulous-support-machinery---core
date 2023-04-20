@@ -28,7 +28,7 @@ namespace fabulous_support_machinery::console::_definitions {
         -> int
     {
         DWORD n = 0;
-        return (::GetNumberOfConsoleInputEvents( stream_handle::in, &n )? n : 0);
+        return (::GetNumberOfConsoleInputEvents( impl::stream_handle::in, &n )? n : 0);
     }
 
     // TODO: get cleaned events from server thread
@@ -37,7 +37,7 @@ namespace fabulous_support_machinery::console::_definitions {
     {
         INPUT_RECORD    result;
         DWORD           n_read  = 0;
-        ::ReadConsoleInput( stream_handle::in, &result, 1, &n_read )
+        ::ReadConsoleInput( impl::stream_handle::in, &result, 1, &n_read )
             or FSM_FAIL( "::ReadConsoleInput failed unexpectedly." );
         assert( n_read == 1 );
         return result;

@@ -6,12 +6,14 @@
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 
+#include <io.h>     // Windows-specific _get_osfhandle.
+
 #include    <array>     // std::array
 
 namespace fsm = fabulous_support_machinery;
 using   fsm::const_, fsm::in_;
 
-namespace fabulous_support_machinery {
+namespace fabulous_support_machinery::impl {
     namespace stream_handle {
         using   std::array;
 
@@ -22,6 +24,13 @@ namespace fabulous_support_machinery {
 
         inline auto for_id( const Stream_id id )
             -> HANDLE
-        { return array{ in, out, err }[id]; }
+        {
+            if( +id <= 2 ) {
+                static const auto std_handles = array{ in, out, err };
+                return std_handles[+id];
+            } else {
+                return reinterpret_cast<HANDLE>( _get_osfhandle( +id ) );
+            }
+        }
     }  // namespace stream_handle
-}  // namespace fabulous_support_machinery
+}  // namespace fabulous_support_machinery::impl

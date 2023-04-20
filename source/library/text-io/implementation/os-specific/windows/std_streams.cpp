@@ -1,7 +1,7 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/text-io/exports/std_streams.hpp>
 
-#include <fsm/text-io/implementation/os-specific/windows/stream_handle.hpp>
+#include <fsm/text-io/implementation/os-specific/windows/_stream_handle.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 

@@ -28,7 +28,7 @@ namespace fabulous_support_machinery::_definitions {
     
     public:
         explicit constexpr Input_stream_id( const int value ): m_value( value ) {}
-        constexpr operator int() const { return m_value; }
+        constexpr auto operator+() const -> int { return m_value; }
     };
     
     class Output_stream_id:
@@ -38,7 +38,7 @@ namespace fabulous_support_machinery::_definitions {
 
     public:
         explicit constexpr Output_stream_id( const int value ): m_value( value ) {}
-        constexpr operator int() const { return m_value; }
+        constexpr auto operator +() const -> int { return m_value; }
     };
 
     class Stream_id:
@@ -50,9 +50,9 @@ namespace fabulous_support_machinery::_definitions {
     public:
         explicit constexpr Stream_id( const int value ): m_value( value ) {}
 
-        constexpr Stream_id( const Input_stream_id value ): m_value( value ) {}
-        constexpr Stream_id( const Output_stream_id value ): m_value( value ) {}
-        constexpr operator int() const { return m_value; }
+        constexpr Stream_id( const Input_stream_id value ): m_value( +value ) {}
+        constexpr Stream_id( const Output_stream_id value ): m_value( +value ) {}
+        constexpr auto operator +() const -> int { return m_value; }
     };
 
     // `inline` is necessary for Visual C++ 2022, even though it’s implied by `constexpr`.

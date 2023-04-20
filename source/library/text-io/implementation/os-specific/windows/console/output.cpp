@@ -22,8 +22,7 @@
 
 namespace fsm       = fabulous_support_machinery;
 
-namespace impl {
-    using fsm::hopefully;
+namespace fabulous_support_machinery::impl {
     
     static auto get_console_input_handle()
         -> HANDLE
@@ -72,7 +71,7 @@ namespace impl {
         static const HANDLE result = get_console_output_handle();
         return result;
     }
-}  // namespace impl
+}  // namespace fabulous_support_machinery::impl
 
 namespace fabulous_support_machinery::console {
     using   fsm::const_, fsm::in_;
@@ -83,7 +82,7 @@ namespace fabulous_support_machinery::console {
 
     void _definitions::clear_screen()
     {
-        system( "cls" );
+        system( "cls" );        // TODO: find out how to do this reliably via API.
     }
 
     // TODO: colorization depending on stream id
