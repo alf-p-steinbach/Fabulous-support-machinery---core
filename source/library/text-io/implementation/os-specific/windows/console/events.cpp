@@ -7,7 +7,7 @@
 #include <fsm/core/exports/support-for-collections/queue-utility.hpp>       // popped_front_of
 #include <fsm/core/exports/constructs/flow-control/repeat_times.hpp>        // repeat_times
 
-#include <fsm/text-io/implementation/os-specific/windows/io/stream_handle.hpp>
+#include <fsm/text-io/implementation/os-specific/windows/_stream_handle.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 

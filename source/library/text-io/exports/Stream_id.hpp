@@ -4,8 +4,9 @@
 #include <fsm/core/exports/constructs/type_builders.hpp>                  // in_
 
 namespace fabulous_support_machinery::_definitions {
-    // struct Input_stream_id{ enum Enum{ in = 0 }; };
-    // struct Output_stream_id{ enum Enum{ out = 1, err = 2 }; };
+    // enum class Input_stream_id{ in = 0 };
+    // enum class Output_stream_id{ out = 1, err = 2 };
+    // enum class Stream_id: extends Input_stream_id, Output_stream_id {};
 
     class Input_stream_id;
     struct Input_stream_id_names

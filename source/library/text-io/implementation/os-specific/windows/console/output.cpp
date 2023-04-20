@@ -1,7 +1,7 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/text-io/exports/console/output.hpp>
 
-#include <fsm/text-io/implementation/os-specific/windows/io/stream_handle.hpp>
+#include <fsm/text-io/implementation/os-specific/windows/_stream_handle.hpp>
 
 #include <fsm/core/exports/basic-types/byte-types/Byte.hpp>
 #include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
