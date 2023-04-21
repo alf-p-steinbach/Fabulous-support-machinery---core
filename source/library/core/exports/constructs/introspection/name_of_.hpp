@@ -16,7 +16,7 @@ namespace fabulous_support_machinery::_definitions {
 
     namespace d = _definitions;
     namespace exports{ using
-        d::name_of;
+        d::name_of_;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 

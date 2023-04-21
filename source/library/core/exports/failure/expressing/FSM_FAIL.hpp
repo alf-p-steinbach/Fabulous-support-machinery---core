@@ -11,6 +11,7 @@
 
 #include <fsm/core/exports/constructs/introspection/FSM_FUNCTION_NAME.hpp>
 #include <fsm/core/exports/failure/expressing/fail.hpp>
+#include <fsm/core/exports/failure/x-classes/default_message_for_.hpp>
 
 
 #define FSM_FAILURE_MESSAGE( explanation ) \
@@ -23,7 +24,7 @@
     FSM_FAIL_WITH_ARGS_( X, ( FSM_FAILURE_MESSAGE( explanation ) ) )
 
 #define FSM_FAIL_WITH_DEFAULT_MESSAGE_( X ) \
-    FSM_FAIL_WITH_ARGS_( X, ( X::default_message ) )
+    FSM_FAIL_WITH_ARGS_( X, ( ::fabulous_support_machinery::x::default_message_for_<X>() ) )
 
 #define FSM_FAIL( explanation ) \
     FSM_FAIL_( std::runtime_error, explanation )
