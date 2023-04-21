@@ -3,7 +3,7 @@
 
 #include <fsm/core/exports/support-for-collections/queue-utility.hpp>       // popped_front_of
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of
-#include <fsm/core/exports/constructs/type_builders.hpp>                    // in_, ref_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                    // in_, ref_
 #include <fsm/core/exports/constructs/declarations/FSM_WITH.hpp>            // FSM_WITH
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>        // FSM_FAIL
 #include <fsm/core/exports/constructs/flow-control/repeat_times.hpp>               // repeat_times

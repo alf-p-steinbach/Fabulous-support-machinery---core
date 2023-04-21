@@ -5,7 +5,7 @@
 #include <fsm/core/exports/text/encoding/u8/basic-sequence-functions.hpp>        // u8::*
 #include <fsm/core/exports/text/encoding/u8/Byte_count.hpp>                      // Byte_count
 #include <fsm/core/exports/text/encoding/u8/Code_point_inspectors_mixin_.hpp>    // Code_point_inspectors_mixin_
-#include <fsm/core/exports/constructs/type_builders.hpp>                                    // array_of_, const_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                                    // array_of_, const_
 
 #include <algorithm>            // copy
 #include <iterator>             // iterator_traits

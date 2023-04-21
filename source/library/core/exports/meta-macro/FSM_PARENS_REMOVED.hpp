@@ -1,4 +1,4 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>
+#define FSM_PARENS_REMOVED( ... )      __VA_ARGS__

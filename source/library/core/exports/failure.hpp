@@ -4,3 +4,4 @@
 #include <fsm/core/exports/failure/detecting.hpp>
 #include <fsm/core/exports/failure/expressing.hpp>
 #include <fsm/core/exports/failure/handling.hpp>
+#include <fsm/core/exports/failure/x-classes.hpp>

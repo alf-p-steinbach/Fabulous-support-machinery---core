@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/text-io/exports/Stream_id.hpp>
-#include <fsm/core/exports/constructs/type_builders.hpp>
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 

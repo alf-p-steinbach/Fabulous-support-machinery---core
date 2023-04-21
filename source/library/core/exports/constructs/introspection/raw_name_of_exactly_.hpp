@@ -14,7 +14,7 @@
 // referenced type, i.e. it ditches both reference and cv-qualification. Wrapping the
 // type as a template parameter avoids these decays.
 
-#include <fsm/core/exports/meta-type/type-inspectors/name_of.hpp>        // name_of
+#include <fsm/core/exports/constructs/introspection/name_of.hpp>            // name_of
 
 #include <string>
 #include <typeinfo>

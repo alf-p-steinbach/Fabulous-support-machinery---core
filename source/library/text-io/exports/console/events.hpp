@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>                  // FSM_ENABLE_IF_
+#include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>                  // FSM_ENABLE_IF
 #include <fsm/text-io/exports/keyboard/key_codes.hpp>                                   // Key code names.
 #include <fsm/core/exports/text/encoding/u8/Code_point_.hpp>                            // Code_point_
 #include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>                           // Movable
@@ -88,7 +88,7 @@ namespace fabulous_support_machinery::console::_definitions {
 
     public:
         template< class Type,
-            FSM_ENABLE_IF_( are_derived_and_base_<Type, Event> )
+            FSM_ENABLE_IF( are_derived_and_base_<Type, Event> )
             >
         Event_holder( in_<Type> e ): m_variant( e ) {}
         

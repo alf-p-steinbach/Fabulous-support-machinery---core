@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>    // int_capacity_of
-#include <fsm/core/exports/constructs/type_builders.hpp>                         // in_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                         // in_
 
 #include <string>
 #include <utility>

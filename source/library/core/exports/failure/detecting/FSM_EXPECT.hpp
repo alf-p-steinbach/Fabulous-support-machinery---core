@@ -14,7 +14,7 @@
 //         or $fail( "some_function failed" );
 
 
-#include <fsm/core/exports/constructs/type_builders.hpp>        // in_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>        // in_
 
 #include <functional>
 #include <utility>

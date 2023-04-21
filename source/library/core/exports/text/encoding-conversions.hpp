@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>
-#include <fsm/core/exports/constructs/type_builders.hpp>
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>
 #include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>  // bits_per_
 
 #include <fsm/core/exports/text/encoding/u8/Code_point_iterator_.hpp>

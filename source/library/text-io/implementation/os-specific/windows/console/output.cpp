@@ -8,7 +8,7 @@
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>
 #include <fsm/core/exports/text/encoding-conversions.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_WITHOUT_USING.hpp>   // FSM_WITHOUT_USING
-#include <fsm/core/exports/constructs/type_builders.hpp>
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 
@@ -47,7 +47,7 @@ namespace fabulous_support_machinery::impl {
         static const HANDLE result = get_console_input_handle();
         return result;
     }
-    
+
     static auto get_console_output_handle()
         -> HANDLE
     {

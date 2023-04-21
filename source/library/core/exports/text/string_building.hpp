@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>   // FSM_ENABLE_IF_
-#include <fsm/core/exports/constructs/type_builders.hpp>                 // in_
+#include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>   // FSM_ENABLE_IF
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                 // in_
 
 #include <string>
 #include <string_view>

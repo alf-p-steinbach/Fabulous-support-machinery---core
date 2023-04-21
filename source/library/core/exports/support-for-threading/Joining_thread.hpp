@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/type_builders.hpp> // in_value_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp> // in_value_
 
 #include <atomic>
 #include <exception>

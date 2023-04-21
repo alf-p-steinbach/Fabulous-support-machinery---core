@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/type_builders.hpp>     // in_
-#include <fsm/core/exports/meta-type/type-inspectors/unmangled_and_cleaned_type_name.hpp>
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>     // in_
+#include <fsm/core/exports/constructs/introspection/unmangled_and_cleaned_type_name.hpp>
 
 #include <string>
 #include <typeindex>

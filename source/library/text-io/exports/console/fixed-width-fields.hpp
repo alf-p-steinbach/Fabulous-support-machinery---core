@@ -3,11 +3,11 @@
 
 // TODO: clean up includes
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of, int_capacity_of
-#include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF_.hpp>      // FSM_ENABLE_IF_
+#include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>      // FSM_ENABLE_IF
 #include <fsm/core/exports/text/encoding/u8/Code_point_iterator_.hpp>       // Code_point_iterator
 #include <fsm/core/exports/text/sprintf-to-std-string.hpp>                  // unsafe::sprintf_to
 #include <fsm/core/exports/text/unicode/monospaced-display-width.hpp>       // assumed_monospaced_display_width_of
-#include <fsm/core/exports/constructs/type_builders.hpp>                    // in_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                    // in_
 #include <fsm/text-io/exports/Stream_id.hpp>                                // Stream_id
 
 #include <algorithm>
@@ -112,7 +112,7 @@ namespace fabulous_support_machinery::console::_definitions {
         return move( buffer );
     }
 
-    template< class tp_Number, FSM_ENABLE_IF_( is_arithmetic_v< tp_Number > ) >
+    template< class tp_Number, FSM_ENABLE_IF( is_arithmetic_v< tp_Number > ) >
     inline auto left( const int w, const tp_Number value )
         -> string
     { return left( w, to_string( value ) ); }   // TODO: replace `to_string`
@@ -134,7 +134,7 @@ namespace fabulous_support_machinery::console::_definitions {
         return move( buffer );
     }
     
-    template< class tp_Number, FSM_ENABLE_IF_( is_arithmetic_v< tp_Number > ) >
+    template< class tp_Number, FSM_ENABLE_IF( is_arithmetic_v< tp_Number > ) >
     inline auto right( const int w, const tp_Number value )
         -> string
     { return right( w, to_string( value ) ); }                                  // TODO: replace `to_string`

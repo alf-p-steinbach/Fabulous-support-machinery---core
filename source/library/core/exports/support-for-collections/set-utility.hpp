@@ -5,7 +5,7 @@
 #include <fsm/core/exports/support-for-collections/FSM_ITS_RANGE.hpp>   // FSM_ITS_RANGE    
 #include <fsm/core/exports/failure/detecting/hopefully.hpp>   // hopefully
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>    // FSM_FAIL_
-#include <fsm/core/exports/constructs/type_builders.hpp>                // in_, array_of
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                // in_, array_of
 
 #include <algorithm>
 #include <iterator>
