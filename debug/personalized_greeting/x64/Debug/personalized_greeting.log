@@ -1,3 +1,0 @@
-﻿cl : command line  warning D9025: overriding '/W4' with '/W3'
-  personalized-greeting.cpp
-  personalized_greeting.vcxproj -> D:\root\dev\libraries\fabulous_support_machinery\debug\personalized_greeting\x64\Debug\personalized_greeting.exe
