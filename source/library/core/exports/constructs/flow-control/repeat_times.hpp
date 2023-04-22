@@ -3,7 +3,7 @@
 
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>                                // in_
 #include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>           // FSM_STATIC_ASSERT
-#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>   // is_integer_, is_signed_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>   // is_integer_, is_signed_
 
 namespace fabulous_support_machinery {
     

@@ -4,12 +4,19 @@
 #include <fsm/core/exports/constructs/introspection/name_of_.hpp>
 
 #include <string>
+#include <string_view>
 
 namespace fabulous_support_machinery::x::_definitions {
-    using   std::string;            // <string>
+    using   std::string,            // <string>
+            std::string_view;       // <string_view>
     
     template< class X >
-    auto default_message_for_() -> string { return name_of_<X>(); }
+    auto default_message_for_()
+        -> string_view
+    {
+        static const string msg = name_of_<X>();
+        return msg;
+    }
 
     namespace d = _definitions;
     namespace exports { using d::default_message_for_; }

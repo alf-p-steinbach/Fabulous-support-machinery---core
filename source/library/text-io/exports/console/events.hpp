@@ -6,7 +6,7 @@
 #include <fsm/core/exports/text/encoding/u8/Code_point_.hpp>                            // Code_point_
 #include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>                           // Movable
 #include <fsm/core/exports/meta-type/class-kinds/Polymorphic.hpp>                       // Polymorphic
-#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>   // are_derived_and_base_, Bare_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>   // are_derived_and_base_, Bare_
 #include <fsm/core/exports/meta-type/Typelist_.hpp>                                     // Typelist_
 
 #include <variant>

@@ -3,7 +3,7 @@
 
 #include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>         // FSM_STATIC_ASSERT
 #include <fsm/core/exports/meta-macro/FSM_PARENS_REMOVED.hpp>               // FSM_PARENS_REMOVED
-#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>   // is_same_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>   // is_same_
 
 #define FSM_IF_WITH( parenthesized_initializer, condition ) \
     if( \

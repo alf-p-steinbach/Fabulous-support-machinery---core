@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/meta-type/class-kinds/Non_instantiable.hpp>                  // Non_instantiable
-#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>  // is_same_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>  // is_same_
 
 #include <tuple>
 

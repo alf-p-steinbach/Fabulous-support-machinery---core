@@ -18,7 +18,7 @@ namespace fabulous_support_machinery::x::_definitions {
 
     template<>
     inline auto default_message_for_<End_of_file>()
-        -> string
+        -> string_view
     { return End_of_file::default_message; }
 
     namespace d = _definitions;

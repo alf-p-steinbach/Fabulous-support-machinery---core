@@ -9,7 +9,7 @@
 #include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>           // FSM_STATIC_ASSERT
 #include <fsm/core/exports/text/encoding/u8/Code_point_ref_.hpp>                        // u8::Code_point_ref_, tag::*
 #include <fsm/core/exports/text/encoding/u8/basic-sequence-functions.hpp>               // u8::*
-#include <fsm/core/exports/meta-type/type-inspectors/compiletime-type-inspectors.hpp>  // bits_per_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>  // bits_per_
 
 #include <iterator>
 #include <string>
