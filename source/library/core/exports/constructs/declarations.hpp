@@ -6,4 +6,4 @@
 #include <fsm/core/exports/constructs/declarations/FSM_TYPE_OF.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_NSNAME_FROM.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_WITH.hpp>
-#include <fsm/core/exports/constructs/declarations/FSM_WITHOUT_USING.hpp>
+#include <fsm/core/exports/constructs/declarations/FSM_NOT_USING.hpp>

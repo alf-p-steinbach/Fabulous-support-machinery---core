@@ -13,7 +13,7 @@ namespace fabulous_support_machinery::x::_definitions {
     struct End_of_file: runtime_error
     {
         using runtime_error::runtime_error;
-        static constexpr auto& default_message = "End of file encountered immediately (no bytes).";
+        static constexpr auto& default_message = "End of file encountered immediately (no input bytes).";
     };
 
     template<>

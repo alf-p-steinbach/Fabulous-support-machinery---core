@@ -1,4 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 #include "console/events.cpp"
+#include "console/input.cpp"
 #include "console/output.cpp"
