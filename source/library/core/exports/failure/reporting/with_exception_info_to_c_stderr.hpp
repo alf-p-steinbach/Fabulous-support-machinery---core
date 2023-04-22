@@ -22,6 +22,6 @@ namespace fabulous_support_machinery::_definitions {
     namespace exports { using
         d::with_exception_info_to_c_stderr;
     }  // namespace exports
-}  // namespace fabluous_support_machinery::_definitions
+}  // namespace fabuluous_support_machinery::_definitions
 
 namespace fabulous_support_machinery    { using namespace _definitions::exports; }
