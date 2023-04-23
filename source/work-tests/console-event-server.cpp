@@ -381,4 +381,4 @@ void cpp_main()
     clog << "Main finished." << endl;
 }
 
-auto main() -> int { return fsm::with_exception_info_to_stderr( cpp_main ); }
+auto main() -> int { return fsm::with_xinfo_to_stderr( cpp_main ); }

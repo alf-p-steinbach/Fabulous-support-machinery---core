@@ -20,4 +20,4 @@ namespace app {
     }
 }  // namespace app
 
-auto main() -> int { return fsm::with_exception_info_to_c_stderr( app::run ); }
+auto main() -> int { return fsm::with_xinfo_to_err_stream( app::run ); }

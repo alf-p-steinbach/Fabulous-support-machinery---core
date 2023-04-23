@@ -3,10 +3,12 @@
 
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>     // in_
 
+#include <string>
 #include <string_view>
 
 namespace fabulous_support_machinery::_definitions {
-    using   std::string_view;
+    using   std::string,            // <string>
+            std::string_view;       // <string_view>
     
     extern auto unmangled_and_cleaned_type_name( in_<string_view> builtin_type_name )
         -> string;

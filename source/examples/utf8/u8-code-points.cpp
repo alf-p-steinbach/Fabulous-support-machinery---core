@@ -16,8 +16,8 @@ namespace app {
 
         // Display one line for each code point with string index, symbol and code point value,
         // all nicely aligned vertically.
-        const auto u8_text = u8::Code_points_view( text );
-        for( const u8::Code_point_ref seq: u8_text ) {
+        const auto u8_code_points = u8::Code_points_view( text );
+        for( const u8::Code_point_ref seq: u8_code_points ) {
             const auto index = seq.char_pointer() - text.data();
             console::output(
                 console::right( 2, index ), ": ",                                   // Index in string.
@@ -29,4 +29,4 @@ namespace app {
     }
 }  // namespace app
 
-auto main() -> int { return fsm::with_exception_info_to_stderr( app::run ); }
+auto main() -> int { return fsm::with_xinfo_to_err_stream( app::run ); }

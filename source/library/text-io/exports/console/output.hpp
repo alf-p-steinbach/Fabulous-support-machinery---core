@@ -22,21 +22,13 @@ namespace fabulous_support_machinery::console::_definitions {
     using os::output_to;
 
     // Wrappers:
-
-    inline void output( in_<string_view> s )
-    {
-        output_to( Stream_id::out, s );
-    }
+    inline void output( in_<string_view> s )        { output_to( Stream_id::out, s ); }
+    inline void output_err( in_<string_view> s )    { output_to( Stream_id::err, s ); }
 
     template< class... Args, FSM_ENABLE_IF( sizeof...( Args ) >= 2 ) >
     void output( Args&&... args )
     {
         output( string_from( forward<Args>( args )... ) );
-    }
-
-    inline void output_err( in_<string_view> s )
-    {
-        output_to( Stream_id::err, s );
     }
 
     template< class... Args, FSM_ENABLE_IF( sizeof...( Args ) >= 2 )  >

@@ -14,7 +14,7 @@ namespace fabulous_support_machinery::_definitions {
             std::string,            // <string>
             std::string_view;       // <stringview>
 
-    struct Failure_reporter: Polymorphic
+    struct Abstract_failure_reporter: Polymorphic
     {
         virtual void output( in_<string_view> text ) const = 0;
 
@@ -39,7 +39,7 @@ namespace fabulous_support_machinery::_definitions {
 
     // namespace d = _definitions;
     namespace exports { using
-        d::Failure_reporter;
+        d::Abstract_failure_reporter;
     }  // namespace exports
 }  // namespace fabluous_support_machinery::_definitions
 

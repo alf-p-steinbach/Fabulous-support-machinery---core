@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>             // in_
-#include <fsm/core/exports/failure/reporting/Failure_reporter.hpp>    // Failure_reporter
+#include <fsm/core/exports/failure/reporting/Abstract_failure_reporter.hpp>    // Abstract_failure_reporter
 
 #include <exception>
 #include <functional>
@@ -18,9 +18,9 @@ namespace fabulous_support_machinery::_definitions {
 
     using Basic_main_func           = function<void()>;
 
-    inline auto with_exception_info_to(
-        in_<Failure_reporter>       reporter,
-        in_<Basic_main_func>        main_func
+    inline auto with_xinfo_to(
+        in_<Abstract_failure_reporter>      reporter,
+        in_<Basic_main_func>                main_func
         )
         -> int
     {
@@ -38,10 +38,16 @@ namespace fabulous_support_machinery::_definitions {
         return EXIT_FAILURE;
     }
 
+    template< class Failure_reporter >
+    auto with_xinfo_to_( in_<Basic_main_func> main_func )
+        -> int
+    { return with_xinfo_to( Failure_reporter(), main_func ); }
+
     namespace d = _definitions;
     namespace exports { using
         d::Basic_main_func,
-        d::with_exception_info_to;
+        d::with_xinfo_to,
+        d::with_xinfo_to_;
     }  // namespace exports
 }  // namespace fabluous_support_machinery::_definitions
 

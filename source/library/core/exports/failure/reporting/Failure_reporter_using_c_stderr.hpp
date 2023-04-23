@@ -1,9 +1,9 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                // in_
-#include <fsm/core/exports/failure/reporting/Failure_reporter.hpp>       // Failure_reporter
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>  // is_empty, int_size_of
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>       // in_
+#include <fsm/core/exports/failure/reporting/Abstract_failure_reporter.hpp> // Abstract_failure_reporter
+#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // is_empty, int_size_of
 
 #include <stdio.h>      // fprintf, fflush, stdout, stderr
 #include <stdlib.h>     // EXIT_...
@@ -13,7 +13,7 @@ namespace fabulous_support_machinery::_definitions {
             std::string_view;       // <stringview>
 
     struct Failure_reporter_using_c_stderr:
-        Failure_reporter
+        Abstract_failure_reporter
     {
         void output( in_<string_view> text ) const override
         {

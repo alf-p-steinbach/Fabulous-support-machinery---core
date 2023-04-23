@@ -37,7 +37,7 @@ namespace fabulous_support_machinery::std_streams::_definitions {
         return move( buffer );
     }
 
-    auto input_using_buffer( string&& buffer )
+    auto os::input_using_buffer( string&& buffer )
         -> string
     {
         if( is_console_stream( Stream_id::in ) ) {
@@ -47,7 +47,7 @@ namespace fabulous_support_machinery::std_streams::_definitions {
         }
     }
 
-    void output_to( const Output_stream_id stream_id, in_<string_view> s )
+    void os::output_to( const Output_stream_id stream_id, in_<string_view> s )
     {
         if( is_console_stream( stream_id ) ) {
             console::output_to( stream_id, s );
