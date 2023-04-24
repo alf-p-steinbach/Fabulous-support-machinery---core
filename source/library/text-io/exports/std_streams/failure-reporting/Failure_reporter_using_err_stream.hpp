@@ -21,7 +21,7 @@ namespace fabulous_support_machinery::std_streams::_definitions {
         {
             for( const auto id: { Stream_id::out, Stream_id::err } ) { flush( id ); }
             if( is_console_stream( Stream_id::out ) and is_console_stream( Stream_id::err ) ) {
-                output( "\n" );
+                output_err( "\n" );
             }
             output_err( text, "\n" );
             flush( Stream_id::err );
