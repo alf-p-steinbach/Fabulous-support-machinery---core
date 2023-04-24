@@ -19,10 +19,10 @@ namespace fabulous_support_machinery::std_streams::_definitions {
     {
         void output( in_<string_view> text ) const override
         {
+            for( const auto id: { Stream_id::out, Stream_id::err } ) { flush( id ); }
             if( is_console_stream( Stream_id::out ) and is_console_stream( Stream_id::err ) ) {
                 output( "\n" );
             }
-            for( const auto id: { Stream_id::out, Stream_id::err } ) { flush( id ); }
             output_err( text, "\n" );
             flush( Stream_id::err );
         }
