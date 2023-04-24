@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>                // in_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>   // FSM_ENABLE_IF
 #include <fsm/core/exports/meta-type/type-inspectors.hpp>               // are_derived_and_base_
 #include <fsm/core/exports/mixins/Relational_operators_mixin_.hpp>      // Relational_operators_mixin_
@@ -19,7 +19,7 @@ namespace fabulous_support_machinery::_definitions {
         constexpr Enumeration( const int value ): m_value( value ) {}
         
     public:
-        constexpr auto operator+() const -> int { return m_value; }
+        constexpr operator int() const { return m_value; }  // Supports e.g. use in `switch`.
     };
 
     template< class E, FSM_ENABLE_IF( are_derived_and_base_<E, Enumeration> ) >
@@ -72,10 +72,10 @@ namespace fabulous_support_machinery::_definitions {
     };
 
     // `inline` is necessary for Visual C++ 2022, even though it’s implied by `constexpr`.
-    inline constexpr    Input_stream_id    Input_stream_id_names::in   = Input_stream_id( 0 );
-    inline constexpr    Output_stream_id   Output_stream_id_names::out = Output_stream_id( 1 );
-    inline constexpr    Output_stream_id   Output_stream_id_names::err = Output_stream_id( 2 );
-    
+    inline constexpr    Input_stream_id    Input_stream_id_names::in        { 0 };
+    inline constexpr    Output_stream_id   Output_stream_id_names::out      { 1 };
+    inline constexpr    Output_stream_id   Output_stream_id_names::err      { 2 };
+
     namespace d = _definitions;
     namespace exports{ using
         d::Input_stream_id,

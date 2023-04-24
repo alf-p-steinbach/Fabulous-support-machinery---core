@@ -11,6 +11,8 @@
 #include <fsm/text-io/exports/std_streams/is_console_stream.hpp>            // is_console_stream
 
 #include <utility>
+
+#include <assert.h>     // assert
 #include <stdio.h>      // fprintf
 
 namespace fabulous_support_machinery::std_streams::_definitions {
@@ -21,10 +23,10 @@ namespace fabulous_support_machinery::std_streams::_definitions {
     {
         buffer.clear();
         for( ;; ) {
-            const int code = getchar();
+            const int code = ::getchar();
             if( code == EOF ) {
                 // Note: `getchar` return value EOF also covers the case of error.
-                hopefully( feof( stdin ) )
+                hopefully( ::feof( stdin ) )
                     or FSM_FAIL( "The standard input stream failed (C ferror is true)" );
                 hopefully( not is_empty( buffer ) )
                     or FSM_FAIL_WITH_DEFAULT_MESSAGE_( x::End_of_file );
@@ -35,6 +37,18 @@ namespace fabulous_support_machinery::std_streams::_definitions {
             buffer += char( code );
         }
         return move( buffer );
+    }
+
+    static auto c_file_from( const Output_stream_id stream_id )
+        -> FILE*
+    {
+        switch( stream_id ) {
+            case Stream_id::out:    return stdout;
+            case Stream_id::err:    return stderr;
+            default:
+                assert( !"Unknown output stream id." );
+        }
+        for( ;; ) {}    // Should never get here.
     }
 
     auto os::input_using_buffer( string&& buffer )
@@ -52,9 +66,13 @@ namespace fabulous_support_machinery::std_streams::_definitions {
         if( is_console_stream( stream_id ) ) {
             console::output_to( stream_id, s );
         } else {
-            const_<FILE*> f = (stream_id == Stream_id::out? stdout : stderr);
-            fprintf( f, "%.*s", int_size_of( s ), s.data() );
+            ::fprintf( c_file_from( stream_id ), "%.*s", int_size_of( s ), s.data() );
         }
     }
     
+    void os::flush( const Output_stream_id stream_id )
+    {
+        ::fflush( c_file_from( stream_id ) );
+    }
+
 }  // namespace fabulous_support_machinery::std_streams::_definitions

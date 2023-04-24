@@ -5,6 +5,7 @@
 #include <fsm/core/exports/failure/reporting/Abstract_failure_reporter.hpp> // Abstract_failure_reporter
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>      // is_empty, int_size_of
 #include <fsm/text-io/exports/std_streams/io.hpp>                           // output
+#include <fsm/text-io/exports/std_streams/is_console_stream.hpp>            // is_console_stream
 
 #include <stdio.h>      // fprintf, fflush, stdout, stderr
 #include <stdlib.h>     // EXIT_...
@@ -18,9 +19,12 @@ namespace fabulous_support_machinery::std_streams::_definitions {
     {
         void output( in_<string_view> text ) const override
         {
-            // TODO: only add newline to stdout if both stdout and stderr go to terminal.
-            output_err( "\n", text );
-            // TODO: flush();
+            if( is_console_stream( Stream_id::out ) and is_console_stream( Stream_id::err ) ) {
+                output( "\n" );
+            }
+            for( const auto id: { Stream_id::out, Stream_id::err } ) { flush( id ); }
+            output_err( text, "\n" );
+            flush( Stream_id::err );
         }
     };
 

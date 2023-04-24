@@ -16,12 +16,14 @@ namespace fabulous_support_machinery::std_streams::_definitions {
             std::move, std::forward;    // <utility>
 
     namespace os {
-        extern auto input_using_buffer( string&& buffer ) -> string;
-        extern void output_to( const Output_stream_id stream_id, in_<string_view> s );
+        extern auto input_using_buffer( string&& ) -> string;
+        extern void output_to( Output_stream_id, in_<string_view> );
+        extern void flush( Output_stream_id );
     }  // namespace os
     
     using os::input_using_buffer;
     using os::output_to;
+    using os::flush;
 
     inline auto input() -> string                   { return input_using_buffer( "" ); }
     inline void output( in_<string_view> s )        { output_to( Stream_id::out, s ); }
