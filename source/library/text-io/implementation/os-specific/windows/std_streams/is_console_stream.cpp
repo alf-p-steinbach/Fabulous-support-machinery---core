@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/text-io/exports/std_streams/is_console_stream.hpp>
-#include <fsm/text-io/implementation/os-specific/windows/_stream_handle.hpp>
+#include <fsm/text-io/implementation/os-specific/windows/_os/stream_handle.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 
@@ -13,7 +13,7 @@ namespace fabulous_support_machinery::std_streams::_definitions {
     {
         // TODO: cache.
         DWORD dummy;
-        return ::GetConsoleMode( impl::stream_handle::for_id( stream_id ), &dummy );
+        return ::GetConsoleMode( _os::stream_handle::for_id( stream_id ), &dummy );
     }
     
 }  // namespace fabulous_support_machinery::std_streams::_definitions

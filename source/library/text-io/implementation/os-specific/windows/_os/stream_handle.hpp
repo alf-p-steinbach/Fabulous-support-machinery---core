@@ -13,7 +13,7 @@
 namespace fsm = fabulous_support_machinery;
 using   fsm::const_, fsm::in_;
 
-namespace fabulous_support_machinery::impl {
+namespace fabulous_support_machinery::_os {
     namespace stream_handle {
         using   std::array;
 
@@ -33,4 +33,4 @@ namespace fabulous_support_machinery::impl {
             }
         }
     }  // namespace stream_handle
-}  // namespace fabulous_support_machinery::impl
+}  // namespace fabulous_support_machinery::_os

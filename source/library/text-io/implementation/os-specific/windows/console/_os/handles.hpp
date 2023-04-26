@@ -1,4 +1,4 @@
-﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>       // const_
 #include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
@@ -6,6 +6,8 @@
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 
 namespace fabulous_support_machinery::_os {
+
+    // TODO: add proper closing of the handles.
 
     inline auto get_console_handle( const_<const wchar_t*> stream_name, const DWORD access )
         -> HANDLE

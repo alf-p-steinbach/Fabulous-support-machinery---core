@@ -51,6 +51,9 @@ namespace fabulous_support_machinery::std_streams::_definitions {
         for( ;; ) {}    // Should never get here.
     }
 
+
+    //-------------------------------------------------- Exports:
+
     auto os::input_using_buffer( string&& buffer )
         -> string
     {

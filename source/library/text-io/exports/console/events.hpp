@@ -45,13 +45,13 @@ namespace fabulous_support_machinery::console::_definitions {
     };
 
     // Unicode code points, not /characters/ like the double code-point flags, but:
-    class Keyboard_code_event:
+    class Keyboard_unicode_event:
         public Keyboard_event
     {
         const u8::Code_point    m_code_point;
 
     public:
-        Keyboard_code_event( const u8::Code_point value ): m_code_point( value ) {}
+        Keyboard_unicode_event( const u8::Code_point value ): m_code_point( value ) {}
         auto code_point() const -> const u8::Code_point& { return m_code_point; }
     };
 
@@ -63,7 +63,7 @@ namespace fabulous_support_machinery::console::_definitions {
     };
 
     // Function keys, escape, etc.:
-    class Keyboard_keypress_event:
+    class Keyboard_special_key_event:
         public Keyboard_event
     {};
 
@@ -77,9 +77,9 @@ namespace fabulous_support_machinery::console::_definitions {
     class Event_holder
     {
         using Type_list = Typelist_<
-            Keyboard_code_event,
+            Keyboard_unicode_event,
             Keyboard_modal_action_event,
-            Keyboard_keypress_event
+            Keyboard_special_key_event
             // Mouse_event
             >;
         using Variant = Type_list::Specialization_of_<variant>;
@@ -131,15 +131,21 @@ namespace fabulous_support_machinery::console::_definitions {
         auto variant_as_base() const -> const Event& { return variant_as<Event>(); }
     };
 
-    extern auto event_is_available() -> bool;
-    extern auto next_event() -> Event_holder;
+    namespace os {
+        extern auto event_is_available() -> bool;
+        extern auto next_event() -> Event_holder;
+    }  // namespace os
+    
+    using   os::event_is_available,
+            os::next_event;
 
     namespace d = _definitions;
     namespace exports{ using
         d::Event,
         d::Keyboard_event,
-        d::Keyboard_keypress_event,
+        d::Keyboard_unicode_event,
         d::Keyboard_modal_action_event,
+        d::Keyboard_special_key_event,
         d::Mouse_event,
         d::Event_holder,
         d::event_is_available, d::next_event;
