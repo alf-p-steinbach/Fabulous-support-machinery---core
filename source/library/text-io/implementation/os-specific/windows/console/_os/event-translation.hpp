@@ -74,7 +74,8 @@ namespace fabulous_support_machinery::_os {
                 if( is_modal ) {
                     translated_events().emplace( console::Keyboard_modal_action_event() );      // TODO:
                 } else {
-                    translated_events().emplace( console::Keyboard_special_key_event() );          // TODO:
+                    // TODO:
+                    translated_events().emplace( console::Keyboard_special_key_event( ev.wVirtualKeyCode ) );
                 }
             }
         }

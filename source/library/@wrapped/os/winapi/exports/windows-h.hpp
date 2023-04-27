@@ -9,13 +9,10 @@
 #endif
 
 #include <assert.h>
-#ifdef _MSC_VER                         // TODO: Check version.
-#   include <iso646.h>                  // Standard `and` etc. also with MSVC.
-#endif
 
-// U8_WINAPI is a custom macro for this file. UNICODE, _UNICODE and _MBCS are MS macros.
-#if defined( U8_WINAPI ) and defined( UNICODE )
-#   error "Inconsistent, both UNICODE (UTF-16) and U8_WINAPI (UTF-8) are defined."
+// NARROW_WINAPI_PLEASE is a custom macro for this file. UNICODE, _UNICODE and _MBCS are MS macros.
+#if defined( NARROW_WINAPI_PLEASE ) and defined( UNICODE )
+#   error "Inconsistent, both UNICODE (UTF-16) and NARROW_WINAPI_PLEASE (ANSI/UTF-8) are defined."
 #   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
@@ -24,14 +21,14 @@
 #   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
-#if not( defined( U8_WINAPI ) or defined( UNICODE ) )
-#   error "Define either U8_WINAPI or UNICODE, for respectively UTF-8 and UTF-16."
+#if not( defined( NARROW_WINAPI_PLEASE ) or defined( UNICODE ) )
+#   error "Define either NARROW_WINAPI_PLEASE or UNICODE, for respectively ANSI/UTF-8 and UTF-16."
 #   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
 #undef UNICODE
 #undef _UNICODE
-#ifdef U8_WINAPI
+#ifdef NARROW_WINAPI_PLEASE
 #   undef _MBCS
 #   define _MBCS        // Mainly for 3rd party code that uses it for platform detection.
 #else
@@ -102,19 +99,10 @@
 #include <windows.h>                                                //
 /////////////////////////////////////////////////////////////////////
 
-// Use like `static_assert( IS_NARROW_WINAPI() )`.
-#define IS_NARROW_WINAPI()      (sizeof(*GetCommandLine()) == 1)
-#define IS_NARROW_WINAPI_TEXT() "Define (only) U8_WINAPI please."
+// Use like `static_assert( IS_NARROW_WINAPI_PLEASE() )`.
+#define IS_NARROW_WINAPI_PLEASE()      (sizeof(*GetCommandLine()) == 1)
+#define IS_NARROW_WINAPI_PLEASE_TEXT() "Define (only) NARROW_WINAPI_PLEASE please."
 
 // Use like `static_assert( IS_WIDE_WINAPI() )`.
 #define IS_WIDE_WINAPI()        (sizeof(*GetCommandLine()) > 1)
 #define IS_WIDE_WINAPI_TEXT()   "Define (only) UNICODE please."
-
-namespace winapi_h {
-    inline auto assert_u8_codepage()
-        -> bool
-    {
-        assert( GetACP() == 65001 or !"The process codepage isn't UTF-8 (old Windows?)." );
-        return true;
-    }
-}  // namespace winapi_h

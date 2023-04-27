@@ -4,9 +4,10 @@
 // there as nice-to-have functionality. For when some library user needs it.
 
 //------------------------------------------------------------------------- Enabling:
-#include <fsm/core/exports/+std-cpp-language/enable-std-literals.hpp>            // Syntax.
-#include <fsm/core/exports/+std-cpp-language/full-core-language-headers.hpp>     // Semantics.
-    
+#include <fsm/core/exports/+std-cpp-language/enable-std-literals.hpp>           // Syntax.
+#include <fsm/core/exports/+std-cpp-language/enable-alternate-keywords.hpp>     // Syntax.
+#include <fsm/core/exports/+std-cpp-language/core-language-headers.hpp>         // Semantics.
+
 //------------------------------------------------------------------------- Requirements:
-#include <fsm/core/exports/+std-cpp-language/asserted.is_cpp17_or_better.hpp>    // C++ version.
-#include <fsm/core/exports/+std-cpp-language/asserted.utf8-literals.hpp>         // Encoding.
+#include <fsm/core/exports/+std-cpp-language/asserted.is_cpp17_or_better.hpp>   // C++ version.
+#include <fsm/core/exports/+std-cpp-language/asserted.utf8-literals.hpp>        // Encoding.

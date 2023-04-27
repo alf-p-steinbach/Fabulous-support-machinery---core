@@ -1,1 +1,1 @@
-#include <fsm/core/exports/+std-cpp-language/full-core-language-headers.hpp>
+#include <fsm/core/exports/+std-cpp-language/core-language-headers.hpp>

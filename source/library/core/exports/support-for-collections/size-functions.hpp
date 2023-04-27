@@ -42,7 +42,7 @@ namespace fabulous_support_machinery {
         -> int
     { return static_cast<int>( c.capacity() ); }
 
-    // Placed here because it belongs with the `int_size` function, even if not about collection.
+    // Placed here because it belongs with the `int_size_of` function, even if not about collection.
     template< class It >                                // Use with care -- no range checking.
     constexpr auto int_distance_of( const It a, const It b ) noexcept
         -> int

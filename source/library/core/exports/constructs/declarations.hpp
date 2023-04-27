@@ -2,6 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/constructs/declarations/Enable_if_.hpp>
+#include <fsm/core/exports/constructs/declarations/enum-support.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_TYPE_OF.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_NSNAME_FROM.hpp>

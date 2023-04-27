@@ -3,7 +3,7 @@
 
 namespace fabuluous_support_machinery::keyboard {
     // <url: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes>
-    inline namespace key_codes { enum{
+    inline namespace key_codes { enum: int {
         lbutton_key                 =  0x01,    // VK_LBUTTON - Left mouse button
         rbutton_key                 =  0x02,    // VK_RBUTTON - Right mouse button
         cancel_key                  =  0x03,    // VK_CANCEL - Control-break processing
