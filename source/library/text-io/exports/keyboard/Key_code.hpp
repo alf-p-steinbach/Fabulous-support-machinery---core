@@ -1,9 +1,11 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-namespace fabuluous_support_machinery::keyboard {
+#include <fsm/core/exports/meta-type/class-kinds/Non_instantiable.hpp>
+
+namespace fabulous_support_machinery {
     // <url: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes>
-    inline namespace key_codes { enum: int {
+    struct Key_code: Non_instantiable { enum Enum: int {
         lbutton_key                 =  0x01,    // VK_LBUTTON - Left mouse button
         rbutton_key                 =  0x02,    // VK_RBUTTON - Right mouse button
         cancel_key                  =  0x03,    // VK_CANCEL - Control-break processing
@@ -129,8 +131,10 @@ namespace fabuluous_support_machinery::keyboard {
         f22_key                     =  0x85,    // VK_F22 - F22 key
         f23_key                     =  0x86,    // VK_F23 - F23 key
         f24_key                     =  0x87,    // VK_F24 - F24 key
+            // gap
         numlock_key                 =  0x90,    // VK_NUMLOCK - NUM LOCK key
         scroll_key                  =  0x91,    // VK_SCROLL - SCROLL LOCK key
+            // gap
         lshift_key                  =  0xA0,    // VK_LSHIFT - Left SHIFT key
         rshift_key                  =  0xA1,    // VK_RSHIFT - Right SHIFT key
         lcontrol_key                =  0xA2,    // VK_LCONTROL - Left CONTROL key
@@ -162,14 +166,19 @@ namespace fabuluous_support_machinery::keyboard {
         oem_period_key              =  0xBE,    // VK_OEM_PERIOD - For any country/region, the '.' key
         oem_2_key                   =  0xBF,    // VK_OEM_2 - Can vary by keyboard. US: the '/?' key
         oem_3_key                   =  0xC0,    // VK_OEM_3 - Can vary by keyboard. US: the '`~' key
+            // gap
         oem_4_key                   =  0xDB,    // VK_OEM_4 - Can vary by keyboard. US: the '[{' key
         oem_5_key                   =  0xDC,    // VK_OEM_5 - Can vary by keyboard. US: the '\|' key
         oem_6_key                   =  0xDD,    // VK_OEM_6 - Can vary by keyboard. US: the ']}' key
         oem_7_key                   =  0xDE,    // VK_OEM_7 - Can vary by keyboard. US: the 'single-quote/double-quote' key
         oem_8_key                   =  0xDF,    // VK_OEM_8 - Can vary by keyboard.
+            // gap
         oem_102_key                 =  0xE2,    // VK_OEM_102 - US: the <> keys; non-US 102-key keyboard: the \\| key
+            // gap
         process_key                 =  0xE5,    // VK_PROCESSKEY - IME PROCESS key
+            // gap
         packet_key                  =  0xE7,    // VK_PACKET - Used to pass Unicode characters as if they were keystrokes.
+            // gap
         attention_key               =  0xF6,    // VK_ATTN - Attn key
         cr_sel_key                  =  0xF7,    // VK_CRSEL - CrSel key
         ex_sel_key                  =  0xF8,    // VK_EXSEL - ExSel key
@@ -178,5 +187,6 @@ namespace fabuluous_support_machinery::keyboard {
         zoom_key                    =  0xFB,    // VK_ZOOM - Zoom key
         pa1_key                     =  0xFD,    // VK_PA1 - PA1 key
         oem_clear_key               =  0xFE,    // VK_OEM_CLEAR - Clear key
-    }; }  // enum + namespace key_codes
-}  // namespace fabuluous_support_machinery::keyboard
+        _
+    }; };  // enum + wrapper
+}  // namespace fabuluous_support_machinery

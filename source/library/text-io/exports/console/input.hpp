@@ -1,6 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
+#include <fsm/text-io/exports/console/event-classes.hpp>
 #include <fsm/text-io/exports/console/output.hpp>
 
 #include <string>
@@ -14,10 +15,18 @@ namespace fabulous_support_machinery::console::_definitions {
             std::move;              // <utility>
 
     namespace os {
-        extern auto input_using_buffer( string&& buffer ) -> string;
+        extern auto input_using_buffer( string&& ) -> string;
     }  // namespace os
 
+#if 1
     using os::input_using_buffer;
+#else
+    inline auto input_using_buffer( string&& buffer )
+        -> string
+    {
+        return "";
+    }
+#endif
 
     inline auto input()
         -> string

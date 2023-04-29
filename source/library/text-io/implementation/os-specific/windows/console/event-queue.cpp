@@ -1,6 +1,6 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/text-io/implementation/os-specific/windows/console/_os/event-translation.hpp>
-#include <fsm/text-io/exports/console/events.hpp>
+#include <fsm/text-io/exports/console/event-queue.hpp>
 
 #include <fsm/core/exports/support-for-collections/queue-utility.hpp>       // popped_front_of
 

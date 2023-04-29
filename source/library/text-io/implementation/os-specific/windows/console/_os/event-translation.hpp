@@ -1,5 +1,5 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/text-io/exports/console/events.hpp>
+#include <fsm/text-io/exports/console/event-queue.hpp>
 
 // #include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
 #include <fsm/core/exports/support-for-collections/set-utility.hpp>         // contains
@@ -53,29 +53,38 @@ namespace fabulous_support_machinery::_os {
 
     inline void translate( in_<KEY_EVENT_RECORD> ev )
     {
-        const wchar_t code = ev.uChar.UnicodeChar;
-        if( code != 0 ) {
+        const wchar_t u_code = ev.uChar.UnicodeChar;
+        if( u_code != 0 ) {
             const DWORD alt_mask    = LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED;
             const DWORD ctrl_mask   = LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED;
+            const DWORD shift_mask  = SHIFT_PRESSED;
         
-            const bool alt_pressed  = !!(ev.dwControlKeyState & alt_mask);
-            const bool ctrl_pressed = !!(ev.dwControlKeyState & ctrl_mask);
+            const bool alt_pressed      = !!(ev.dwControlKeyState & alt_mask);
+            const bool ctrl_pressed     = !!(ev.dwControlKeyState & ctrl_mask);
+            const bool shift_pressed    = !!(ev.dwControlKeyState & shift_mask);
 
+            Key_modifier_set modifiers;
+            if( alt_pressed ) { modifiers |= Key_modifier::alt; }
+            if( ctrl_pressed ) { modifiers |= Key_modifier::ctrl; }
+            if( shift_pressed ) { modifiers |= Key_modifier::shift; }
+            
+            const auto key_code = Key_code::Enum( ev.wVirtualKeyCode );
             if( alt_pressed == ctrl_pressed ) {
-                translated_events().emplace( console::Keyboard_unicode_event{ code } );
+                // Textual. The Alt+Ctrl possibility is AltGr on e.g. a Norwegian keyboard.
+                translated_events().emplace(
+                    console::Keyboard_unicode_event( key_code, u_code, modifiers )
+                    );
             } else {
-                // "is pressed" continuous effect Backspace, Delete, PgUp, PgDn, left, up, down, right:
-                static constexpr WORD modal_keys[] =
-                {
-                    VK_BACK, VK_DELETE, VK_PRIOR, VK_NEXT, VK_LEFT, VK_UP, VK_DOWN, VK_RIGHT
-                };
-                
-                const bool is_modal = contains( ev.wVirtualKeyCode, modal_keys );
-                if( is_modal ) {
-                    translated_events().emplace( console::Keyboard_modal_action_event() );      // TODO:
+                // Non-textual.
+                if( is_continuous_effect_key( key_code ) ) {
+                    translated_events().emplace(
+                        console::Keyboard_continuous_effect_key_event(
+                            static_cast<Continuous_key_effect::Enum>( key_code ), modifiers
+                            )
+                        );
                 } else {
                     // TODO:
-                    translated_events().emplace( console::Keyboard_special_key_event( ev.wVirtualKeyCode ) );
+                    translated_events().emplace( console::Keyboard_special_key_event( key_code ) );
                 }
             }
         }

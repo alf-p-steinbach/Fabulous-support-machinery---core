@@ -10,5 +10,5 @@ namespace fabulous_support_machinery {
         Failure_reporter_using_c_stderr
     >;
 
-}  // namespace fabuluous_support_machinery
+}  // namespace fabulous_support_machinery
 
