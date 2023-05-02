@@ -41,7 +41,7 @@ namespace fabulous_support_machinery::console::_definitions {
     protected:
         Keyboard_event( const Key_code::Enum code, const Key_modifier_set modifiers = {} ):
             m_modifiers( modifiers )
-        {}
+        { (void) code; }
         
     public:
         auto key_code() const   -> Key_code::Enum      { return m_key_code; }

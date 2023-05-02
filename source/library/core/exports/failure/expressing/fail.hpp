@@ -6,28 +6,42 @@
 
 #include <stdexcept>
 #include <string>
+#include <type_traits>
 
 namespace fabulous_support_machinery::_definitions {
     using   std::runtime_error,
-            std::string;
+            std::string,
+            std::is_constructible_v;
 
     // Main functionality:
 
-    template< class X >
+    template< class X, class String, class... Args >
     [[noreturn]]
-    inline auto fail_( const string& message ) -> bool { throw X( message ); }
+    inline auto fail_with_msg_as_string_( const String& s, const Args&... args )
+        -> bool
+    { throw X( static_cast<string>( s ), args... ); }
+
+    template< class X, class First_arg, class... More_args >
+    constexpr bool is_constructible_with_string_ = is_constructible_v<X, string, More_args...>;
+
+    template< class X, class... Args >
+    [[noreturn]]
+    inline auto fail_( const Args&... args )
+        -> bool
+    {
+        if constexpr(
+            not is_constructible_v<X, Args...> and is_constructible_with_string_<X, Args...>
+            ) {
+            fail_with_msg_as_string_<X>( args... );
+        } else {
+            throw X( args... );
+        }
+    }
 
     [[noreturn]]
     inline auto fail( const string& message ) -> bool { fail_<runtime_error>( message ); }
 
-
-    // Convenience wrappers, in particular for calling with `std::string_view` argument:
-
-    template< class X, class String_type,
-        FSM_ENABLE_IF( not are_derived_and_base_<Bare_<String_type>, string> )
-        >
-    [[noreturn]]
-    inline auto fail_( String_type&& message ) -> bool { fail_<X>( string( message ) ); }
+    // Convenience wrapper, in particular for calling with `std::string_view` argument:
 
     template< class String_type,
         FSM_ENABLE_IF( not are_derived_and_base_<Bare_<String_type>, string> )

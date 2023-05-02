@@ -8,7 +8,7 @@
 #define FSM_IF_WITH( parenthesized_initializer, condition ) \
     if( \
         FSM_PARENS_REMOVED( parenthesized_initializer ); \
-        fabulous_support_machinery::asserted_as_bool( condition ) \
+        ::fabulous_support_machinery::asserted_as_bool( condition ) \
         )
         
 #define FSM_IF( condition ) \
