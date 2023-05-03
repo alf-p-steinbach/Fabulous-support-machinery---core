@@ -20,11 +20,11 @@
 #define FSM_FAIL_WITH_ARGS_( X, args_list ) \
     ::fabulous_support_machinery::fail_<X> args_list
 
-#define FSM_FAIL_( X, explanation ) \
-    FSM_FAIL_WITH_ARGS_( X, ( FSM_FAILURE_MESSAGE( explanation ) ) )
-
 #define FSM_FAIL_WITH_DEFAULT_MESSAGE_( X ) \
     FSM_FAIL_WITH_ARGS_( X, ( ::fabulous_support_machinery::x::default_message_for_<X>() ) )
+
+#define FSM_FAIL_( X, explanation ) \
+    FSM_FAIL_WITH_ARGS_( X, ( FSM_FAILURE_MESSAGE( explanation ) ) )
 
 #define FSM_FAIL( explanation ) \
     FSM_FAIL_( std::runtime_error, explanation )

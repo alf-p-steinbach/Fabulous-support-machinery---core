@@ -13,8 +13,6 @@ namespace fabulous_support_machinery::_definitions {
             std::string,
             std::is_constructible_v;
 
-    // Main functionality:
-
     template< class X, class String, class... Args >
     [[noreturn]]
     inline auto fail_with_msg_as_string_( const String& s, const Args&... args )
@@ -23,6 +21,9 @@ namespace fabulous_support_machinery::_definitions {
 
     template< class X, class First_arg, class... More_args >
     constexpr bool is_constructible_with_string_ = is_constructible_v<X, string, More_args...>;
+
+
+    // Main functionality:
 
     template< class X, class... Args >
     [[noreturn]]
