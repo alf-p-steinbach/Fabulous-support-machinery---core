@@ -25,9 +25,8 @@ namespace fabulous_support_machinery {
     //
     // The following are convenience ops for dealing with bytes as numbers:
     //
-    // +x, -x, (x == 0), (x != 0)
     
-    inline namespace byte_as_integer_ops {
+    inline namespace byte_as_integer_ops {      // +x, -x, (x == 0), (x != 0)
         constexpr auto operator+( const Byte v )
             -> Numeric_byte
         { return std::to_integer<Numeric_byte>( v ); }
@@ -36,6 +35,7 @@ namespace fabulous_support_machinery {
             -> Numeric_byte
         { return -std::to_integer<Numeric_byte>( v ); }
 
+
         constexpr auto operator==( const Byte v, Literal_null )
             -> bool
         { return (+v == 0); }
@@ -43,6 +43,7 @@ namespace fabulous_support_machinery {
         constexpr auto operator==( Literal_null, const Byte v )
             -> bool
         { return (+v == 0); }
+
 
         constexpr auto operator!=( const Byte v, Literal_null )
             -> bool
