@@ -22,8 +22,15 @@ namespace fabulous_support_machinery::string_building::_definitions {
 
     // TODO: overloads for numbers etc.
 
-    template< class tp_T >
-    inline auto operator<<( string&& destination, in_<tp_T> source )
+    template< class T, FSM_ENABLE_IF( is_arithmetic_v<T> ) >
+    inline auto operator<<( string& destination, in_<T> value )
+        -> string&
+    {
+        return destination.append( to_string( value ) );        // TODO: from_chars
+    }
+
+    template< class T >
+    inline auto operator<<( string&& destination, in_<T> source )
         -> string&&
     { return move( destination << source ); }
     

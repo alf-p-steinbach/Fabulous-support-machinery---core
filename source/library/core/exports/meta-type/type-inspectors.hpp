@@ -78,4 +78,5 @@ namespace fabulous_support_machinery {
     
     template< class T >     
     constexpr bool is_unsigned_integer_         = is_integer_<T> and is_unsigned_<T>;
+
 }  // namespace fabulous_support_machinery

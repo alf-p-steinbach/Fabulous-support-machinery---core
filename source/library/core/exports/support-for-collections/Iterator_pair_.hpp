@@ -38,7 +38,7 @@ namespace fabulous_support_machinery::_definitions {
     };
 
     // Convenience factory functions with iterator deduction:
-    namespace its {
+    namespace iterable_for {     // all_of, all_except_first_of
         // `all`:
         template< class Iterator >
         constexpr auto all_of( const Iterator it_begin, const Iterator it_end )
@@ -50,22 +50,23 @@ namespace fabulous_support_machinery::_definitions {
             -> Iterator_pair_<decltype( begin_of( c ) )>
         { return {c}; }
 
-        // `all_x_first_of`:
+
+        // `all_except_first_of`:
         template< class Iterator >
-        constexpr auto all_x_first_of( const Iterator it_begin, const Iterator it_end )
+        constexpr auto all_except_first_of( const Iterator it_begin, const Iterator it_end )
             -> Iterator_pair_<Iterator>
         { return {next( it_begin ), it_end}; }
 
         template< class Collection >
-        constexpr auto all_x_first_of( Collection&& c )
+        constexpr auto all_except_first_of( Collection&& c )
             -> Iterator_pair_<decltype( begin_of( c ) )>
         { return {next( begin_of( c ) ), end_of( c )}; }
-    }  // namespace its
+    }  // namespace iterable_for
 
     namespace d = _definitions;
     namespace exports { using
         d::Iterator_pair_;
-        namespace its = d::its;     // all_of, all_x_first_of
+        namespace iterable_for = d::iterable_for;     // all_of, all_except_first_of
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
