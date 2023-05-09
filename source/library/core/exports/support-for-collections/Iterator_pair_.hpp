@@ -14,6 +14,7 @@
 namespace fabulous_support_machinery::_definitions {
     using   std::distance, std::next;
 
+    // TODO: derive from `std::pair`
     template< class Iterator >
     class Iterator_pair_
     {
