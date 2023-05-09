@@ -1,4 +1,4 @@
-﻿#include <fsm/all.hpp>
+﻿#include <fsm/_all.hpp>
 #include <fsm/$-macros.hpp>     // $nsname_from
 namespace fsm = fabulous_support_machinery;
 

@@ -26,48 +26,43 @@ namespace fabulous_support_machinery::_definitions {
             m_it_end( it_end )
         {}
 
-        template< class Collection >
-        constexpr Iterator_pair_( Collection& c ):
-            m_it_begin( begin_of( c ) ),
-            m_it_end( end_of( c ) )
-        {}
-
         constexpr auto begin() const    -> Iterator     { return m_it_begin; }
         constexpr auto end() const      -> Iterator     { return m_it_end; }
         constexpr auto size() const     -> Size         { return distance( m_it_begin, m_it_end ); }
     };
 
-    // Convenience factory functions with iterator deduction:
-    namespace iterable_for {     // all_of, all_except_first_of
-        // `all`:
-        template< class Iterator >
-        constexpr auto all_of( const Iterator it_begin, const Iterator it_end )
-            -> Iterator_pair_<Iterator>
-        { return {it_begin, it_end}; }
+    // // Convenience factory functions with iterator deduction:
+    // namespace iterator_pair_factory_functions{
+        // template< class Iterator >
+        // constexpr auto all_of( const Iterator it_begin, const Iterator it_end )
+            // -> Iterator_pair_<Iterator>
+        // { return {it_begin, it_end}; }
 
-        template< class Collection >
-        constexpr auto all_of( Collection&& c )
-            -> Iterator_pair_<decltype( begin_of( c ) )>
-        { return {c}; }
+        // // This is the primary general function. Overloads defined in separate headers
+        // // for container wrappers, e.g. stack and queue. Note: customization for a type
+        // // T needs overloads for both `const T&` and `T&` in order to match better.
+        // template< class Collection >
+        // constexpr auto all_of( Collection&& c )
+            // -> Iterator_pair_<decltype( begin_of( c ) )>
+        // { return {begin_of( c ), end_of( c )}; }
 
+        // template< class Iterator >
+        // constexpr auto all_except_first_of( const Iterator it_begin, const Iterator it_end )
+            // -> Iterator_pair_<Iterator>
+        // { return {next( it_begin ), it_end}; }
 
-        // `all_except_first_of`:
-        template< class Iterator >
-        constexpr auto all_except_first_of( const Iterator it_begin, const Iterator it_end )
-            -> Iterator_pair_<Iterator>
-        { return {next( it_begin ), it_end}; }
-
-        template< class Collection >
-        constexpr auto all_except_first_of( Collection&& c )
-            -> Iterator_pair_<decltype( begin_of( c ) )>
-        { return {next( begin_of( c ) ), end_of( c )}; }
-    }  // namespace iterable_for
+        // template< class Collection >
+        // constexpr auto all_except_first_of( Collection&& c )
+            // -> Iterator_pair_<decltype( begin_of( c ) )>
+        // { return {next( begin_of( c ) ), end_of( c )}; }
+    // }  // namespace iterator_pair_factory_functions
 
     namespace d = _definitions;
-    namespace exports { using
+    namespace exports{ using
         d::Iterator_pair_;
-        namespace iterable_for = d::iterable_for;     // all_of, all_except_first_of
+        // using namespace d::iterator_pair_factory_functions;
     }  // namespace exports
+        
 }  // namespace fabulous_support_machinery::_definitions
 
 namespace fabulous_support_machinery    { using namespace _definitions::exports; }

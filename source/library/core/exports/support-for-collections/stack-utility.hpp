@@ -4,7 +4,7 @@
 #include <fsm/core/exports/basic-types/Size+Index.hpp>                  // Index
 #include <fsm/core/exports/failure/detecting/hopefully.hpp>             // hopefully
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>             // FSM_FAIL_
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_, ref_
 #include <fsm/core/exports/support-for-collections/Iterator_pair_.hpp>  // Iterator_pair_
 
 #include <deque>
@@ -16,7 +16,7 @@
 namespace fabulous_support_machinery::_definitions {
     using   std::deque,
             std::stack,
-            std::forward;               // <utility>
+            std::move, std::forward;        // <utility>
 
     template< class Item, class Container = std::deque<Item>, class... Args >
     auto make_stack( Args&&... args )
@@ -28,54 +28,49 @@ namespace fabulous_support_machinery::_definitions {
     }
 
     template< class Item, class Container >
-    auto item_at( const Index i, in_<stack<Item, Container>> st )
-        -> const Item&
+    auto container_for( in_<stack<Item, Container>> st )
+        -> const Container&
     {
         using Stack = stack<Item, Container>;
         struct Access: Stack { using Stack::c; };
-        return (st.*&Access::c)[i];
+        return st.*&Access::c;
     }
+
+    template< class Item, class Container >
+    auto item_at( const Index i, in_<stack<Item, Container>> st )
+        -> const Item&
+    { return container_for( st )[i]; }
 
     template< class Item, class Container >
     auto checked_item_at( const Index i, in_<stack<Item, Container>> st )
         -> const Item&
-    {
-        hopefully( size_t( i ) < st.size() ) or FSM_FAIL( "Out of range index" );
-        return item_at( i, st );
-    }
+    { return container_for( st ).at( i ); }
     
-    template< class Item, class Container >
-    auto all_of( in_<stack<Item, Container>> st )
-        -> auto
-    {
-        using Stack = stack<Item, Container>;
-        struct Access: Stack { using Stack::c; };
-        return iterable_for::all_of( st.*&Access::c );
-    }
-
     template< class Item, class Container >
     auto popped_top_of( stack<Item, Container>& st )
         -> Item
     {
-        Item result = st.top();
+        Item result = move( st.top() );
         st.pop();
         return result;
     }
 
     namespace d = _definitions;
-    namespace exports {
-        inline namespace stack_ops {
-            using
-                d::make_stack,
-                d::item_at,
-                d::checked_item_at,
-                d::all_of,
-                d::popped_top_of;
-        }
-    }  // namespace exports
+    namespace exports { using
+        d::make_stack,
+        d::container_for,
+        d::item_at,
+        d::checked_item_at,
+        d::popped_top_of;
+    }
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery
-{
-     using namespace _definitions::exports;
-}
+namespace fabulous_support_machinery{
+    using namespace _definitions::exports;
+
+    // Not a simple equate because may need to be an extension of earlier declared namespace.
+    namespace stack_ops {
+        using namespace _definitions::exports;
+    }  // namespace exports
+
+}  // namespace fabulous_support_machinery
