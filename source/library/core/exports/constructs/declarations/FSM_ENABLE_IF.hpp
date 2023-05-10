@@ -15,4 +15,4 @@
 #include <fsm/core/exports/constructs/declarations/enable_if_.hpp>
 
 #define FSM_ENABLE_IF( ... ) \
-    fabulous_support_machinery::Enable_if_<__VA_ARGS__> = true
+    std::enable_if_t<__VA_ARGS__>* = nullptr
