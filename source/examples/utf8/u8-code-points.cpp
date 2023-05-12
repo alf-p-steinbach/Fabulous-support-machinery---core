@@ -15,9 +15,9 @@ namespace app {
         for( const u8::Cp_bytes_ref cp_bytes: u8_code_points ) {
             const auto index = cp_bytes.char_pointer() - text.data();
             console::output(
-                console::right( 2, index ), ": ",                                   // Index in string.
-                console::right( 6, fsm::string_from( "‘", cp_bytes.sv(), "’" ) ), " ",   // E.g. "‘日’".
-                console::right( 9, unicode::to_spec( cp_bytes.cp_number() ) ),           // E.g. "u65E5".
+                console::right( 2, index ), ": ",                                       // Index in string.
+                console::right( 6, fsm::string_from( "‘", cp_bytes.sv(), "’" ) ), " ",  // E.g. "‘日’".
+                console::right( 9, unicode::to_spec( cp_bytes.cp_number() ) ),          // E.g. "u65E5".
                 "\n"
                 );
         }
