@@ -1,17 +1,11 @@
-﻿#include <fsm/_all.hpp>
-#include <fsm/$-macros.hpp>     // $ns_from
-namespace fsm = fabulous_support_machinery;
-
-#include <string_view>
+﻿#include <fsm/_simple.hpp>
 
 namespace app {
-    $ns_from( fsm, console );  $ns_from( fsm, u8 );  $ns_from( fsm, unicode );
-    $ns_from( fsm, fmtlib );
+    using namespace fsm::namespace_names;   // console, u8, unicode, fmtlib
+    constexpr auto text = "Every 日本国 кошка loves blåbærsyltetøy!"sv;
 
     void run()
     {
-        constexpr auto text = "Every 日本国 кошка loves blåbærsyltetøy!"sv;
-
         // Just display the message.
         console::print_fmt( "{}\n", text );
         
