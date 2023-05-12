@@ -52,7 +52,7 @@ namespace fabulous_support_machinery::u8::_definitions {
 
         using   Inspectors::first_unit, Inspectors::n_bytes,
                 Inspectors::begin, Inspectors::end, Inspectors::unit_pointer, Inspectors::char_pointer,
-                Inspectors::cp_number, Inspectors::sv, Inspectors::str;
+                Inspectors::as_number, Inspectors::sv, Inspectors::str;
     };
     
     using Cp_bytes_ref = Cp_bytes_ref_<const char*>;

@@ -74,7 +74,7 @@ namespace fabulous_support_machinery::console::_definitions {
             const auto it_beyond    = u8::Cp_iterator( p_beyond );
 
             for( auto it_back = prev( it_beyond ); true; --it_back ) {
-                m_display_width -= display_width_of( it_back->cp_number() );
+                m_display_width -= display_width_of( it_back->as_number() );
                 const_<const char*> p_cropped_beyond = it_back.unit_iterator();
                 if( p_cropped_beyond == p_first ) {
                     m_text = {};

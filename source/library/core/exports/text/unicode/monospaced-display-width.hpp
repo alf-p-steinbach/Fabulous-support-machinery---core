@@ -40,7 +40,7 @@ namespace fabulous_support_machinery::unicode::_definitions {
     {
         int result = 0;
         for( in_<u8::Cp_bytes_ref> seq: u8::to_code_point_iterators( text ) ) {
-            if( const auto w = monospaced_display_width_of_code( seq.cp_number() ) ) {
+            if( const auto w = monospaced_display_width_of_code( seq.as_number() ) ) {
                 result += w.value();
             } else {
                 return {};
@@ -85,7 +85,7 @@ namespace fabulous_support_machinery::unicode::_definitions {
     {
         int result = 0;
         for( in_<u8::Cp_bytes_ref> seq: u8::to_code_point_iterators( text ) ) {
-            result += assumed_monospaced_display_width_of_code( seq.cp_number() );
+            result += assumed_monospaced_display_width_of_code( seq.as_number() );
         }
         return result;
     }

@@ -34,7 +34,7 @@ namespace fabulous_support_machinery::text {
         
         for( const u8::Cp_bytes_ref seq: u8::to_code_point_iterators( s ) ) {
             // TODO: surrogate pairs
-            buffer.push_back( static_cast<Unit>( seq.cp_number() ) );
+            buffer.push_back( static_cast<Unit>( seq.as_number() ) );
         }
 
         return buffer;

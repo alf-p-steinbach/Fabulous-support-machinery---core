@@ -17,7 +17,7 @@ namespace app {
             console::output(
                 console::right( 2, index ), ": ",                                       // Index in string.
                 console::right( 6, fsm::string_from( "‘", cp_bytes.sv(), "’" ) ), " ",  // E.g. "‘日’".
-                console::right( 9, unicode::to_spec( cp_bytes.cp_number() ) ),          // E.g. "u65E5".
+                console::right( 9, unicode::to_spec( cp_bytes.as_number() ) ),          // E.g. "u65E5".
                 "\n"
                 );
         }

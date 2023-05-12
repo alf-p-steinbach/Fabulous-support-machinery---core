@@ -17,7 +17,7 @@ namespace app {
             console::print_fmt( "{:2}: {:>6} {:>9}\n",
                 index,                                      // Index in string.
                 fmtlib::format( "‘{}’", cp_bytes.sv() ),    // E.g. "‘日’".
-                unicode::to_spec( cp_bytes.cp_number() )    // E.g. "u65E5".
+                unicode::to_spec( cp_bytes.as_number() )    // E.g. "u65E5".
                 );
         }
     }
