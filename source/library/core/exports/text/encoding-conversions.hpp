@@ -5,7 +5,7 @@
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>
 #include <fsm/core/exports/meta-type/type-inspectors.hpp>  // bits_per_
 
-#include <fsm/core/exports/text/encoding/u8/Code_point_iterator_.hpp>
+#include <fsm/core/exports/text/encoding/u8/Cp_iterator_.hpp>
 
 #include <array>        // std::array
 #include <string>       // std::wstring
@@ -32,7 +32,7 @@ namespace fabulous_support_machinery::text {
         FSM_STATIC_ASSERT( bits_per_<Unit> == 16 );
         buffer.clear();  buffer.reserve( s.size() );
         
-        for( const u8::Code_point_ref seq: u8::to_code_point_iterators( s ) ) {
+        for( const u8::Cp_bytes_ref seq: u8::to_code_point_iterators( s ) ) {
             // TODO: surrogate pairs
             buffer.push_back( static_cast<Unit>( seq.cp_number() ) );
         }

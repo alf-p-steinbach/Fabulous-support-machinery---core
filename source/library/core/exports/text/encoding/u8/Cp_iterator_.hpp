@@ -7,7 +7,7 @@
 #include <fsm/core/exports/mixins/Relational_operators_mixin_.hpp>                      // Relational_operators_mixin_
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>                    // FSM_FAIL
 #include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>           // FSM_STATIC_ASSERT
-#include <fsm/core/exports/text/encoding/u8/Code_point_ref_.hpp>                        // u8::Code_point_ref_, tag::*
+#include <fsm/core/exports/text/encoding/u8/Cp_bytes_ref_.hpp>                        // u8::Cp_bytes_ref_, tag::*
 #include <fsm/core/exports/text/encoding/u8/basic-sequence-functions.hpp>               // u8::*
 #include <fsm/core/exports/meta-type/type-inspectors.hpp>  // bits_per_
 
@@ -20,24 +20,24 @@ namespace fabulous_support_machinery::u8::_definitions {
             std::string, std::to_string,            // <string>
             std::string_view;                       // <string_view>
 
-    struct Code_point_iterator_base
+    struct Cp_iterator_base
     {
         struct Step_delta{ enum Enum{ backward = -1, forward = +1 }; };
     };
     
     template< class tp_Unit_iterator, bool tp_check = true >
-    class Code_point_iterator_core_:
-        public Code_point_iterator_base,
-        public Relational_operators_mixin_<Code_point_iterator_core_<tp_Unit_iterator, tp_check>>
+    class Cp_iterator_core_:
+        public Cp_iterator_base,
+        public Relational_operators_mixin_<Cp_iterator_core_<tp_Unit_iterator, tp_check>>
     {
     public:
         using Unit_iterator     = tp_Unit_iterator;
         using Unit              = typename iterator_traits<Unit_iterator>::value_type;
-        using Code_point_ref    = Code_point_ref_<Unit_iterator, tp_check>;
+        using Cp_bytes_ref    = Cp_bytes_ref_<Unit_iterator, tp_check>;
 
         // Required for e.g. use of `std::prev`, and generally for `std::iterator_traits`:
         using difference_type   = Size;
-        using value_type        = Code_point_ref;
+        using value_type        = Cp_bytes_ref;
         using pointer           = value_type*;
         using reference         = value_type&;
         using iterator_category	= std::bidirectional_iterator_tag;
@@ -45,22 +45,22 @@ namespace fabulous_support_machinery::u8::_definitions {
         FSM_STATIC_ASSERT( bits_per_<Unit> == 8 );
 
     protected:
-        Code_point_ref    m_code_point_ref;
+        Cp_bytes_ref    m_code_point_ref;
 
     public:
-        constexpr Code_point_iterator_core_( tags::Unchecked, const Unit_iterator it ):
+        constexpr Cp_iterator_core_( tags::Unchecked, const Unit_iterator it ):
             m_code_point_ref( tags::Unchecked(), it )
         {}
 
-        constexpr Code_point_iterator_core_( const Unit_iterator it ):
+        constexpr Cp_iterator_core_( const Unit_iterator it ):
             m_code_point_ref( it )
         {}
 
         auto unit_iterator() const -> Unit_iterator     { return m_code_point_ref.unit_iterator(); }
         auto codepoint() const -> char32_t              { return m_code_point_ref.codepoint(); }
-        auto sequence() const -> const Code_point_ref&  { return m_code_point_ref; }
+        auto sequence() const -> const Cp_bytes_ref&  { return m_code_point_ref; }
 
-        friend auto compare( in_<Code_point_iterator_core_> a, in_<Code_point_iterator_core_> b )
+        friend auto compare( in_<Cp_iterator_core_> a, in_<Cp_iterator_core_> b )
             -> int
         { return static_cast<int>( a.m_code_point_ref.unit_pointer() - b.m_code_point_ref.unit_pointer() ); }
 
@@ -76,7 +76,7 @@ namespace fabulous_support_machinery::u8::_definitions {
                     hopefully( lead_bytes::include( Byte( *it ) ) )
                         or FSM_FAIL( "Invalid lead byte" );
                 }
-                m_code_point_ref = Code_point_ref( tags::Unchecked(), it );
+                m_code_point_ref = Cp_bytes_ref( tags::Unchecked(), it );
             }
         }
 
@@ -101,20 +101,20 @@ namespace fabulous_support_machinery::u8::_definitions {
         void step_backward()    { step_<Step_delta::backward>(); }
     };
     
-    using Code_point_iterator_core = Code_point_iterator_core_<const char*>;
+    using Cp_iterator_core = Cp_iterator_core_<const char*>;
 
     template< class tp_Unit_iterator, bool tp_check = true >
-    class Code_point_iterator_:
-        public Code_point_iterator_core_< tp_Unit_iterator, tp_check >
+    class Cp_iterator_:
+        public Cp_iterator_core_< tp_Unit_iterator, tp_check >
     {
         // TODO: standard-iterator stuff.
     public:
-        using Base = Code_point_iterator_core_<tp_Unit_iterator, tp_check>;
-        using Base::Code_point_iterator_core_;      // Inherit the constructors.
-        using Self = Code_point_iterator_;
+        using Base = Cp_iterator_core_<tp_Unit_iterator, tp_check>;
+        using Base::Cp_iterator_core_;      // Inherit the constructors.
+        using Self = Cp_iterator_;
 
-        using typename Base::Code_point_ref;
-        using Value = Code_point_ref;
+        using typename Base::Cp_bytes_ref;
+        using Value = Cp_bytes_ref;
         
         using Base::sequence;
         using Base::step_forward;
@@ -143,24 +143,24 @@ namespace fabulous_support_machinery::u8::_definitions {
         }
     };
     
-    using Code_point_iterator = Code_point_iterator_<const char*>;
+    using Cp_iterator = Cp_iterator_<const char*>;
 
     template<
         class tp_Unit_iterator,
-        class tp_It = Code_point_iterator_< tp_Unit_iterator >
+        class tp_It = Cp_iterator_< tp_Unit_iterator >
         >
     constexpr auto to_code_point_iterators( in_<tp_Unit_iterator> it_first, const int n )
         -> Iterator_pair_< tp_It >
     { return {tp_It( it_first ), tp_It( tags::Unchecked(), it_first + n )}; }
 
     constexpr auto to_code_point_iterators( in_<string_view> s )
-        -> Iterator_pair_< Code_point_iterator >
+        -> Iterator_pair_< Cp_iterator >
     { return to_code_point_iterators( s.data(), int_size_of( s ) ); }
         
     namespace d = _definitions;
     namespace exports { using
-        d::Code_point_iterator_core_, d::Code_point_iterator_core,
-        d::Code_point_iterator_, d::Code_point_iterator,
+        d::Cp_iterator_core_, d::Cp_iterator_core,
+        d::Cp_iterator_, d::Cp_iterator,
         d::to_code_point_iterators;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::u8::_definitions

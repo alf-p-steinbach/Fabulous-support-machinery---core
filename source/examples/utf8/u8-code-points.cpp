@@ -11,13 +11,13 @@ namespace app {
 
         // Display one line for each code point with string index, symbol and code point value,
         // all nicely aligned vertically.
-        const auto u8_code_points = u8::Code_points_view( text );
-        for( const u8::Code_point_ref seq: u8_code_points ) {
-            const auto index = seq.char_pointer() - text.data();
+        const auto u8_code_points = u8::Cp_sequence_view( text );
+        for( const u8::Cp_bytes_ref cp_bytes: u8_code_points ) {
+            const auto index = cp_bytes.char_pointer() - text.data();
             console::output(
                 console::right( 2, index ), ": ",                                   // Index in string.
-                console::right( 6, fsm::string_from( "‘", seq.sv(), "’" ) ), " ",   // E.g. "‘日’".
-                console::right( 9, unicode::to_spec( seq.cp_number() ) ),           // E.g. "u65E5".
+                console::right( 6, fsm::string_from( "‘", cp_bytes.sv(), "’" ) ), " ",   // E.g. "‘日’".
+                console::right( 9, unicode::to_spec( cp_bytes.cp_number() ) ),           // E.g. "u65E5".
                 "\n"
                 );
         }

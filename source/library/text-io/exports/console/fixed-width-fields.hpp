@@ -4,7 +4,7 @@
 // TODO: clean up includes
 #include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of, int_capacity_of
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>      // FSM_ENABLE_IF
-#include <fsm/core/exports/text/encoding/u8/Code_point_iterator_.hpp>       // Code_point_iterator
+#include <fsm/core/exports/text/encoding/u8/Cp_iterator_.hpp>       // Cp_iterator
 #include <fsm/core/exports/text/sprintf-to-std-string.hpp>                  // unsafe::sprintf_to
 #include <fsm/core/exports/text/unicode/monospaced-display-width.hpp>       // assumed_monospaced_display_width_of
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>                    // in_
@@ -71,7 +71,7 @@ namespace fabulous_support_machinery::console::_definitions {
 
             const auto p_first      = m_text.data();
             const auto p_beyond     = p_first + m_text.size();
-            const auto it_beyond    = u8::Code_point_iterator( p_beyond );
+            const auto it_beyond    = u8::Cp_iterator( p_beyond );
 
             for( auto it_back = prev( it_beyond ); true; --it_back ) {
                 m_display_width -= display_width_of( it_back->cp_number() );

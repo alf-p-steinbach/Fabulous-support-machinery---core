@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/text/encoding/u8/Code_point_iterator_.hpp>
+#include <fsm/core/exports/text/encoding/u8/Cp_iterator_.hpp>
 
 #include <optional>
 #include <string_view>
@@ -39,7 +39,7 @@ namespace fabulous_support_machinery::unicode::_definitions {
         -> optional<int>
     {
         int result = 0;
-        for( in_<u8::Code_point_ref> seq: u8::to_code_point_iterators( text ) ) {
+        for( in_<u8::Cp_bytes_ref> seq: u8::to_code_point_iterators( text ) ) {
             if( const auto w = monospaced_display_width_of_code( seq.cp_number() ) ) {
                 result += w.value();
             } else {
@@ -84,7 +84,7 @@ namespace fabulous_support_machinery::unicode::_definitions {
         -> int
     {
         int result = 0;
-        for( in_<u8::Code_point_ref> seq: u8::to_code_point_iterators( text ) ) {
+        for( in_<u8::Cp_bytes_ref> seq: u8::to_code_point_iterators( text ) ) {
             result += assumed_monospaced_display_width_of_code( seq.cp_number() );
         }
         return result;
