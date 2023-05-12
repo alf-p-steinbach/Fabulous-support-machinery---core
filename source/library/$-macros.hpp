@@ -10,8 +10,8 @@
 #include <fsm/core/exports/constructs/declarations/FSM_NOT_USING.hpp>
 #define $not_using                  FSM_NOT_USING
 
-#include <fsm/core/exports/constructs/declarations/FSM_NSNAME_FROM.hpp>
-#define $nsname_from                FSM_NSNAME_FROM
+#include <fsm/core/exports/constructs/declarations/FSM_NS_FROM.hpp>
+#define $ns_from                    FSM_NS_FROM
 
 #include <fsm/core/exports/constructs/declarations/FSM_TYPE_OF.hpp>
 #define $type_of                    FSM_TYPE_OF

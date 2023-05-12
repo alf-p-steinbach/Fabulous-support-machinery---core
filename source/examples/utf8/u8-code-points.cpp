@@ -1,11 +1,11 @@
 ﻿#include <fsm/_all.hpp>
-#include <fsm/$-macros.hpp>     // $nsname_from
+#include <fsm/$-macros.hpp>     // $ns_from
 namespace fsm = fabulous_support_machinery;
 
 #include <string_view>
 
 namespace app {
-    $nsname_from( fsm, console );  $nsname_from( fsm, u8 );  $nsname_from( fsm, unicode );
+    $ns_from( fsm, console );  $ns_from( fsm, u8 );  $ns_from( fsm, unicode );
 
     void run()
     {

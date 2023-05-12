@@ -3,12 +3,12 @@
 
 // Example usage:
 //
-//      FSM_NSNAME_FROM( std, chrono );
+//      FSM_NS_FROM( std, chrono );
 //
 // Or with $-macros from header <fsm/$-macros.hpp>:
 //
-//      $nsname_from( std, chrono );
+//      $ns_from( std, chrono );
 
 
-#define FSM_NSNAME_FROM( containing_ns, name ) \
+#define FSM_NS_FROM( containing_ns, name ) \
     namespace name = containing_ns::name

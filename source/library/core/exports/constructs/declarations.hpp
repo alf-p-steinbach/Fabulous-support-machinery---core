@@ -5,6 +5,6 @@
 #include <fsm/core/exports/constructs/declarations/enum-support.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_TYPE_OF.hpp>
-#include <fsm/core/exports/constructs/declarations/FSM_NSNAME_FROM.hpp>
+#include <fsm/core/exports/constructs/declarations/FSM_NS_FROM.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_WITH.hpp>
 #include <fsm/core/exports/constructs/declarations/FSM_NOT_USING.hpp>
