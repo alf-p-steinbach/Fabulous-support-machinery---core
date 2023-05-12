@@ -11,8 +11,5 @@
 //      template< class Item, $enable_if( sizeof( Item ) == 1 ) >
 //      auto to_char_ptr( Item* ) -> char*;
 
-
-#include <fsm/core/exports/constructs/declarations/enable_if_.hpp>
-
 #define FSM_ENABLE_IF( ... ) \
     std::enable_if_t<__VA_ARGS__>* = nullptr
