@@ -19,21 +19,23 @@ namespace fabulous_support_machinery::u8::_definitions {
             std::string_view;           // <string_view>
 
     template< class > struct Unit_iterator_of_t_;
-    template< class Type > using Unit_iterator_of_ = typename Unit_iterator_of_t_<Type>::T;
 
-    template< class tp_Derived >
+    template< class Type >
+    using Unit_iterator_of_ = typename Unit_iterator_of_t_<Type>::T;
+
+    template< class Derived >
     class Code_point_inspectors_mixin_:
-        public Relational_operators_mixin_<Code_point_inspectors_mixin_<tp_Derived>>
+        public Relational_operators_mixin_<Code_point_inspectors_mixin_<Derived>>
     {
     public:
-        using Unit_iterator     = Unit_iterator_of_<tp_Derived>;
+        using Unit_iterator     = Unit_iterator_of_<Derived>;
         using Unit              = typename iterator_traits<Unit_iterator>::value_type;
         FSM_STATIC_ASSERT( sizeof( Unit ) == 1 );
 
     private:
         auto self() const
-            -> const tp_Derived&
-        { return static_cast<const tp_Derived&>( *this ); }
+            -> const Derived&
+        { return static_cast<const Derived&>( *this ); }
 
         auto it_start() const -> Unit_iterator { return self().unit_iterator(); }
 
@@ -52,10 +54,10 @@ namespace fabulous_support_machinery::u8::_definitions {
         auto str() const        -> string           { return string( char_pointer(), n_bytes() ); }
     };
 
-    template< class tp_Derived >
+    template< class Derived >
     inline auto compare(
-        in_<Code_point_inspectors_mixin_<tp_Derived>>  a,
-        in_<Code_point_inspectors_mixin_<tp_Derived>>  b
+        in_<Code_point_inspectors_mixin_<Derived>>  a,
+        in_<Code_point_inspectors_mixin_<Derived>>  b
         ) -> int
     {
         // UTF-8 sequences compare lexicographically just like their Unicode code points.
