@@ -11,8 +11,7 @@ namespace app {
         
         // Display one line for each code point with string index, symbol and code point value,
         // all nicely aligned vertically.
-        const auto u8_code_points = u8::Cp_sequence_view( text );
-        for( const u8::Cp_bytes_ref cp_bytes: u8_code_points ) {
+        for( const u8::Cp_bytes_ref cp_bytes: u8::Cp_sequence_view( text ) ) {
             const auto index = cp_bytes.char_pointer() - text.data();
             console::print_fmt( "{:2}: {:>6} {:>9}\n",
                 index,                                      // Index in string.
