@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>       // FSM_ENABLE_IF
-#include <fsm/core/exports/meta-type/type-inspectors.hpp>                   // are_derived_and_base_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>                   // are_base_and_derived_
 
 #include <stdexcept>
 #include <string>
@@ -45,7 +45,7 @@ namespace fabulous_support_machinery::_definitions {
     // Convenience wrapper, in particular for calling with `std::string_view` argument:
 
     template< class String_type,
-        FSM_ENABLE_IF( not are_derived_and_base_<Bare_<String_type>, string> )
+        FSM_ENABLE_IF( not are_base_and_derived_<string, Bare_<String_type>> )
         >
     [[noreturn]]
     inline auto fail( String_type&& message ) -> bool { fail( string( message ) ); }

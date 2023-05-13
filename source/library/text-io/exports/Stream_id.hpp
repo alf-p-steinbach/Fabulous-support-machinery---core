@@ -3,7 +3,7 @@
 
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>   // FSM_ENABLE_IF
-#include <fsm/core/exports/meta-type/type-inspectors.hpp>               // are_derived_and_base_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>               // are_base_and_derived_
 #include <fsm/core/exports/mixins/Relational_operators_mixin_.hpp>      // Relational_operators_mixin_
 
 namespace fabulous_support_machinery::_definitions {
@@ -22,7 +22,7 @@ namespace fabulous_support_machinery::_definitions {
         constexpr operator int() const { return m_value; }  // Supports e.g. use in `switch`.
     };
 
-    template< class E, FSM_ENABLE_IF( are_derived_and_base_<E, Enumeration> ) >
+    template< class E, FSM_ENABLE_IF( are_base_and_derived_<Enumeration, E> ) >
     constexpr auto compare( const E a, const E b )
         -> int
     { return (+a - +b); }

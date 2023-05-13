@@ -7,16 +7,29 @@
 
 namespace fabulous_support_machinery {
     template< class T >
-    constexpr int n_bytes_per_                  = static_cast<int>( sizeof( T ) );
+    constexpr int   n_bytes_per_                = static_cast<int>( sizeof( T ) );
 
     template< class T >
-    constexpr int bits_per_                     = n_bytes_per_<T>*bits_per_byte;
-    
+    constexpr int   bits_per_                   = n_bytes_per_<T>*bits_per_byte;
+
     template< class A, class B >    
     constexpr bool  is_same_                    = std::is_same_v<A, B>;
 
-    template< class D, class B >    
-    constexpr bool  are_derived_and_base_       = std::is_base_of_v<B, D>;  // (sic!)
+    template< class Base, class Derived >    
+    constexpr bool  are_base_and_derived_       = std::is_base_of_v<Base, Derived>;
+
+    template< class To, class From >
+    constexpr bool  converts_to_                = std::is_convertible_v<From, To>;
+
+    template< class Base, class Derived >
+    constexpr bool  type_is_a_                  = // Like C++20 concept `derived_from`
+        are_base_and_derived_< Base, Derived > and
+        converts_to_< const volatile Base*, const volatile Derived* >;
+
+    template< class T, class Arg >
+    constexpr auto object_is_a_( const Arg& o )
+        -> bool
+    { return (dynamic_cast<const volatile T*>( &o ) != nullptr); }
 
 
     // Unwrappers.
