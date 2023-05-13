@@ -30,7 +30,7 @@ namespace fabulous_support_machinery::u8::_definitions {
     {
     public:
         using Unit_iterator     = Unit_iterator_of_<Derived>;
-        FSM_STATIC_ASSERT( is_tagged_as_forward_<Unit_iterator> );
+        FSM_STATIC_ASSERT( is_tagged_as_forward_<Unit_iterator> );      // That includes random access iterators.
         
         using Unit              = typename iterator_traits<Unit_iterator>::value_type;
         FSM_STATIC_ASSERT( sizeof( Unit ) == 1 );
