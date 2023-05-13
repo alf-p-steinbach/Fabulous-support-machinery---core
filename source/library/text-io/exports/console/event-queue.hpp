@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/meta-type/Typelist_.hpp>                     // Typelist_
-#include <fsm/core/exports/meta-type/type-inspectors.hpp>               // are_base_and_derived_, Bare_
+#include <fsm/core/exports/meta-type/type-inspectors.hpp>               // type_is_a_, Bare_
 #include <fsm/text-io/exports/console/event-classes.hpp>
 
 #include <initializer_list>
@@ -36,7 +36,7 @@ namespace fabulous_support_machinery::console::_definitions {
 
     public:
         template< class Type,
-            FSM_ENABLE_IF( are_base_and_derived_<Event, Type> )
+            FSM_ENABLE_IF( type_is_a_<Event, Type> )
             >
         Event_holder( in_<Type> e ): m_variant( e ) {}
         
@@ -50,7 +50,7 @@ namespace fabulous_support_machinery::console::_definitions {
                 const auto is_specified_type = []( const auto& e )
                     -> bool
                 {
-                    return are_base_and_derived_<Type, Bare_<decltype( e )>>;
+                    return type_is_a_<Type, Bare_<decltype( e )>>;
                 };
                 return visit( is_specified_type, m_variant );
             }
