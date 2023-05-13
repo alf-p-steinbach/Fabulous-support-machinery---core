@@ -15,7 +15,7 @@ namespace fabulous_support_machinery::_definitions {
     { return (args and ...); }
 
     template< class Unary_predicate, class... Args >
-    constexpr auto all_are( in_<Unary_predicate> p, const Args&&... args )
+    constexpr auto all( in_<Unary_predicate> p, const Args&&... args )
         -> bool
     { return all_of( p( forward<Args>( args ) )... ); }
 
@@ -26,7 +26,7 @@ namespace fabulous_support_machinery::_definitions {
     { return (args or ...); }
 
     template< class Unary_predicate, class... Args >
-    constexpr auto any_is( in_<Unary_predicate> p, const Args&&... args )
+    constexpr auto any( in_<Unary_predicate> p, const Args&&... args )
         -> bool
     { return any_of( p( forward<Args>( args ) )... ); }
 
@@ -37,18 +37,18 @@ namespace fabulous_support_machinery::_definitions {
     { return ((!!args + ...) == 1); }
 
     template< class Unary_predicate, class... Args >
-    constexpr auto exactly_one_is( in_<Unary_predicate> p, const Args&&... args )
+    constexpr auto exactly_one( in_<Unary_predicate> p, const Args&&... args )
         -> bool
     { return exactly_one_of( p( forward<Args>( args ) )... ); }
 
     namespace d = _definitions;
     namespace exports { using
         d::all_of,
-        d::all_are,
+        d::all,
         d::any_of,
-        d::any_is,
+        d::any,
         d::exactly_one_of,
-        d::exactly_one_is;
+        d::exactly_one;
     }
 }  // namespace fabulous_support_machinery::_definitions
 
