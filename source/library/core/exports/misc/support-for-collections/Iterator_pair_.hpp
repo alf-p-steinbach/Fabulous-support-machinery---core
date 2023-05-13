@@ -7,7 +7,7 @@
 //      for( in_<T>: its::all_x_first_of( vec ) ) { ...
 
 #include <fsm/core/exports/basic-types/Size+Index.hpp>                      // Size
-#include <fsm/core/exports/support-for-collections/begin_of+end_of.hpp>     // begin_of, end_of
+#include <fsm/core/exports/misc/support-for-collections/begin_of+end_of.hpp>     // begin_of, end_of
 
 #include <iterator>     // std::(distance, next)
 

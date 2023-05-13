@@ -2,8 +2,8 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/basic-types/byte-types/Byte.hpp>                             // Byte
-#include <fsm/core/exports/support-for-collections/Iterator_pair_.hpp>                      // Iterator_pair_
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>                      // int_size_of
+#include <fsm/core/exports/misc/support-for-collections/Iterator_pair_.hpp>                      // Iterator_pair_
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>                      // int_size_of
 #include <fsm/core/exports/mixins/Relational_operators_mixin_.hpp>                      // Relational_operators_mixin_
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>                    // FSM_FAIL
 #include <fsm/core/exports/failure/detecting/FSM_STATIC_ASSERT.hpp>           // FSM_STATIC_ASSERT

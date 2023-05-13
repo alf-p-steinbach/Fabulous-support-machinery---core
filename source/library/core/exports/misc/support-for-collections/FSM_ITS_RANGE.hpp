@@ -12,7 +12,7 @@
 //      sort( $its_range( items ) );
 
 
-#include <fsm/core/exports/support-for-collections/begin_of+end_of.hpp>
+#include <fsm/core/exports/misc/support-for-collections/begin_of+end_of.hpp>
 
 #define FSM_ITS_RANGE( collection ) \
     fabulous_support_machinery::begin_of( fabulous_support_machinery::_definitions::lvalue( collection ) ), \

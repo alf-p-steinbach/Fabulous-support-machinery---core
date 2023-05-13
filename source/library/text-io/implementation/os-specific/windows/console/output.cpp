@@ -4,7 +4,7 @@
 #include <fsm/text-io/implementation/os-specific/windows/console/_os/handles.hpp>
 
 #include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // size_of, is_empty
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // size_of, is_empty
 #include <fsm/core/exports/text/encoding-conversions.hpp>                   // to_utf_16_as_
 #include <fsm/core/exports/constructs/declarations/FSM_NOT_USING.hpp>       // FSM_NOT_USING
 

@@ -3,3 +3,6 @@
 
 #include <fsm/core/exports/misc/Default_value.hpp>
 #include <fsm/core/exports/misc/Literal_null.hpp>
+#include <fsm/core/exports/misc/support-for-collections.hpp>
+#include <fsm/core/exports/misc/support-for-threading.hpp>
+#include <fsm/core/exports/misc/support-for-time.hpp>

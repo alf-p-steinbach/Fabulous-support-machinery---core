@@ -4,72 +4,72 @@
 #include <fsm/core/exports/basic-types/Size+Index.hpp>                  // Index
 #include <fsm/core/exports/failure/detecting/hopefully.hpp>             // hopefully
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>             // FSM_FAIL_
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_
-#include <fsm/core/exports/support-for-collections/Iterator_pair_.hpp>  // Iterator_pair_
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_, ref_
+#include <fsm/core/exports/misc/support-for-collections/Iterator_pair_.hpp>  // Iterator_pair_
 
 #include <deque>
-#include <queue>
+#include <stack>
 #include <utility>
 
 #include <stddef.h>         // size_t
 
 namespace fabulous_support_machinery::_definitions {
     using   std::deque,
-            std::queue,
-            std::move, std::forward;           // <utility>
-    
+            std::stack,
+            std::move, std::forward;        // <utility>
+
     template< class Item, class Container = std::deque<Item>, class... Args >
-    auto make_queue( Args&&... args )
-        -> queue<Item, Container>
+    auto make_stack( Args&&... args )
+        -> stack<Item, Container>
     {
-        queue<Item, Container>  result;
+        stack<Item, Container>  result;
         (result.push( forward<Args>( args ) ), ...);
         return result;
     }
 
     template< class Item, class Container >
-    auto container_for( in_<queue<Item, Container>> q )
+    auto container_for( in_<stack<Item, Container>> st )
         -> const Container&
     {
-        using Queue = queue<Item, Container>;
-        struct Access: Queue { using Queue::c; };
-        return q.*&Access::c;
+        using Stack = stack<Item, Container>;
+        struct Access: Stack { using Stack::c; };
+        return st.*&Access::c;
     }
 
     template< class Item, class Container >
-    auto item_at( const Index i, in_<queue<Item, Container>> q )
+    auto item_at( const Index i, in_<stack<Item, Container>> st )
         -> const Item&
-    { return container_for( q )[i]; }
+    { return container_for( st )[i]; }
 
     template< class Item, class Container >
-    auto checked_item_at( const Index i, in_<queue<Item, Container>> q )
+    auto checked_item_at( const Index i, in_<stack<Item, Container>> st )
         -> const Item&
-    { return container_for( q ).at( i ); }
-
+    { return container_for( st ).at( i ); }
+    
     template< class Item, class Container >
-    auto popped_front_of( queue<Item, Container>& q )
+    auto popped_top_of( stack<Item, Container>& st )
         -> Item
     {
-        Item result = move( q.front() );
-        q.pop();
+        Item result = move( st.top() );
+        st.pop();
         return result;
     }
 
     namespace d = _definitions;
     namespace exports { using
-        d::make_queue,
+        d::make_stack,
         d::container_for,
         d::item_at,
         d::checked_item_at,
-        d::popped_front_of;
-    }  // namespace exports
+        d::popped_top_of;
+    }
 }  // namespace fabulous_support_machinery::_definitions
 
 namespace fabulous_support_machinery{
     using namespace _definitions::exports;
 
     // Not a simple equate because may need to be an extension of earlier declared namespace.
-    namespace queue_ops {
+    namespace stack_ops {
         using namespace _definitions::exports;
     }  // namespace exports
 

@@ -6,7 +6,7 @@
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>       // const_, in_
 #include <fsm/core/exports/failure/detecting/hopefully.hpp>                 // hopefully
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>                 // FSM_FAIL
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of, is_empty
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // int_size_of, is_empty
 #include <fsm/text-io/exports/console/input.hpp>                            // console::input
 #include <fsm/text-io/exports/std_streams/is_console_stream.hpp>            // is_console_stream
 

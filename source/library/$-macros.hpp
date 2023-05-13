@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/support-for-collections/FSM_ITS_RANGE.hpp>
+#include <fsm/core/exports/misc/support-for-collections/FSM_ITS_RANGE.hpp>
 #define $its_range                  FSM_ITS_RANGE
 
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>

@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>                // in_
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>  // is_empty
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>  // is_empty
 #include <fsm/core/exports/meta-type/class-kinds/Polymorphic.hpp>       // Polymorphic
 
 #include <exception>

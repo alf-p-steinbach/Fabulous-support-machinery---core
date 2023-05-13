@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 #include <fsm/core/exports/basic-types/byte-types/Byte.hpp>                 // Byte
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // int_size_of
 #include <fsm/core/exports/failure/detecting/hopefully.hpp>       // hopefully
 #include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>        // FSM_FAIL
 

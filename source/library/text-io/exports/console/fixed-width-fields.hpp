@@ -2,7 +2,7 @@
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
 // TODO: clean up includes
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // int_size_of, int_capacity_of
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // int_size_of, int_capacity_of
 #include <fsm/core/exports/constructs/declarations/FSM_ENABLE_IF.hpp>      // FSM_ENABLE_IF
 #include <fsm/core/exports/text/encoding/u8/Cp_iterator_.hpp>       // Cp_iterator
 #include <fsm/core/exports/text/sprintf-to-std-string.hpp>                  // unsafe::sprintf_to

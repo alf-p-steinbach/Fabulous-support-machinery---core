@@ -3,7 +3,7 @@
 
 #include <fsm/core/exports/constructs/declarations/type_builders.hpp>       // in_
 #include <fsm/core/exports/failure/reporting/Abstract_failure_reporter.hpp> // Abstract_failure_reporter
-#include <fsm/core/exports/support-for-collections/size-functions.hpp>      // is_empty, int_size_of
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // is_empty, int_size_of
 #include <fsm/text-io/exports/std_streams/io.hpp>                           // output
 #include <fsm/text-io/exports/std_streams/is_console_stream.hpp>            // is_console_stream
 

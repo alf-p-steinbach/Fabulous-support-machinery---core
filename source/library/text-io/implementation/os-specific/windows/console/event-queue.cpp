@@ -2,7 +2,7 @@
 #include <fsm/text-io/implementation/os-specific/windows/console/_os/event-translation.hpp>
 #include <fsm/text-io/exports/console/event-queue.hpp>
 
-#include <fsm/core/exports/support-for-collections/queue-utility.hpp>       // popped_front_of
+#include <fsm/core/exports/misc/support-for-collections/queue-utility.hpp>       // popped_front_of
 
 namespace fabulous_support_machinery::console::_definitions {
 
