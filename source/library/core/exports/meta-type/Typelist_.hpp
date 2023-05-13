@@ -20,11 +20,12 @@ namespace fabulous_support_machinery::_definitions {
     template< class Types >
     using Typelist_head_ = typename Typelist_head_t_<Types>::T;
 
-    template< class Type >
-    struct Typelist_head_t_<Typelist_<Type>>
-    {
-        using T = Type;
-    };
+    // TODO: is this necessary?
+    // template< class Type >
+    // struct Typelist_head_t_<Typelist_<Type>>
+    // {
+        // using T = Type;
+    // };
 
     template< class First, class... Rest >
     struct Typelist_head_t_<Typelist_<First, Rest...>>
