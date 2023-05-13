@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/basic-types/byte-types/byte-info.hpp> // bits_per_byte
+#include <fsm/core/exports/basic-types/byte-types/byte-info.hpp>                    // bits_per_byte
 
 #include <type_traits>
 
@@ -21,8 +21,9 @@ namespace fabulous_support_machinery {
     template< class To, class From >
     constexpr bool  converts_to_                = std::is_convertible_v<From, To>;
 
+    // Like C++20 concept `derived_from`
     template< class Base, class Derived >
-    constexpr bool  type_is_a_                  = // Like C++20 concept `derived_from`
+    constexpr bool  type_is_a_                  =
         are_base_and_derived_< Base, Derived > and
         converts_to_< const volatile Base*, const volatile Derived* >;
 

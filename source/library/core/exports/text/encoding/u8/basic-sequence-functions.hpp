@@ -1,10 +1,11 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/basic-types/byte-types/Byte.hpp>                 // Byte
-#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // int_size_of
-#include <fsm/core/exports/failure/detecting/hopefully.hpp>       // hopefully
-#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>        // FSM_FAIL
+#include <fsm/core/exports/basic-types/byte-types/Byte.hpp>                     // Byte
+#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>     // int_size_of
+#include <fsm/core/exports/constructs/declarations/FSM_NS_FROM.hpp>             // FSM_NS_FROM
+#include <fsm/core/exports/failure/detecting/hopefully.hpp>                     // hopefully
+#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>                     // FSM_FAIL
 
 #include <iterator>
 
@@ -166,10 +167,10 @@ namespace fabulous_support_machinery::u8::_definitions {
 
     namespace d = _definitions;
     namespace exports {
-        namespace continuation_bytes    = d::continuation_bytes;
-        namespace lead_bytes            = d::lead_bytes;
-        namespace byte_sequences        = d::byte_sequences;
+        FSM_NS_FROM( d, continuation_bytes );
+        FSM_NS_FROM( d, lead_bytes );
+        FSM_NS_FROM( d, byte_sequences );
     }  // namespace exports
 }  // namespace fabulous_support_machinery::u8::_definitions
 
-namespace fabulous_support_machinery::u8 { using namespace _definitions; }
+namespace fabulous_support_machinery::u8 { using namespace _definitions::exports; }

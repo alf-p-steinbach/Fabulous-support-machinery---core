@@ -10,34 +10,34 @@ namespace fabulous_support_machinery::_definitions {
        
     // AND
     template< class... Args >
-    constexpr auto all_of( const Args&&... args )
+    constexpr auto all_of( const Args&... args )
         -> bool
     { return (args and ...); }
 
     template< class Unary_predicate, class... Args >
-    constexpr auto all( in_<Unary_predicate> p, const Args&&... args )
+    constexpr auto all( in_<Unary_predicate> p, const Args&... args )
         -> bool
     { return all_of( p( forward<Args>( args ) )... ); }
 
     // OR
     template< class... Args >
-    constexpr auto any_of( const Args&&... args )
+    constexpr auto any_of( const Args&... args )
         -> bool
     { return (args or ...); }
 
     template< class Unary_predicate, class... Args >
-    constexpr auto any( in_<Unary_predicate> p, const Args&&... args )
+    constexpr auto any( in_<Unary_predicate> p, const Args&... args )
         -> bool
     { return any_of( p( forward<Args>( args ) )... ); }
 
     // XOR.
     template< class... Args >
-    constexpr auto exactly_one_of( const Args&&... args )
+    constexpr auto exactly_one_of( const Args&... args )
         -> bool
     { return ((!!args + ...) == 1); }
 
     template< class Unary_predicate, class... Args >
-    constexpr auto exactly_one( in_<Unary_predicate> p, const Args&&... args )
+    constexpr auto exactly_one( in_<Unary_predicate> p, const Args&... args )
         -> bool
     { return exactly_one_of( p( forward<Args>( args ) )... ); }
 
