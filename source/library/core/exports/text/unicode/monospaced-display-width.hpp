@@ -1,16 +1,20 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/text/encoding/u8/Cp_iterator_.hpp>
+#include <fsm/core/exports/text/encoding/u8/Cp_iterator_.hpp>           // fsm::u8::*
+#include <fsm/core/exports/constructs/declarations/FSM_NS_FROM.hpp>     // FSM_NS_FROM
 
 #include <optional>
 #include <string_view>
 #include <variant>
 
-namespace fabulous_support_machinery::unicode::_definitions {
-    using   std::optional, std::holds_alternative, std::get,
-            std::string_view,
-            std::variant;
+namespace fsm_definitions::unicode {
+    namespace fsm = fabulous_support_machinery;
+    FSM_NS_FROM( fsm, u8 );
+    using   fsm::in_;
+    using   std::optional, std::holds_alternative, std::get,        // <optional>
+            std::string_view,                                       // <string_view>
+            std::variant;                                           // <variant>
 
     struct Special_display_widths{ enum Enum{
         // Values & comments from <url: https://github.com/ridiculousfish/widecharwidth/>.
@@ -98,18 +102,25 @@ namespace fabulous_support_machinery::unicode::_definitions {
         -> int
     { return assumed_monospaced_display_width_of_text( text ); }
 
-    namespace d = _definitions;
+    namespace x = unicode;
     namespace exports { using
-        d::Special_display_widths,
-        d::Display_width_details,
-        d::monospaced_display_width_details_of,
-        d::monospaced_display_width_of_code,
-        d::monospaced_display_width_of_text,
-        d::monospaced_display_width_of,
-        d::assumed_monospaced_display_width_of_code,
-        d::assumed_monospaced_display_width_of_text,
-        d::assumed_monospaced_display_width_of;
+        x::Special_display_widths,
+        x::Display_width_details,
+        x::monospaced_display_width_details_of,
+        x::monospaced_display_width_of_code,
+        x::monospaced_display_width_of_text,
+        x::monospaced_display_width_of,
+        x::assumed_monospaced_display_width_of_code,
+        x::assumed_monospaced_display_width_of_text,
+        x::assumed_monospaced_display_width_of;
     }  // namespace exports
-}  // namespace fabluous_support_machinery::unicode::_definitions
+}  // namespace fsm_definitions::unicode
 
-namespace fabulous_support_machinery::unicode  { using namespace _definitions::exports; }
+namespace fabulous_support_machinery{
+    // `unicode::` stuff is intentionally not available unqualified in fsm namespace.
+    
+    // Not a simple equate because may need to be an extension of earlier declared namespace.
+    namespace unicode{
+        using namespace fsm_definitions::unicode::exports;
+    }  // namespace boolean_ops
+}

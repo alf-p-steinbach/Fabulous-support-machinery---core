@@ -1,23 +1,21 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/basic-types/Size+Index.hpp>                  // Index
-#include <fsm/core/exports/failure/detecting/hopefully.hpp>             // hopefully
-#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>             // FSM_FAIL_
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_
-#include <fsm/core/exports/misc/support-for-collections/Iterator_pair_.hpp>  // Iterator_pair_
+#include <fsm/core/exports/basic-types/Size+Index.hpp>                          // Index
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>           // in_
 
 #include <deque>
 #include <queue>
 #include <utility>
 
-#include <stddef.h>         // size_t
-
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions::queue_ops {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::Index,
+            fsm::in_, fsm::ref_;
     using   std::deque,
             std::queue,
             std::move, std::forward;           // <utility>
-    
+
     template< class Item, class Container = std::deque<Item>, class... Args >
     auto make_queue( Args&&... args )
         -> queue<Item, Container>
@@ -47,7 +45,7 @@ namespace fabulous_support_machinery::_definitions {
     { return container_for( q ).at( i ); }
 
     template< class Item, class Container >
-    auto popped_front_of( queue<Item, Container>& q )
+    auto popped_front_of( ref_<queue<Item, Container>> q )
         -> Item
     {
         Item result = move( q.front() );
@@ -55,22 +53,21 @@ namespace fabulous_support_machinery::_definitions {
         return result;
     }
 
-    namespace d = _definitions;
+    namespace x = queue_ops;
     namespace exports { using
-        d::make_queue,
-        d::container_for,
-        d::item_at,
-        d::checked_item_at,
-        d::popped_front_of;
+        x::make_queue,
+        x::container_for,
+        x::item_at,
+        x::checked_item_at,
+        x::popped_front_of;
     }  // namespace exports
-}  // namespace fabulous_support_machinery::_definitions
+}  // namespace fsm_definitions::queue_ops
 
 namespace fabulous_support_machinery{
-    using namespace _definitions::exports;
+    using namespace fsm_definitions::queue_ops::exports;
 
     // Not a simple equate because may need to be an extension of earlier declared namespace.
     namespace queue_ops {
-        using namespace _definitions::exports;
+        using namespace fsm_definitions::queue_ops::exports;
     }  // namespace exports
-
 }  // namespace fabulous_support_machinery

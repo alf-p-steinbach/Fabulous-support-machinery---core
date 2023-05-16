@@ -3,9 +3,9 @@
 
 #include <fsm/@wrapped/3rd-party-lib/widechar_wcwidth/exports/all.hpp>
 
-namespace fabulous_support_machinery::unicode::_definitions {
+namespace fsm_definitions::unicode {
 
-    #if 0   // For exposition:
+    /*   // For exposition:
         using   std::variant;
 
         struct Special_display_widths{ enum Enum{
@@ -20,7 +20,7 @@ namespace fabulous_support_machinery::unicode::_definitions {
         }; };
 
         using Display_width_details = variant<int, Special_display_widths::Enum>;
-    #endif
+    */
 
     auto monospaced_display_width_details_of( const char32_t code ) noexcept
         -> Display_width_details
@@ -35,5 +35,4 @@ namespace fabulous_support_machinery::unicode::_definitions {
             : Display_width_details( Special_display_widths::Enum( w ) )
             );
     }
-
-}  // namespace fabluous_support_machinery::unicode::_definitions
+}  // namespace fsm_definitions::unicode

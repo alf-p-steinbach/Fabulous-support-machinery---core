@@ -1,19 +1,17 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/exports/+std-cpp-language.hpp>
 
-#include <fsm/core/exports/basic-types/Size+Index.hpp>                  // Index
-#include <fsm/core/exports/failure/detecting/hopefully.hpp>             // hopefully
-#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>             // FSM_FAIL_
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>   // in_, ref_
-#include <fsm/core/exports/misc/support-for-collections/Iterator_pair_.hpp>  // Iterator_pair_
+#include <fsm/core/exports/basic-types/Size+Index.hpp>                          // Index
+#include <fsm/core/exports/constructs/declarations/type_builders.hpp>           // in_, ref_
 
 #include <deque>
 #include <stack>
 #include <utility>
 
-#include <stddef.h>         // size_t
-
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions::stack_ops {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::Index,
+            fsm::in_, fsm::ref_;
     using   std::deque,
             std::stack,
             std::move, std::forward;        // <utility>
@@ -47,7 +45,7 @@ namespace fabulous_support_machinery::_definitions {
     { return container_for( st ).at( i ); }
     
     template< class Item, class Container >
-    auto popped_top_of( stack<Item, Container>& st )
+    auto popped_top_of( ref_<stack<Item, Container>> st )
         -> Item
     {
         Item result = move( st.top() );
@@ -55,22 +53,21 @@ namespace fabulous_support_machinery::_definitions {
         return result;
     }
 
-    namespace d = _definitions;
+    namespace x = stack_ops;
     namespace exports { using
-        d::make_stack,
-        d::container_for,
-        d::item_at,
-        d::checked_item_at,
-        d::popped_top_of;
+        x::make_stack,
+        x::container_for,
+        x::item_at,
+        x::checked_item_at,
+        x::popped_top_of;
     }
-}  // namespace fabulous_support_machinery::_definitions
+}  // namespace fsm_definitions::stack_ops
 
 namespace fabulous_support_machinery{
-    using namespace _definitions::exports;
+    using namespace fsm_definitions::stack_ops::exports;
 
     // Not a simple equate because may need to be an extension of earlier declared namespace.
     namespace stack_ops {
-        using namespace _definitions::exports;
+        using namespace fsm_definitions::stack_ops::exports;
     }  // namespace exports
-
 }  // namespace fabulous_support_machinery

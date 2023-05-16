@@ -4,7 +4,7 @@
 #include    <string>        // std::string
 #include    <stdio.h>       // sprintf
 
-namespace fabulous_support_machinery::unicode::_definitions {
+namespace fsm_definitions::unicode {
     using   std::string;            // <string>
 
     inline auto to_spec( const char32_t code )
@@ -14,11 +14,13 @@ namespace fabulous_support_machinery::unicode::_definitions {
         sprintf( result + 1, "%0*X", (code > 0xFFFF? 8 : 4), static_cast<unsigned>( code ) );
         return result;
     }
+}  // namespace fsm_definitions::unicode
 
-    namespace d = _definitions;
-    namespace exports { using
-        d::to_spec;
-    }  // namespace exports
-}  // namespace fabluous_support_machinery::unicode::_definitions
-
-namespace fabulous_support_machinery::unicode  { using namespace _definitions::exports; }
+namespace fabulous_support_machinery{
+    // `to_spec` is intentionally not available unqualified in the fsm namespace.
+    
+    // Not a simple equate because may need to be an extension of earlier declared namespace.
+    namespace unicode{
+        using fsm_definitions::unicode::to_spec;
+    }  // namespace unicode
+}  // namespace fabulous_support_machinery
