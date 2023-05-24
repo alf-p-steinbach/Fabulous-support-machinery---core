@@ -1,7 +1,7 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/text-io/headers/console/output.hpp>
 
-#include <fsm/text-io/implementation/os-specific/windows/console/_os/handles.hpp>
+#include <fsm/text-io/cpp-files/os-specific/windows/console/_os/handles.hpp>
 
 #include <fsm/core/headers/failure.hpp>                                     // hopefully, FSM_FAIL
 #include <fsm/core/headers/misc/support-for-collections/size-functions.hpp>      // size_of, is_empty

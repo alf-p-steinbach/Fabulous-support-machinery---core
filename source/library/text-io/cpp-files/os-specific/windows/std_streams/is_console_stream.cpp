@@ -2,7 +2,7 @@
 #include <fsm/core/headers/+std-cpp-language.hpp>
 
 #include <fsm/text-io/headers/std_streams/is_console_stream.hpp>
-#include <fsm/text-io/implementation/os-specific/windows/_os/stream_handle.hpp>
+#include <fsm/text-io/cpp-files/os-specific/windows/_os/stream_handle.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 

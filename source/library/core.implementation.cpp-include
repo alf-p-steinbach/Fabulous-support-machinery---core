@@ -1,6 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/implementation/os-specific.cpp-include>
-#include <fsm/core/implementation/common-portable.cpp-include>
+#include <fsm/core/cpp-files/os-specific.cpp-include>
+#include <fsm/core/cpp-files/common-portable.cpp-include>
 
 // Dependencies:
 #include <fsm/@wrapped/3rd-party-lib/widechar_wcwidth.cpp-include>

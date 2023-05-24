@@ -6,10 +6,10 @@
 // #include <fsm/core/headers/misc/support-for-collections/size-functions.hpp>      // is_empty
 #include <fsm/core/headers/constructs/flow-control/repeat_times.hpp>        // repeat_times
 
-// #include <fsm/text-io/implementation/os-specific/windows/_stream_handle.hpp>
+// #include <fsm/text-io/cpp-files/os-specific/windows/_stream_handle.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
-#include <fsm/text-io/implementation/os-specific/windows/console/_os/handles.hpp>   // console_input_handle
+#include <fsm/text-io/cpp-files/os-specific/windows/console/_os/handles.hpp>   // console_input_handle
 
 #include <queue>
 
