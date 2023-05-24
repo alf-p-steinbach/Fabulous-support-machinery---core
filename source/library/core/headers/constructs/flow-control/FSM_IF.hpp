@@ -2,7 +2,7 @@
 #include <fsm/core/headers/+std-cpp-language.hpp>
 
 #include <fsm/core/headers/failure/detecting/FSM_STATIC_ASSERT.hpp>         // FSM_STATIC_ASSERT
-#include <fsm/core/headers/meta-macro/FSM_PARENS_REMOVED.hpp>               // FSM_PARENS_REMOVED
+#include <fsm/core/headers/misc/support-for-macros/FSM_PARENS_REMOVED.hpp>               // FSM_PARENS_REMOVED
 #include <fsm/core/headers/meta-type/type-inspectors.hpp>   // is_same_
 
 #define FSM_IF_WITH( parenthesized_initializer, ... ) \

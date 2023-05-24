@@ -13,14 +13,8 @@
 
 
 #include <fsm/core/headers/misc/support-for-collections/begin_of+end_of.hpp>
+#include <fsm/core/headers/misc/support-for-macros/the_lvalue.hpp>
 
 #define FSM_ITS_RANGE( collection ) \
-    fabulous_support_machinery::begin_of( fabulous_support_machinery::_definitions::lvalue( collection ) ), \
+    fabulous_support_machinery::begin_of( fabulous_support_machinery::the_lvalue( collection ) ), \
     fabulous_support_machinery::end_of( collection )
-
-namespace fabulous_support_machinery::_definitions {
-    
-    template< class Type >
-    constexpr auto lvalue( Type& o ) -> Type& { return o; }
-
-}  // namespace fabulous_support_machinery::_definitions

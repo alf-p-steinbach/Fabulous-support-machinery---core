@@ -4,7 +4,6 @@
 #include <fsm/core/headers/basic-types.hpp>
 #include <fsm/core/headers/constructs.hpp>
 #include <fsm/core/headers/failure.hpp>
-#include <fsm/core/headers/meta-macro.hpp>
 #include <fsm/core/headers/meta-type.hpp>
 #include <fsm/core/headers/misc.hpp>
 #include <fsm/core/headers/mixins.hpp>
