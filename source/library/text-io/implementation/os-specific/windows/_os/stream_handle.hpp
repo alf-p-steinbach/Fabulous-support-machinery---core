@@ -1,8 +1,8 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/exports/+std-cpp-language.hpp>
+#include <fsm/core/headers/+std-cpp-language.hpp>
 
-#include <fsm/text-io/exports/Stream_id.hpp>
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>
+#include <fsm/text-io/headers/Stream_id.hpp>
+#include <fsm/core/headers/constructs/declarations/type_builders.hpp>
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 

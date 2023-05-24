@@ -1,12 +1,12 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/text-io/exports/console/output.hpp>
+#include <fsm/text-io/headers/console/output.hpp>
 
 #include <fsm/text-io/implementation/os-specific/windows/console/_os/handles.hpp>
 
-#include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
-#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // size_of, is_empty
-#include <fsm/core/exports/text/encoding-conversions.hpp>                   // to_utf_16_as_
-#include <fsm/core/exports/constructs/declarations/FSM_NOT_USING.hpp>       // FSM_NOT_USING
+#include <fsm/core/headers/failure.hpp>                                     // hopefully, FSM_FAIL
+#include <fsm/core/headers/misc/support-for-collections/size-functions.hpp>      // size_of, is_empty
+#include <fsm/core/headers/text/encoding-conversions.hpp>                   // to_utf_16_as_
+#include <fsm/core/headers/constructs/declarations/FSM_NOT_USING.hpp>       // FSM_NOT_USING
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>             // WriteConsole
 

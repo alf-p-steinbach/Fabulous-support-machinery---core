@@ -1,10 +1,10 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/text-io/exports/console/event-queue.hpp>
+#include <fsm/text-io/headers/console/event-queue.hpp>
 
-// #include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
-#include <fsm/core/exports/misc/support-for-collections/set-utility.hpp>         // contains
-// #include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // is_empty
-#include <fsm/core/exports/constructs/flow-control/repeat_times.hpp>        // repeat_times
+// #include <fsm/core/headers/failure.hpp>                                     // hopefully, FSM_FAIL
+#include <fsm/core/headers/misc/support-for-collections/set-utility.hpp>         // contains
+// #include <fsm/core/headers/misc/support-for-collections/size-functions.hpp>      // is_empty
+#include <fsm/core/headers/constructs/flow-control/repeat_times.hpp>        // repeat_times
 
 // #include <fsm/text-io/implementation/os-specific/windows/_stream_handle.hpp>
 

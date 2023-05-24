@@ -1,5 +1,5 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/text-io/exports/std_streams.hpp>
+#include <fsm/text-io/headers/std_streams.hpp>
 
 #include <fsm/text-io/implementation/os-specific/windows/_stream_handle.hpp>
 

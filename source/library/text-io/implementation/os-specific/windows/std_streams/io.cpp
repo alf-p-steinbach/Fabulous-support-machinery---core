@@ -1,14 +1,14 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/exports/+std-cpp-language.hpp>
+#include <fsm/core/headers/+std-cpp-language.hpp>
 
-#include <fsm/text-io/exports/std_streams/io.hpp>       // ~
+#include <fsm/text-io/headers/std_streams/io.hpp>       // ~
 
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>       // const_, in_
-#include <fsm/core/exports/failure/detecting/hopefully.hpp>                 // hopefully
-#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>                 // FSM_FAIL
-#include <fsm/core/exports/misc/support-for-collections/size-functions.hpp>      // int_size_of, is_empty
-#include <fsm/text-io/exports/console/input.hpp>                            // console::input
-#include <fsm/text-io/exports/std_streams/is_console_stream.hpp>            // is_console_stream
+#include <fsm/core/headers/constructs/declarations/type_builders.hpp>       // const_, in_
+#include <fsm/core/headers/failure/detecting/hopefully.hpp>                 // hopefully
+#include <fsm/core/headers/failure/expressing/FSM_FAIL.hpp>                 // FSM_FAIL
+#include <fsm/core/headers/misc/support-for-collections/size-functions.hpp>      // int_size_of, is_empty
+#include <fsm/text-io/headers/console/input.hpp>                            // console::input
+#include <fsm/text-io/headers/std_streams/is_console_stream.hpp>            // is_console_stream
 
 #include <utility>
 

@@ -1,9 +1,9 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/text-io/exports/console/input.hpp>
+#include <fsm/text-io/headers/console/input.hpp>
 
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>       // const_
-#include <fsm/core/exports/failure/detecting/hopefully.hpp>                 // hopefully
-#include <fsm/core/exports/failure/expressing/FSM_FAIL.hpp>                 // FSM_FAIL*
+#include <fsm/core/headers/constructs/declarations/type_builders.hpp>       // const_
+#include <fsm/core/headers/failure/detecting/hopefully.hpp>                 // hopefully
+#include <fsm/core/headers/failure/expressing/FSM_FAIL.hpp>                 // FSM_FAIL*
 
 #include <string>
 #include <utility>

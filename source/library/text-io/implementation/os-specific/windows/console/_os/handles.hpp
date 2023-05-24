@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <fsm/core/exports/constructs/declarations/type_builders.hpp>       // const_
-#include <fsm/core/exports/failure.hpp>                                     // hopefully, FSM_FAIL
+#include <fsm/core/headers/constructs/declarations/type_builders.hpp>       // const_
+#include <fsm/core/headers/failure.hpp>                                     // hopefully, FSM_FAIL
 
 #include <fsm/@wrapped/os/winapi/exports/windows-h.for-u16.hpp>
 

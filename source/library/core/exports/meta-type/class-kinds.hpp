@@ -1,6 +1,0 @@
-﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/exports/+std-cpp-language.hpp>
-
-#include <fsm/core/exports/meta-type/class-kinds/Movable.hpp>
-#include <fsm/core/exports/meta-type/class-kinds/Non_instantiable.hpp>
-#include <fsm/core/exports/meta-type/class-kinds/Polymorphic.hpp>

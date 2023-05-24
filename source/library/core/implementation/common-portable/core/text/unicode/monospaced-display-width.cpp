@@ -1,5 +1,5 @@
 ﻿// Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/exports/text/unicode/monospaced-display-width.hpp>
+#include <fsm/core/headers/text/unicode/monospaced-display-width.hpp>
 
 #include <fsm/@wrapped/3rd-party-lib/widechar_wcwidth/exports/all.hpp>
 

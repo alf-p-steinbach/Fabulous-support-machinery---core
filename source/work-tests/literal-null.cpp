@@ -1,4 +1,4 @@
-#include <fsm/core/exports/misc/Literal_null.hpp>
+#include <fsm/core/headers/misc/Literal_null.hpp>
 namespace fsm = fabulous_support_machinery;
 
 void foo( fsm::Literal_null ) {}
