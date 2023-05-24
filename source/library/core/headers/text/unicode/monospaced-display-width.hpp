@@ -8,6 +8,8 @@
 #include <string_view>
 #include <variant>
 
+#include <assert.h>
+
 namespace fsm_definitions::unicode {
     namespace fsm = fabulous_support_machinery;
     FSM_NS_FROM( fsm, u8 );
@@ -79,6 +81,7 @@ namespace fsm_definitions::unicode {
             case Special_display_widths::non_character:     return 0;
             case Special_display_widths::widened_in_9:      return 2;
             default: {
+                assert( false );
                 for( ;; ) {}        // Should never get here.
             }
         }
@@ -106,10 +109,12 @@ namespace fsm_definitions::unicode {
     namespace exports { using
         x::Special_display_widths,
         x::Display_width_details,
+            // optional<int> result:
         x::monospaced_display_width_details_of,
         x::monospaced_display_width_of_code,
         x::monospaced_display_width_of_text,
         x::monospaced_display_width_of,
+            // int result (just a guesstimate when unknown):
         x::assumed_monospaced_display_width_of_code,
         x::assumed_monospaced_display_width_of_text,
         x::assumed_monospaced_display_width_of;
