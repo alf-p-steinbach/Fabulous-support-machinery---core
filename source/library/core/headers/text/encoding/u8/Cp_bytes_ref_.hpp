@@ -14,7 +14,7 @@ namespace tag {
 
 namespace fsm_definitions::u8 {
     namespace fsm = fabulous_support_machinery;
-    FSM_NS_FROM( fsm::u8, byte_sequences );         // text/encoding/u8/basic-sequence-functions.hpp
+    // FSM_NS_FROM( fsm::u8, byte_sequence );         // text/encoding/u8/basic-sequence-functions.hpp
 
     using   fsm::in_,                               // constructs/declarations/type_builders.hpp
             fsm::u8::Code_point_inspectors_mixin_;  // text/encoding/u8/Code_point_inspectors_mixin_.hpp
@@ -52,7 +52,7 @@ namespace fsm_definitions::u8 {
         {}
 
         constexpr Cp_bytes_ref_( const Unit_iterator it_first ):
-            m_it_first( check? byte_sequences::checked( it_first ) : it_first )
+            m_it_first( check? byte_sequence::checked( it_first ) : it_first )
         {}
  
         constexpr auto unit_iterator() const -> Unit_iterator { return m_it_first; }

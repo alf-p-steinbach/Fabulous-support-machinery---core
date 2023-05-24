@@ -7,7 +7,7 @@ namespace fsm_definitions::u16 {
     using   std::iterator_traits;
 
     template< class tp_Unit_iterator >
-    constexpr byte_sequences::to_codepoint( const tp_Unit_iterator it )
+    constexpr byte_sequence::to_codepoint( const tp_Unit_iterator it )
         -> char32_t
     {
         const Unit unit = *it;
@@ -29,7 +29,7 @@ namespace fsm_definitions::u16 {
         auto operator*() const
             -> char32_t
         {
-            return byte_sequences::to_codepoint( m_it );
+            return byte_sequence::to_codepoint( m_it );
         }
             
         void advance()

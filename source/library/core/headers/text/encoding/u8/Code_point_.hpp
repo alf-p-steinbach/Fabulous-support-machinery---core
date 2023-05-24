@@ -46,7 +46,7 @@ namespace fsm_definitions::u8 {
         FSM_STATIC_ASSERT( sizeof( Unit ) == 1 );
 
         static constexpr int max_length = 4;
-        FSM_STATIC_ASSERT( max_length == byte_sequences::max_length );
+        FSM_STATIC_ASSERT( max_length == byte_sequence::max_length );
 
     private:
         using Inspectors = Code_point_inspectors_mixin_< Code_point_ >;
@@ -70,13 +70,13 @@ namespace fsm_definitions::u8 {
         Code_point_( const_<const Unit*> p_first ):
             Code_point_(
                 tags::Unchecked(),
-                tp_check? byte_sequences::checked( p_first ) : p_first
+                tp_check? byte_sequence::checked( p_first ) : p_first
                 )
         {}
         
         Code_point_( const char32_t code )
         {
-            byte_sequences::to_sequence_at( m_units, code );
+            byte_sequence::to_sequence_at( m_units, code );
         }
 
         // CRTP callback for inspectors:

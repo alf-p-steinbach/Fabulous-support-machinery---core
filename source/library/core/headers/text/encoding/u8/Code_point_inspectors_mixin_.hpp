@@ -16,8 +16,8 @@
 
 namespace fsm_definitions::u8 {
     namespace fsm = fabulous_support_machinery;
-    FSM_NS_FROM( fsm::u8, byte_sequences );         // text/encoding/u8/basic-sequence-functions.hpp
-    FSM_NS_FROM( fsm::u8, lead_bytes );             // text/encoding/u8/basic-sequence-functions.hpp
+    // FSM_NS_FROM( fsm::u8, byte_sequence );         // text/encoding/u8/basic-sequence-functions.hpp
+    // FSM_NS_FROM( fsm::u8, lead_bytes );             // text/encoding/u8/basic-sequence-functions.hpp
 
     using   fsm::Byte,
             fsm::in_,
@@ -64,7 +64,7 @@ namespace fsm_definitions::u8 {
         // Requires contiguous iterator:
         auto unit_pointer() const -> const Unit*    { return &*it_start(); }
         auto char_pointer() const -> const char*    { return reinterpret_cast<const char*>( unit_pointer() ); }
-        auto as_number() const  -> char32_t         { return byte_sequences::to_codepoint( it_start() ); }
+        auto as_number() const  -> char32_t         { return byte_sequence::to_codepoint( it_start() ); }
         auto sv() const         -> string_view      { return string_view( char_pointer(), n_bytes() ); }
     };
 

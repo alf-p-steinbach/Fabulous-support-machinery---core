@@ -83,11 +83,11 @@ namespace fsm_definitions::u8 {
         void step_backward()
         {
             Unit_iterator it = prev( m_code_point_ref.unit_iterator() );
-            while( fsm::u8::continuation_bytes::include( Byte( *it ) ) ) {
+            while( fsm::u8::is_continuation_byte( Byte( *it ) ) ) {
                 --it;
             }
             if constexpr( check ) {
-                hopefully( fsm::u8::lead_bytes::include( Byte( *it ) ) )    // TODO: naming, "include" is ungood
+                hopefully( fsm::u8::is_lead_byte( Byte( *it ) ) )    // TODO: naming, "include" is ungood
                     or FSM_FAIL( "Invalid lead byte" );
             }
             m_code_point_ref = Cp_bytes_ref( tag::Unchecked(), it );
