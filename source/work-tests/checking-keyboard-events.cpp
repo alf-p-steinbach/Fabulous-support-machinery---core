@@ -22,7 +22,7 @@ auto main() -> int
     for( ;; ) {
         const event::Holder ev = event::next();
         if( ev.holds<Char_event>() ) {
-            const fsm::u8::Code_point& code = ev.ref<Char_event>().code_point;
+            const fsm::u8::Cp_bytes& code = ev.ref<Char_event>().code_point;
             if( code.codepoint() == 27 ) {
                 break;
             }

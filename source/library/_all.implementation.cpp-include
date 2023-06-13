@@ -1,0 +1,4 @@
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+
+#include "core.implementation.cpp-include"
+#include "text-io.implementation.cpp-include"

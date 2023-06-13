@@ -1,0 +1,15 @@
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <fsm/core/+std-cpp-language.hpp>
+
+// Example usage:
+//
+//      template< class Item, FSM_ENABLE_IF( sizeof( Item ) == 1 ) >
+//      auto to_char_ptr( Item* ) -> char*;
+//
+// Or with $-macros from header <fsm/$-macros.hpp>:
+//
+//      template< class Item, $enable_if( sizeof( Item ) == 1 ) >
+//      auto to_char_ptr( Item* ) -> char*;
+
+#define FSM_ENABLE_IF( ... ) \
+    std::enable_if_t<__VA_ARGS__>* = nullptr
