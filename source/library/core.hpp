@@ -3,6 +3,7 @@
 
 #include <fsm/core/basic-types.hpp>
 #include <fsm/core/constructs.hpp>
+#include <fsm/core/environment.hpp>
 #include <fsm/core/failure.hpp>
 #include <fsm/core/meta-type.hpp>
 #include <fsm/core/misc.hpp>

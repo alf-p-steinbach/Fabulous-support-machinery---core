@@ -2,13 +2,15 @@
 #include <fsm/core/+std-cpp-language.hpp>
 
 #include <fsm/core/constructs/declarations/FSM_ENABLE_IF.hpp>       // FSM_ENABLE_IF
-#include <fsm/core/meta-type/type-inspectors.hpp>                   // are_base_and_derived_
+#include <fsm/core/meta-type/type-inspectors.hpp>                   // are_base_and_derived_, Bare_
 
 #include <stdexcept>
 #include <string>
 #include <type_traits>
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::are_base_and_derived_, fsm::Bare_;
     using   std::runtime_error,
             std::string,
             std::is_constructible_v;
@@ -50,11 +52,11 @@ namespace fabulous_support_machinery::_definitions {
     [[noreturn]]
     inline auto fail( String_type&& message ) -> bool { fail( string( message ) ); }
     
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports { using
         d::fail_,
         d::fail;
     };
 }  // namespace fabulous_support_machinery::_definitions;
 
-namespace fabulous_support_machinery{ using namespace _definitions::exports; }
+namespace fabulous_support_machinery{ using namespace fsm_definitions::exports; }

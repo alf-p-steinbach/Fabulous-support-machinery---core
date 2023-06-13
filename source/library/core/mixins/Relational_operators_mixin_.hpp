@@ -3,7 +3,10 @@
 
 #include <fsm/core/constructs/declarations/type_builders.hpp>       // in_
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::in_;
+
     template< class Derived >
     struct Relational_operators_mixin_
     {
@@ -32,10 +35,10 @@ namespace fabulous_support_machinery::_definitions {
         { return (compare( a, b ) > 0); }
     };
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports{ using
         d::Relational_operators_mixin_;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

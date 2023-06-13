@@ -5,7 +5,9 @@
 
 #include <iterator>             // std::iterator_traits etc.
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::type_is_a_;
     using   std::iterator_traits,
             std::input_iterator_tag,
             std::output_iterator_tag,
@@ -32,7 +34,7 @@ namespace fabulous_support_machinery::_definitions {
     template< class It >    
     constexpr bool  is_tagged_as_random_access_ = type_is_a_<random_access_iterator_tag, iterator_category_of_<It>>;
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports { using
         d::iterator_category_of_,
         d::is_tagged_as_input_,
@@ -43,4 +45,4 @@ namespace fabulous_support_machinery::_definitions {
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

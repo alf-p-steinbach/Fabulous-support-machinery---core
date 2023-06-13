@@ -3,11 +3,9 @@
 
 #include <fsm/core/misc/support-for-collections/queue-utility.hpp>      // popped_front_of
 #include <fsm/core/misc/support-for-collections/size-functions.hpp>     // int_size_of
-#include <fsm/core/constructs/declarations/type_builders.hpp>           // in_, ref_
-#include <fsm/core/constructs/declarations/FSM_WITH.hpp>                // FSM_WITH
 #include <fsm/core/failure/expressing/FSM_FAIL.hpp>                     // FSM_FAIL
 #include <fsm/core/constructs/flow-control/repeat_times.hpp>            // repeat_times
-#include <fsm/core/meta-type/class-kinds/Movable.hpp>                   // Movable
+#include <fsm/core/meta-type/class-kinds/Only_movable.hpp>              // Only_movable
 #include <fsm/core/misc/support-for-threading/Mutex_locker.hpp>         // Mutex_locker
 #include <fsm/core/misc/support-for-time/Duration.hpp>                  // Duration
 
@@ -16,7 +14,14 @@
 #include <queue>
 #include <variant>
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::popped_front_of,
+            fsm::int_size_of,
+            fsm::repeat_times,
+            fsm::Only_movable,
+            fsm::Mutex_locker,
+            fsm::Duration;
     using   std::condition_variable,            // <condition_variable>
             std::mutex, std::unique_lock,       // <mutex>
             std::queue,                         // <queue>
@@ -35,7 +40,7 @@ namespace fabulous_support_machinery::_definitions {
 
     public:
         class Access:
-            public Movable
+            public Only_movable
         {
             friend class Shared_queue_;
             using Q_ptr = variant<Shared_queue_*, const Shared_queue_*>;
@@ -104,10 +109,10 @@ namespace fabulous_support_machinery::_definitions {
         auto access() const -> const Access     { return Access( *this ); }
     };
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports { using
         d::Shared_queue_;
     }  // namespace exports
-}  // namespace fabulous_support_machinery::_definitions
+}  // namespace fsm_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

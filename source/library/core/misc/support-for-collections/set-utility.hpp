@@ -1,11 +1,9 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/basic-types/Size+Index.hpp>                  // Size
-#include <fsm/core/misc/support-for-collections/FSM_ITS_RANGE.hpp>   // FSM_ITS_RANGE    
-#include <fsm/core/failure/detecting/hopefully.hpp>   // hopefully
-#include <fsm/core/failure/expressing/FSM_FAIL.hpp>    // FSM_FAIL_
-#include <fsm/core/constructs/declarations/type_builders.hpp>                // in_, array_of
+#include <fsm/core/basic-types/Size+Index.hpp>                          // Size
+#include <fsm/core/constructs/declarations/type_builders.hpp>           // in_, array_of_
+#include <fsm/core/misc/support-for-collections/FSM_ITS_RANGE.hpp>      // FSM_ITS_RANGE    
 
 #include <algorithm>
 #include <iterator>
@@ -14,7 +12,11 @@
 
 #include <stddef.h>         // size_t
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::Size,
+            fsm::in_, fsm::array_of_,
+            fsm::hopefully;
     using   std::find,              // <algorithm>
             std::end,               // <iterator>
             std::set,               // <queue>
@@ -34,10 +36,10 @@ namespace fabulous_support_machinery::_definitions {
     // TODO: also for unordered set.
     // TODO: also ditto for map.
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports { using
         d::contains;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

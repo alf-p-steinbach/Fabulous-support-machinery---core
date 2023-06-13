@@ -6,7 +6,7 @@
 #include <fsm/text-io/namespace_names.hpp>
 #include <fsm/text-io/std_streams.hpp>
 #include <fsm/text-io/Stream_id.hpp>
-#include <fsm/text-io/with_xinfo_to_err_stream.hpp>
+#include <fsm/text-io/with_exceptions_displayed.hpp>
 
 // Guaranteed availability:
 #include <fsm/core.hpp>

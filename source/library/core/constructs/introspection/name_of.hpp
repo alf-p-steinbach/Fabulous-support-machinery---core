@@ -8,7 +8,10 @@
 #include <typeindex>
 #include <typeinfo>
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::in_,
+            fsm::unmangled_and_cleaned_type_name;
     using   std::string,            // <string>
             std::type_index,        // <typeindex>
             std::type_info;         // <type_info>
@@ -21,10 +24,10 @@ namespace fabulous_support_machinery::_definitions {
         -> string
     { return unmangled_and_cleaned_type_name( info.name() ); }
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports{ using
         d::name_of;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

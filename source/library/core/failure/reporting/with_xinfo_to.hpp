@@ -11,7 +11,10 @@
 #include <stdio.h>      // fprintf, fflush, stdout, stderr
 #include <stdlib.h>     // EXIT_...
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::in_,
+            fsm::Abstract_failure_reporter;
     using   std::exception,         // <exception>
             std::function,          // <functional>
             std::string_view;       // <stringview>
@@ -43,7 +46,7 @@ namespace fabulous_support_machinery::_definitions {
         -> int
     { return with_xinfo_to( Failure_reporter(), main_func ); }
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports { using
         d::Basic_main_func,
         d::with_xinfo_to,
@@ -51,4 +54,4 @@ namespace fabulous_support_machinery::_definitions {
     }  // namespace exports
 }  // namespace fabluous_support_machinery::_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

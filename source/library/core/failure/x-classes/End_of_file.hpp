@@ -6,7 +6,9 @@
 #include <stdexcept>
 #include <string>
 
-namespace fabulous_support_machinery::x::_definitions {
+namespace fsm_definitions::x {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::x::default_message_for_;
     using   std::runtime_error,     // <stdexcept>
             std::string;            // <string>
     
@@ -21,8 +23,11 @@ namespace fabulous_support_machinery::x::_definitions {
         -> string_view
     { return End_of_file::default_message; }
 
-    namespace d = _definitions;
+    namespace d = x;
     namespace exports { using d::End_of_file; }
-}  // namespace fabulous_support_machinery::x::_definitions
+}  // namespace fsm_definitions::x
 
-namespace fabulous_support_machinery::x     { using namespace _definitions::exports; }
+namespace fabulous_support_machinery{
+    namespace x{ using namespace fsm_definitions::x::exports; }
+}  // namespace fabulous_support_machinery{
+

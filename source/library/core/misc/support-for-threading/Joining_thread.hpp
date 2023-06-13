@@ -1,16 +1,18 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/constructs/declarations/type_builders.hpp> // in_value_
+// #include <fsm/core/constructs/declarations/type_builders.hpp> // in_value_
 
 #include <atomic>
 #include <exception>
 #include <thread>
+#include <utility>
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
     using   std::atomic,
             std::current_exception, std::exception_ptr,
-            std::thread;
+            std::thread,
+            std::move;
 
     class Joining_thread_state
     {
@@ -52,10 +54,10 @@ namespace fabulous_support_machinery::_definitions {
         }
     };
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports { using
         d::Joining_thread;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery { using namespace _definitions::exports; }
+namespace fabulous_support_machinery { using namespace fsm_definitions::exports; }

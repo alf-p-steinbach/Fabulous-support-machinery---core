@@ -16,11 +16,13 @@
 
 #include <fsm/core/constructs/introspection/name_of.hpp>            // name_of
 
-#include <string>
+#include <string_view>
 #include <typeinfo>
 
-namespace fabulous_support_machinery::_definitions {
-    using   std::string;
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::name_of;
+    using   std::string_view;
     
     template< class Type > struct Wrapped_ {};
 
@@ -34,10 +36,10 @@ namespace fabulous_support_machinery::_definitions {
         return xname.substr( i_first, i_beyond - i_first );
     }
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports{ using
         d::raw_name_of_exactly_;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

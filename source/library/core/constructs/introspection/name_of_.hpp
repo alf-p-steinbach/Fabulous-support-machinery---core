@@ -6,7 +6,10 @@
 
 #include <string>
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::raw_name_of_exactly_,
+            fsm::unmangled_and_cleaned_type_name;
     using   std::string;
 
     template< class Type >
@@ -14,10 +17,10 @@ namespace fabulous_support_machinery::_definitions {
         -> std::string
     { return unmangled_and_cleaned_type_name( raw_name_of_exactly_<Type>() ); }
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports{ using
         d::name_of_;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery    { using namespace _definitions::exports; }
+namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }

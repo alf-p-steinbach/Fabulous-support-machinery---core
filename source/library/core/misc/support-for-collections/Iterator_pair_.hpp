@@ -11,7 +11,10 @@
 
 #include <iterator>     // std::(distance, next)
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::Size,
+            fsm::begin_of, fsm::end_of;
     using   std::distance, std::next;
 
     // TODO: derive from `std::pair`
@@ -57,7 +60,7 @@ namespace fabulous_support_machinery::_definitions {
         { return {next( begin_of( c ) ), end_of( c )}; }
     }  // namespace iterator_pair_factory_functions
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports{ using
         d::Iterator_pair_;
         namespace its_range = d::iterator_pair_factory_functions;
@@ -67,6 +70,6 @@ namespace fabulous_support_machinery::_definitions {
 
 namespace fabulous_support_machinery
 {
-    using namespace _definitions::exports;
-    namespace its_range { using namespace _definitions::exports::its_range; }
+    using namespace fsm_definitions::exports;
+    namespace its_range { using namespace fsm_definitions::exports::its_range; }
 }

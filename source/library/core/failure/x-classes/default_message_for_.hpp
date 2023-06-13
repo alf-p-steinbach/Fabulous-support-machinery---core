@@ -6,7 +6,9 @@
 #include <string>
 #include <string_view>
 
-namespace fabulous_support_machinery::x::_definitions {
+namespace fsm_definitions::x {
+    namespace fsm = fabulous_support_machinery;
+    using   fsm::name_of_;
     using   std::string,            // <string>
             std::string_view;       // <string_view>
     
@@ -18,8 +20,11 @@ namespace fabulous_support_machinery::x::_definitions {
         return msg;
     }
 
-    namespace d = _definitions;
+    namespace d = x;
     namespace exports { using d::default_message_for_; }
-}  // namespace fabulous_support_machinery::x::_definitions
+}  // namespace fsm_definitions::x
 
-namespace fabulous_support_machinery::x     { using namespace _definitions::exports; }
+namespace fabulous_support_machinery
+{
+    namespace x { using namespace fsm_definitions::x::exports; }
+}

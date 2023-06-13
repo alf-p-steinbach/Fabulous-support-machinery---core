@@ -5,15 +5,15 @@
 
 namespace fabulous_support_machinery {
 
-    class Movable
+    class Only_movable
     {
-        using Self = Movable;
-        Movable( in_<Self> ) = delete;
+        using Self = Only_movable;
+        Only_movable( in_<Self> ) = delete;
         auto operator=( in_<Self> ) -> Self& = delete;
         
     public:
-        Movable() {}
-        Movable( Self&& ) {}
+        Only_movable() {}
+        Only_movable( Self&& ) {}
         auto operator=( Self&& ) -> Self& { return *this; }
     };
 
