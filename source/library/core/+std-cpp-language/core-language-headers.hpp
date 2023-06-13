@@ -1,5 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include "versions.hpp"             // FSM_CPP_VERSION etc.
+
+#include <fsm/core/environment/properties/cpp-versions.hpp>     // FSM_CPP_VERSION etc.
 
 #include    <stddef.h>              // size_t and ptrdiff_t.
 #include    <stdlib.h>              // EXIT_FAILURE, EXIT_SUCCESS.

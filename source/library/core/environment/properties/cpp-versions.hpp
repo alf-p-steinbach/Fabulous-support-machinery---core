@@ -2,6 +2,7 @@
 
 // <url: https://en.cppreference.com/w/cpp/preprocessor/replace#Predefined_macros>
 #define FSM_CPP_VERSION     __cplusplus
+
 #define FSM_CPP98           199711L
 #define FSM_CPP03           FSM_CPP98
 #define FSM_CPP11           201103L
@@ -12,6 +13,7 @@
 namespace fabulous_support_machinery {
     enum: long {
         cpp_version     = FSM_CPP_VERSION,
+
         cpp98           = FSM_CPP98,
         cpp03           = FSM_CPP03,
         cpp11           = FSM_CPP11,
