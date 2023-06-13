@@ -2,3 +2,4 @@
 #include <fsm/core/+std-cpp-language.hpp>
 
 #include <fsm/core/constructs/expressions/boolean-operations.hpp>
+#include <fsm/core/constructs/expressions/number-operations.hpp>

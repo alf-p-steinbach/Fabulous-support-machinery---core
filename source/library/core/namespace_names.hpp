@@ -7,6 +7,7 @@ namespace fabulous_support_machinery{
     namespace console{}  namespace std_streams{}  namespace fmtlib{}
 
     namespace boolean_ops{}     // core/constructs/expressions/boolean-operations.hpp
+    namespace number_ops{}      // core/constructs/expressions/number-operations.hpp
 
     namespace u8{}              // core/text/encoding/u8.hpp
     namespace unicode{}         // core/text/encoding/unicode.hpp
