@@ -7,3 +7,9 @@
 #ifndef FSM_NO_FMT_LIB_PLEASE
 #   include <fsm/@wrapped/3rd-party-lib/fmtlib.hpp>
 #endif
+
+#if 0  // Copy+paste template:
+    #if __has_include( <fsm/FOO.hpp> )
+    #   include <fsm/FOO.hpp>
+    #endif
+#endif
