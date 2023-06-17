@@ -2,6 +2,9 @@
 #include <fsm/core/+std-cpp-language.hpp>
 
 #include <fsm/_all.hpp>
-#include <fsm/$-macros.hpp>
 
+// Conveniences (great for small apps, may not be suitable for large scale development):
 namespace fsm = fabulous_support_machinery;
+namespace fabulous_support_machinery{ using namespace console_io; }
+using namespace fsm::console_io;
+#include <fsm/$-macros.hpp>

@@ -3,12 +3,12 @@
 
 #include <fsm/text-io/_cpp-files/os-specific/windows/console/_os/handles.hpp>
 
-#include <fsm/core/failure.hpp>                                     // hopefully, FSM_FAIL
-#include <fsm/core/misc/support-for-collections/size-functions.hpp>      // size_of, is_empty
-#include <fsm/core/text/encoding-conversions.hpp>                   // to_utf_16_as_
-#include <fsm/core/constructs/declarations/FSM_NOT_USING.hpp>       // FSM_NOT_USING
-
-#include <fsm/@wrapped/os/winapi/windows-h.for-u16.hpp>             // WriteConsole
+#include <fsm/core/failure.hpp>                                         // hopefully, FSM_FAIL
+#include <fsm/core/misc/support-for-collections/size-functions.hpp>     // size_of, is_empty
+#include <fsm/core/text/encoding-conversions.hpp>                       // to_utf_16_as_
+#include <fsm/core/constructs/declarations/FSM_NOT_USING.hpp>           // FSM_NOT_USING
+    
+#include <fsm/@wrapped/os/winapi/windows-h.for-u16.hpp>                 // WriteConsole
 
 #include <string>       // std::wstring
 
@@ -28,7 +28,7 @@ namespace fabulous_support_machinery::console::_definitions {
     }
 
     // TODO: colorization depending on stream id -- OK to do at exports level?
-    void os::output_to( const Output_stream_id stream_id, in_<string_view> s )
+    void os::display_to( const Output_stream_id stream_id, in_<string_view> s )
     {
         FSM_NOT_USING( stream_id ) {
             if( is_empty( s ) ) { return; }
@@ -43,7 +43,7 @@ namespace fabulous_support_machinery::console::_definitions {
                 static_cast<DWORD>( ws_len ),
                 &n_units_written,
                 {}      // reserved
-                ) or FSM_FAIL( "Failed to output to the console via WriteConsole." );
+                ) or FSM_FAIL( "Failed to display to the console via WriteConsole." );
             assert( n_units_written == ws_len );
         }
     }

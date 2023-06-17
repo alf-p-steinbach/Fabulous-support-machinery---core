@@ -67,7 +67,7 @@ namespace fabulous_support_machinery::std_streams::_definitions {
     void os::output_to( const Output_stream_id stream_id, in_<string_view> s )
     {
         if( is_console_stream( stream_id ) ) {
-            console::output_to( stream_id, s );
+            console::display_to( stream_id, s );
         } else {
             ::fprintf( c_file_from( stream_id ), "%.*s", int_size_of( s ), s.data() );
         }

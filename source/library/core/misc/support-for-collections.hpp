@@ -7,4 +7,5 @@
 #include <fsm/core/misc/support-for-collections/queue-utility.hpp>
 #include <fsm/core/misc/support-for-collections/size-functions.hpp>
 #include <fsm/core/misc/support-for-collections/set-utility.hpp>
+#include <fsm/core/misc/support-for-collections/Span_.hpp>
 #include <fsm/core/misc/support-for-collections/stack-utility.hpp>

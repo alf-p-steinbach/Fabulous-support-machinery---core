@@ -7,7 +7,3 @@
 #include <fsm/text-io/console/input.hpp>
 #include <fsm/text-io/console/output.hpp>
 #include <fsm/text-io/console/useful_ns_names.hpp>
-
-namespace fabulous_support_machinery::console::ns_name{
-    namespace console = fabulous_support_machinery::console;
-}

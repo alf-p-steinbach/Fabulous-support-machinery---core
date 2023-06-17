@@ -20,8 +20,8 @@
 #define $with                       FSM_WITH
 #define $with_mutable               FSM_WITH_MUTABLE
 
-#include <fsm/core/constructs/introspection/FSM_FUNCTION_NAME.hpp>
-#define $function_name              FSM_FUNCTION_NAME
+#include <fsm/core/constructs/introspection/FSM_FUNC_ID.hpp>
+#define $function_name              FSM_FUNC_ID
 
 #include <fsm/core/failure/expressing/FSM_FAIL.hpp>
 #define $failure_message            FSM_FAILURE_MESSAGE

@@ -4,7 +4,10 @@
 #include <fsm/core/constructs/declarations/FSM_NS_FROM.hpp>     // FSM_NS_FROM
 
 namespace fabulous_support_machinery{
-    namespace console{}  namespace std_streams{}  namespace fmtlib{}
+    namespace console{}
+    namespace console_io{}          // Only the input and output functions.
+    namespace std_streams{}
+    namespace fmtlib{}
 
     namespace namespace_names {
         namespace fsm = fabulous_support_machinery;

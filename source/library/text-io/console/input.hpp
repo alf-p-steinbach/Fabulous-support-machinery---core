@@ -18,15 +18,7 @@ namespace fabulous_support_machinery::console::_definitions {
         extern auto input_using_buffer( string&& ) -> string;
     }  // namespace os
 
-#if 1
     using os::input_using_buffer;
-#else
-    inline auto input_using_buffer( string&& buffer )
-        -> string
-    {
-        return "";
-    }
-#endif
 
     inline auto input()
         -> string
@@ -35,7 +27,7 @@ namespace fabulous_support_machinery::console::_definitions {
     inline auto input( in_<string_view> prompt )
         -> string
     {
-        output( prompt );
+        display( prompt );
         return input_using_buffer( "" );
     }
 
@@ -47,3 +39,8 @@ namespace fabulous_support_machinery::console::_definitions {
 }  // namespace fabulous_support_machinery::console::_definitions
 
 namespace fabulous_support_machinery::console   { using namespace _definitions::exports; }
+
+namespace fabulous_support_machinery::console_io{ using
+    console::input_using_buffer,
+    console::input;
+}

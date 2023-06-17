@@ -94,4 +94,9 @@ namespace fabulous_support_machinery::console::_definitions {
     }  // namespace exports
 }  // namespace fabulous_support_machinery::console::_definitions
 
-namespace fabulous_support_machinery::console   { using namespace _definitions::exports; }
+namespace fabulous_support_machinery{
+    namespace console{
+        using namespace _definitions::exports;
+    }
+    using namespace console;
+}

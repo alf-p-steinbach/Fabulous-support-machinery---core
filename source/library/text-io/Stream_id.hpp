@@ -6,7 +6,7 @@
 #include <fsm/core/meta-type/type-inspectors.hpp>               // type_is_a_
 #include <fsm/core/mixins/Relational_operators_mixin_.hpp>      // Relational_operators_mixin_
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions {
     // enum class Input_stream_id { in = 0 };
     // enum class Output_stream_id { out = 1, err = 2 };
     // enum class Stream_id extends Input_stream_id, Output_stream_id {};
@@ -76,12 +76,12 @@ namespace fabulous_support_machinery::_definitions {
     inline constexpr    Output_stream_id   Output_stream_id_names::out      { 1 };
     inline constexpr    Output_stream_id   Output_stream_id_names::err      { 2 };
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports{ using
         d::Input_stream_id,
         d::Output_stream_id,
         d::Stream_id;
     }  // namespace exports
-}  // namespace fabulous_support_machinery::_definitions
+}  // namespace fsm_definitions
 
-namespace fabulous_support_machinery { using namespace _definitions::exports; }
+namespace fabulous_support_machinery { using namespace fsm_definitions::exports; }

@@ -24,7 +24,7 @@
         []( const auto retval ) -> bool { return (__VA_ARGS__); } \
         )
 
-namespace fabulous_support_machinery::_definitions {
+namespace fsm_definitions{
     using   std::function,          // <functional>
             std::move;              // <utility>
 
@@ -47,10 +47,10 @@ namespace fabulous_support_machinery::_definitions {
         -> bool
     { return check.denotes_success( value ); }
 
-    namespace d = _definitions;
+    namespace d = fsm_definitions;
     namespace exports { using
         d::Expect_;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::_definitions
 
-namespace fabulous_support_machinery     { using namespace _definitions::exports; }
+namespace fabulous_support_machinery     { using namespace fsm_definitions::exports; }

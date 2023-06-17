@@ -9,13 +9,13 @@
 //
 //      delete_file( path ) or $fail( "delete_file failed" );
 
-#include <fsm/core/constructs/introspection/FSM_FUNCTION_NAME.hpp>
+#include <fsm/core/constructs/introspection/FSM_FUNC_ID.hpp>
 #include <fsm/core/failure/expressing/fail.hpp>
 #include <fsm/core/failure/x-classes/default_message_for_.hpp>
 
 
 #define FSM_FAILURE_MESSAGE( explanation ) \
-    std::string() + FSM_FUNCTION_NAME + " - " + (explanation)
+    std::string( FSM_FUNC_ID ) + " - " + (explanation)
 
 #define FSM_FAIL_WITH_ARGS_( X, args_list ) \
     ::fabulous_support_machinery::fail_<X> args_list
