@@ -13,3 +13,7 @@
     #   include <fsm/FOO.hpp>
     #endif
 #endif
+
+#if __has_include( <fsm/stdlib-alts.hpp> )
+#   include <fsm/stdlib-alts.hpp>
+#endif
