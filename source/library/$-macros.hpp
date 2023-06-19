@@ -40,7 +40,7 @@
 #define $if_with                    FSM_IF_WITH
 #define $if                         FSM_IF
 
-#include <fsm/core/environment/properties/cpp-versions.hpp>
+#include <fsm/core/environment/properties/FSM_CPPdd.hpp>
 #define $cpp_version                FSM_CPP_VERSION
 #define $cpp98                      FSM_CPP98
 #define $cpp03                      FSM_CPP03

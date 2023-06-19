@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/basic-types/Size+Index.hpp>                          // Size
+#include <fsm/core/types/fundamental/Size+Index.hpp>                          // Size
 #include <fsm/core/constructs/declarations/type_builders.hpp>           // in_, array_of_
 #include <fsm/core/misc/support-for-collections/FSM_ITS_RANGE.hpp>      // FSM_ITS_RANGE    
 

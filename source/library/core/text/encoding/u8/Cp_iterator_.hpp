@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/basic-types/byte-types/Byte.hpp>                     // Byte
+#include <fsm/core/types/fundamental/byte-types/Byte.hpp>                     // Byte
 #include <fsm/core/misc/support-for-collections/Iterator_pair_.hpp>     // Iterator_pair_
 #include <fsm/core/misc/support-for-collections/size-functions.hpp>     // int_size_of
 #include <fsm/core/mixins/Relational_operators_mixin_.hpp>              // Relational_operators_mixin_
@@ -18,7 +18,7 @@
 namespace fsm_definitions::u8 {
     namespace fsm = fabulous_support_machinery;
     
-    using   fsm::Byte,                              // basic-types/byte-types/Byte.hpp
+    using   fsm::Byte,                              // types/fundamental/byte-types/Byte.hpp
             fsm::in_,                               // constructs/declarations/type_builders.hpp
             fsm::hopefully,                         // failure/detecting/hopefully.hpp
             fsm::bits_per_,                         // meta-type/type-inspectors.hpp

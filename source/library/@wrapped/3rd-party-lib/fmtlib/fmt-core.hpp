@@ -5,7 +5,7 @@
 // Define FSM_NO_FMT_HEADER_ONLY_PLEASE to avoid getting the header only version of the fmt lib.
 // Define FSM_FMTLIB_LOCALE_STUFF_PLEASE to get the <locale> header and overloads using std locales.
 
-#include <fsm/core/environment/properties/cpp-versions.hpp>
+#include <fsm/core/environment/properties/FSM_CPPdd.hpp>
 #ifndef FSM_NO_FMT_HEADER_ONLY_PLEASE
 #   if FSM_CPP_VERSION < FSM_CPP20
 #       undef   FMT_HEADER_ONLY

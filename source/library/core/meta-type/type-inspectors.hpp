@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/basic-types/byte-types/Byte.hpp>                     // bits_per_byte
+#include <fsm/core/types/fundamental/byte-types/Byte.hpp>                     // bits_per_byte
 
 #include <type_traits>
 

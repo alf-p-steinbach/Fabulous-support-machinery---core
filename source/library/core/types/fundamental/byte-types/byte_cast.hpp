@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/basic-types/byte-types/Byte.hpp>             // Byte
+#include <fsm/core/types/fundamental/byte-types/Byte.hpp>             // Byte
 #include <fsm/core/constructs/declarations/type_builders.hpp>   // const_
 #include <fsm/core/failure/detecting/FSM_STATIC_ASSERT.hpp>     // FSM_STATIC_ASSERT
 

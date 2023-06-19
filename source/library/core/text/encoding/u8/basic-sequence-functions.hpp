@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/basic-types/byte-types/Byte.hpp>                     // Byte
+#include <fsm/core/types/fundamental/byte-types/Byte.hpp>                     // Byte
 #include <fsm/core/misc/Literal_null.hpp>                               // Literal_null
 #include <fsm/core/misc/support-for-collections/size-functions.hpp>     // int_size_of
 #include <fsm/core/constructs/declarations/FSM_NS_FROM.hpp>             // FSM_NS_FROM

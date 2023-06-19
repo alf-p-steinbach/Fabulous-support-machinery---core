@@ -9,7 +9,7 @@
 #include <cstddef>  // Supplies `<std::byte>`.
 #include <stddef.h> // Avoids problems with /inadvertent/ use of stuff from `::`.
 
-#include <fsm/core/basic-types/byte-types/Byte.hpp>         // Byte, bits_per_byte
+#include <fsm/core/types/fundamental/byte-types/Byte.hpp>         // Byte, bits_per_byte
 #include <fsm/core/misc/Literal_null.hpp>                   // Literal_null
 
 namespace fabulous_support_machinery {

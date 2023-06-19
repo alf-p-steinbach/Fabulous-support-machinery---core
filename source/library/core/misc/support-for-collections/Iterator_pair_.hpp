@@ -6,7 +6,7 @@
 //      for( in_<T>: its_range::all_of( p, p + size ) ) { ...
 //      for( in_<T>: its_range::all_except_first_of( vec ) ) { ...
 
-#include <fsm/core/basic-types/Size+Index.hpp>                          // Size
+#include <fsm/core/types/fundamental/Size+Index.hpp>                          // Size
 #include <fsm/core/misc/support-for-collections/begin_of+end_of.hpp>    // begin_of, end_of
 
 #include <iterator>     // std::(distance, next)

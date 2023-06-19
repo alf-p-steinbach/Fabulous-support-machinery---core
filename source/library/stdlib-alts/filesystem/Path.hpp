@@ -21,6 +21,7 @@ namespace fsm_definitions {
     public:
         class Computer;
         class Drive;
+        class Root;
         class Steps;
 
         Path() {}

@@ -4,8 +4,8 @@
 // A view of a raw array, like C++20 `std::span`
 // <url: https://en.cppreference.com/w/cpp/container/span>.
 
-#include <fsm/core/basic-types/byte-types/Byte.hpp>                     // is_byte_
-#include <fsm/core/basic-types/Size+Index.hpp>                          // Size, Index
+#include <fsm/core/types/fundamental/byte-types/Byte.hpp>                     // is_byte_
+#include <fsm/core/types/fundamental/Size+Index.hpp>                          // Size, Index
 #include <fsm/core/constructs/declarations/FSM_ENABLE_IF.hpp>           // FSM_ENABLE_IF
 #include <fsm/core/constructs/declarations/type_builders.hpp>           // const_
 #include <fsm/core/meta-type/type-inspectors.hpp>                       // Bare_
