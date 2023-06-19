@@ -50,23 +50,26 @@ namespace fabulous_support_machinery {
     // Built-in type detectors for foundation functionality.
 
     template< class T >
-    constexpr bool  is_builtin_integral_type_   = std::is_integral_v<T>;
+    constexpr bool  is_builtin_integral_type_       = std::is_integral_v<T>;
 
     template< class T >
-    constexpr bool  is_builtin_integer_         = is_builtin_integral_type_<T> and not is_same_<T, bool>;
+    constexpr bool  is_builtin_integer_             = is_builtin_integral_type_<T> and not is_same_<T, bool>;
 
     template< class T >
-    constexpr bool  is_builtin_signed_          = std::is_signed_v<T>;
+    constexpr bool  is_builtin_signed_              = std::is_signed_v<T>;
     
     template< class T >
-    constexpr bool  is_builtin_signed_integer_  = is_builtin_integer_<T> and is_builtin_signed_<T>;
+    constexpr bool  is_builtin_signed_integer_      = is_builtin_integer_<T> and is_builtin_signed_<T>;
     
     template< class T >
-    constexpr bool  is_builtin_unsigned_        = std::is_unsigned_v<T>;
+    constexpr bool  is_builtin_unsigned_            = std::is_unsigned_v<T>;
     
     template< class T >
-    constexpr bool  is_builtin_unsigned_integer_ = is_builtin_integer_<T> and is_builtin_unsigned_<T>;
+    constexpr bool  is_builtin_unsigned_integer_    = is_builtin_integer_<T> and is_builtin_unsigned_<T>;
     
+    template< class T >
+    constexpr bool  is_builtin_number_              = std::is_arithmetic_v<T>;
+
 
     // Numerical type classifiers.
     // std::is_signed etc. can't be specialized for user defined types, formal UB.
@@ -93,4 +96,6 @@ namespace fabulous_support_machinery {
     template< class T >     
     constexpr bool is_unsigned_integer_         = is_integer_<T> and is_unsigned_<T>;
 
+    template< class T >     
+    constexpr bool is_number_                   = is_builtin_number_<T>;
 }  // namespace fabulous_support_machinery

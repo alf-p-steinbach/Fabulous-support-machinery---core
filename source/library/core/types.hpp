@@ -2,3 +2,4 @@
 #include <fsm/core/+std-cpp-language.hpp>
 
 #include <fsm/core/types/fundamental.hpp>
+#include <fsm/core/types/Interval.hpp>

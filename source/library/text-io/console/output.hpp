@@ -4,6 +4,7 @@
 #include <fsm/core/constructs/declarations/FSM_ENABLE_IF.hpp>       // FSM_ENABLE_IF
 #include <fsm/core/constructs/declarations/type_builders.hpp>       // in_
 #include <fsm/core/text/string_building.hpp>                        // string_from
+#include <fsm/core/meta-type/type-inspectors.hpp>                   // is_number_
 #include <fsm/text-io/Stream_id.hpp>                                // Stream_id
 
 #include <string_view>
@@ -22,8 +23,14 @@ namespace fabulous_support_machinery::console::_definitions {
     using os::display_to;
 
     // Wrappers:
-    inline void display( in_<string_view> s )       { display_to( Stream_id::out, s ); }
-    inline void display_err( in_<string_view> s )   { display_to( Stream_id::err, s ); }
+    inline void display( in_<string_view> s )           { display_to( Stream_id::out, s ); }
+    inline void display_error( in_<string_view> s )     { display_to( Stream_id::err, s ); }
+
+    template< class Number, FSM_ENABLE_IF( is_number_<Number> ) >
+    inline void display( const Number x ) { display( string_from( x ) ); }
+
+    template< class Number, FSM_ENABLE_IF( is_number_<Number> ) >
+    inline void display_error( const Number x ) { display_error( string_from( x ) ); }
 
     template< class... Args, FSM_ENABLE_IF( sizeof...( Args ) >= 2 ) >
     void display( Args&&... args )
@@ -32,9 +39,9 @@ namespace fabulous_support_machinery::console::_definitions {
     }
 
     template< class... Args, FSM_ENABLE_IF( sizeof...( Args ) >= 2 )  >
-    void display_err( Args&&... args )
+    void display_error( Args&&... args )
     {
-        display_err( string_from( forward<Args>( args )... ) );
+        display_error( string_from( forward<Args>( args )... ) );
     }
 
     namespace d = _definitions;
@@ -42,7 +49,7 @@ namespace fabulous_support_machinery::console::_definitions {
         d::clear_screen,
         d::display_to,
         d::display,
-        d::display_err;
+        d::display_error;
     }  // namespace exports
 }  // namespace fabulous_support_machinery::console::_definitions
 
@@ -52,5 +59,5 @@ namespace fabulous_support_machinery::console_io{ using
     console::clear_screen,
     console::display_to,
     console::display,
-    console::display_err;
+    console::display_error;
 }
