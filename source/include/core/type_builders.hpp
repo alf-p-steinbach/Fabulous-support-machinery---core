@@ -4,18 +4,17 @@
 #include <type_traits>
 
 namespace fsm_definitions {
+
+    // Builders that support template argument deduction:
     namespace type_builders
     {
-        // Builders that support template argument deduction:
         template< class T >     using type_             = T;
-        template< class T >     using movable_value_    = T;
         template< class T >     using const_            = const T;
-
         template< class T >     using ref_              = T&;
-        template< class T >     using in_               = ref_<const T>;
 
         template< const int n, class Item > using array_of_         = Item[n];
     }
+
 }  // namespace fsm_definitions
 
 namespace fsm {
