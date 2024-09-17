@@ -14,7 +14,7 @@
 #   include <stop-compilation>
 #endif
 
-#include <math.h>
+#include <fsm/core/c/math.hpp>
 #ifndef M_PI
 #   error "M_PI not defined by <math.h> (apparently included without _USE_MATH_DEFINES)."
 #   include <stop-compilation>

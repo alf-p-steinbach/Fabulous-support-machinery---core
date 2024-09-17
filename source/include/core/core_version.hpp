@@ -7,7 +7,7 @@
 namespace fsm_definitions {
 
     inline const auto core_version   = Version{ "FSM core sub-library version 1.0" };
-    
+
     FSM_( "EXPORTS:" ) namespace d = fsm_definitions;  namespace exports {
         using   d::core_version;
     }  // namespace exports
