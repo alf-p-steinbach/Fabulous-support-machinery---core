@@ -10,3 +10,4 @@
 #define FSM_CPP14           201402L
 #define FSM_CPP17           201703L
 #define FSM_CPP20           202002L
+#define FSM_CPP23           202302L
