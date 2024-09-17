@@ -1,4 +1,0 @@
-﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-
-#include "std_streams/io.cpp"
-#include "std_streams/is_console_stream.cpp"

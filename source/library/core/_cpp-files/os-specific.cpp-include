@@ -1,9 +1,0 @@
-﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#if defined( _WIN32 )
-#   include "os-specific/windows.cpp-include"
-#elif defined( __unix__ )
-#   include "os-specific/unix.cpp-include"
-#else
-#   error "This OS is not supported (yet), sorry."
-#   include <stop-compilation>
-#endif
