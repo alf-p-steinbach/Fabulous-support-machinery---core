@@ -16,7 +16,10 @@ namespace fsm_definitions {
         template< class Arg >
         Moving_( Arg&& arg ): m_object( forward( arg ) ) {}
         
-        operator Type&& () { return move( m_object ); }
+        Moving_( Moving_& other ): m_object( move( other.m_object ) ) {}
+        Moving_( Moving_&& other ): m_object( move( other.m_object ) ) {}
+        
+        operator Type&& () noexcept { return move( m_object ); }
     };
     
     FSM_( "EXPORTS:" ) namespace d = fsm_definitions;  namespace exports {

@@ -3,6 +3,7 @@
 
 #include <fsm/core/class_kinds.hpp>
 #include <fsm/core/core_version.hpp>
+#include <fsm/core/exception_handling.hpp>
 #include <fsm/core/FSM_.hpp>
 #include <fsm/core/parameter_passing.hpp>
 #include <fsm/core/platform.hpp>
