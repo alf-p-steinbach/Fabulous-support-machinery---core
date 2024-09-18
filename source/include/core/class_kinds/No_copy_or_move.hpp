@@ -7,8 +7,10 @@
 #include <fsm/core/parameter_passing/in_.hpp>
 
 namespace fsm_definitions {
+    using   fsm::in_;
 
     namespace class_kinds {
+        
         class No_copy_or_move
         {
             using Self = No_copy_or_move;
@@ -18,11 +20,12 @@ namespace fsm_definitions {
         public:
             No_copy_or_move() noexcept {}
         };
-    }  // namespace class_kinds
 
-    FSM_( "EXPORTS:" ) namespace d = fsm_definitions;  namespace exports {
-        FSM_NSNAME_FROM( d, class_kinds );
-    }  // namespace exports
+    }  // namespace class_kinds
 }  // namespace fsm_definitions
 
-namespace fsm { using namespace fsm_definitions::exports; }
+namespace fsm {
+    inline namespace class_kinds {
+        using namespace fsm_definitions::class_kinds;
+    }
+}  // namespace fsm

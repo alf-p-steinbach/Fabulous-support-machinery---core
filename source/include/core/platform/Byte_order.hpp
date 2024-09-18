@@ -1,6 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 namespace fsm {
+    
     // C++20 provides `std::endian`, <url: https://en.cppreference.com/w/cpp/types/endian>.
     // The definition below is a slightly modified copy of the possibility at cppreference.
     struct Byte_order{ enum Enum: int {
@@ -14,4 +15,5 @@ namespace fsm {
             native          = __BYTE_ORDER__
         #endif
     }; };
+
 }  // namespace fsm

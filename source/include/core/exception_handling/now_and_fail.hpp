@@ -7,11 +7,13 @@
 #include <string>
 
 namespace fsm_definitions {
+    using   fsm::Moving_, fsm::in_;
     using   std::runtime_error,             // <stdexcept>
             std::string;                    // <string>
 
     namespace exception_handling
     {
+
         constexpr auto now( const bool condition ) noexcept -> bool { return condition; }
         
         template< class X, class... Args >
@@ -30,8 +32,8 @@ namespace fsm_definitions {
             fail_<runtime_error>( message );
             for( ;; ) {}        // Should never get here.
         }
-    }
 
+    }
 }  // namespace fsm_definitions
 
 namespace fsm {
