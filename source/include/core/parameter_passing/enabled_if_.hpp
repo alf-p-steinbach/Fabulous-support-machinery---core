@@ -9,8 +9,8 @@ namespace fsm_definitions {
     namespace parameter_passing {
 
         template< bool condition >
-        using Enable_if_ = enable_if_t<condition, bool>;
-        
+        constexpr auto enabled_if_() -> bool { return enable_if_t<condition, bool>( true ); }
+
     }  // namespace parameter_passing
 }  // namespace fsm_definitions
 
