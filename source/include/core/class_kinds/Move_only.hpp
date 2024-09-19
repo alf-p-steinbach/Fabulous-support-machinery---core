@@ -1,8 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/std_core_language.hpp>
 
-#include <fsm/core/constructs/FSM_NSNAME_FROM.hpp>      // FSM_NSNAME_FROM
-
 #include <fsm/core/parameter_passing/in_.hpp>
 
 namespace fsm_definitions {
@@ -26,7 +24,5 @@ namespace fsm_definitions {
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace class_kinds {
-        using namespace fsm_definitions::class_kinds;
-    }
+    inline namespace class_kinds { using namespace fsm_definitions::class_kinds; }
 }  // namespace fsm
