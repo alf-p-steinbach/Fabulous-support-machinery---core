@@ -1,0 +1,99 @@
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+#include <fsm/core/std_core_language.hpp>
+
+#include <fsm/core/class_kinds/No_copy_or_move.hpp>     // No_copy_or_move
+#include <fsm/core/platform/os_id_macros.hpp>           // FSM_OS_...
+#include <fsm/core/parameter_passing/in_.hpp>           // in_
+#include <fsm/core/wrapped/fmt_lib/core.hpp>            // -- {fmt} lib stuff.
+
+#include <cstdio>
+#include <stdio.h>          // fileno
+#include <string>
+#include <utility>
+
+#if defined( FSM_OS_IS_WINDOWS )
+#   include <io.h>
+#elif defined( FSM_OS_IS_UNIX )
+#   include <unistd.h>      // isatty
+#else
+#   error "This platform is not supported."
+#   include <stop-compilation>
+#endif
+
+namespace fsm_definitions {
+    using   fsm::No_copy_or_move, fsm::in_,
+            fsm::format_string, fsm::vformat, fsm::make_format_args;
+    using   std::string,            // <string>
+            std::forward;           // <utility>
+
+    #ifdef FSM_OS_IS_WINDOWS
+        inline const auto fileno = _fileno;         // <stdio.h>
+        inline const auto isatty = _isatty;         // <io.h>
+        
+        struct Console_encoding_fix: No_copy_or_move
+        {
+            ~Console_encoding_fix() {}
+            Console_encoding_fix() {}
+        };
+    #else
+        struct Console_encoding_fix: No_copy_or_move
+        {
+            ~Console_encoding_fix() {}
+            Console_encoding_fix() {}
+        };
+    #endif
+
+    namespace stream {
+        using Handle = FILE*;
+    }  // namespace stream
+
+    namespace stream_io {
+
+        inline auto is_console( const stream::Handle stream )
+            -> bool
+        { return isatty( fileno( stdout ) ); }
+
+        inline void put( const stream::Handle stream, in_<string> s )
+        {
+            #if FSM_OS_IS_WINDOWS
+                if( is_console( stream ) ) {
+                    static const Console_encoding_fix   a_fix;  // Sets active codepage to 65001 (UTF-8).
+                }
+            #endif
+            fputs( s.c_str(), stream );
+        }
+
+        inline void put( in_<string> s ) { put( stdout, s.c_str() ); }
+
+        inline void put_line( const stream::Handle stream, in_<string> s )
+        {
+            put( stream, s.c_str() );
+            put( stream, "\n" );
+        }
+
+        inline void put_line( in_<string> s ) { put_line( stdout, s ); }
+
+
+        //--------------------------------------------------------------- With formatting:
+        
+        template< class... Args >
+        inline void put( const stream::Handle stream, format_string<Args...> fmt, Args&&... args )
+        {
+            put( stream, format( fmt, forward<const Args>( args )... ) );
+        }
+        
+        template< class... Args >
+        inline void put( format_string<Args...> fmt, Args&&... args )
+        {
+            put( stdout, format( fmt, forward<const Args>( args )... ) );
+        }
+ 
+ }  // namespace stream_io
+}  // namespace fsm_definitions
+
+namespace fsm {
+    inline namespace stream_io {
+        using namespace fsm_definitions::stream_io;
+    }
+    namespace stream = fsm_definitions::stream;
+}  // namespace fsm

@@ -8,5 +8,5 @@ namespace fsm_definitions::fmtlib {
     using namespace fmt;
 
 #   define FSM_FMTLIB_API_PROVIDES_FORMAT_STRING_TYPE
-    constexpr bool api_provides_format_string_type = true;
+    constexpr bool api_provides_the_format_string_type = true;
 }  // namespace fsm_definitions::fmtlib

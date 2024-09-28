@@ -41,9 +41,17 @@ namespace fsm_definitions::fmtlib {
             
     // <url: https://en.cppreference.com/w/cpp/utility/format#Notes>
     // `std::basic_format_string` is not exposed prior to C++ <format> header version 202207.
-    #if __cpp_lib_format >= (2022*100 + 7)
-        #define FSM_FMTLIB_API_PROVIDES_FORMAT_STRING_TYPE
-        constexpr bool api_provides_format_string_type = true;
+    //
+    // But (reason for `FSM_PLEASE_FIX_FORMAT` option macro):
+    //
+    // “We intentionally treat the addition of std::basic_format_string (P2508) as a defect report
+    // because all known implementations make these components available in C++20 mode, although it
+    // is not so categorized officially.”
+    //
+    #if __cpp_lib_format >= (2022*100 + 7) or not defined( FSM_PLEASE_FIX_FORMAT )
+        #define FSM_FMTLIB_API_PROVIDES_THE_FORMAT_STRING_TYPE
+
+        constexpr bool api_provides_the_format_string_type = true;
 
         using   std::format, std::format_to, std::format_to_n, std::formatted_size,
                 std::basic_format_string, std::format_string, std::wformat_string;
@@ -79,46 +87,46 @@ namespace fsm_definitions::fmtlib {
         template< class... Args >
         inline auto format( format_string<Args...> fmt, Args&&... args )
             -> string
-        { return vformat( fmt.get(), make_format_args( forward<Args>( args )... ) ); }
+        { return vformat( fmt.get(), make_format_args( forward<const Args>( args )... ) ); }
 
         // To avoid `std::format` with internal arg type being considered by overload resolution.
         template< class... Args >
         inline auto format( const_<const char*> fmt, Args&&... args )
             -> string
-        { return vformat( fmt, make_format_args( forward<Args>( args )... ) ); }
+        { return vformat( fmt, make_format_args( forward<const Args>( args )... ) ); }
 
         template< class... Args >
         inline auto format( wformat_string<Args...> fmt, Args&&... args )
             -> wstring
-        { return vformat( fmt.get(), make_wformat_args( forward<Args>( args )... ) ); }
+        { return vformat( fmt.get(), make_wformat_args( forward<const Args>( args )... ) ); }
 
         // To avoid `std::format` with internal arg type being considered by overload resolution.
         template< class... Args >
         inline auto format( const_<const wchar_t*> fmt, Args&&... args )
             -> string
-        { return vformat( fmt, make_format_args( forward<Args>( args )... ) ); }
+        { return vformat( fmt, make_format_args( forward<const Args>( args )... ) ); }
 
         #ifdef FSM_FMTLIB_LOCALE_STUFF_PLEASE
             template< class... Args >
             inline auto format( const locale& loc, format_string<Args...> fmt, Args&&... args )
                 -> string
-            { return vformat( loc, fmt.get(), make_format_args( forward<Args>( args )... ) ); }
+            { return vformat( loc, fmt.get(), make_format_args( forward<const Args>( args )... ) ); }
 
             template< class... Args >
             inline auto format( const locale& loc, wformat_string<Args...> fmt, Args&&... args )
                 -> string
-            { return vformat( loc, fmt.get(), make_wformat_args( forward<Args>( args )... ) ); }
+            { return vformat( loc, fmt.get(), make_wformat_args( forward<const Args>( args )... ) ); }
         #endif  // FSM_FMTLIB_LOCALE_STUFF_PLEASE
 
         template< class OutputIt, class... Args >
         inline auto format_to( OutputIt out, format_string<Args...> fmt, Args&&... args )
             -> OutputIt
-        { return std::vformat_to( out, fmt.get(), make_format_args( forward<Args>( args)... ) ); }
+        { return std::vformat_to( out, fmt.get(), make_format_args( forward<const Args>( args)... ) ); }
 
         template< class OutputIt, class... Args >
         inline auto format_to( OutputIt out, wformat_string<Args...> fmt, Args&&... args )
             -> OutputIt
-        { return vformat_to( out, fmt.get(), make_wformat_args( forward<Args>( args )... ) ); }
+        { return vformat_to( out, fmt.get(), make_wformat_args( forward<const Args>( args )... ) ); }
 
         #ifdef FSM_FMTLIB_LOCALE_STUFF_PLEASE
             template< class OutputIt, class... Args >
@@ -126,14 +134,14 @@ namespace fsm_definitions::fmtlib {
                 OutputIt out, const locale& loc, format_string<Args...> fmt, Args&&... args
                 )
                 -> OutputIt
-            { return vformat_to( out, loc, fmt.get(), make_format_args( forward<Args>( args )... ) ); }
+            { return vformat_to( out, loc, fmt.get(), make_format_args( forward<const Args>( args )... ) ); }
             
             template< class OutputIt, class... Args >
             inline auto format_to(
                 OutputIt out, const locale& loc, wformat_string<Args...> fmt, Args&&... args
                 )
                 -> OutputIt
-            { return vformat_to( out, loc, fmt.get(), make_wformat_args( forward<Args>( args )... ) ); }
+            { return vformat_to( out, loc, fmt.get(), make_wformat_args( forward<const Args>( args )... ) ); }
         #endif  // FSM_FMTLIB_LOCALE_STUFF_PLEASE
 
         // `format_to_n` is not provided, because

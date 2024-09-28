@@ -8,6 +8,7 @@
 #include <fsm/core/parameter_passing.hpp>
 #include <fsm/core/platform.hpp>
 #include <fsm/core/std_core_language.hpp>
+#include <fsm/core/stream_io.hpp>
 #include <fsm/core/text.hpp>
 #include <fsm/core/type_builders.hpp>
 #include <fsm/core/Version.hpp>

@@ -50,7 +50,7 @@ namespace fsm_definitions::fmtlib {
         x::basic_format_context, x::format_context, x::wformat_context,
         x::basic_format_parse_context, x::format_parse_context, x::wformat_parse_context,
         //
-        x::api_provides_format_string_type,
+        x::api_provides_the_format_string_type,
         //
         x::format, x::format_to, // x::format_to_n, x::formatted_size,
         x::basic_format_string, x::format_string, x::wformat_string;
