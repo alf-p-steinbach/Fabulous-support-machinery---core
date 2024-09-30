@@ -49,7 +49,7 @@ namespace fsm_definitions {
 
         inline auto is_console( const Stream_handle stream )
             -> bool
-        { return isatty( fileno( stdout ) ); }
+        { return isatty( fileno( stream ) ); }
 
         inline void put( const Stream_handle stream, in_<string> s )
         {

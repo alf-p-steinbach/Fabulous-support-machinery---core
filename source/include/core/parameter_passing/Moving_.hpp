@@ -22,7 +22,6 @@ namespace fsm_definitions {
             operator Type&& () noexcept { return move( m_object ); }
 
             operator Type () const = delete;
-            operator const Type () const = delete;
         };
     }  // namespace parameter_passing
 }  // namespace fsm_definitions
