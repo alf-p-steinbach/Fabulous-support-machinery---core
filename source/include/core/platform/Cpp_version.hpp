@@ -19,9 +19,11 @@ namespace fsm_definitions {
                 -> Cpp_version
             { return {version_number / 100, version_number % 100}; }
 
+            constexpr auto number() const noexcept -> long { return 100*year + month; }
+
             constexpr auto informal_id() const noexcept -> int { return year % 100; }
 
-            auto to_string() const -> string { return "C++ " + std::to_string( informal_id() ); }
+            auto to_string() const -> string { return "C++" + std::to_string( informal_id() ); }
         };
 
         static_assert( FSM_CPP98 == FSM_CPP03 );
