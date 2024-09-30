@@ -5,7 +5,7 @@
 // Define FSM_NO_FMT_HEADER_ONLY_PLEASE     to avoid getting the header only version of the fmt lib.
 // Define FSM_FMTLIB_LOCALE_STUFF_PLEASE    to get the <locale> header and overloads using std locales.
 
-#include <fsm/core/FSM_.hpp>        // Inline commenting macro FSM_.
+#include <string>
 
 #include <fsm/core/platform/cpp_version_macros.hpp>
 #ifndef FSM_NO_FMT_HEADER_ONLY_PLEASE
@@ -34,13 +34,17 @@
 #ifdef FSM_USING_ORIGINAL_FMTLIB
 // #   pragma message "original fmt
 #   include <fsm/core/wrapped/fmt_lib/_details/core.via-original-fmt-library.hpp>
+#   include <fsm/core/wrapped/fmt_lib/_details/fmt_lib_version.hpp>
 #else
 // #   pragma message "fmt from standard library"
 #   include <fsm/core/wrapped/fmt_lib/_details/core.via-stdlib.hpp>
 #endif
 
-namespace fsm_definitions::fmtlib {
-    FSM_( "EXPORTS:" ) namespace x = fmtlib;  namespace exports { using
+namespace fsm_definitions {
+    using   std::string;        // <string>
+
+    // EXPORTS from the included headers (exposition + existence check only):
+    namespace x = fmt_lib;  namespace fmt_lib_exports { using
         x::vformat, x::vformat_to,
         x::make_format_args, x::make_wformat_args,
         x::visit_format_arg,
@@ -54,9 +58,19 @@ namespace fsm_definitions::fmtlib {
         //
         x::format, x::format_to, // x::format_to_n, x::formatted_size,
         x::basic_format_string, x::format_string, x::wformat_string;
-    }  // namespace exports
-}  // namespace fsm_definitions::fmtlib
+    }  // namespace fmt_lib_exports
+
+    namespace fmt_lib {
+        #if defined( FSM_USING_ORIGINAL_FMTLIB )
+            const inline string fmt_lib_source = fmt_lib_description;     // E.g. "{{fmt}} version 9.11".
+        #elif defined( FSM_BACKEND_PROVIDES_THE_FORMAT_STRING_TYPE )
+            const inline string fmt_lib_source = "the C++ standard library";
+        #else
+            const inline string fmt_lib_source = "the C++ standard library + DIY supplements";
+        #endif
+    }
+}  // namespace fsm_definitions
     
 namespace fsm {
-    inline namespace fmtlib{ using namespace fsm_definitions::fmtlib::exports; }
+    inline namespace fmt_lib{ using namespace fsm_definitions::fmt_lib; }
 }  // namespace fsm

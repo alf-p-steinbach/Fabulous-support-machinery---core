@@ -77,26 +77,26 @@ namespace fsm_definitions {
         template< class... Args >
         inline void put( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
         {
-            put( stream, format( fmt, forward<const Args>( args )... ) );
+            put( stream, format( fmt, forward<Args>( args )... ) );
         }
         
         template< class... Args >
         inline void put( format_string<Args...> fmt, Args&&... args )
         {
-            put( stdout, format( fmt, forward<const Args>( args )... ) );
+            put( stdout, format( fmt, forward<Args>( args )... ) );
         }
  
         template< class... Args >
         inline void put_line( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
         {
-            put( stream, format( fmt, forward<const Args>( args )... ) );
+            put( stream, format( fmt, forward<Args>( args )... ) );
             put( stream, "\n" );
         }
 
         template< class... Args >
         inline void put_line( format_string<Args...> fmt, Args&&... args )
         {
-            put( stdout, format( fmt, forward<const Args>( args )... ) );
+            put( stdout, format( fmt, forward<Args>( args )... ) );
             put( stdout, "\n" );
         }
 
