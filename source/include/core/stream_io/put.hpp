@@ -53,11 +53,7 @@ namespace fsm_definitions {
 
         inline void put( const Stream_handle stream, in_<string> s )
         {
-            #if FSM_OS_IS_WINDOWS
-                if( is_console( stream ) ) {
-                    static const Console_encoding_fix   a_fix;  // Sets active codepage to 65001 (UTF-8).
-                }
-            #endif
+            static const Console_encoding_fix   a_fix;  // In Windows sets active codepage 65001 (UTF-8).
             fputs( s.c_str(), stream );
         }
 
