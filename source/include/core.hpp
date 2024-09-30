@@ -2,7 +2,6 @@
 #include <fsm/core/std_core_language.hpp>
 
 #include <fsm/core/class_kinds.hpp>
-#include <fsm/core/core_version.hpp>
 #include <fsm/core/exception_handling.hpp>
 #include <fsm/core/FSM_.hpp>
 #include <fsm/core/parameter_passing.hpp>
@@ -11,4 +10,3 @@
 #include <fsm/core/stream_io.hpp>
 #include <fsm/core/text.hpp>
 #include <fsm/core/type_builders.hpp>
-#include <fsm/core/Version.hpp>

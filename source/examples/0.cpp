@@ -3,6 +3,6 @@ using   fsm::put;
 
 auto main() -> int
 {
-    put( "Using {}.\n", fsm::core_version.description );
-    put( "C++ {}.\n", (FSM_CPP_VERSION / 100) % 100 );
+    put( "The FSM (Fabulous Support Machinery) library.\n" );
+    put( "Using {} with {}.\n", fsm::fsm_core_version, fsm::cpp_version.to_string() );
 }

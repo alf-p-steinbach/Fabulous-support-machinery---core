@@ -43,17 +43,15 @@ namespace fsm_definitions {
         };
     #endif
 
-    namespace stream {
-        using Handle = FILE*;
-    }  // namespace stream
-
     namespace stream_io {
 
-        inline auto is_console( const stream::Handle stream )
+        using Stream_handle = FILE*;
+
+        inline auto is_console( const Stream_handle stream )
             -> bool
         { return isatty( fileno( stdout ) ); }
 
-        inline void put( const stream::Handle stream, in_<string> s )
+        inline void put( const Stream_handle stream, in_<string> s )
         {
             #if FSM_OS_IS_WINDOWS
                 if( is_console( stream ) ) {
@@ -65,7 +63,7 @@ namespace fsm_definitions {
 
         inline void put( in_<string> s ) { put( stdout, s.c_str() ); }
 
-        inline void put_line( const stream::Handle stream, in_<string> s )
+        inline void put_line( const Stream_handle stream, in_<string> s )
         {
             put( stream, s.c_str() );
             put( stream, "\n" );
@@ -77,7 +75,7 @@ namespace fsm_definitions {
         //--------------------------------------------------------------- With formatting:
         
         template< class... Args >
-        inline void put( const stream::Handle stream, format_string<Args...> fmt, Args&&... args )
+        inline void put( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
         {
             put( stream, format( fmt, forward<const Args>( args )... ) );
         }
@@ -88,12 +86,25 @@ namespace fsm_definitions {
             put( stdout, format( fmt, forward<const Args>( args )... ) );
         }
  
- }  // namespace stream_io
+        template< class... Args >
+        inline void put_line( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
+        {
+            put( stream, format( fmt, forward<const Args>( args )... ) );
+            put( stream, "\n" );
+        }
+
+        template< class... Args >
+        inline void put_line( format_string<Args...> fmt, Args&&... args )
+        {
+            put( stdout, format( fmt, forward<const Args>( args )... ) );
+            put( stdout, "\n" );
+        }
+
+    }  // namespace stream_io
 }  // namespace fsm_definitions
 
 namespace fsm {
     inline namespace stream_io {
         using namespace fsm_definitions::stream_io;
     }
-    namespace stream = fsm_definitions::stream;
 }  // namespace fsm
