@@ -2,6 +2,7 @@
 #include <fsm/core/std_core_language.hpp>
 
 #include <fsm/core/class_kinds/No_copy_or_move.hpp>     // No_copy_or_move
+#include <fsm/core/exception_handling/now_and_fail.hpp> // TODO: FSM_FAIL
 #include <fsm/core/platform/os_id_macros.hpp>           // FSM_OS_...
 #include <fsm/core/parameter_passing/in_.hpp>           // in_
 #include <fsm/core/wrapped/fmt_lib/core.hpp>            // -- {fmt} lib stuff.
@@ -9,6 +10,7 @@
 #include <cstdio>
 #include <stdio.h>          // fileno
 #include <string>
+#include <string_view>
 #include <utility>
 
 #if defined( FSM_OS_IS_WINDOWS )
@@ -22,8 +24,11 @@
 
 namespace fsm_definitions {
     using   fsm::No_copy_or_move, fsm::in_,
+            fsm::now, fsm::fail,
             fsm::format_string, fsm::vformat, fsm::make_format_args;
-    using   std::string,            // <string>
+    using   std::fwrite,            // <cstdio>
+            std::string,            // <string>
+            std::string_view,       // <string_view>
             std::forward;           // <utility>
 
     #ifdef FSM_OS_IS_WINDOWS
@@ -51,10 +56,13 @@ namespace fsm_definitions {
             -> bool
         { return isatty( fileno( stream ) ); }
 
-        inline void put( const Stream_handle stream, in_<string> s )
+        inline void put( const Stream_handle stream, in_<string_view> s )
         {
             static const Console_encoding_fix   a_fix;  // In Windows sets active codepage 65001 (UTF-8).
-            fputs( s.c_str(), stream );
+
+            const auto n_bytes_written = fwrite( s.data(), 1, s.size(), stream );
+            now( n_bytes_written == s.size() )
+                or fail( "fwrite failed" );             // TODO: use FSM_FAIL
         }
 
         inline void put( in_<string> s ) { put( stdout, s.c_str() ); }
