@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------- Requirements:
 // TODO: assert minimum language version
 #include <fsm/core/assertions/literals_are_utf8.hpp>                    // Encoding.
+#include <fsm/core/assertions/int_is_more_than_16_bits.hpp>             // `int` number range.
 
 //------------------------------------------------------------------------- Enabling:
 #include <fsm/core/std_core_language/enable-std-literals.hpp>           // Syntax.
