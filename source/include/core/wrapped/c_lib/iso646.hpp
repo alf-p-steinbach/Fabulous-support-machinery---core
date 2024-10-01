@@ -2,5 +2,5 @@
 //
 // As if each name from <ciso646> is placed in global namespace.
 
-#include <ciso646>
+// #include <ciso646>       -- Removed in C++20.
 #include <iso646.h>
