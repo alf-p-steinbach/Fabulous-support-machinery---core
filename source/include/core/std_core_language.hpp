@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 //------------------------------------------------------------------------- Requirements:
-// TODO: assert minimum language version
+// TODO: assert minimum language version?
 #include <fsm/core/assertions/literals_are_utf8.hpp>                    // Encoding.
 #include <fsm/core/assertions/int_is_more_than_16_bits.hpp>             // `int` number range.
 
