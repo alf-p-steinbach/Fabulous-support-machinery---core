@@ -7,6 +7,7 @@
 
 #include <string>
 
+// Unless contra-indicated by FSM_NO_FMT_HEADER_ONLY_PLEASE default to FMT_HEADER_ONLY for C++ versions <20.
 #include <fsm/core/platform/cpp_version_macros.hpp>
 #ifndef FSM_NO_FMT_HEADER_ONLY_PLEASE
 #   if FSM_CPP_VERSION < FSM_CPP20
@@ -20,10 +21,8 @@
 #   define  FSM_USE_ORIGINAL_FMTLIB_PLEASE
 #endif
 
-#if FSM_CPP_VERSION >= FSM_CPP20 and not defined( FSM_USE_ORIGINAL_FMTLIB_PLEASE )
-#   undef   FSM_USING_ORIGINAL_FMTLIB       // = Using the standard library's adoption.
-#else
-#   undef   FSM_USING_ORIGINAL_FMTLIB
+#undef   FSM_USING_ORIGINAL_FMTLIB       // = Using the standard library's adoption.
+#if FSM_CPP_VERSION < FSM_CPP20 or defined( FSM_USE_ORIGINAL_FMTLIB_PLEASE )
 #   define  FSM_USING_ORIGINAL_FMTLIB
 #endif
 
@@ -32,7 +31,7 @@
 #endif
 
 #ifdef FSM_USING_ORIGINAL_FMTLIB
-// #   pragma message "original fmt
+// #   pragma message "original fmt"
 #   include <fsm/core/wrapped/fmt_lib/_details/core.via-original-fmt-library.hpp>
 #   include <fsm/core/wrapped/fmt_lib/_details/fmt_lib_version.hpp>
 #else

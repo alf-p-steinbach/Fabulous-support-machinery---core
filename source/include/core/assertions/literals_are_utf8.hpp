@@ -3,14 +3,7 @@
 // There is unfortunately no known portable way to stop the compilation if this assert fires,
 // and there is apparently no way to detect UTF-8 as execution character set in preprocessing.
 
-namespace fsm {
-    constexpr auto utf8_is_the_execution_character_set()
-        -> bool
-    {
-        constexpr auto& slashed_o = "ø";
-        return (sizeof( slashed_o ) == 3 and slashed_o[0] == '\xC3' and slashed_o[1] == '\xB8');
-    }
-}  // namespace fsm
+#include <fsm/core/assertions/support_code/utf8_is_the_execution_character_set.hpp>
 
 static_assert(
     fsm::utf8_is_the_execution_character_set(),
