@@ -51,7 +51,5 @@ namespace fsm_definitions {
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace platform {
-        using namespace fsm_definitions::platform;
-    }
+    inline namespace platform { using namespace fsm_definitions::platform; }
 }  // namespace fsm
