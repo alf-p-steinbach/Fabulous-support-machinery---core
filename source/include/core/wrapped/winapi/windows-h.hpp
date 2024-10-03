@@ -3,7 +3,7 @@
 //
 // In this file custom macros (not Microsoft's macros) have names with "WINAPI" prefix:
 // 
-//      WINAPI_IS_CHAR_BASED,
+//      WINAPI_SHOULD_BE_NARROW,
 //      WINAPI_VERSION, WINAPI_SERVICE_PACK,
 //      WINAPI_IS_NARROW(), WINAPI_IS_WIDE()
 //
@@ -18,8 +18,8 @@
 
 #include <assert.h>
 
-#if defined( WINAPI_IS_CHAR_BASED ) and defined( UNICODE )
-#   error "Inconsistent, both UNICODE (UTF-16) and WINAPI_IS_CHAR_BASED (ANSI/UTF-8) are defined."
+#if defined( WINAPI_SHOULD_BE_NARROW ) and defined( UNICODE )
+#   error "Inconsistent, both UNICODE (UTF-16) and WINAPI_SHOULD_BE_NARROW (ANSI/UTF-8) are defined."
 #   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
@@ -28,14 +28,14 @@
 #   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
-#if not( defined( WINAPI_IS_CHAR_BASED ) or defined( UNICODE ) )
-#   error "Define either WINAPI_IS_CHAR_BASED or UNICODE for respectively ANSI/UTF-8 and UTF-16."
+#if not( defined( WINAPI_SHOULD_BE_NARROW ) or defined( UNICODE ) )
+#   error "Define either WINAPI_SHOULD_BE_NARROW or UNICODE for respectively ANSI/UTF-8 and UTF-16."
 #   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
 #undef UNICODE
 #undef _UNICODE
-#ifdef WINAPI_IS_CHAR_BASED
+#ifdef WINAPI_SHOULD_BE_NARROW
 #   undef _MBCS
 #   define _MBCS        // Mainly for 3rd party code that uses it for platform detection.
 #else
