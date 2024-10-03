@@ -3,7 +3,9 @@
 //
 // In this file custom macros (not Microsoft's macros) have names with "WINAPI" prefix:
 // 
-//   WINAPI_IS_CHAR_BASED, WINAPI_VERSION, WINAPI_SERVICE_PACK
+//      WINAPI_IS_CHAR_BASED,
+//      WINAPI_VERSION, WINAPI_SERVICE_PACK,
+//      WINAPI_IS_NARROW(), WINAPI_IS_WIDE()
 //
 // Ideal usage:
 // define `WINAPI_VERSION` in the build settings, or anyway before including this file.
@@ -104,6 +106,6 @@
 #include <windows.h>                                                //
 /////////////////////////////////////////////////////////////////////
 
-// Use like `static_assert( IS_NARROW_WINAPI() )`.
-#define IS_NARROW_WINAPI()      (sizeof(*GetCommandLine()) == 1)
-#define IS_WIDE_WINAPI()        (sizeof(*GetCommandLine()) > 1)
+// Use like `static_assert( WINAPI_IS_NARROW() )`.
+#define WINAPI_IS_NARROW()      (sizeof(*GetCommandLine()) == 1)
+#define WINAPI_IS_WIDE()        (sizeof(*GetCommandLine()) > 1)
