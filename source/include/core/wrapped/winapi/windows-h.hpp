@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 //
-// In this file custom macros (not Microsoft's macros) have names with "WINAPI" in them:
+// In this file custom macros (not Microsoft's macros) have names with "WINAPI" prefix:
 // 
 //   WINAPI_IS_CHAR_BASED, WINAPI_VERSION, WINAPI_SERVICE_PACK
 //
