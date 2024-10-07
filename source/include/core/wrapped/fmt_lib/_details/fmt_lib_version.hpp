@@ -24,11 +24,11 @@ namespace fsm_definitions {
                 major( _major ), minor( _minor ), patch( _patch )
             {}
 
-            static constexpr auto from_number( const long version_number ) noexcept
+            static constexpr auto from_number( const int version_number ) noexcept
                 -> Fmt_lib_version
             { return {version_number / 10000, (version_number/100) % 100, version_number % 100}; }
 
-            constexpr auto number() const noexcept -> long { return (major*100 + minor)*100 + patch; }
+            constexpr auto number() const noexcept -> int { return (major*100 + minor)*100 + patch; }
 
             auto to_string() const -> string { return format( "{}.{}", major, minor ); }
             auto to_string_all() const -> string { return format( "{}.{}.{}", major, minor, patch ); }
