@@ -47,11 +47,7 @@ namespace fsm_definitions {
                 }
             };
         #else
-            struct Console_fix: No_copy_or_move
-            {
-                ~Console_fix()  {}
-                Console_fix()   {}
-            };
+            struct Console_fix: No_copy_or_move {};
         #endif
     }  // namespace stream_io
 }  // namespace fsm_definitions
