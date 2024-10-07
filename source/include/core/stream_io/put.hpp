@@ -108,7 +108,5 @@ namespace fsm_definitions {
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace stream_io {
-        using namespace fsm_definitions::stream_io;
-    }
+    inline namespace stream_io { using namespace fsm_definitions::stream_io; }
 }  // namespace fsm

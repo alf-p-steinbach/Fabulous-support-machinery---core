@@ -9,7 +9,7 @@
 namespace fsm_definitions {
     using   fsm::in_, fsm::With_relops_from_compare_;
     using   std::string;
-    
+
     namespace fmt_lib {
 
         struct Fmt_lib_version: With_relops_from_compare_<Fmt_lib_version>
