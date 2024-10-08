@@ -42,8 +42,8 @@ namespace fsm_definitions {
             };
         }  // namespace windows_impl
     #endif
-    namespace stream_io {
 
+    namespace stream_io {
         #ifdef FSM_OS_IS_WINDOWS
             struct Console_fix: windows_impl::Console_fix {};
         #else

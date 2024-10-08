@@ -7,15 +7,31 @@ namespace fsm_definitions {
 
     namespace input {
 
-        auto input_line( const int n_max_chars = 256 )
-            -> string
+        class Line_reader
         {
-            const int chunk_size = 64;
-            string result;
-            for( ;; ) {
+        public:
+            auto next( const int n_max_chars = 256 )
+                -> string
+            {
+                const int chunk_size = 64;
+                string result;
+                for( ;; ) {
 
+                }
             }
+        };
+
+        inline lines()
+            -> Line_reader&
+        {
+            static Line_reader the_line_reader = {};
+            return the_line_reader;
         }
+
+        inline auto input_line( const int n_max_chars = 256 )
+            -> string
+        { return lines().next( n_max_chars ); }
+
     }  // namespace input
 }  // namespace fsm_definitions
 
