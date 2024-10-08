@@ -10,7 +10,5 @@ namespace fsm_definitions {
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace parameter_passing {
-        using namespace fsm_definitions::parameter_passing;
-    }
+    inline namespace parameter_passing { using namespace fsm_definitions::parameter_passing; }
 }  // namespace fsm

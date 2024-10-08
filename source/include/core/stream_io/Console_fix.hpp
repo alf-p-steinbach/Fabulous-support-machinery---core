@@ -19,13 +19,7 @@ namespace fsm_definitions {
             extern auto console_mode() -> uint32_t;
             extern void set_console_mode( uint32_t new_mode );
             constexpr uint32_t enable_console_ansi_escapes = 4; // MS `ENABLE_VIRTUAL_TERMINAL_PROCESSING`
-        }  // namespace windows_impl
-        
-        using namespace windows_impl;
-    #endif
 
-    namespace stream_io {
-        #ifdef FSM_OS_IS_WINDOWS
             class Console_fix: No_copy_or_move
             {
                 int         m_original_cp;
@@ -46,6 +40,12 @@ namespace fsm_definitions {
                     set_console_codepage( codepage_utf8 );
                 }
             };
+        }  // namespace windows_impl
+    #endif
+    namespace stream_io {
+
+        #ifdef FSM_OS_IS_WINDOWS
+            struct Console_fix: windows_impl::Console_fix {};
         #else
             struct Console_fix: No_copy_or_move {};
         #endif
