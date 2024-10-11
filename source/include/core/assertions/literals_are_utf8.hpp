@@ -3,7 +3,7 @@
 // There is unfortunately no known portable way to stop the compilation if this assert fires,
 // and there is apparently no way to detect UTF-8 as execution character set in preprocessing.
 
-#include <fsm/core/assertions/_details/utf8_is_the_execution_character_set.hpp>
+#include <fsm/core/assertions/_impl/utf8_is_the_execution_character_set.hpp>
 
 static_assert(
     fsm::utf8_is_the_execution_character_set(),
