@@ -5,3 +5,7 @@
 #include <fsm/core/constructs/FSM_FUNC_ID/func_id_from_raw_decl.hpp>  // func_id_from_raw_decl
 
 #define FSM_FUNC_ID   fsm_definitions::func_id_from_raw_decl( FSM_RAW_FUNC_DECL )
+
+#ifndef FSM_NO_DOLLAR_MACROS_PLEASE
+#   define  $func_id    FSM_FUNC_ID
+#endif

@@ -9,3 +9,8 @@
 #include <fsm/core/std_core_language/enable-std-literals.hpp>           // Syntax.
 #include <fsm/core/std_core_language/enable-alternate-keywords.hpp>     // Syntax.
 #include <fsm/core/std_core_language/core-language-headers.hpp>         // Semantics.
+
+//------------------------------------------------------------------------- Disabling:
+#ifdef __clang__
+#   pragma clang diagnostic ignored "-Wunqualified-std-cast-call"
+#endif
