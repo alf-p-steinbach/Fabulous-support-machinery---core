@@ -10,7 +10,6 @@
 #include <string_view>
 #include <utility>
 
-#include <stdio.h> // DEBUG
 namespace fsm_definitions {
     using   fsm::C_str,                 // <C_str.hpp>
             fsm::const_,                // <type_builders.hpp>
