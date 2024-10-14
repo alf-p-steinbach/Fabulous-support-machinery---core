@@ -8,12 +8,12 @@ namespace fsm_definitions {
 
     namespace parameter_passing {
         template< class Container >
-        class Buffer_
+        class Buffer_ref_
         {
-            Container   m_object;
+            Container&  m_object;
             
         public:
-            Buffer_( Container&& o ): m_object( move( o ) ) {}
+            Buffer_ref_( Container&& o ): m_object( o ) { m_object.clear(); }
             auto rvref() -> Container&& { return move( m_object ); }
         };
     }  // namespace parameter_passing
