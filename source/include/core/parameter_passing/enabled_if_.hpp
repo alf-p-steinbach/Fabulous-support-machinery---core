@@ -11,7 +11,9 @@ namespace fsm_definitions {
     namespace parameter_passing {
 
         template< bool condition >
-        constexpr auto enabled_if_( C_str = nullptr ) -> enable_if_t<condition, bool> { return true; }
+        constexpr auto enabled_if_( C_str = nullptr )
+            -> enable_if_t<condition, bool>
+        { return true; }
 
     }  // namespace parameter_passing
 }  // namespace fsm_definitions

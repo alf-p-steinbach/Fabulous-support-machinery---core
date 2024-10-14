@@ -7,8 +7,8 @@
 #include <cstdio>
 
 namespace fsm_definitions {
-    using   fsm::put,
-            fsm::trimmed;
+    using   fsm::put,                   // <put.hpp>
+            fsm::trimmed;               // <trimming.hpp>
     using   std::FILE;
 
     namespace input {

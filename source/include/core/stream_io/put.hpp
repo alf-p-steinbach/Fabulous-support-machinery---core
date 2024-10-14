@@ -9,7 +9,6 @@
 
 #include <cstdio>
 #include <stdio.h>          // fileno
-#include <string>
 #include <string_view>
 #include <utility>
 
@@ -25,9 +24,9 @@
 namespace fsm_definitions {
     using   fsm::No_copy_or_move, fsm::in_,
             fsm::now, fsm::fail,
+            fsm::in_,
             fsm::format_string, fsm::vformat, fsm::make_format_args;
     using   std::fwrite,            // <cstdio>
-            std::string,            // <string>
             std::string_view,       // <string_view>
             std::forward;           // <utility>
 
@@ -49,7 +48,6 @@ namespace fsm_definitions {
     #endif
 
     namespace stream_io {
-
         using Stream_handle = FILE*;
 
         inline auto is_console( const Stream_handle stream )
@@ -65,15 +63,15 @@ namespace fsm_definitions {
                 or fail( "fwrite failed" );             // TODO: use FSM_FAIL
         }
 
-        inline void put( in_<string> s ) { put( stdout, s.c_str() ); }
+        inline void put( in_<string_view> s ) { put( stdout, s ); }
 
-        inline void put_line( const Stream_handle stream, in_<string> s )
+        inline void put_line( const Stream_handle stream, in_<string_view> s )
         {
-            put( stream, s.c_str() );
+            put( stream, s );
             put( stream, "\n" );
         }
 
-        inline void put_line( in_<string> s ) { put_line( stdout, s ); }
+        inline void put_line( in_<string_view> s ) { put_line( stdout, s ); }
 
 
         //--------------------------------------------------------------- With formatting:
@@ -103,7 +101,6 @@ namespace fsm_definitions {
             put( stdout, format( fmt, forward<Args>( args )... ) );
             put( stdout, "\n" );
         }
-
     }  // namespace stream_io
 }  // namespace fsm_definitions
 
