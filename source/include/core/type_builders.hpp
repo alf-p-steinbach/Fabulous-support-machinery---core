@@ -18,7 +18,5 @@ namespace fsm_definitions {
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace type_builders {
-        using namespace fsm_definitions::type_builders;
-    }  // inline namespace type_builders
+    inline namespace type_builders { using namespace fsm_definitions::type_builders; }
 }  // namespace fsm
