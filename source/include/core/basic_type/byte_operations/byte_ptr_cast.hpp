@@ -1,8 +1,8 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/std_core_language.hpp>
 
-#include <fsm/core/basic_types/Byte/is_byte_.hpp>       // is_byte_
-#include <fsm/core/type_builders.hpp>                   // const_
+#include <fsm/core/basic_type/byte_operations/is_byte_.hpp>     // is_byte_
+#include <fsm/core/type_builders.hpp>                           // const_
 
 namespace fsm_definitions {
     using   fsm::is_byte_,

@@ -1,6 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/std_core_language.hpp>
 
+#include <fsm/core/basic_type.hpp>
 #include <fsm/core/class_kinds.hpp>
 #include <fsm/core/exception_handling.hpp>
 #include <fsm/core/FSM_.hpp>
