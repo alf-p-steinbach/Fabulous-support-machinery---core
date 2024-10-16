@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/std_core_language.hpp>
+#include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/wrapped/c_lib/stddef.hpp>        // ptrdiff_t, size_t
 

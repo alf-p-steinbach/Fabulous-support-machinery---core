@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/std_core_language.hpp>
+#include <fsm/core/platform/std_core_language.hpp>
 
 // `Literal_null` can be used as a parameter type for specializing the case of
 // literal 0 as argument. Only literal `0` is accepted as constructor argument.

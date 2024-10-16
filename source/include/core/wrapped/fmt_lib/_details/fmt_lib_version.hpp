@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/std_core_language.hpp>
+#include <fsm/core/platform/std_core_language.hpp>
 
 #include <fmt/core.h>       // FMT_VERSION
 #include <fsm/core/mixins/With_relops_from_compare_.hpp>

@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/std_core_language.hpp>
+#include <fsm/core/platform/std_core_language.hpp>
 
 // Define FSM_USE_ORIGINAL_FMTLIB_PLEASE    to use the original fmt library instead of the standard library.
 // Define FSM_NO_FMT_HEADER_ONLY_PLEASE     to avoid getting the header only version of the fmt lib.
