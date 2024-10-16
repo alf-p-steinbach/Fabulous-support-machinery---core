@@ -54,7 +54,7 @@ namespace fsm_definitions {
             -> bool
         { return isatty( fileno( stream ) ); }
 
-        inline void put( const Stream_handle stream, in_<string_view> s )
+        inline void put_to( const Stream_handle stream, in_<string_view> s )
         {
             static const Console_encoding_fix   a_fix;  // In Windows sets active codepage 65001 (UTF-8).
 
@@ -63,43 +63,43 @@ namespace fsm_definitions {
                 or fail( "fwrite failed" );             // TODO: use $fail
         }
 
-        inline void put( in_<string_view> s ) { put( stdout, s ); }
+        inline void put( in_<string_view> s ) { put_to( stdout, s ); }
 
-        inline void put_line( const Stream_handle stream, in_<string_view> s )
+        inline void put_line_to( const Stream_handle stream, in_<string_view> s )
         {
-            put( stream, s );
-            put( stream, "\n" );
+            put_to( stream, s );
+            put_to( stream, "\n" );
         }
 
-        inline void put_line( in_<string_view> s ) { put_line( stdout, s ); }
+        inline void put_line( in_<string_view> s ) { put_line_to( stdout, s ); }
 
 
         //--------------------------------------------------------------- With formatting:
         
         template< class... Args >
-        inline void put( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
+        inline void put_to( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
         {
-            put( stream, format( fmt, forward<Args>( args )... ) );
+            put_to( stream, format( fmt, forward<Args>( args )... ) );
         }
         
         template< class... Args >
         inline void put( format_string<Args...> fmt, Args&&... args )
         {
-            put( stdout, format( fmt, forward<Args>( args )... ) );
+            put_to( stdout, format( fmt, forward<Args>( args )... ) );
         }
  
         template< class... Args >
-        inline void put_line( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
+        inline void put_line_to( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
         {
-            put( stream, format( fmt, forward<Args>( args )... ) );
-            put( stream, "\n" );
+            put_to( stream, format( fmt, forward<Args>( args )... ) );
+            put_to( stream, "\n" );
         }
 
         template< class... Args >
         inline void put_line( format_string<Args...> fmt, Args&&... args )
         {
-            put( stdout, format( fmt, forward<Args>( args )... ) );
-            put( stdout, "\n" );
+            put_to( stdout, format( fmt, forward<Args>( args )... ) );
+            put_to( stdout, "\n" );
         }
     }  // namespace stream_io
 }  // namespace fsm_definitions

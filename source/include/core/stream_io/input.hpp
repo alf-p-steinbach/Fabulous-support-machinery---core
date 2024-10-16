@@ -1,14 +1,16 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
+#include <fsm/core/exception_handling/FSM_FAIL.hpp>         // now, $fail
 #include <fsm/core/stream_io/put.hpp>
 #include <fsm/core/text/trimming.hpp>
 
 #include <cstdio>
 
 namespace fsm_definitions {
-    using   fsm::put,                   // <put.hpp>
-            fsm::trimmed;               // <trimming.hpp>
+    using   fsm::now,                   // exception_handling/FSM_FAIL.hpp
+            fsm::put,                   // stream_io/put.hpp
+            fsm::trimmed;               // text/trimming.hpp
     using   std::FILE;
 
     namespace input {
@@ -40,6 +42,8 @@ namespace fsm_definitions {
                     }
                     result += char( ch_code );
                 }
+                const bool immediate_eof = (result == "" and feof( m_stream ));
+                now( not immediate_eof ) or $fail( "Stream input encountered logical EOF immediately." );
                 return result;
             }
         };

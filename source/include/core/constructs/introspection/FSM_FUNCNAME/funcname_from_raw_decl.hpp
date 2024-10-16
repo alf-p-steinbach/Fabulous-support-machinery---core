@@ -18,6 +18,7 @@ namespace fsm_definitions {
     // • No left parenthesis in return type specification.
     //
     // TODO: get rid of that last assumption.
+    // TODO: add template args to name (different data with g++, clang and MSVC).
 
     constexpr auto funcname_from_raw_decl( in_<string_view> raw_func_decl )
         -> string_view
