@@ -10,7 +10,7 @@
 
 namespace fsm_definitions {
     using   fsm::bits_per_,                 // basic_types/bits_per_.hpp
-            fsm::now,                       // exception_handling/FSM_FAIL.hpp
+            fsm::now,                       // exception_handling/$fail.hpp
             fsm::enabled_if_;               // parameter_passing/enabled_if_.hpp
     using   std::string_view,               // <string_view>
             std::is_unsigned_v;             // <type_traits>
@@ -32,7 +32,7 @@ namespace fsm_definitions {
                     switch( ch ) {
                         case '0':  case '1': case Spec::any: {
                             now( n_bitspecs < bits_per_<Uint> )
-                                or FSM_FAIL( "Too many bits in the specification." );
+                                or $fail( "Too many bits in the specification." );
                             m_mask <<= 1u;  m_value <<= 1u;
                             if( ch != Spec::any ) {
                                 m_mask |= 1u;
@@ -42,7 +42,7 @@ namespace fsm_definitions {
                         }
                         case Spec::separator: {}
                         default: {
-                            FSM_FAIL( "Invalid character in bitpattern spec" );
+                            $fail( "Invalid character in bitpattern spec" );
                         }
                     }
                 }

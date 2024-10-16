@@ -3,15 +3,13 @@
 //
 // Example:
 //
-//      FSM_NSNAME_FROM( std, chrono );
-//
-// Or with $-macros:
-//
 //      $nsname_from( std, chrono );
+//
+// Or with uppercase macros:
+//
+//      FSM_NSNAME_FROM( std, chrono );
 
 #define FSM_NSNAME_FROM( containing_ns, name ) \
     namespace name = containing_ns::name
 
-#ifndef FSM_NO_DOLLAR_MACROS_PLEASE
-#   define  $nsname_from    FSM_NSNAME_FROM
-#endif
+#define $nsname_from    FSM_NSNAME_FROM
