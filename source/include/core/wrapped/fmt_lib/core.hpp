@@ -8,7 +8,7 @@
 #include <string>
 
 // Unless contra-indicated by FSM_NO_FMT_HEADER_ONLY_PLEASE default to FMT_HEADER_ONLY for C++ versions <20.
-#include <fsm/core/platform/cpp_version_macros.hpp>
+#include <fsm/core/platform/inspection/cpp_version_macros.hpp>
 #ifndef FSM_NO_FMT_HEADER_ONLY_PLEASE
 #   if FSM_CPP_VERSION < FSM_CPP20
 #       undef   FMT_HEADER_ONLY

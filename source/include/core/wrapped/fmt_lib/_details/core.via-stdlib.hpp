@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/std_core_language.hpp>
 
-#include <fsm/core/platform/cpp_version_macros.hpp>
+#include <fsm/core/platform/inspection/cpp_version_macros.hpp>
 #include <fsm/core/type_builders.hpp>           // const_, in_
 
 #include <format>           // Requires C++20 or later.  Defines `__cpp_lib_format`.

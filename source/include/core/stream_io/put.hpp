@@ -3,7 +3,7 @@
 
 #include <fsm/core/class_kinds/No_copy_or_move.hpp>     // No_copy_or_move
 #include <fsm/core/exception_handling/now-and-fail.hpp> // TODO: $fail
-#include <fsm/core/platform/os_id_macros.hpp>           // FSM_OS_...
+#include <fsm/core/platform/inspection/os_id_macros.hpp>           // FSM_OS_...
 #include <fsm/core/parameter_passing/in_.hpp>           // in_
 #include <fsm/core/wrapped/fmt_lib/core.hpp>            // -- {fmt} lib stuff.
 

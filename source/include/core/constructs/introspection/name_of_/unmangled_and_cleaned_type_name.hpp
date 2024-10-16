@@ -1,14 +1,12 @@
-﻿// TODO:
-#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/+std-cpp-language.hpp>
 
-#include <fsm/core/constructs/declarations/type_builders.hpp>     // in_
+#include <fsm/core/parameter_passing/in_.hpp>       // in_
 
 #include <string>
 #include <string_view>
 
 namespace fsm_definitions {
-    namespace fsm = fabulous_support_machinery;
     using   fsm::in_;
     using   std::string,            // <string>
             std::string_view;       // <string_view>

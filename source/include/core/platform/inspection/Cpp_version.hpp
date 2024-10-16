@@ -2,7 +2,7 @@
 #include <fsm/core/std_core_language.hpp>
 
 #include <fsm/core/mixins/With_relops_from_compare_.hpp>
-#include <fsm/core/platform/cpp_version_macros.hpp>
+#include <fsm/core/platform/inspection/cpp_version_macros.hpp>
 #include <fsm/core/parameter_passing/in_.hpp>
 
 #include <string>

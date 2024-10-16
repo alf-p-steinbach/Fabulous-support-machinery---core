@@ -1,6 +1,6 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
-#include <fsm/core/platform/cpp_version_macros.hpp>     // FSM_CPP_VERSION etc.
+#include <fsm/core/platform/inspection/cpp_version_macros.hpp>     // FSM_CPP_VERSION etc.
 
 #include <fsm/core/wrapped/c_lib/assert.hpp>    // assert
 #include <fsm/core/wrapped/c_lib/stddef.hpp>    // size_t and ptrdiff_t.
