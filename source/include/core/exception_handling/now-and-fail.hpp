@@ -6,12 +6,14 @@
 #include <exception>
 #include <stdexcept>
 #include <string>
+#include <utility>
 
 namespace fsm_definitions {
     using   fsm::in_;
     using   std::current_exception, std::throw_with_nested,     // <exception>
             std::runtime_error,                                 // <stdexcept>
-            std::string;                                        // <string>
+            std::string,                                        // <string>
+            std::forward;                                       // <utility>
 
     namespace exception_handling
     {
@@ -19,14 +21,14 @@ namespace fsm_definitions {
         
         template< class X, class... Args >
         [[noreturn]]
-        inline auto fail_( in_<string> message, in_<Args>... args )
+        inline auto fail_( in_<string> message, Args&&... args )
             -> bool
         {
             const bool has_current_exception = !!current_exception();
             if( has_current_exception ) {
-                throw_with_nested( X( message, args... ) );
+                throw_with_nested( X( message, forward<Args>( args )... ) );
             } else {
-                throw X( message, args... );
+                throw X( message, forward<Args>( args )... );
             }
             for( ;; ) {}        // Should never get here.
         }
