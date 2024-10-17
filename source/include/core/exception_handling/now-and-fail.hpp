@@ -3,13 +3,15 @@
 
 #include <fsm/core/parameter_passing/in_.hpp>   // in_
 
+#include <exception>
 #include <stdexcept>
 #include <string>
 
 namespace fsm_definitions {
     using   fsm::in_;
-    using   std::runtime_error,             // <stdexcept>
-            std::string;                    // <string>
+    using   std::current_exception, std::throw_with_nested,     // <exception>
+            std::runtime_error,                                 // <stdexcept>
+            std::string;                                        // <string>
 
     namespace exception_handling
     {
@@ -20,7 +22,12 @@ namespace fsm_definitions {
         inline auto fail_( in_<string> message, in_<Args>... args )
             -> bool
         {
-            throw X( message, args... );
+            const bool has_current_exception = !!current_exception();
+            if( has_current_exception ) {
+                throw_with_nested( X( message, args... ) );
+            } else {
+                throw X( message, args... );
+            }
             for( ;; ) {}        // Should never get here.
         }
 

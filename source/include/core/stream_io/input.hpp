@@ -36,7 +36,6 @@ namespace fsm_definitions {
                 string result;
                 for( ;; ) {
                     const int ch_code = fgetc( m_stream );
-                    // TODO: fail on EOF
                     if( ch_code == EOF or ch_code == '\n' ) {
                         break;
                     }

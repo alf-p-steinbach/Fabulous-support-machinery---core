@@ -1,4 +1,5 @@
 // A general template for simple applications.
+// An exception (e.g. reading beyond EOF) is handled with a stderr message and failure exit code.
 //
 #include <fsm/core.hpp>
 #include <string>
@@ -14,5 +15,4 @@ namespace app {
     }
 }  // namespace app
 
-// An input stream exception, e.g. EOF, is handled with a stderr message and failure exit code.
 auto main() -> int { return fsm::with_exceptions_displayed( app::run ); }
