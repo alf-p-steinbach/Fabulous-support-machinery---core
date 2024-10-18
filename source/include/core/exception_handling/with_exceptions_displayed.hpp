@@ -1,8 +1,9 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/parameter_passing/in_.hpp>   // in_
-#include <fsm/core/stream_io/put.hpp>           // put
+#include <fsm/core/exception_handling/for_each_exception_in.hpp>    // for_each_exception_in
+#include <fsm/core/parameter_passing/in_.hpp>                       // in_
+#include <fsm/core/stream_io/put.hpp>                               // put
 
 #include <functional>
 #include <stdexcept>
@@ -23,11 +24,13 @@ namespace fsm_definitions {
             try{
                 f();
                 return EXIT_SUCCESS;
-            } catch( in_<exception> x ) {
-                put( "\n" );
-                put_to( stderr, "!{}\n", x.what() );
+            } catch( in_<exception> x0 ) {
+                put( "\n" );    // TODO: restrict to stdout = console
+                for_each_exception_in( x0, [&]( in_<exception> x ) {
+                    put_to( stderr, "{}{}\n", (&x == &x0? "!" : "    because: "), x.what() );
+                } );
             } catch( ... ) {
-                put( "\n" );
+                put( "\n" );    // TODO: restrict to stdout = console
                 put_to( stderr, "!<unknown exception>\n" );
             }
             return EXIT_FAILURE;

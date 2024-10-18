@@ -23,6 +23,7 @@ namespace fsm_definitions {
         public:
             Unknown_exception( in_<exception_ptr> p ): m_ptr( p ) {}
             auto ptr() const -> exception_ptr { return m_ptr; }
+            auto what() const noexcept -> const char* override { return "<unknown exception>"; }
         };
 
         inline void rethrow_if_nested_pointee( in_<exception_ptr> p )
@@ -36,31 +37,65 @@ namespace fsm_definitions {
             }
         }
 
+        #if defined( __GNUC__ ) and not defined( __llvm__ ) and not defined( __INTEL_COMPILER )
+
+            // Recursive, to avoid crash due to bug in the g++ runtime library.
+            inline auto for_each_nested_exception_in(
+                in_<exception>                      x,
+                function<void( in_<exception> )>    f
+                ) -> bool
+            {
+                for( ;; ) {
+                    try {
+                        rethrow_if_nested( x );     // Rethrows a nested exception, if any.
+                        return true;
+                    } catch( in_<exception> nested_x ) {
+                        f( nested_x );
+                        return for_each_nested_exception_in( nested_x, f );
+                    } catch( ... ) {
+                        f( Unknown_exception{ current_exception() } );
+                        return false;
+                    }
+                }
+            }
+
+        #else
+
+            inline auto for_each_nested_exception_in(
+                in_<exception>                      final_x,
+                function<void( in_<exception> )>    f
+                ) -> bool
+            {
+                exception_ptr p_current = nullptr;
+                for( ;; ) {
+                    try {
+                        if( not p_current ) {
+                            rethrow_if_nested( final_x );       // Rethrows a nested exception, if any.
+                        } else {
+                            rethrow_if_nested_pointee( p_current );
+                        }
+                        return true;
+                    } catch( in_<exception> x ) {
+                        f( x );
+                        p_current = current_exception();
+                    } catch( ... ) {
+                        f( Unknown_exception{ current_exception() } );
+                        return false;
+                    }
+                }
+            }
+
+        #endif
+
         inline auto for_each_exception_in(
             in_<exception>                      final_x,
             function<void( in_<exception> )>    f
             ) -> bool
         {
-            exception_ptr p_current = nullptr;
             f( final_x );
-            for( ;; ) {
-                try {
-                    if( not p_current ) {
-                        rethrow_if_nested( final_x );
-                    } else {
-                        rethrow_if_nested_pointee( p_current );
-                    }
-                    return true;
-                } catch( in_<exception> x ) {
-                    f( x );
-                    p_current = current_exception();
-                } catch( ... ) {
-                    f( Unknown_exception{ current_exception() } );
-                    return false;
-                }
-            }
+            return for_each_nested_exception_in( final_x, f );
         }
-    }
+    }  // namespace exception_handling
 }  // namespace fsm_definitions
 
 namespace fsm {
