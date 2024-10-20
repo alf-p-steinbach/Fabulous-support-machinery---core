@@ -1,17 +1,19 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/parameter_passing/in_.hpp>           // in_
+#include <fsm/core/exception_handling/rethrow_nested_if_any_in.hpp>     // rethrow_nested_if_any_in
+#include <fsm/core/parameter_passing/in_.hpp>                           // in_
 
 #include <exception>
 #include <functional>
 #include <stdexcept>
 
 namespace fsm_definitions {
-    using   fsm::in_;                   // parameter_passing/in_
+    using   fsm::rethrow_nested_if_any_in,      // excpetion_handling/rethrow_nested_if_any_in.hpp
+             fsm::in_;                          // parameter_passing/in_
     using   std::exception_ptr, std::make_exception_ptr, std::rethrow_exception,    // <exception>
-            std::function,                          // <functional>
-            std::exception;                         // <stdexcept>
+            std::function,                      // <functional>
+            std::exception;                     // <stdexcept>
 
     namespace exception_handling
     {
@@ -26,40 +28,34 @@ namespace fsm_definitions {
             auto what() const noexcept -> const char* override { return "<unknown exception>"; }
         };
 
-        inline void rethrow_if_nested_pointee( in_<exception_ptr> p )
+        inline auto for_each_nested_exception_in(
+            in_<exception>                      x,
+            function<void( in_<exception> )>    f
+            ) -> bool
         {
             try {
-                rethrow_exception( p );
-            } catch( in_<exception> x ) {
-                rethrow_if_nested( x );
+                rethrow_nested_if_any_in( x );
+                return true;
+            } catch( in_<exception> nested_x ) {
+                f( nested_x );
+                return for_each_nested_exception_in( nested_x, f );
             } catch( ... ) {
-                ;
+                f( Unknown_exception{ current_exception() } );
+                return false;
             }
         }
 
-        #if defined( __GNUC__ ) and not defined( __llvm__ ) and not defined( __INTEL_COMPILER )
-
-            // Recursive, to avoid crash due to bug in the g++ runtime library.
-            inline auto for_each_nested_exception_in(
-                in_<exception>                      x,
-                function<void( in_<exception> )>    f
-                ) -> bool
+        #if 0       // Iterative version.
+            inline void rethrow_if_nested_pointee( in_<exception_ptr> p )
             {
-                for( ;; ) {
-                    try {
-                        rethrow_if_nested( x );     // Rethrows a nested exception, if any.
-                        return true;
-                    } catch( in_<exception> nested_x ) {
-                        f( nested_x );
-                        return for_each_nested_exception_in( nested_x, f );
-                    } catch( ... ) {
-                        f( Unknown_exception{ current_exception() } );
-                        return false;
-                    }
+                try {
+                    rethrow_exception( p );
+                } catch( in_<exception> x ) {
+                    rethrow_nested_if_any_in( x );
+                } catch( ... ) {
+                    ;
                 }
             }
-
-        #else
 
             inline auto for_each_nested_exception_in(
                 in_<exception>                      final_x,
@@ -70,7 +66,7 @@ namespace fsm_definitions {
                 for( ;; ) {
                     try {
                         if( not p_current ) {
-                            rethrow_if_nested( final_x );       // Rethrows a nested exception, if any.
+                            rethrow_nested_if_any_in( final_x );    // Rethrows a nested exception, if any.
                         } else {
                             rethrow_if_nested_pointee( p_current );
                         }
@@ -84,7 +80,6 @@ namespace fsm_definitions {
                     }
                 }
             }
-
         #endif
 
         inline auto for_each_exception_in(
