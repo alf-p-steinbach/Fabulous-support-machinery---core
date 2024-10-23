@@ -5,7 +5,7 @@
 #include <string>
 
 namespace app {
-    using   fsm::put, fsm::trimmed, fsm::input_line;    // Or just `using namespace fsm;`.
+    using   fsm::input_line, fsm::put, fsm::trimmed;    // Or just `using namespace fsm;`.
     using   std::string;
 
     void run()
