@@ -2,4 +2,5 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/constructs/introspection/FSM_FUNCNAME.hpp>
-// TODO:
+#include <fsm/core/constructs/introspection/name_of_.hpp>
+#include <fsm/core/constructs/introspection/name_of.hpp>

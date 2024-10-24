@@ -7,6 +7,7 @@
 
 #include <functional>
 #include <stdexcept>
+#include <typeinfo>     // TODO: remove
 
 #include <fsm/core/wrapped/c_lib/stdlib.hpp>
 
@@ -27,7 +28,7 @@ namespace fsm_definitions {
             } catch( in_<exception> x0 ) {
                 put( "\n" );    // TODO: restrict to stdout = console
                 for_each_exception_in( x0, [&]( in_<exception> x ) {
-                    put_to( stderr, "{}{}\n", (&x == &x0? "!" : "    because: "), x.what() );
+                    put_to( stderr, "{}{} [ {} ]\n", (&x == &x0? "!" : "    because: "), x.what(), typeid( x ).name() );
                 } );
             } catch( ... ) {
                 put( "\n" );    // TODO: restrict to stdout = console

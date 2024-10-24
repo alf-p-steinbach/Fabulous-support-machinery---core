@@ -1,5 +1,5 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
-#include <fsm/core/+std-cpp-language.hpp>
+#include <fsm/core/platform/std_core_language.hpp>
 
 // Using `raw_name_of_exactly_<T>()` instead of `typeid(T).name()` avoids decay of T.
 //
@@ -14,32 +14,27 @@
 // referenced type, i.e. it ditches both reference and cv-qualification. Wrapping the
 // type as a template parameter avoids these decays.
 
-#include <fsm/core/constructs/introspection/name_of.hpp>            // name_of
-
 #include <string_view>
-#include <typeinfo>
 
 namespace fsm_definitions {
-    namespace fsm = fabulous_support_machinery;
-    using   fsm::name_of;
     using   std::string_view;
     
     template< class Type > struct Wrapped_ {};
 
-    template< class Type >
-    auto raw_name_of_exactly_()
-        -> string_view
-    {
-        const string_view   xname       = typeid( Wrapped_<Type> ).name();
-        const size_t        i_first     = xname.find_first_of( '<' ) + 1;
-        const size_t        i_beyond    = xname.find_last_of( '>' );
-        return xname.substr( i_first, i_beyond - i_first );
-    }
+    namespace introspection {
+        template< class Type >
+        auto raw_name_of_exactly_()
+            -> string_view
+        {
+            const string_view   xname       = typeid( Wrapped_<Type> ).name();
+            const size_t        i_first     = xname.find_first_of( '<' ) + 1;
+            const size_t        i_beyond    = xname.find_last_of( '>' );
 
-    namespace d = fsm_definitions;
-    namespace exports{ using
-        d::raw_name_of_exactly_;
-    }  // namespace exports
-}  // namespace fabulous_support_machinery::_definitions
+            return xname.substr( i_first, i_beyond - i_first );
+        }
+    }  // namespace introspection
+}  // namespace fsm_definitions
 
-namespace fabulous_support_machinery    { using namespace fsm_definitions::exports; }
+namespace fsm {
+    inline namespace introspection { using namespace fsm_definitions::introspection; }
+}  // namespace fsm
