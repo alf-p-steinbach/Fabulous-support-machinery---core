@@ -17,7 +17,7 @@ namespace fsm_definitions {
 
     namespace introspection {
 
-        inline auto exception_type_name_for( in_<exception> x )
+        inline auto exception_type_name_for( in_<exception> x, const bool add_nesting_indicator = true )
             -> string
         {
             const string raw_name = name_of( typeid( x ) );
@@ -28,7 +28,8 @@ namespace fsm_definitions {
                 const auto      npos        = size_t( -1 );
 
                 if( i_first != npos and i_beyond != npos ) {
-                    return raw_name.substr( i_first, i_beyond - i_first );
+                    const auto nesting_indicator = (add_nesting_indicator? "+" : "");
+                    return raw_name.substr( i_first, i_beyond - i_first ) + nesting_indicator;
                 }
             }
             return raw_name;
