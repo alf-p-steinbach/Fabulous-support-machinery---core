@@ -13,19 +13,19 @@ namespace fsm_definitions {
             fsm::now,                       // exception_handling/$fail.hpp
             fsm::enabled_if_;               // parameter_passing/enabled_if_.hpp
     using   std::string_view,               // <string_view>
-            std::is_unsigned_v;             // <type_traits>
+            std::is_unsigned;               // <type_traits>
 
     namespace basic_types {
-        template< class Uint, bool = enabled_if_< is_unsigned_v< Uint > > >
+        template< class Uint, bool = enabled_if_< is_unsigned< Uint > > >
         class Bitpattern_
         {
             Uint        m_mask      = 0;
             Uint        m_value     = 0;
 
         public:
-            struct Spec{ enum Enum: char { zero = '0', one = '1', any = '*', separator = '\'' }; };
+            struct Spec{ enum Enum: char { zero = '0', one = '1', any = 'x', separator = '\'' }; };
 
-            Bitpattern_( in_<string_view> spec )
+            constexpr Bitpattern_( in_<string_view> spec )
             {
                 int n_bitspecs = 0;
                 for( const char ch: spec ) {
@@ -42,11 +42,18 @@ namespace fsm_definitions {
                         }
                         case Spec::separator: {}
                         default: {
-                            $fail( "Invalid character in bitpattern spec" );
+                            $fail( "Invalid character in bitpattern spec." );
                         }
                     }
                 }
             }
+
+            template< class Arg >
+            auto matches( Arg ) const noexcept -> bool = delete;
+            
+            auto matches( const Uint bits ) const noexcept
+                -> bool
+            { return ((bits & m_mask) == m_value); }
         };
     }  // namespace basic_types
 }  // namespace fsm_definitions

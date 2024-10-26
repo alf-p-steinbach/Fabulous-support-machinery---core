@@ -18,7 +18,7 @@
 
 namespace fsm_definitions {
     using   std::string_view;
-    
+
     template< class Type > struct Wrapped_ {};
 
     namespace introspection {
