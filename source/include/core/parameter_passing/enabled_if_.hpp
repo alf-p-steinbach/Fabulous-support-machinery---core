@@ -10,9 +10,9 @@ namespace fsm_definitions {
 
     namespace parameter_passing {
         template< bool condition >
-        constexpr auto enabled_if_( C_str = nullptr )
+        constexpr auto enabled_if_( C_str message = nullptr )
             -> enable_if_t<condition, bool>
-        { return true; }
+        { (void) message; return true; }
     }  // namespace parameter_passing
 }  // namespace fsm_definitions
 

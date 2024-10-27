@@ -12,7 +12,7 @@ namespace fsm_definitions {
     using   std::size_t,                // <cstddef>
             std::distance, std::size;   // <iterator>
 
-    namespace collection_support {
+    namespace collection_support { inline namespace size_functions {
         template< class Container >
         constexpr auto is_empty( in_<Container> c ) noexcept
             -> bool
@@ -51,7 +51,7 @@ namespace fsm_definitions {
         constexpr auto int_distance_from_to( const It a, const It b ) noexcept
             -> int
         { return static_cast<int>( distance( a, b ) ); }
-    }  // namespace collection_support
+    } }  // namespace collection_support, inline namespace size_functions
 }  // namespace fsm_definitions
 
 namespace fsm {
