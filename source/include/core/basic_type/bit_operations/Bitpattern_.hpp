@@ -48,7 +48,7 @@ namespace fsm_definitions {
                         case Spec::separator: { break; }
                         default: {
                             $fail( "Invalid character in bitpattern spec." );
-                            break;
+                            for( ;; ) {}    // Should never get here.
                         }
                     }
                 }
