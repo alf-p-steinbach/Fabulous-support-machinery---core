@@ -1,15 +1,40 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
+#include <fsm/core/basic_type/bit_operations/Bitpattern_.hpp>           // Bitpattern_
 #include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
 #include <fsm/core/collection_support/size_functions.hpp>               // int_size_of
 #include <fsm/core/constructs/FSM_NSNAME_FROM.hpp>                      // FSM_NSNAME_FROM
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // hopefully, FSM_FAIL
 
 namespace fsm_definitions {
+    using   fsm::Bitpattern_,           // basic_type/bit_operations/Bitpattern_.hpp
+            fsm::Byte;                  // basic_type/bit_operations/Byte.hpp
 
     namespace text::u8 {
-        
+        constexpr auto  ascii_pattern       = Bitpattern_<Byte>( "0xxx'xxxx" );
+        constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
+        constexpr auto  headbyte_pattern    = Bitpattern_<Byte>( "11xx'xxxx" );
+
+        constexpr auto is_ascii_byte( const Byte unit ) noexcept
+            -> bool
+        { return ascii_pattern.matches( unit ); }
+
+        constexpr auto is_tailbyte( const Byte unit ) noexcept
+            -> bool
+        { return tailbyte_pattern.matches( unit ); }
+
+        constexpr auto is_headbyte( const Byte unit ) noexcept
+            -> bool
+        { return headbyte_pattern.matches( unit ); }
+
+        constexpr auto tailbyte_value_of( const Byte unit ) noexcept
+            -> Byte
+        { return tailbyte_pattern.varying_bits_of( unit ); }
+
+        constexpr auto headbyte_value_of( const Byte unit ) noexcept
+            -> Byte
+        { return tailbyte_pattern.varying_bits_of( unit ); }
     }  // namespace text::u8
 }  // namespace fsm_definitions
 
@@ -25,7 +50,7 @@ namespace fsm_definitions::u8 {
             fsm::hopefully;
 
     namespace continuation_bytes {
-        constexpr int   n_value_bits    = 6;
+        constexpr int   n_unitalue_bits    = 6;
         constexpr auto  value_bits_mask = Byte( (1u << n_value_bits) - 1 );
         constexpr auto  head_mask       = Byte( 0b11u << n_value_bits );
         constexpr auto  head_pattern    = Byte( 0b10u << n_value_bits );
@@ -39,6 +64,8 @@ namespace fsm_definitions::u8 {
         constexpr auto value_bits_of( const Byte unit ) noexcept
             -> Byte
         { return unit & value_bits_mask; }
+
+        // constexpr tailbyte_value( const Byte unit)
     }  // namespace continuation_bytes
 
     constexpr auto is_continuation_byte( const Byte unit ) noexcept

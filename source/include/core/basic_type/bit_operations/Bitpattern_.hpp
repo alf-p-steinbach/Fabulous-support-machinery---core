@@ -26,9 +26,23 @@ namespace fsm_definitions {
             Uint        m_mask      = 0;
             Uint        m_value     = 0;
 
+            auto str( const bool do_group_digits ) const
+                -> string
+            {
+                string result;
+                for( int i = bits_per_<Uint> - 1; i >= 0;  --i ) {
+                    const unsigned mask_bit     = (m_mask >> i) & 1;
+                    const unsigned value_bit    = (m_value >> i) & 1;
+                    result += (mask_bit? char( value_bit + '0' ) : char( Spec::any ));
+                    if( do_group_digits and i > 0 and i % 4 == 0 ) {
+                        result += char( Spec::separator );
+                    }
+                }
+                return result;
+            }
+
         public:
             struct Spec{ enum Enum: char { zero = '0', one = '1', any = 'x', separator = '\'' }; };
-
             constexpr Bitpattern_( in_<string_view> spec )
             {
                 int n_bitspecs = 0;
@@ -61,20 +75,12 @@ namespace fsm_definitions {
                 -> bool
             { return ((bits & m_mask) == m_value); }
 
-            auto str( const bool do_group_digits = false ) const
-                -> string
-            {
-                string result;
-                for( int i = bits_per_<Uint> - 1; i >= 0;  --i ) {
-                    const unsigned mask_bit     = (m_mask >> i) & 1;
-                    const unsigned value_bit    = (m_value >> i) & 1;
-                    result += (mask_bit? char( value_bit + '0' ) : char( Spec::any ));
-                    if( do_group_digits and i > 0 and i % 4 == 0 ) {
-                        result += char( Spec::separator );
-                    }
-                }
-                return result;
-            }
+            constexpr auto varying_bits_of( const Uint bits ) const noexcept
+                -> Uint
+            { return bits & ~m_mask; }
+
+            auto str() const                -> string { return str( false ); }
+            auto str_with_groups() const    -> string { return str( true ); }
         };
 
         constexpr auto operator""_bp( const C_str spec, const size_t spec_length )
