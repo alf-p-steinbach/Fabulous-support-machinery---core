@@ -7,6 +7,8 @@
 #include <fsm/core/constructs/FSM_NSNAME_FROM.hpp>                      // FSM_NSNAME_FROM
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // hopefully, FSM_FAIL
 
+#include <cassert>      // assert macro
+
 namespace fsm_definitions {
     using   fsm::Bitpattern_,           // basic_type/bit_operations/Bitpattern_.hpp
             fsm::Byte;                  // basic_type/bit_operations/Byte.hpp
@@ -28,13 +30,30 @@ namespace fsm_definitions {
             -> bool
         { return headbyte_pattern.matches( unit ); }
 
+        // UB if the unit is not a tailbyte.
         constexpr auto tailbyte_value_of( const Byte unit ) noexcept
             -> Byte
         { return tailbyte_pattern.varying_bits_of( unit ); }
 
+        // UB if the unit is not a headbyte.
         constexpr auto headbyte_value_of( const Byte unit ) noexcept
             -> Byte
-        { return tailbyte_pattern.varying_bits_of( unit ); }
+        {
+            Byte mask = 0b0010'0000;
+            while( mask & unit ) { mask >>= 1; }
+            assert( mask != 0 or !"Invalid u8 head byte." );
+            return unit & (mask - 1);
+        }
+
+        constexpr auto seq_length_of( const Byte first_byte )
+            -> int
+        {
+            if( (first_byte & 0b1000'0000) == 0 ) { return 1; }
+            if( (first_byte & 0b0010'0000) == 0 ) { return 2; }
+            if( (first_byte & 0b0001'0000) == 0 ) { return 3; }
+            if( (first_byte & 0b1000'1000) == 0 ) { return 4; }
+            // oops, invalid head byte; }
+        }
     }  // namespace text::u8
 }  // namespace fsm_definitions
 
@@ -145,7 +164,7 @@ namespace fsm_definitions::u8 {
             }
             return Validity::valid;
         }
-        
+
         template< class Unit_iterator >
         constexpr auto checked( const Unit_iterator it )
             -> Unit_iterator
