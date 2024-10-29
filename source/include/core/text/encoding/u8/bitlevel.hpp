@@ -2,7 +2,8 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/basic_type/bit_operations/Bitpattern_.hpp>           // Bitpattern_
-#include <fsm/core/basic_type/names.hpp>                                // Byte, Cardinal
+#include <fsm/core/basic_type/Cardinal_int.hpp>                         // Ꜿint, Ꜿ1
+#include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
 #include <fsm/core/collection_support/size_functions.hpp>               // int_size_of
 #include <fsm/core/constructs/FSM_NSNAME_FROM.hpp>                      // FSM_NSNAME_FROM
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // hopefully, FSM_FAIL
@@ -11,7 +12,8 @@
 
 namespace fsm_definitions {
     using   fsm::Bitpattern_,                               // basic_type/bit_operations/Bitpattern_.hpp
-            fsm::Byte, fsm::Cardinal, fsm::cardinal_1;      // basic_type/names.hpp
+            fsm::Byte,                                      // basic_type/names/Byte.hpp
+            fsm::Ꜿint, fsm::Ꜿ1;                             // basic_type/Cardinal_int.hpp
 
     namespace text::u8 {
         constexpr auto  ascii_pattern       = Bitpattern_<Byte>( "0xxx'xxxx" );
@@ -47,24 +49,23 @@ namespace fsm_definitions {
 
         // The formal limit on number of tailbytes, 3, is not enforced.
         constexpr auto n_tailbytes_after( const Byte first_byte )
-            -> Cardinal
+            -> Ꜿint
         {
-            using C = Cardinal;
-            if( (first_byte & 0b1000'0000) == 0 ) { return C( 0 ); }
-            if( (first_byte & 0b0010'0000) == 0 ) { return C( 1 ); }
-            if( (first_byte & 0b0001'0000) == 0 ) { return C( 2 ); }
-            if( (first_byte & 0b1000'1000) == 0 ) { return C( 3 ); }
+            if( (first_byte & 0b1000'0000) == 0 ) { return Ꜿint( 0 ); }
+            if( (first_byte & 0b0010'0000) == 0 ) { return Ꜿint( 1 ); }
+            if( (first_byte & 0b0001'0000) == 0 ) { return Ꜿint( 2 ); }
+            if( (first_byte & 0b1000'1000) == 0 ) { return Ꜿint( 3 ); }
             // assert( !"oops, invalid head byte (max 3 tail bytes permitted)" );
-            if( (first_byte & 0b1000'0100) == 0 ) { return C( 4 ); }
-            if( (first_byte & 0b1000'0010) == 0 ) { return C( 5 ); }
-            if( (first_byte & 0b1000'0001) == 0 ) { return C( 6 ); }
-            return C( 7 );
+            if( (first_byte & 0b1000'0100) == 0 ) { return Ꜿint( 4 ); }
+            if( (first_byte & 0b1000'0010) == 0 ) { return Ꜿint( 5 ); }
+            if( (first_byte & 0b1000'0001) == 0 ) { return Ꜿint( 6 ); }
+            return Ꜿint( 7 );
         }
 
         // The formal limit on number of tailbytes, 3, is not enforced.
         constexpr auto seq_length_of( const Byte first_byte )
-            -> Cardinal
-        { return n_tailbytes_after( first_byte ) + cardinal_1; }
+            -> Ꜿint
+        { return n_tailbytes_after( first_byte ) + Ꜿ1; }
 
         constexpr auto is_valid_headbyte( const Byte unit )
             -> bool
