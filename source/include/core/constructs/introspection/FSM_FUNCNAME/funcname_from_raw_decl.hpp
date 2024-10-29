@@ -7,7 +7,7 @@
 #include <string_view>
 
 namespace fsm_definitions {
-    using   fsm::Index,                     // <basic_types/Index-and-Size.hpp>
+    using   fsm::Index,                     // <basic_type/Index-and-Size.hpp>
             fsm::in_;                       // <type_builders.hpp>
     using   std::string_view;               // <string_view>
 

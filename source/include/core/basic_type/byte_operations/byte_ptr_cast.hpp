@@ -8,7 +8,7 @@ namespace fsm_definitions {
     using   fsm::is_byte_,
             fsm::const_;
 
-    namespace basic_types {
+    namespace basic_type {
  
         template< class To, class From >
         constexpr auto byte_ptr_cast_( const_<From*> p )
@@ -19,9 +19,9 @@ namespace fsm_definitions {
             return reinterpret_cast<To*>( p );
         }
 
-    }  // namespace basic_types
+    }  // namespace basic_type
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace basic_types{ using namespace fsm_definitions::basic_types; }
+    inline namespace basic_type{ using namespace fsm_definitions::basic_type; }
 }  // namespace fsm

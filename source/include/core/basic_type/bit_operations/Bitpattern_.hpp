@@ -11,15 +11,15 @@
 #include <type_traits>
 
 namespace fsm_definitions {
-    using   fsm::bits_per_,                 // basic_types/bit_operations/bits_per_.hpp
-            fsm::C_str,                     // basic_types/C_Str
+    using   fsm::bits_per_,                 // basic_type/bit_operations/bits_per_.hpp
+            fsm::C_str,                     // basic_type/C_Str
             fsm::now,                       // exception_handling/FSM_FAIL.hpp
             fsm::enabled_if_;               // parameter_passing/enabled_if_.hpp
     using   std::string,                    // <string>
             std::string_view,               // <string_view>
             std::is_unsigned_v;             // <type_traits>
 
-    namespace basic_types { inline namespace bit_operations{
+    namespace basic_type { inline namespace bit_operations{
         template< class Uint, bool = enabled_if_< is_unsigned_v< Uint > >() >
         class Bitpattern_
         {
@@ -87,9 +87,9 @@ namespace fsm_definitions {
             -> Bitpattern_<unsigned>
         { return Bitpattern_<unsigned>( string_view( spec, spec_length ) ); }
 
-    } }  // namespace basic_types, inline namespace bit_operations
+    } }  // namespace basic_type, inline namespace bit_operations
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace basic_types{ using namespace fsm_definitions::basic_types; }
+    inline namespace basic_type{ using namespace fsm_definitions::basic_type; }
 }  // namespace fsm

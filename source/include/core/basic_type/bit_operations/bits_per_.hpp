@@ -6,14 +6,14 @@
 namespace fsm_definitions {
     using   fsm::bits_per_byte;         // <type.hpp>
 
-    namespace basic_types {
+    namespace basic_type {
 
         template< class Type >
         constexpr int bits_per_   = sizeof( Type )*bits_per_byte;
 
-    }  // namespace basic_types
+    }  // namespace basic_type
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace basic_types{ using namespace fsm_definitions::basic_types; }
+    inline namespace basic_type{ using namespace fsm_definitions::basic_type; }
 }  // namespace fsm
