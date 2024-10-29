@@ -3,5 +3,4 @@
 
 #include <fsm/core/basic_type/names/Byte.hpp>
 #include <fsm/core/basic_type/names/C_str.hpp>
-#include <fsm/core/basic_type/names/Cardinal.hpp>
 #include <fsm/core/basic_type/names/Index-and-Size.hpp>
