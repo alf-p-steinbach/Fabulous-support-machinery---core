@@ -12,15 +12,14 @@ namespace fsm_definitions {
 
         using Ꜿint = Cardinal_int;              // Latin capital letter reversed c with dot, U+A73E.
 
-        constexpr auto as_cardinal( const int x ) noexcept
+        constexpr auto as_Ꜿint( const int x ) noexcept
             -> Ꜿint
         {
             assert( x >= 0 );
             return Ꜿint( x );
         }
 
-        constexpr auto cardinal_1   = Ꜿint( 1 );
-        constexpr auto Ꜿ1           = cardinal_1;
+        constexpr auto Ꜿ1           = Ꜿint( 1 );
 
         constexpr auto operator+( const Ꜿint x ) noexcept -> Ꜿint { return x; }
 
@@ -63,8 +62,8 @@ namespace fsm_definitions {
             -> Ꜿint&
         { return (a = a / b); }
 
-        constexpr auto succ( const Ꜿint x ) noexcept -> Ꜿint { return x + cardinal_1; }
-        constexpr auto pred( const Ꜿint x ) noexcept -> Ꜿint { return x - cardinal_1; }
+        constexpr auto succ( const Ꜿint x ) noexcept -> Ꜿint { return x + Ꜿ1; }
+        constexpr auto pred( const Ꜿint x ) noexcept -> Ꜿint { return x - Ꜿ1; }
 
         // When `limit` is guaranteed not negative and `x` just may be negative, instead of
         //
