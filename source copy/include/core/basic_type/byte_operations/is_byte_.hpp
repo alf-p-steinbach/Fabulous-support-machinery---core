@@ -2,13 +2,14 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 namespace fsm_definitions {
-    namespace basic_type {
+    namespace basic_types {
 
-        using C_str = const char*;
+        template< class Type >
+        constexpr bool is_byte_ = (sizeof( Type ) == 1);
 
-    }  // namespace basic_type
+    }  // namespace basic_types
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace basic_type{ using namespace fsm_definitions::basic_type; }
+    inline namespace basic_types{ using namespace fsm_definitions::basic_types; }
 }  // namespace fsm
