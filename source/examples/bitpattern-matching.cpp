@@ -13,6 +13,7 @@ namespace app {
     {
         constexpr auto pattern = Bitpattern_<Byte>( "0101'00x1" );
         put( "Pattern: {}.\n", pattern.str() );
+        put( "\n" );
         for( unsigned u = 0; u <= 0xFF; ++u ) {
             if( pattern.matches( Byte( u ) ) ) {
                 put( "Match:   {:08b}.\n", u );
