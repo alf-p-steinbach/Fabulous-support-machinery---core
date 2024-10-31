@@ -4,21 +4,22 @@
 #include <fsm/core/basic_type/bit_operations/Bitpattern_.hpp>           // Bitpattern_
 #include <fsm/core/basic_type/Cardinal_int.hpp>                         // Ꜿint, Ꜿ1
 #include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
-#include <fsm/core/collection_support/size_functions.hpp>               // int_size_of
-#include <fsm/core/constructs/FSM_NSNAME_FROM.hpp>                      // FSM_NSNAME_FROM
-#include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // hopefully, FSM_FAIL
+#include <fsm/core/type_builders.hpp>                                   // const_
 
 #include <cassert>      // assert macro
 
 namespace fsm_definitions {
     using   fsm::Bitpattern_,                               // basic_type/bit_operations/Bitpattern_.hpp
+            fsm::Ꜿint, fsm::Ꜿ1,                             // basic_type/Cardinal_int.hpp
             fsm::Byte,                                      // basic_type/names/Byte.hpp
-            fsm::Ꜿint, fsm::Ꜿ1;                             // basic_type/Cardinal_int.hpp
+            fsm::const_;                                    // type_builders.hpp
 
     namespace text::u8 {
         constexpr auto  ascii_pattern       = Bitpattern_<Byte>( "0xxx'xxxx" );
-        constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
         constexpr auto  headbyte_pattern    = Bitpattern_<Byte>( "11xx'xxxx" );
+        constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
+
+        constexpr auto  n_tailbyte_value_bits   = tailbyte_pattern.n_varying_bits();
 
         constexpr auto is_ascii_byte( const Byte unit ) noexcept
             -> bool
@@ -70,6 +71,26 @@ namespace fsm_definitions {
         constexpr auto is_valid_headbyte( const Byte unit )
             -> bool
         { return is_headbyte( unit ) and n_tailbytes_after( unit ) <= 3; }
+
+        constexpr auto to_codepoint( const_<const Byte*> p_first )
+            -> char32_t
+        {
+            const Byte  first_byte      = *p_first;
+            const Ꜿint  n_tailbytes     = n_tailbytes_after( first_byte );
+
+            if( n_tailbytes == 0 ) {
+                return first_byte;          // ASCII.
+            }
+
+            const Byte* p = p_first;
+            char32_t result = headbyte_value_of( first_byte );
+            for( Ꜿint i = Ꜿ1; i <= n_tailbytes; ++i ) {
+                ++p;
+                result <<= n_tailbyte_value_bits;
+                result |= tailbyte_value_of( *p );
+            }
+            return result;
+        }
     }  // namespace text::u8
 }  // namespace fsm_definitions
 

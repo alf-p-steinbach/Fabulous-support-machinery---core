@@ -4,34 +4,64 @@
 #include <fsm/core/wrapped/c_lib/assert.hpp>            // assert
 #include <fsm/core/wrapped/c_lib/limits.hpp>            // INT_MAX
 
+namespace tag {
+    using Unchecked = struct Unchecked_struct*;
+}  // namesapace tag
+
 namespace fsm_definitions {
     namespace basic_type {
 
         // The notion of a non-negative integer à la Modula-2:
-        enum Cardinal_int: int {};              // `Cardinal_int` converts implicitly to `int`.
-
-        using Ꜿint = Cardinal_int;              // Latin capital letter reversed c with dot, U+A73E.
-
-        constexpr auto as_Ꜿint( const int x ) noexcept
-            -> Ꜿint
+        class Cardinal_int
         {
-            assert( x >= 0 );
-            return Ꜿint( x );
-        }
+            int     m_value     = 0;
 
-        constexpr auto Ꜿ1           = Ꜿint( 1 );
+        public:
+            static constexpr auto unchecked = tag::Unchecked();
 
-        constexpr auto operator+( const Ꜿint x ) noexcept -> Ꜿint { return x; }
+            constexpr explicit Cardinal_int( tag::Unchecked, const int value ):
+                m_value( value )
+            {}
+
+            constexpr explicit Cardinal_int( const int value ):
+                Cardinal_int( unchecked, value )
+            { assert( m_value >= 0 ); }
+
+            constexpr auto as_int() const noexcept -> int { return m_value; }
+            constexpr operator int() const noexcept { return as_int(); }
+        };
+
+        using Ꜿint = Cardinal_int;          // Latin capital letter reversed c with dot, U+A73E.
+
+        constexpr auto Ꜿ0 = Ꜿint( 0 );
+        constexpr auto Ꜿ1 = Ꜿint( 1 );
+
+        constexpr auto operator+( const Ꜿint x ) noexcept
+            -> Ꜿint
+        { return x; }
 
         constexpr auto operator+( const Ꜿint a, const Ꜿint b ) noexcept
             -> Ꜿint
-        { return Ꜿint( a + b ); }
+        { return Ꜿint( tag::Unchecked(), a + b ); }
 
         constexpr auto operator+=( Ꜿint& a, const Ꜿint b ) noexcept
             -> Ꜿint&
         { return (a = a + b); }
 
-        constexpr auto operator-( const Ꜿint ) -> Ꜿint = delete;
+        constexpr auto operator++( Ꜿint& x ) noexcept
+            -> Ꜿint&
+        { return (x += Ꜿ1); }
+
+        [[nodiscard]]
+        constexpr auto operator++( Ꜿint& x, int ) noexcept
+            -> Ꜿint
+        {
+            const Ꜿint result = x;
+            ++x;
+            return result;
+        }
+
+        constexpr auto operator-( const Ꜿint ) -> int = delete;
 
         constexpr auto operator-( const Ꜿint a, const Ꜿint b ) noexcept
             -> Ꜿint
@@ -44,9 +74,22 @@ namespace fsm_definitions {
             -> Ꜿint&
         { return (a = a - b); }
 
+        constexpr auto operator--( Ꜿint& x ) noexcept
+            -> Ꜿint&
+        { return (x -= Ꜿ1); }
+
+        [[nodiscard]]
+        constexpr auto operator--( Ꜿint& x, int ) noexcept
+            -> Ꜿint
+        {
+            const Ꜿint result = x;
+            --x;
+            return result;
+        }
+
         constexpr auto operator*( const Ꜿint a, const Ꜿint b ) noexcept
             -> Ꜿint
-        { return Ꜿint( a * b ); }
+        { return Ꜿint( tag::Unchecked(), a * b ); }
 
         constexpr auto operator*=( Ꜿint& a, const Ꜿint b ) noexcept
             -> Ꜿint&
@@ -56,14 +99,15 @@ namespace fsm_definitions {
             -> Ꜿint
         {
             assert( b != 0 );
-            return Ꜿint( a / b );
+            return Ꜿint( tag::Unchecked(), a / b );
         }
         constexpr auto operator/=( Ꜿint& a, const Ꜿint b ) noexcept
             -> Ꜿint&
         { return (a = a / b); }
 
-        constexpr auto succ( const Ꜿint x ) noexcept -> Ꜿint { return x + Ꜿ1; }
-        constexpr auto pred( const Ꜿint x ) noexcept -> Ꜿint { return x - Ꜿ1; }
+        // I believe these are from Pascal.
+        constexpr auto succ( const Ꜿint x ) noexcept -> Ꜿint { return Ꜿint( x + 1 ); }
+        constexpr auto pred( const Ꜿint x ) noexcept -> Ꜿint { return Ꜿint( x - 1 ); }
 
         // When `limit` is guaranteed not negative and `x` just may be negative, instead of
         //

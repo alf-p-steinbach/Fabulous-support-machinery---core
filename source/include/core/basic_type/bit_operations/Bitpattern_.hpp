@@ -79,6 +79,20 @@ namespace fsm_definitions {
                 -> Uint
             { return bits & ~m_mask; }
 
+            constexpr auto n_masked_bits() const noexcept
+                -> Uint
+            {
+                Uint count = 0;
+                for( Uint bits = m_mask; bits != 0; bits >>= 1 ) {
+                    count += !!(bits & 1);
+                }
+                return count;
+            }
+
+            constexpr auto n_varying_bits() const noexcept
+                -> Uint
+            { return bits_per_<Uint> - n_masked_bits(); }
+
             auto str() const                -> string { return str( false ); }
             auto str_with_groups() const    -> string { return str( true ); }
         };
