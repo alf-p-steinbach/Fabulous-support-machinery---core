@@ -33,8 +33,21 @@ namespace fsm_definitions {
 
         using Ꜿint = Cardinal_int;          // Latin capital letter reversed c with dot, U+A73E.
 
-        constexpr auto Ꜿ0 = Ꜿint( 0 );
-        constexpr auto Ꜿ1 = Ꜿint( 1 );
+        inline namespace cardinal_literals {
+            constexpr auto operator""_cardinal( const unsigned long long int value ) noexcept
+                -> Ꜿint
+            {
+                assert( value <= INT_MAX );
+                return Ꜿint( value );
+            }
+
+            constexpr auto operator""_Ꜿ( const unsigned long long int value ) noexcept
+                -> Ꜿint
+            { return operator""_cardinal( value ); }
+        }  // inline namespace cardinal_literals
+
+        constexpr auto Ꜿ0 = 0_cardinal;
+        constexpr auto Ꜿ1 = 1_cardinal;
 
         constexpr auto operator+( const Ꜿint x ) noexcept
             -> Ꜿint

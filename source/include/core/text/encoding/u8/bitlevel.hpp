@@ -9,6 +9,7 @@
 #include <cassert>      // assert macro
 
 namespace fsm_definitions {
+    using namespace fsm::cardinal_literals;
     using   fsm::Bitpattern_,                               // basic_type/bit_operations/Bitpattern_.hpp
             fsm::Ꜿint, fsm::Ꜿ1,                             // basic_type/Cardinal_int.hpp
             fsm::Byte,                                      // basic_type/names/Byte.hpp
@@ -52,15 +53,15 @@ namespace fsm_definitions {
         constexpr auto n_tailbytes_after( const Byte first_byte )
             -> Ꜿint
         {
-            if( (first_byte & 0b1000'0000) == 0 ) { return Ꜿint( 0 ); }
-            if( (first_byte & 0b0010'0000) == 0 ) { return Ꜿint( 1 ); }
-            if( (first_byte & 0b0001'0000) == 0 ) { return Ꜿint( 2 ); }
-            if( (first_byte & 0b1000'1000) == 0 ) { return Ꜿint( 3 ); }
             // assert( !"oops, invalid head byte (max 3 tail bytes permitted)" );
-            if( (first_byte & 0b1000'0100) == 0 ) { return Ꜿint( 4 ); }
-            if( (first_byte & 0b1000'0010) == 0 ) { return Ꜿint( 5 ); }
-            if( (first_byte & 0b1000'0001) == 0 ) { return Ꜿint( 6 ); }
-            return Ꜿint( 7 );
+            if( (first_byte & 0b1000'0000) == 0 ) { return 0_cardinal; }
+            if( (first_byte & 0b0010'0000) == 0 ) { return 1_cardinal; }
+            if( (first_byte & 0b0001'0000) == 0 ) { return 2_cardinal; }
+            if( (first_byte & 0b1000'1000) == 0 ) { return 3_cardinal; }
+            if( (first_byte & 0b1000'0100) == 0 ) { return 4_cardinal; }
+            if( (first_byte & 0b1000'0010) == 0 ) { return 5_cardinal; }
+            if( (first_byte & 0b1000'0001) == 0 ) { return 6_cardinal; }
+            return 7_cardinal;
         }
 
         // The formal limit on number of tailbytes, 3, is not enforced.
