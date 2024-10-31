@@ -7,7 +7,6 @@
 #include <fsm/core/parameter_passing/enabled_if_.hpp>
 #include <fsm/core/parameter_passing/in_.hpp>
 
-// #include <bitset>
 #include <string>
 #include <string_view>
 #include <type_traits>
@@ -18,12 +17,12 @@ namespace fsm_definitions {
             fsm::now,                       // exception_handling/FSM_FAIL.hpp
             fsm::enabled_if_,               // parameter_passing/enabled_if_.hpp
             fsm::in_;                       // parameter_passing/in_.hpp
-    using   //std::bitset,                    // <bitset>
-            std::string,                    // <string>
+    using   std::string,                    // <string>
             std::string_view,               // <string_view>
             std::is_unsigned_v;             // <type_traits>
 
     namespace basic_type { inline namespace bit_operations{
+
         template< class Uint, bool = enabled_if_< is_unsigned_v< Uint > >() >
         class Bitpattern_
         {
@@ -88,7 +87,8 @@ namespace fsm_definitions {
             constexpr auto n_varying_bits() const noexcept
                 -> Uint
             {
-                // return bitset<bits_per_<Uint>>( m_mask ).count();    // Not constexpr before C++23.
+                // std::bitset::count() was not constexpr before C++23.
+                // std::popcount not available until C++20.
                 Uint count = 0;
                 for( Uint bits = m_mask; bits != 0; bits >>= 1 ) {
                     count += !!(bits & 1);

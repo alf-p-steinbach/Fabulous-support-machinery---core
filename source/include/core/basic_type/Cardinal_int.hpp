@@ -11,6 +11,9 @@ namespace tag {
 namespace fsm_definitions {
     namespace basic_type {
 
+        // TODO: numeric_limits specialization
+        // TODO: relational operators
+
         // The notion of a non-negative integer à la Modula-2:
         class Cardinal_int
         {
@@ -32,16 +35,18 @@ namespace fsm_definitions {
         };
 
         using Ꜿint = Cardinal_int;          // Latin capital letter reversed c with dot, U+A73E.
+                                            // Can be short for “Cardinal_int”, and/or
+                                            // can be read as short for “counting number”.
 
         inline namespace cardinal_literals {
-            constexpr auto operator""_cardinal( const unsigned long long int value ) noexcept
+            constexpr auto operator ""_cardinal( const unsigned long long int value ) noexcept
                 -> Ꜿint
             {
                 assert( value <= INT_MAX );
                 return Ꜿint( value );
             }
 
-            constexpr auto operator""_Ꜿ( const unsigned long long int value ) noexcept
+            constexpr auto operator ""_Ꜿ( const unsigned long long int value ) noexcept
                 -> Ꜿint
             { return operator""_cardinal( value ); }
         }  // inline namespace cardinal_literals
