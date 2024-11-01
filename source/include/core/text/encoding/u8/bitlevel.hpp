@@ -2,6 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/basic_type/bit_operations/Bitpattern_.hpp>           // Bitpattern_
+#include <fsm/core/basic_type/byte_operations/byte_ptr_cast.hpp>        // byte_ptr_cast
 #include <fsm/core/basic_type/Cardinal_int.hpp>                         // Ꜿint
 #include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // now, $fail
@@ -12,6 +13,7 @@
 namespace fsm_definitions {
     using namespace fsm::cardinal_literals;
     using   fsm::Bitpattern_,                           // basic_type/bit_operations/Bitpattern_.hpp
+            fsm::byte_ptr_cast,                         // basic_type/byte_operations/byte_ptr_cast.hpp
             fsm::Ꜿint,                                  // basic_type/Cardinal_int.hpp
             fsm::Byte,                                  // basic_type/names/Byte.hpp
             fsm::now,                                   // exception_handling/FSM_FAIL.hpp
@@ -95,6 +97,10 @@ namespace fsm_definitions {
             return result;
         }
 
+        constexpr auto codepoint_from( const_<const char*> p_first )
+            -> char32_t
+        { return codepoint_from( byte_ptr_cast( p_first ) ); }
+
         constexpr auto to_seq_at( const_<Byte*> p_start, const char32_t code )
             -> Ꜿint    // Length of sequence including head byte.
         {
@@ -121,6 +127,10 @@ namespace fsm_definitions {
             *p_start = Byte( bits | head_byte_signature );                  // Remaining bits.
             return n_tailbytes + 1;
         }
+
+        constexpr auto to_seq_at( const_<char*> p_start, const char32_t code )
+            -> Ꜿint    // Length of sequence including head byte.
+        { return to_seq_at( byte_ptr_cast( p_start ), code ); }
     }  // namespace text::u8
 }  // namespace fsm_definitions
 
