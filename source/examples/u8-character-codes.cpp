@@ -22,7 +22,7 @@ namespace app {
 
             // Display the codes.
             for( const char* p = s.data(); p != p_end; p += +u8::seq_length_of( *p ) ) {
-                put( " {:04X}", +u8::codepoint_from( p ) );
+                put( " {:04X}", unsigned( u8::codepoint_from( p ) ) );
             }
             put( "\n" );
         }
