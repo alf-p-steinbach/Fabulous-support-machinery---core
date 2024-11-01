@@ -30,6 +30,7 @@ namespace fsm_definitions {
         constexpr auto byte_ptr_cast( const_<const From*> p )
             -> const Byte*
         { return byte_ptr_cast_<const Byte>( p ); }
+
     }  // namespace basic_type
 }  // namespace fsm_definitions
 
