@@ -101,7 +101,7 @@ namespace fsm_definitions {
             const auto seq = p_start;
             if( code < 0x80 ) {                                             // 7 bits as 7
                 seq[0] = code;
-                return Ꜿ1;
+                return 1;
             }
 
             const auto n_tailbytes = Ꜿint(
