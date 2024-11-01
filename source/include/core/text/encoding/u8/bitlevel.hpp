@@ -22,7 +22,7 @@ namespace fsm_definitions {
         constexpr auto  headbyte_pattern    = Bitpattern_<Byte>( "11xx'xxxx" );
         constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
 
-        constexpr Ꜿint n_tailbyte_value_bits   = tailbyte_pattern.n_value_bits();
+        constexpr Ꜿint n_tailbyte_value_bits   = tailbyte_pattern.n_value_bits();      // 6
 
         constexpr auto is_ascii_byte( const Byte unit ) noexcept
             -> bool
@@ -55,11 +55,11 @@ namespace fsm_definitions {
         constexpr auto n_tailbytes_after( const Byte first_byte )
             -> Ꜿint
         {
-            // assert( !"oops, invalid head byte (max 3 tail bytes permitted)" );
             if( (first_byte & 0b1000'0000) == 0 ) { return 0_cardinal; }
             if( (first_byte & 0b0010'0000) == 0 ) { return 1_cardinal; }
             if( (first_byte & 0b0001'0000) == 0 ) { return 2_cardinal; }
             if( (first_byte & 0b1000'1000) == 0 ) { return 3_cardinal; }
+            // assert( !"oops, invalid head byte (max 3 tail bytes permitted)" );
             if( (first_byte & 0b1000'0100) == 0 ) { return 4_cardinal; }
             if( (first_byte & 0b1000'0010) == 0 ) { return 5_cardinal; }
             if( (first_byte & 0b1000'0001) == 0 ) { return 6_cardinal; }
@@ -75,7 +75,7 @@ namespace fsm_definitions {
             -> bool
         { return is_headbyte( unit ) and n_tailbytes_after( unit ) <= 3; }
 
-        constexpr auto to_codepoint( const_<const Byte*> p_first )
+        constexpr auto codepoint_from( const_<const Byte*> p_first )
             -> char32_t
         {
             const Byte  first_byte      = *p_first;
@@ -89,7 +89,7 @@ namespace fsm_definitions {
             char32_t result = headbyte_value_of( first_byte );
             for( Ꜿint i = Ꜿ1; i <= n_tailbytes; ++i ) {
                 ++p;
-                result <<= n_tailbyte_value_bits;
+                result <<= +n_tailbyte_value_bits;
                 result |= tailbyte_value_of( *p );
             }
             return result;
@@ -112,11 +112,11 @@ namespace fsm_definitions {
             now( n_tailbytes != 666 ) or $fail( "Invalid Unicode code point (≥ 0x110000)." );
 
             auto bits = code;
-            for( Byte* p = p_start + n_tailbytes; p != p_start; --p ) {     // N ×
+            for( Byte* p = p_start + +n_tailbytes; p != p_start; --p ) {     // N ×
                 *p = tailbyte_pattern.with_value_bits( Byte( bits ) );      // 6 bits.
-                bits >>= n_tailbyte_value_bits;
+                bits >>= +n_tailbyte_value_bits;
             }
-            const auto head_byte_signature = Byte( ~((0b1000'0000u >> n_tailbytes) - 1) );
+            const auto head_byte_signature = Byte( ~((0b1000'0000u >> +n_tailbytes) - 1) );
             // assert( headbyte_pattern.matches( head_byte_signature ) );
             *p_start = Byte( bits | head_byte_signature );                  // Remaining bits.
             return n_tailbytes + Ꜿ1;
