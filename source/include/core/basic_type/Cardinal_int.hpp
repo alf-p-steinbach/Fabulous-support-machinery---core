@@ -9,6 +9,7 @@ namespace tag {
 }  // namesapace tag
 
 namespace fsm_definitions {
+
     namespace basic_type {
 
         // TODO: numeric_limits specialization
@@ -22,9 +23,11 @@ namespace fsm_definitions {
         public:
             static constexpr auto unchecked = tag::Unchecked();
 
-            constexpr explicit Cardinal_int( tag::Unchecked, const int value ):
+            constexpr Cardinal_int( tag::Unchecked, const int value ):
                 m_value( value )
             {}
+
+            constexpr Cardinal_int(): m_value( 0 ) {}   // Supports e.g. `Ꜿint x = {};`.
 
             constexpr explicit Cardinal_int( const int value ):
                 Cardinal_int( unchecked, value )
@@ -60,7 +63,7 @@ namespace fsm_definitions {
 
         constexpr auto operator+( const Ꜿint a, const Ꜿint b ) noexcept
             -> Ꜿint
-        { return Ꜿint( tag::Unchecked(), a + b ); }
+        { return Ꜿint( tag::Unchecked(), 0 + a + b ); }
 
         constexpr auto operator+=( Ꜿint& a, const Ꜿint b ) noexcept
             -> Ꜿint&
@@ -85,7 +88,7 @@ namespace fsm_definitions {
             -> Ꜿint
         {
             assert( a >= b );
-            return Ꜿint( a - b );
+            return Ꜿint( 0 + a - b );
         }
 
         constexpr auto operator-=( Ꜿint& a, const Ꜿint b ) noexcept
@@ -107,7 +110,7 @@ namespace fsm_definitions {
 
         constexpr auto operator*( const Ꜿint a, const Ꜿint b ) noexcept
             -> Ꜿint
-        { return Ꜿint( tag::Unchecked(), a * b ); }
+        { return Ꜿint( tag::Unchecked(), 1 * a * b ); }
 
         constexpr auto operator*=( Ꜿint& a, const Ꜿint b ) noexcept
             -> Ꜿint&
@@ -117,15 +120,16 @@ namespace fsm_definitions {
             -> Ꜿint
         {
             assert( b != 0 );
-            return Ꜿint( tag::Unchecked(), a / b );
+            return Ꜿint( tag::Unchecked(), 1 * a / b );
         }
+
         constexpr auto operator/=( Ꜿint& a, const Ꜿint b ) noexcept
             -> Ꜿint&
         { return (a = a / b); }
 
-        // I believe these are from Pascal.
-        constexpr auto succ( const Ꜿint x ) noexcept -> Ꜿint { return Ꜿint( x + 1 ); }
-        constexpr auto pred( const Ꜿint x ) noexcept -> Ꜿint { return Ꜿint( x - 1 ); }
+        // I believe these are from Pascal, where they were named `succ` and `pred`.
+        constexpr auto succ_of( const Ꜿint x ) noexcept -> Ꜿint { return Ꜿint( x + 1 ); }
+        constexpr auto pred_of( const Ꜿint x ) noexcept -> Ꜿint { return x - Ꜿ1; }
 
         // When `limit` is guaranteed not negative and `x` just may be negative, instead of
         //

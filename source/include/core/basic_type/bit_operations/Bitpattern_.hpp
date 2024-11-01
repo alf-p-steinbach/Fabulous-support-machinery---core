@@ -2,6 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/basic_type/bit_operations/bits_per_.hpp>
+#include <fsm/core/basic_type/Cardinal_int.hpp>
 #include <fsm/core/basic_type/names/C_str.hpp>
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>
 #include <fsm/core/parameter_passing/enabled_if_.hpp>
@@ -13,7 +14,8 @@
 
 namespace fsm_definitions {
     using   fsm::bits_per_,                 // basic_type/bit_operations/bits_per_.hpp
-            fsm::C_str,                     // basic_type/C_Str
+            fsm::Ꜿint,                      // basic_type/Cardinal_int.hpp
+            fsm::C_str,                     // basic_type/names/C_Str
             fsm::now,                       // exception_handling/FSM_FAIL.hpp
             fsm::enabled_if_,               // parameter_passing/enabled_if_.hpp
             fsm::in_;                       // parameter_passing/in_.hpp
@@ -74,31 +76,41 @@ namespace fsm_definitions {
             }
 
             template< class Arg >
+            constexpr auto with_value_bits( Arg ) const noexcept = delete;
+
+            constexpr auto with_value_bits( const Uint bits ) const noexcept
+                -> Uint
+            { return (bits | ~m_mask); }
+
+            template< class Arg >
             constexpr auto matches( Arg ) const noexcept -> bool = delete;
             
             constexpr auto matches( const Uint bits ) const noexcept
                 -> bool
             { return ((bits & ~m_mask) == m_const_bits); }
 
-            constexpr auto varying_bits_of( const Uint bits ) const noexcept
+            template< class Arg >
+            constexpr auto value_bits_of( Arg ) const noexcept  -> Uint = delete;
+
+            constexpr auto value_bits_of( const Uint bits ) const noexcept
                 -> Uint
             { return bits & m_mask; }
 
-            constexpr auto n_varying_bits() const noexcept
-                -> Uint
+            constexpr auto n_value_bits() const noexcept
+                -> Ꜿint
             {
                 // std::bitset::count() was not constexpr before C++23.
                 // std::popcount not available until C++20.
-                Uint count = 0;
+                Ꜿint count = {};
                 for( Uint bits = m_mask; bits != 0; bits >>= 1 ) {
-                    count += !!(bits & 1);
+                    count += Ꜿint( bits & 1 );
                 }
                 return count;
             }
 
             constexpr auto n_masked_bits() const noexcept
                 -> Uint
-            { return bits_per_<Uint> - n_varying_bits(); }
+            { return bits_per_<Uint> - n_value_bits(); }
 
             auto str() const                -> string { return str( false ); }
             auto str_with_groups() const    -> string { return str( true ); }

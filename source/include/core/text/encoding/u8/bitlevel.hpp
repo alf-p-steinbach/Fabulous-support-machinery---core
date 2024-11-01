@@ -10,17 +10,17 @@
 
 namespace fsm_definitions {
     using namespace fsm::cardinal_literals;
-    using   fsm::Bitpattern_,                               // basic_type/bit_operations/Bitpattern_.hpp
-            fsm::Ꜿint, fsm::Ꜿ1,                             // basic_type/Cardinal_int.hpp
-            fsm::Byte,                                      // basic_type/names/Byte.hpp
-            fsm::const_;                                    // type_builders.hpp
+    using   fsm::Bitpattern_,                           // basic_type/bit_operations/Bitpattern_.hpp
+            fsm::Ꜿint, fsm::Ꜿ1,                         // basic_type/Cardinal_int.hpp
+            fsm::Byte,                                  // basic_type/names/Byte.hpp
+            fsm::const_;                                // type_builders.hpp
 
     namespace text::u8 {
         constexpr auto  ascii_pattern       = Bitpattern_<Byte>( "0xxx'xxxx" );
         constexpr auto  headbyte_pattern    = Bitpattern_<Byte>( "11xx'xxxx" );
         constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
 
-        constexpr auto  n_tailbyte_value_bits   = tailbyte_pattern.n_varying_bits();
+        constexpr Ꜿint n_tailbyte_value_bits   = tailbyte_pattern.n_value_bits();
 
         constexpr auto is_ascii_byte( const Byte unit ) noexcept
             -> bool
@@ -37,7 +37,7 @@ namespace fsm_definitions {
         // Unspecified if the unit is not a tailbyte.
         constexpr auto tailbyte_value_of( const Byte unit ) noexcept
             -> Byte
-        { return unit & 0b0011'1111; }
+        { return tailbyte_pattern.value_bits_of( unit ); }
 
         // Unspecified if the unit is not a headbyte,
         // except that the formal limit on number of tailbytes, 3, is not enforced.
@@ -97,16 +97,16 @@ namespace fsm_definitions {
         constexpr auto to_seq_at( const_<const Byte*> p_start, const char32_t code )
             -> int
         {
-            using Unit = typename iterator_traits<Unit_iterator>::value_type;
+            const auto seq = p_start;
             if( false ) {
             } else if( code < 0x80 ) {                                 // 7 bits as 7
-                *(p_start + 0) = code;
+                seq[0] = code;
                 return 1;
             } else if( code < 0x800 ) {                             // 11 bits as 5 + 6
                 char32_t bits = code;
-                *(p_start + 1) = bits & +continuation_bytes::value_bits_mask );   // 6
-                bits >>= continuation_bytes::n_value_bits;
-                *(p_start + 0) = 0b1100'0000 | bits );                            // 5
+                seq[1] = tailbyte_pattern.with_values( Byte( bits ) );          // 6
+                bits >>= n_tailbyte_value_bits;
+                seq[0] = Byte( 0b1100'0000 | bits );                            // 5
                 return 2;
             } else if( code < 0x10000 ) {                           // 16 bits as 4 + 6 + 6
                 char32_t bits = code;
