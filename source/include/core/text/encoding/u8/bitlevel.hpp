@@ -4,6 +4,7 @@
 #include <fsm/core/basic_type/bit_operations/Bitpattern_.hpp>           // Bitpattern_
 #include <fsm/core/basic_type/Cardinal_int.hpp>                         // Ꜿint, Ꜿ1
 #include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
+#include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // now, $fail
 #include <fsm/core/type_builders.hpp>                                   // const_
 
 #include <cassert>      // assert macro
@@ -13,6 +14,7 @@ namespace fsm_definitions {
     using   fsm::Bitpattern_,                           // basic_type/bit_operations/Bitpattern_.hpp
             fsm::Ꜿint, fsm::Ꜿ1,                         // basic_type/Cardinal_int.hpp
             fsm::Byte,                                  // basic_type/names/Byte.hpp
+            fsm::now,                                   // exception_handling/FSM_FAIL.hpp
             fsm::const_;                                // type_builders.hpp
 
     namespace text::u8 {
@@ -93,45 +95,32 @@ namespace fsm_definitions {
             return result;
         }
 
-#if 0
-        constexpr auto to_seq_at( const_<const Byte*> p_start, const char32_t code )
-            -> int
+        constexpr auto to_seq_at( const_<Byte*> p_start, const char32_t code )
+            -> Ꜿint    // Length of sequence including head byte.
         {
             const auto seq = p_start;
-            if( false ) {
-            } else if( code < 0x80 ) {                                 // 7 bits as 7
+            if( code < 0x80 ) {                                             // 7 bits as 7
                 seq[0] = code;
-                return 1;
-            } else if( code < 0x800 ) {                             // 11 bits as 5 + 6
-                char32_t bits = code;
-                seq[1] = tailbyte_pattern.with_values( Byte( bits ) );          // 6
-                bits >>= n_tailbyte_value_bits;
-                seq[0] = Byte( 0b1100'0000 | bits );                            // 5
-                return 2;
-            } else if( code < 0x10000 ) {                           // 16 bits as 4 + 6 + 6
-                char32_t bits = code;
-                *(p_start + 2) = bits & +continuation_bytes::value_bits_mask );   // 6
-                bits >>= continuation_bytes::n_value_bits;
-                *(p_start + 1) = bits & +continuation_bytes::value_bits_mask );   // 6
-                bits >>= continuation_bytes::n_value_bits;
-                *(p_start + 0) = 0b1110'0000 | bits );                            // 4
-                return 3;
-            } else if( code < 0x110000 ) {                          // 21 bits as 3 + 6 + 6 + 6
-                char32_t bits = code;
-                *(p_start + 3) = bits & +continuation_bytes::value_bits_mask );   // 6
-                bits >>= continuation_bytes::n_value_bits;
-                *(p_start + 2) = bits & +continuation_bytes::value_bits_mask );   // 6
-                bits >>= continuation_bytes::n_value_bits;
-                *(p_start + 1) = bits & +continuation_bytes::value_bits_mask );   // 6
-                bits >>= continuation_bytes::n_value_bits;
-                *(p_start + 0) = 0b1111'0000 | bits );                            // 3
-                return 4;
-            } else {
-                FSM_FAIL( "Invalid Unicode code point (≥ 0x110000)." );
+                return Ꜿ1;
             }
-            for( ;; ) {}    // Should never get here.
+
+            const auto n_tailbytes = Ꜿint(
+                //  5 + 1*6 = 11          4 + 2*6 = 16            3 + 3*6 = 21
+                    code < 0x800? 1     : code < 0x10000? 2     : code < 0x110000? 3
+                : 666
+                );
+            now( n_tailbytes != 666 ) or $fail( "Invalid Unicode code point (≥ 0x110000)." );
+
+            auto bits = code;
+            for( Byte* p = p_start + n_tailbytes; p != p_start; --p ) {     // N ×
+                *p = tailbyte_pattern.with_value_bits( Byte( bits ) );      // 6 bits.
+                bits >>= n_tailbyte_value_bits;
+            }
+            const auto head_byte_signature = Byte( ~((0b1000'0000u >> n_tailbytes) - 1) );
+            // assert( headbyte_pattern.matches( head_byte_signature ) );
+            *p_start = Byte( bits | head_byte_signature );                  // Remaining bits.
+            return n_tailbytes + Ꜿ1;
         }
-#endif
     }  // namespace text::u8
 }  // namespace fsm_definitions
 
