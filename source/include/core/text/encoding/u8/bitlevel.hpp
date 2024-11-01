@@ -105,7 +105,7 @@ namespace fsm_definitions {
             }
 
             const auto n_tailbytes = Ꜿint(
-                //  5 + 1*6 = 11          4 + 2*6 = 16            3 + 3*6 = 21
+                //  5 + 1×6 = 11          4 + 2×6 = 16            3 + 3×6 = 21
                     code < 0x800? 1     : code < 0x10000? 2     : code < 0x110000? 3
                 : 666
                 );
