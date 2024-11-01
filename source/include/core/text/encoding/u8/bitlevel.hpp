@@ -2,7 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/basic_type/bit_operations/Bitpattern_.hpp>           // Bitpattern_
-#include <fsm/core/basic_type/Cardinal_int.hpp>                         // Ꜿint, Ꜿ1
+#include <fsm/core/basic_type/Cardinal_int.hpp>                         // Ꜿint
 #include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // now, $fail
 #include <fsm/core/type_builders.hpp>                                   // const_
@@ -12,7 +12,7 @@
 namespace fsm_definitions {
     using namespace fsm::cardinal_literals;
     using   fsm::Bitpattern_,                           // basic_type/bit_operations/Bitpattern_.hpp
-            fsm::Ꜿint, fsm::Ꜿ1,                         // basic_type/Cardinal_int.hpp
+            fsm::Ꜿint,                                  // basic_type/Cardinal_int.hpp
             fsm::Byte,                                  // basic_type/names/Byte.hpp
             fsm::now,                                   // exception_handling/FSM_FAIL.hpp
             fsm::const_;                                // type_builders.hpp
