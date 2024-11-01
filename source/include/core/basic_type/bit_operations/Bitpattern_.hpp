@@ -51,7 +51,7 @@ namespace fsm_definitions {
         public:
             constexpr Bitpattern_( in_<string_view> spec )
             {
-                int n_bitspecs = 0;
+                Ꜿint n_bitspecs = 0;
                 for( const char ch: spec ) {
                     switch( ch ) {
                         case '0':  case '1': case Spec::any: {
@@ -101,9 +101,9 @@ namespace fsm_definitions {
             {
                 // std::bitset::count() was not constexpr before C++23.
                 // std::popcount not available until C++20.
-                Ꜿint count = {};
+                Ꜿint count = 0;
                 for( Uint bits = m_mask; bits != 0; bits >>= 1 ) {
-                    count += Ꜿint( bits & 1 );
+                    count += bits & 1;
                 }
                 return count;
             }
