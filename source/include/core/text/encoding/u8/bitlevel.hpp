@@ -112,7 +112,7 @@ namespace fsm_definitions {
             now( n_tailbytes != 666 ) or $fail( "Invalid Unicode code point (≥ 0x110000)." );
 
             auto bits = code;
-            for( Byte* p = p_start + +n_tailbytes; p != p_start; --p ) {     // N ×
+            for( Byte* p = p_start + +n_tailbytes; p != p_start; --p ) {    // N ×
                 *p = tailbyte_pattern.with_value_bits( Byte( bits ) );      // 6 bits.
                 bits >>= +n_tailbyte_value_bits;
             }
