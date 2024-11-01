@@ -55,21 +55,21 @@ namespace fsm_definitions {
         constexpr auto n_tailbytes_after( const Byte first_byte )
             -> Ꜿint
         {
-            if( (first_byte & 0b1000'0000) == 0 ) { return 0_cardinal; }
-            if( (first_byte & 0b0010'0000) == 0 ) { return 1_cardinal; }
-            if( (first_byte & 0b0001'0000) == 0 ) { return 2_cardinal; }
-            if( (first_byte & 0b1000'1000) == 0 ) { return 3_cardinal; }
             // assert( !"oops, invalid head byte (max 3 tail bytes permitted)" );
-            if( (first_byte & 0b1000'0100) == 0 ) { return 4_cardinal; }
-            if( (first_byte & 0b1000'0010) == 0 ) { return 5_cardinal; }
-            if( (first_byte & 0b1000'0001) == 0 ) { return 6_cardinal; }
-            return 7_cardinal;
+            if( (first_byte & 0b1000'0000) == 0 ) { return 0; }
+            if( (first_byte & 0b0010'0000) == 0 ) { return 1; }
+            if( (first_byte & 0b0001'0000) == 0 ) { return 2; }
+            if( (first_byte & 0b1000'1000) == 0 ) { return 3; }
+            if( (first_byte & 0b1000'0100) == 0 ) { return 4; }
+            if( (first_byte & 0b1000'0010) == 0 ) { return 5; }
+            if( (first_byte & 0b1000'0001) == 0 ) { return 6; }
+            return 7;
         }
 
         // The formal limit on number of tailbytes, 3, is not enforced.
         constexpr auto seq_length_of( const Byte first_byte )
             -> Ꜿint
-        { return n_tailbytes_after( first_byte ) + Ꜿ1; }
+        { return n_tailbytes_after( first_byte ) + 1; }
 
         constexpr auto is_valid_headbyte( const Byte unit )
             -> bool
@@ -87,7 +87,7 @@ namespace fsm_definitions {
 
             const Byte* p = p_first;
             char32_t result = headbyte_value_of( first_byte );
-            for( Ꜿint i = Ꜿ1; i <= n_tailbytes; ++i ) {
+            for( Ꜿint i = 1; i <= n_tailbytes; ++i ) {
                 ++p;
                 result <<= +n_tailbyte_value_bits;
                 result |= tailbyte_value_of( *p );
@@ -119,7 +119,7 @@ namespace fsm_definitions {
             const auto head_byte_signature = Byte( ~((0b1000'0000u >> +n_tailbytes) - 1) );
             // assert( headbyte_pattern.matches( head_byte_signature ) );
             *p_start = Byte( bits | head_byte_signature );                  // Remaining bits.
-            return n_tailbytes + Ꜿ1;
+            return n_tailbytes + 1;
         }
     }  // namespace text::u8
 }  // namespace fsm_definitions
