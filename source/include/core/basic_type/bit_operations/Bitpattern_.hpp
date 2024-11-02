@@ -80,7 +80,7 @@ namespace fsm_definitions {
 
             constexpr auto with_value_bits( const Uint bits ) const noexcept
                 -> Uint
-            { return (bits | ~m_mask); }
+            { return ((bits & m_mask) | m_const_bits); }
 
             template< class Arg >
             constexpr auto matches( Arg ) const noexcept -> bool = delete;
