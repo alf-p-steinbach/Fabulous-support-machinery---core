@@ -1,9 +1,9 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/basic_type/names/C_str.hpp>              // C_str
-#include <fsm/core/platform/inspection/os_id_macros.hpp>    // FMS_
-#include <fsm/core/parameter_passing/in_.hpp>               // in_
+#include <fsm/core/basic_type/names/C_str.hpp>                      // C_str
+#include <fsm/core/platform/inspection/os_id_macros.hpp>            // FMS_
+#include <fsm/core/parameter_passing/data_flow_directions.hpp>      // in_
 
 #include <string>
 #include <string_view>

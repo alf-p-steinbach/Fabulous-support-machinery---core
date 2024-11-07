@@ -2,7 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/basic_type/names/C_str.hpp>
-#include <fsm/core/parameter_passing/in_.hpp>
+#include <fsm/core/parameter_passing/data_flow_directions.hpp>
 #include <fsm/core/type_builders.hpp>
 #include <fsm/core/text/classifiers.hpp>
 
@@ -11,9 +11,10 @@
 #include <utility>
 
 namespace fsm_definitions {
-    using   fsm::C_str,                 // <C_str.hpp>
-            fsm::const_,                // <type_builders.hpp>
-            fsm::in_;                   // <in_.hpp>
+    using   fsm::C_str,                 // basic_type/names/C_str.hpp
+            fsm::const_,                // type_builders.hpp
+            fsm::in_;                   // parameter_passing/data_flow_directions.hpp
+
     using   std::string,                // <string>
             std::string_view;           // <string_view>
 

@@ -6,7 +6,7 @@
 #include <fsm/core/basic_type/names/C_str.hpp>
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>
 #include <fsm/core/parameter_passing/enabled_if_.hpp>
-#include <fsm/core/parameter_passing/in_.hpp>
+#include <fsm/core/parameter_passing/data_flow_directions.hpp>
 
 #include <string>
 #include <string_view>
@@ -18,7 +18,7 @@ namespace fsm_definitions {
             fsm::C_str,                     // basic_type/names/C_Str
             fsm::now,                       // exception_handling/FSM_FAIL.hpp
             fsm::enabled_if_,               // parameter_passing/enabled_if_.hpp
-            fsm::in_;                       // parameter_passing/in_.hpp
+            fsm::in_;                       // parameter_passing/data_flow_directions.hpp
     using   std::string,                    // <string>
             std::string_view,               // <string_view>
             std::is_unsigned_v;             // <type_traits>

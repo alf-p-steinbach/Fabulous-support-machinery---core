@@ -1,14 +1,20 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
+#include <fsm/core/parameter_passing/enabled_if_.hpp>   // enabled_if_
+
 #include <fsm/core/wrapped/c_lib/assert.hpp>            // assert
 #include <fsm/core/wrapped/c_lib/limits.hpp>            // INT_MAX
+
+#include <type_traits>
 
 namespace tag {
     using Unchecked = struct Unchecked_struct*;
 }  // namesapace tag
 
 namespace fsm_definitions {
+    using   fsm::enabled_if_;               // parameter_passing/enabled_if_.hpp
+    using   std::is_arithmetic_v;           // <type_traits>
 
     namespace basic_type {
 
@@ -21,7 +27,7 @@ namespace fsm_definitions {
         // A `Cardinal_int` a.k.a. `Ꜿint`
         //
         // • has the range 0 through `INT_MAX` inclusive, i.e. no negative values ever;
-        // • has well defined magnitude comparison to values of any other arithmetic type;
+        // • has reasonable magnitude comparison to values of any other arithmetic type;
         // • as a special case supports efficient bounds checking for a range 0 through N;
         // • converts explicitly to `int` via `x.as_int`, `+x` or `-x`; and
         // • with `NDEBUG` defined has checked implicit construction from `int`.
@@ -102,17 +108,19 @@ namespace fsm_definitions {
             constexpr auto operator> ( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a > +b); }
             constexpr auto operator!=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a != +b); }
 
-            template< class Number >
+            template< class Number,
+                bool = enabled_if_< is_arithmetic_v< Number > > >
             constexpr auto compare( const Ꜿint a, const Number b ) noexcept
                 -> int
             { return (Number( a ) > b) - (Number( a ) < b); }
 
-            template< class Number >
+            template< class Number,
+                bool = enabled_if_< is_arithmetic_v< Number > > >
             constexpr auto compare( const Number a, const Ꜿint b ) noexcept
                 -> int
             { return (a > Number( b )) - (a < Number( b )); }
 
-            constexpr auto compare( Ꜿint& a, const Ꜿint b ) noexcept
+            constexpr auto compare( Ꜿint a, const Ꜿint b ) noexcept
                 -> int
             { return a.as_int() - b.as_int(); }
         }  // inline namespace cardinal_comparison
@@ -181,6 +189,17 @@ namespace fsm_definitions {
             constexpr auto operator/=( Ꜿint& a, const Ꜿint b ) noexcept
                 -> Ꜿint&
             { return (a = a / b); }
+
+            constexpr auto operator%( const Ꜿint a, const Ꜿint b ) noexcept
+                -> Ꜿint
+            {
+                assert( +b != 0 );
+                return Ꜿint( tag::Unchecked(), +a % +b );
+            }
+
+            constexpr auto operator%=( Ꜿint& a, const Ꜿint b ) noexcept
+                -> Ꜿint&
+            { return (a = a % b); }
 
             // In Pascal these were built-ins named `succ` and `pred`:
             constexpr auto next_of( const Ꜿint x ) noexcept -> Ꜿint { return x + 1; }

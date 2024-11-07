@@ -4,7 +4,8 @@
 namespace fsm_definitions {
     namespace parameter_passing {
 
-        template< class T > using in_ = const T&;
+        template< class T > using in_       = const T&;
+        template< class T > using in_out_   = T&;
 
     }  // namespace parameter_passing
 }  // namespace fsm_definitions
