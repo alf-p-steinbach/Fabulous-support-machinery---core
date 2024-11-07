@@ -30,7 +30,7 @@ namespace fsm_definitions {
         //
         // • has the range 0 through `INT_MAX` inclusive, i.e. no negative values ever;
         // • has reasonable magnitude comparison to values of any other arithmetic type;
-        // • as a special case supports efficient bounds checking for a range 0 through N;
+        // • as a special case supports efficient bounds checking for a range 0 to N;
         // • converts explicitly to `int` via `x.as_int`, `+x` or `-x`; and
         // • with `NDEBUG` defined has checked implicit construction from `int`.
         //
@@ -109,6 +109,8 @@ namespace fsm_definitions {
             constexpr auto operator>=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a >= +b); }
             constexpr auto operator> ( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a > +b); }
             constexpr auto operator!=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a != +b); }
+
+            // TODO: optimize `compare` for unsigned `Number` types.
 
             template< class Number,
                 bool = enabled_if_< is_arithmetic_v< Number > > >
