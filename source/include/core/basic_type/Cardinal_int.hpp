@@ -1,7 +1,8 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/parameter_passing/enabled_if_.hpp>   // enabled_if_
+#include <fsm/core/parameter_passing/data_flow_directions.hpp>      // in_out_
+#include <fsm/core/parameter_passing/enabled_if_.hpp>               // enabled_if_
 
 #include <fsm/core/wrapped/c_lib/assert.hpp>            // assert
 #include <fsm/core/wrapped/c_lib/limits.hpp>            // INT_MAX
@@ -13,7 +14,8 @@ namespace tag {
 }  // namesapace tag
 
 namespace fsm_definitions {
-    using   fsm::enabled_if_;               // parameter_passing/enabled_if_.hpp
+    using   fsm::in_out_,                   // parameter_passing/data_flow_directions_.hpp>
+            fsm::enabled_if_;               // parameter_passing/enabled_if_.hpp
     using   std::is_arithmetic_v;           // <type_traits>
 
     namespace basic_type {
@@ -130,16 +132,16 @@ namespace fsm_definitions {
                 -> Ꜿint
             { return Ꜿint( tag::Unchecked(), +a + +b ); }
 
-            constexpr auto operator+=( Ꜿint& a, const Ꜿint b ) noexcept
+            constexpr auto operator+=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
                 -> Ꜿint&
             { return (a = a + b); }
 
-            constexpr auto operator++( Ꜿint& x ) noexcept
+            constexpr auto operator++( in_out_<Ꜿint> x ) noexcept
                 -> Ꜿint&
             { return (x += Ꜿ1); }
 
             [[nodiscard]]
-            constexpr auto operator++( Ꜿint& x, int ) noexcept
+            constexpr auto operator++( in_out_<Ꜿint> x, int ) noexcept
                 -> Ꜿint
             {
                 const Ꜿint result = x;
@@ -154,16 +156,16 @@ namespace fsm_definitions {
                 return Ꜿint( +a - +b );        // Checked.
             }
 
-            constexpr auto operator-=( Ꜿint& a, const Ꜿint b ) noexcept
+            constexpr auto operator-=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
                 -> Ꜿint&
             { return (a = a - b); }
 
-            constexpr auto operator--( Ꜿint& x ) noexcept
+            constexpr auto operator--( in_out_<Ꜿint> x ) noexcept
                 -> Ꜿint&
             { return (x -= Ꜿ1); }
 
             [[nodiscard]]
-            constexpr auto operator--( Ꜿint& x, int ) noexcept
+            constexpr auto operator--( in_out_<Ꜿint> x, int ) noexcept
                 -> Ꜿint
             {
                 const Ꜿint result = x;
@@ -175,7 +177,7 @@ namespace fsm_definitions {
                 -> Ꜿint
             { return Ꜿint( tag::Unchecked(), +a * +b ); }
 
-            constexpr auto operator*=( Ꜿint& a, const Ꜿint b ) noexcept
+            constexpr auto operator*=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
                 -> Ꜿint&
             { return (a = a * b); }
 
@@ -186,7 +188,7 @@ namespace fsm_definitions {
                 return Ꜿint( tag::Unchecked(), +a / +b );
             }
 
-            constexpr auto operator/=( Ꜿint& a, const Ꜿint b ) noexcept
+            constexpr auto operator/=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
                 -> Ꜿint&
             { return (a = a / b); }
 
@@ -197,7 +199,7 @@ namespace fsm_definitions {
                 return Ꜿint( tag::Unchecked(), +a % +b );
             }
 
-            constexpr auto operator%=( Ꜿint& a, const Ꜿint b ) noexcept
+            constexpr auto operator%=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
                 -> Ꜿint&
             { return (a = a % b); }
 
