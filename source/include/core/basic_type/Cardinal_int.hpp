@@ -18,9 +18,16 @@ namespace fsm_definitions {
 
         // The notion of a non-negative integer à la Modula-2’s `CARDINAL`.
         //
+        // A `Cardinal_int` a.k.a. `Ꜿint`
+        //
+        // • has the range 0 through `INT_MAX` inclusive, i.e. no negative values ever;
+        // • has well defined magnitude comparison to values of any other arithmetic type;
+        // • as a special case supports efficient bounds checking for a range 0 through N;
+        // • converts explicitly to `int` via `x.as_int`, `+x` or `-x`; and
+        // • with `NDEBUG` defined has checked implicit construction from `int`.
+        //
         // In order to avoid annoying explicit conversions of literals to `Cardinal_int`, with
-        // this design `int` converts implicitly to `Cardinal_int`, but not vice versa. One can
-        // use unary `+` to convert a `Cardinal_int` to `int`. Or member function `.as_int()`.
+        // this design `int` converts implicitly to `Cardinal_int`, but not vice versa.
         //
         // That hard choice means that mixed type expressions resolve to type `Cardinal_int`.
         //
