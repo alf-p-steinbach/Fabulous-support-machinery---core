@@ -35,10 +35,8 @@ namespace fsm_definitions {
                 m_value( value )
             {}
 
-            constexpr Cardinal_int(): m_value( 0 ) {}   // Supports e.g. `Ꜿint x = {};`.
-
-            constexpr Cardinal_int( const int value ):
-                Cardinal_int( unchecked, value )
+            constexpr Cardinal_int( const int value = 0 ):
+                m_value( value )
             { assert( m_value >= 0 ); }
 
             constexpr auto as_int() const noexcept -> int { return m_value; }
@@ -89,14 +87,28 @@ namespace fsm_definitions {
             { return -x.as_int(); }
         }  // inline namespace cardinal_to_int_conversion
 
-        inline namespace cardinal_relational_operators {
+       inline namespace cardinal_comparison {
             constexpr auto operator< ( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a < +b); }
             constexpr auto operator<=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a <= +b); }
             constexpr auto operator==( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a == +b); }
             constexpr auto operator>=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a >= +b); }
             constexpr auto operator> ( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a > +b); }
             constexpr auto operator!=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a != +b); }
-        }  // inline namespace cardinal_relational_operators
+
+            template< class Number >
+            constexpr auto compare( const Ꜿint a, const Number b ) noexcept
+                -> int
+            { return (Number( a ) > b) - (Number( a ) < b); }
+
+            template< class Number >
+            constexpr auto compare( const Number a, const Ꜿint b ) noexcept
+                -> int
+            { return (a > Number( b )) - (a < Number( b )); }
+
+            constexpr auto compare( Ꜿint& a, const Ꜿint b ) noexcept
+                -> int
+            { return a.as_int() - b.as_int(); }
+        }  // inline namespace cardinal_comparison
 
         inline namespace cardinal_arithmetic {
             constexpr auto operator+( const Ꜿint a, const Ꜿint b ) noexcept
@@ -163,9 +175,9 @@ namespace fsm_definitions {
                 -> Ꜿint&
             { return (a = a / b); }
 
-            // In Pascal these were named `succ` and `pred`:
-            constexpr auto succ_of( const Ꜿint x ) noexcept -> Ꜿint { return x + 1; }
-            constexpr auto pred_of( const Ꜿint x ) noexcept -> Ꜿint { return x - 1; }
+            // In Pascal these were built-ins named `succ` and `pred`:
+            constexpr auto next_of( const Ꜿint x ) noexcept -> Ꜿint { return x + 1; }
+            constexpr auto prev_of( const Ꜿint x ) noexcept -> Ꜿint { return x - 1; }
         }  // inline namespace cardinal_arithmetic
     }  // namespace basic_type
 }  // namespace fsm_definitions
