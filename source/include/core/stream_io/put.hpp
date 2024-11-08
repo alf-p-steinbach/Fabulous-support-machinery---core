@@ -62,7 +62,7 @@ namespace fsm_definitions {
         {
             static const Console_encoding_fix   a_fix;  // In Windows sets active codepage 65001 (UTF-8).
 
-            // TODO: support > INT_MAX bytes?
+            assert( s.size() <= INT_MAX );              // TODO: support > INT_MAX bytes?
             const Ꜿint n_bytes_written = fwrite( s.data(), 1, s.size(), stream );
             now( n_bytes_written == s.size() )
                 or $fail( "fwrite failed" );
@@ -84,27 +84,25 @@ namespace fsm_definitions {
         template< class... Args >
         inline void put_to( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
         {
-            put_to( stream, format( fmt, forward<Args>( args )... ) );
+            put_to( stream, string_view( format( fmt, forward<Args>( args )... ) ) );
         }
 
         template< class... Args >
         inline void put( format_string<Args...> fmt, Args&&... args )
         {
-            put_to( stdout, format( fmt, forward<Args>( args )... ) );
+            put_to( stdout, fmt, forward<Args>( args )... );
         }
 
         template< class... Args >
         inline void put_line_to( const Stream_handle stream, format_string<Args...> fmt, Args&&... args )
         {
-            put_to( stream, format( fmt, forward<Args>( args )... ) );
-            put_to( stream, "\n" );
+            put_line_to( stream, string_view( format( fmt, forward<Args>( args )... ) ) );
         }
 
         template< class... Args >
         inline void put_line( format_string<Args...> fmt, Args&&... args )
         {
-            put_to( stdout, format( fmt, forward<Args>( args )... ) );
-            put_to( stdout, "\n" );
+            put_line_to( stdout, fmt, forward<Args>( args )... );
         }
     }  // namespace stream_io
 }  // namespace fsm_definitions
