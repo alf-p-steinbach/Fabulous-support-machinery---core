@@ -20,6 +20,9 @@ namespace fsm_definitions {
             fsm::const_;                                // type_builders.hpp
 
     namespace text::u8 {
+        constexpr Ꜿint  max_seq_length      = 4;        // As of 2024. Could be up to and including 7.
+        constexpr Ꜿint  max_tailbytes       = max_seq_length - 1;
+
         constexpr auto  ascii_pattern       = Bitpattern_<Byte>( "0xxx'xxxx" );
         constexpr auto  headbyte_pattern    = Bitpattern_<Byte>( "11xx'xxxx" );
         constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
@@ -57,15 +60,15 @@ namespace fsm_definitions {
         constexpr auto n_tailbytes_after( const Byte first_byte )
             -> Ꜿint
         {
-            // assert( !"oops, invalid head byte (max 3 tail bytes permitted)" );
             if( (first_byte & 0b1000'0000) == 0 ) { return 0; }
             if( (first_byte & 0b0010'0000) == 0 ) { return 1; }
             if( (first_byte & 0b0001'0000) == 0 ) { return 2; }
             if( (first_byte & 0b1000'1000) == 0 ) { return 3; }
+            // assert( !"oops, invalid head byte (max 3 tail bytes permitted)" );
             if( (first_byte & 0b1000'0100) == 0 ) { return 4; }
             if( (first_byte & 0b1000'0010) == 0 ) { return 5; }
             if( (first_byte & 0b1000'0001) == 0 ) { return 6; }
-            return 7;
+            return 0;       // Invalid head byte but return 0 to possibly skip 1 byte.
         }
 
         // The formal limit on number of tailbytes, 3, is not enforced.
