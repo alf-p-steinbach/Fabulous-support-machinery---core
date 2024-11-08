@@ -37,6 +37,7 @@ namespace fsm_definitions {
             return Validity::valid;
         }
 
+        // Array locations `p[0]` through `p[seq_length_of( p[0] ) - 1]` must exist.
         constexpr auto checked( const_<const Byte*> p )
             -> const Byte*
         {
