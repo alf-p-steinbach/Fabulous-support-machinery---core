@@ -29,8 +29,8 @@ namespace fsm_definitions {
             const Ꜿint n_bytes = seq_length_of( code );
             if( n_bytes > max_seq_length )  { return Validity::invalid_seq_length; }
 
-            for( int i = 1; i < n_bytes; ++i ) {
-                if( not is_tailbyte( Byte( p[i] ) ) ) {
+            for( Ꜿint i = 1; i < n_bytes; ++i ) {
+                if( not is_tailbyte( p[+i] ) ) {
                     return Validity::invalid_tailbyte;
                 }
             }
