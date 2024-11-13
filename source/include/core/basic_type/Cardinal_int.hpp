@@ -14,9 +14,9 @@ namespace tag {
 }  // namesapace tag
 
 namespace fsm_definitions {
-    using   fsm::in_out_,                   // parameter_passing/data_flow_directions_.hpp>
-            fsm::enabled_if_;               // parameter_passing/enabled_if_.hpp
-    using   std::is_arithmetic_v;           // <type_traits>
+    using   fsm::in_out_,                               // parameter_passing/data_flow_directions_.hpp>
+            fsm::enabled_if_;                           // parameter_passing/enabled_if_.hpp
+    using   std::is_arithmetic_v, std::common_type_t;   // <type_traits>
 
     namespace basic_type {
 
@@ -55,7 +55,17 @@ namespace fsm_definitions {
             { assert( m_value >= 0 ); }
 
             constexpr auto as_int() const noexcept -> int { return m_value; }
-            constexpr explicit operator int() const noexcept { return as_int(); }
+            // constexpr explicit operator int() const noexcept { return as_int(); }
+
+            template< class Integer >
+            constexpr operator Integer () const noexcept
+            {
+                using Common = common_type_t<Integer, int>;
+
+                const auto result = static_cast<Integer>( as_int() );
+                assert( Common( result ) == Common( as_int() ) );
+                return result;
+            }
         };
 
         using Ꜿint = Cardinal_int;          // Latin capital letter reversed c with dot, U+A73E.

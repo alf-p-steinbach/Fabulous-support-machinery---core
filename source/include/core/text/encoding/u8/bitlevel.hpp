@@ -23,15 +23,15 @@ namespace fsm_definitions {
         constexpr Ꜿint  max_seq_length      = 4;        // As of 2024. Could be up to and including 7.
         constexpr Ꜿint  max_tailbytes       = max_seq_length - 1;
 
-        constexpr auto  ascii_pattern       = Bitpattern_<Byte>( "0xxx'xxxx" );
+        constexpr auto  asciibyte_pattern   = Bitpattern_<Byte>( "0xxx'xxxx" );
         constexpr auto  headbyte_pattern    = Bitpattern_<Byte>( "11xx'xxxx" );
         constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
 
         constexpr Ꜿint n_tailbyte_value_bits   = tailbyte_pattern.n_value_bits();      // 6
 
-        constexpr auto is_ascii_byte( const Byte unit ) noexcept
+        constexpr auto is_asciibyte( const Byte unit ) noexcept
             -> bool
-        { return ascii_pattern.matches( unit ); }
+        { return asciibyte_pattern.matches( unit ); }
 
         constexpr auto is_tailbyte( const Byte unit ) noexcept
             -> bool
@@ -41,6 +41,10 @@ namespace fsm_definitions {
             -> bool
         { return headbyte_pattern.matches( unit ); }
 
+        constexpr auto is_seq_start( const Byte unit ) noexcept
+            -> bool
+        { return not is_tailbyte( unit ); }     // = `is_asciibyte( unit ) or is_headbyte( unit )`
+ 
         // Unspecified if the unit is not a tailbyte.
         constexpr auto tailbyte_value_of( const Byte unit ) noexcept
             -> Byte

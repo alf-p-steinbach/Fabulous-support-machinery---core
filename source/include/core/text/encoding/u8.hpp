@@ -3,3 +3,4 @@
 
 #include <fsm/core/text/encoding/u8/bitlevel.hpp>
 #include <fsm/core/text/encoding/u8/seq.hpp>
+#include <fsm/core/text/encoding/u8/seq.char.hpp>

@@ -15,13 +15,13 @@ namespace app {
             const_<const char*> p_end = s.data() + s.length();
 
             // Display the characters.
-            for( const char* p = s.data(); p != p_end; p += +u8::seq_length_of( *p ) ) {
-                put( "{:>5s}", string_view( p, +u8::seq_length_of( *p ) ) );
+            for( const char* p = s.data(); p != p_end; u8::move_to_next( p ) ) {
+                put( "{:>5s}", string_view( p, u8::seq_length_of( *p ) ) );
             }
             put( "\n" );
 
             // Display the codes.
-            for( const char* p = s.data(); p != p_end; p += +u8::seq_length_of( *p ) ) {
+            for( const char* p = s.data(); p != p_end;  u8::move_to_next( p ) ) {
                 put( " {:04X}", unsigned( u8::codepoint_from( p ) ) );
             }
             put( "\n" );
