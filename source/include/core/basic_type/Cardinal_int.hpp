@@ -7,6 +7,7 @@
 #include <fsm/core/wrapped/c_lib/assert.hpp>            // assert
 #include <fsm/core/wrapped/c_lib/limits.hpp>            // INT_MAX
 
+#include <limits>
 #include <type_traits>
 
 namespace tag {
@@ -14,9 +15,10 @@ namespace tag {
 }  // namesapace tag
 
 namespace fsm_definitions {
-    using   fsm::in_out_,                               // parameter_passing/data_flow_directions_.hpp>
-            fsm::enabled_if_;                           // parameter_passing/enabled_if_.hpp
-    using   std::is_arithmetic_v, std::common_type_t;   // <type_traits>
+    using   fsm::in_out_,           // parameter_passing/data_flow_directions_.hpp>
+            fsm::enabled_if_;       // parameter_passing/enabled_if_.hpp
+    using   std::numeric_limits,    // <limits>
+            std::common_type_t, std::is_arithmetic_v, std::is_unsigned_v;   // <type_traits>
 
     namespace basic_type {
 
@@ -32,12 +34,17 @@ namespace fsm_definitions {
         // • has reasonable magnitude comparison to values of any other arithmetic type;
         // • as a special case supports efficient bounds checking for a range 0 to N;
         // • converts explicitly to `int` via `x.as_int`, `+x` or `-x`; and
-        // • with `NDEBUG` defined has checked implicit construction from `int`.
+        // • has `assert`-checked implicit construction from `int` (turn off with `NDEBUG`).
         //
-        // In order to avoid annoying explicit conversions of literals to `Cardinal_int`, with
+        // In order to avoid annoying explicit literals → `Cardinal_int` conversions, with
         // this design `int` converts implicitly to `Cardinal_int`, but not vice versa.
         //
         // That hard choice means that mixed type expressions resolve to type `Cardinal_int`.
+        //
+        // However there is a templated `assert`-checked implicit conversion to integer types.
+        // This conversion is not invoked in arithmetic expressions, since the desired type
+        // is not known. But it's invoked for a `Cardinal_int` as initialiser or as the rhs
+        // of an assignment, avoiding annoying explicit `Cardinal_int` → integer conversions.
         //
         class Cardinal_int
         {
@@ -55,16 +62,18 @@ namespace fsm_definitions {
             { assert( m_value >= 0 ); }
 
             constexpr auto as_int() const noexcept -> int { return m_value; }
-            // constexpr explicit operator int() const noexcept { return as_int(); }
 
-            template< class Integer >
-            constexpr operator Integer () const noexcept
+            template< class Number >
+            constexpr operator Number () const noexcept
             {
-                using Common = common_type_t<Integer, int>;
-
-                const auto result = static_cast<Integer>( as_int() );
-                assert( Common( result ) == Common( as_int() ) );
-                return result;
+                static_assert( is_arithmetic_v<Number> );
+                using Common = common_type_t<Number, int>;
+                (void) Common();
+                assert(
+                    is_unsigned_v<Number> or
+                    static_cast<Common>( as_int() ) <= numeric_limits<Number>::max()
+                    );
+                return static_cast<Number>( as_int() );
             }
         };
 
