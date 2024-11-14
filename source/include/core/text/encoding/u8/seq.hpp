@@ -62,6 +62,24 @@ namespace fsm_definitions {
             return p;
         }
 
+        constexpr auto capped_p_seq_after(
+            const_<const Byte*>     p_seq,
+            const Ꜿint              max_length = max_seq_length
+            ) -> const Byte*
+        {
+            // return p_seq + min( seq_length_of( p_seq ), max_length );
+            if( max_length == 0 ) {
+                return p_seq;
+            }
+            const Byte* p = p_seq + 1;
+            Ꜿint count = 1;
+            while( is_tailbyte( *p ) and count < max_length ) {
+                ++p;
+                ++count;
+            }
+            return p;
+        }
+
         constexpr auto p_seq_before( const_<const Byte*> p_seq )
             -> const Byte*
         {
@@ -70,14 +88,47 @@ namespace fsm_definitions {
             return p;
         }
 
+        constexpr auto capped_p_seq_before(
+            const_<const Byte*>     p_seq,
+            const Ꜿint              max_length = max_seq_length
+            ) -> const Byte*
+        {
+            if( max_length == 0 ) {
+                return p_seq;
+            }
+            const Byte* p = p_seq - 1;
+            Ꜿint count = 1;
+            while( is_tailbyte( *p ) and count < max_length ) {
+                --p;
+                ++count;
+            }
+            return p;
+        }
+
         constexpr void move_to_next( const Byte*& p_seq )
         {
             p_seq = p_seq_after( p_seq );
         }
 
+        constexpr void capped_move_to_next(
+            const Byte*&    p_seq,
+            const Ꜿint      max_length = max_seq_length
+            )
+        {
+            p_seq = capped_p_seq_after( p_seq, max_length );
+        }
+
         constexpr void move_to_prev( const Byte*& p_seq )
         {
             p_seq = p_seq_before( p_seq );
+        }
+
+        constexpr void capped_move_to_prev(
+            const Byte*&    p_seq,
+            const Ꜿint      max_length = max_seq_length
+            )
+        {
+            p_seq = capped_p_seq_before( p_seq, max_length );
         }
 
     } }  // namespace u8::text, inline namespace seq

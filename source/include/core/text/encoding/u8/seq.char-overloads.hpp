@@ -21,24 +21,52 @@ namespace fsm_definitions {
         // Array locations `p[0]` through `p[seq_length_of( p[0] ) - 1]` must exist.
         constexpr auto checked( const_<const char*> p )
             -> const char*
-        { return byte_ptr_cast_<const char>( byte_ptr_cast( p ) ); }
+        { return byte_ptr_cast_<const char>( checked( byte_ptr_cast( p ) ) ); }
 
         constexpr auto p_seq_after( const_<const char*> p_seq )
             -> const char*
-        { return byte_ptr_cast_<const char>( byte_ptr_cast( p_seq ) ); }
+        { return byte_ptr_cast_<const char>( p_seq_after( byte_ptr_cast( p_seq ) ) ); }
+
+        constexpr auto capped_p_seq_after(
+            const_<const char*>     p_seq,
+            const Ꜿint              max_length = max_seq_length
+            ) -> const char*
+        { return byte_ptr_cast_<const char>( capped_p_seq_after( byte_ptr_cast( p_seq ), max_length ) ); }
 
         constexpr auto p_seq_before( const_<const char*> p_seq )
             -> const char*
-        { return byte_ptr_cast_<const char>( byte_ptr_cast( p_seq ) ); }
+        { return byte_ptr_cast_<const char>( p_seq_before( byte_ptr_cast( p_seq ) ) ); }
+
+        constexpr auto capped_p_seq_before(
+            const_<const char*>     p_seq,
+            const Ꜿint              max_length = max_seq_length
+            ) -> const char*
+        { return byte_ptr_cast_<const char>( capped_p_seq_before( byte_ptr_cast( p_seq ), max_length ) ); }
 
         constexpr void move_to_next( const char*& p_seq )
         {
             p_seq = byte_ptr_cast_<const char>( p_seq_after( byte_ptr_cast( p_seq ) ) );
         }
 
+        constexpr void capped_move_to_next(
+            const char*&    p_seq,
+            const Ꜿint      max_length = max_seq_length
+            )
+        {
+            p_seq = byte_ptr_cast_<const char>( capped_p_seq_after( byte_ptr_cast( p_seq ), max_length ) );
+        }
+
         constexpr void move_to_prev( const char*& p_seq )
         {
             p_seq = byte_ptr_cast_<const char>( p_seq_before( byte_ptr_cast( p_seq ) ) );
+        }
+
+        constexpr void capped_move_to_prev(
+            const char*&    p_seq,
+            const Ꜿint      max_length = max_seq_length
+            )
+        {
+            p_seq = byte_ptr_cast_<const char>( capped_p_seq_before( byte_ptr_cast( p_seq ), max_length ) );
         }
 
         constexpr auto string_view_of( const_<const char*> p_seq )

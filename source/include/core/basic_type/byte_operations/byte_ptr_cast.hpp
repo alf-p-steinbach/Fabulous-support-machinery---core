@@ -21,6 +21,8 @@ namespace fsm_definitions {
             return reinterpret_cast<To*>( p );
         }
 
+        // TODO: remove templating here, e.g. make parameter do the conversion:
+
         template< class From >
         constexpr auto byte_ptr_cast( const_<From*> p )
             -> Byte*
