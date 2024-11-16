@@ -30,7 +30,12 @@ namespace fsm_definitions {
         template< class Container >
         constexpr auto size_of( in_<Container> c ) noexcept
             -> Size
-        { return static_cast<Size>( size( c ) ); }          // Like C++20 std::ssize.
+        { return static_cast<Size>( size( c ) ); }              // Like C++20 std::ssize.
+
+        template< class Container >
+        constexpr auto ssize_of( in_<Container> c ) noexcept    // Alternative “well known” name.
+            -> Size
+        { return size_of( c ); }
 
         template< class Container >
         constexpr auto usize_of( in_<Container> c ) noexcept
