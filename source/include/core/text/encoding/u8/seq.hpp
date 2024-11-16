@@ -28,10 +28,10 @@ namespace fsm_definitions {
 
             if( not is_headbyte( code ) )   { return Validity::invalid_headbyte; }
 
-            const Ꜿint n_bytes = seq_length_of( code );
+            const Cint n_bytes = seq_length_of( code );
             if( n_bytes > max_seq_length )  { return Validity::invalid_seq_length; }
 
-            for( Ꜿint i = 1; i < n_bytes; ++i ) {
+            for( Cint i = 1; i < n_bytes; ++i ) {
                 if( not is_tailbyte( p[+i] ) ) {
                     return Validity::invalid_tailbyte;
                 }
@@ -64,7 +64,7 @@ namespace fsm_definitions {
 
         constexpr auto capped_p_seq_after(
             const_<const Byte*>     p_seq,
-            const Ꜿint              max_length = max_seq_length
+            const Cint              max_length = max_seq_length
             ) -> const Byte*
         {
             // return p_seq + min( seq_length_of( p_seq ), max_length );
@@ -72,7 +72,7 @@ namespace fsm_definitions {
                 return p_seq;
             }
             const Byte* p = p_seq + 1;
-            Ꜿint count = 1;
+            Cint count = 1;
             while( is_tailbyte( *p ) and count < max_length ) {
                 ++p;
                 ++count;
@@ -90,14 +90,14 @@ namespace fsm_definitions {
 
         constexpr auto capped_p_seq_before(
             const_<const Byte*>     p_seq,
-            const Ꜿint              max_length = max_seq_length
+            const Cint              max_length = max_seq_length
             ) -> const Byte*
         {
             if( max_length == 0 ) {
                 return p_seq;
             }
             const Byte* p = p_seq - 1;
-            Ꜿint count = 1;
+            Cint count = 1;
             while( is_tailbyte( *p ) and count < max_length ) {
                 --p;
                 ++count;
@@ -112,7 +112,7 @@ namespace fsm_definitions {
 
         constexpr void capped_move_to_next(
             const Byte*&    p_seq,
-            const Ꜿint      max_length = max_seq_length
+            const Cint      max_length = max_seq_length
             )
         {
             p_seq = capped_p_seq_after( p_seq, max_length );
@@ -125,7 +125,7 @@ namespace fsm_definitions {
 
         constexpr void capped_move_to_prev(
             const Byte*&    p_seq,
-            const Ꜿint      max_length = max_seq_length
+            const Cint      max_length = max_seq_length
             )
         {
             p_seq = capped_p_seq_before( p_seq, max_length );

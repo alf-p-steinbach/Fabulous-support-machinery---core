@@ -1,7 +1,7 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/basic_type/Cardinal_int.hpp>             // Ꜿint
+#include <fsm/core/basic_type/Cardinal_int.hpp>             // Cint
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>         // now, $fail
 #include <fsm/core/stream_io/put.hpp>                       // put
 #include <fsm/core/text/trimming.hpp>                       // trimmed
@@ -9,7 +9,7 @@
 #include <cstdio>
 
 namespace fsm_definitions {
-    using   fsm::Ꜿint,                  // basic_type/Cardinal_int.hpp
+    using   fsm::Cint,                  // basic_type/Cardinal_int.hpp
             fsm::now,                   // exception_handling/FSM_FAIL.hpp
             fsm::put,                   // stream_io/put.hpp
             fsm::trimmed;               // text/trimming.hpp
@@ -17,7 +17,7 @@ namespace fsm_definitions {
     using   std::FILE;
 
     namespace input {
-        struct Max_line_length{ Ꜿint value; };
+        struct Max_line_length{ Cint value; };
         constexpr auto n_max_chars_default = Max_line_length{ 256 };
 
         class Line_reader

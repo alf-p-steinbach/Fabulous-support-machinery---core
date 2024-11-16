@@ -1,23 +1,23 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/basic_type/Cardinal_int.hpp>                     // Ꜿint
+#include <fsm/core/basic_type/Cardinal_int.hpp>                     // Cint
 #include <fsm/core/class_kinds/No_copy_or_move.hpp>                 // No_copy_or_move
 #include <fsm/core/platform/inspection/os_id_macros.hpp>            // FSM_OS_...
 
 #include <cstdint>
 
 namespace fsm_definitions {
-    using   fsm::Ꜿint,                      // basic_type/Cardinal_int.hpp
+    using   fsm::Cint,                      // basic_type/Cardinal_int.hpp
             fsm::No_copy_or_move;           // class_kinds/No_copy_or_move.hpp
 
     using   std::uint32_t;          // <cstdint>
 
     #ifdef FSM_OS_IS_WINDOWS
         namespace windows_impl {
-            extern auto console_codepage() -> Ꜿint;
-            extern void set_console_codepage( Ꜿint cp );
-            constexpr Ꜿint codepage_utf8 = 65001;                // MS `CP_UTF8`
+            extern auto console_codepage() -> Cint;
+            extern void set_console_codepage( Cint cp );
+            constexpr Cint codepage_utf8 = 65001;                // MS `CP_UTF8`
             
             extern auto console_mode() -> uint32_t;
             extern void set_console_mode( uint32_t new_mode );
@@ -25,7 +25,7 @@ namespace fsm_definitions {
 
             class Console_fix: No_copy_or_move
             {
-                Ꜿint        m_original_cp;
+                Cint        m_original_cp;
                 uint32_t    m_original_mode;
               
             public:

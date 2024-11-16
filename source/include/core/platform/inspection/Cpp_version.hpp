@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/basic_type/Cardinal_int.hpp>                         // Ꜿint
+#include <fsm/core/basic_type/Cardinal_int.hpp>                         // Cint
 #include <fsm/core/mixins/With_relops_from_compare_.hpp>                // With_relops_from_compare_
 #include <fsm/core/platform/inspection/cpp_version_macros.hpp>          // FSM_CPPxxx
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>          // in_
@@ -18,18 +18,18 @@ namespace fsm_definitions {
         {
             using Self = Cpp_version;
 
-            Ꜿint    year;
-            Ꜿint    month;              // 1-based.
+            Cint    year;
+            Cint    month;              // 1-based.
             
-            constexpr Cpp_version( const Ꜿint y, const Ꜿint m ): year( y ), month( m ) {}
+            constexpr Cpp_version( const Cint y, const Cint m ): year( y ), month( m ) {}
 
-            static constexpr auto from_number( const Ꜿint version_number ) noexcept
+            static constexpr auto from_number( const Cint version_number ) noexcept
                 -> Cpp_version
             { return {version_number / 100, version_number % 100}; }
 
-            constexpr auto number() const noexcept -> Ꜿint { return 100*year + month; }
+            constexpr auto number() const noexcept -> Cint { return 100*year + month; }
 
-            constexpr auto informal_id() const noexcept -> Ꜿint { return year % 100; }
+            constexpr auto informal_id() const noexcept -> Cint { return year % 100; }
 
             auto to_string() const -> string { return "C++" + std::to_string( +informal_id() ); }
 

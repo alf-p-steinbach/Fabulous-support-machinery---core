@@ -2,7 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/type_builders.hpp>                       // in_
-#include <fsm/core/basic_type/Cardinal_int.hpp>             // Ꜿint
+#include <fsm/core/basic_type/Cardinal_int.hpp>             // Cint
 #include <fsm/core/basic_type/names/Index-and-Size.hpp>     // Index, Size (as ptrdiff_t)
 
 #include    <iterator>      // std::(distance, size)
@@ -39,12 +39,12 @@ namespace fsm_definitions {
 
         template< class Container >                         // Use with care -- no range checking.
         constexpr auto cint_size_of( in_<Container> c ) noexcept
-            -> Ꜿint
+            -> Cint
         { return static_cast<int>( size_of( c ) ); }
 
         template< class Container >                         // Use with care -- no range checking.
         constexpr auto cint_capacity_of( in_<Container> c ) noexcept
-            -> Ꜿint
+            -> Cint
         { return static_cast<int>( c.capacity() ); }
 
         // Placed here because it belongs with the `int_size_of` function, even if not about collection.

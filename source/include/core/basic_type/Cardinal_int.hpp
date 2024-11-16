@@ -28,7 +28,7 @@ namespace fsm_definitions {
 
         // The notion of a non-negative integer à la Modula-2’s `CARDINAL`.
         //
-        // A `Cardinal_int` a.k.a. `Ꜿint`
+        // A `Cardinal_int` a.k.a. `Cint`
         //
         // • has the range 0 through `INT_MAX` inclusive, i.e. no negative values ever;
         // • has reasonable magnitude comparison to values of any other arithmetic type;
@@ -77,10 +77,11 @@ namespace fsm_definitions {
             }
         };
 
-        using Ꜿint = Cardinal_int;          // Latin capital letter reversed c with dot, U+A73E.
-                                            // Can be short for “Cardinal_int”, and/or
+        // Could have used latin capital letter reversed c with dot, U+A73E, but difficult to type.
+        using Cint = Cardinal_int;          // Can be short for “Cardinal_int”, and/or
                                             // can be read as short for “counting number”.
 
+                                            
         // When `limit` is guaranteed not negative and `x` just may be negative, instead of
         //
         //      0 < x and x < limit
@@ -91,142 +92,142 @@ namespace fsm_definitions {
         //
         // Probably a modern compiler will optimize to this anyway. But may be more clear.
         //
-        constexpr auto in_range_zero_up_to( const Ꜿint limit, const int x ) noexcept
+        constexpr auto in_range_zero_up_to( const Cint limit, const int x ) noexcept
             -> bool
         { return (unsigned( x ) < unsigned( limit.as_int() )); }
 
         inline namespace cardinal_literals {
             constexpr auto operator ""_cardinal( const unsigned long long int value ) noexcept
-                -> Ꜿint
+                -> Cint
             {
                 assert( value <= INT_MAX );
-                return Ꜿint( value );
+                return Cint( value );
             }
 
-            constexpr auto operator ""_Ꜿint( const unsigned long long int value ) noexcept
-                -> Ꜿint
+            constexpr auto operator ""_Cint( const unsigned long long int value ) noexcept
+                -> Cint
             { return operator""_cardinal( value ); }
 
-            constexpr auto Ꜿ0 = 0_Ꜿint;
-            constexpr auto Ꜿ1 = 1_Ꜿint;
+            constexpr auto C0 = 0_Cint;
+            constexpr auto C1 = 1_Cint;
         }  // inline namespace cardinal_literals
 
         inline namespace cardinal_to_int_conversion {
-            constexpr auto operator+( const Ꜿint x ) noexcept
+            constexpr auto operator+( const Cint x ) noexcept
                 -> int
             { return x.as_int(); }
 
-            constexpr auto operator-( const Ꜿint x ) noexcept
+            constexpr auto operator-( const Cint x ) noexcept
                 -> int
             { return -x.as_int(); }
         }  // inline namespace cardinal_to_int_conversion
 
        inline namespace cardinal_comparison {
-            constexpr auto operator< ( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a < +b); }
-            constexpr auto operator<=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a <= +b); }
-            constexpr auto operator==( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a == +b); }
-            constexpr auto operator>=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a >= +b); }
-            constexpr auto operator> ( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a > +b); }
-            constexpr auto operator!=( const Ꜿint a, const Ꜿint b ) noexcept -> bool { return (+a != +b); }
+            constexpr auto operator< ( const Cint a, const Cint b ) noexcept -> bool { return (+a < +b); }
+            constexpr auto operator<=( const Cint a, const Cint b ) noexcept -> bool { return (+a <= +b); }
+            constexpr auto operator==( const Cint a, const Cint b ) noexcept -> bool { return (+a == +b); }
+            constexpr auto operator>=( const Cint a, const Cint b ) noexcept -> bool { return (+a >= +b); }
+            constexpr auto operator> ( const Cint a, const Cint b ) noexcept -> bool { return (+a > +b); }
+            constexpr auto operator!=( const Cint a, const Cint b ) noexcept -> bool { return (+a != +b); }
 
             // TODO: optimize `compare` for unsigned `Number` types.
 
             template< class Number,
                 bool = enabled_if_< is_arithmetic_v< Number > > >
-            constexpr auto compare( const Ꜿint a, const Number b ) noexcept
+            constexpr auto compare( const Cint a, const Number b ) noexcept
                 -> int
             { return (Number( a ) > b) - (Number( a ) < b); }
 
             template< class Number,
                 bool = enabled_if_< is_arithmetic_v< Number > > >
-            constexpr auto compare( const Number a, const Ꜿint b ) noexcept
+            constexpr auto compare( const Number a, const Cint b ) noexcept
                 -> int
             { return (a > Number( b )) - (a < Number( b )); }
 
-            constexpr auto compare( Ꜿint a, const Ꜿint b ) noexcept
+            constexpr auto compare( Cint a, const Cint b ) noexcept
                 -> int
             { return a.as_int() - b.as_int(); }
         }  // inline namespace cardinal_comparison
 
         inline namespace cardinal_arithmetic {
-            constexpr auto operator+( const Ꜿint a, const Ꜿint b ) noexcept
-                -> Ꜿint
-            { return Ꜿint( tag::Unchecked(), +a + +b ); }
+            constexpr auto operator+( const Cint a, const Cint b ) noexcept
+                -> Cint
+            { return Cint( tag::Unchecked(), +a + +b ); }
 
-            constexpr auto operator+=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
-                -> Ꜿint&
+            constexpr auto operator+=( in_out_<Cint> a, const Cint b ) noexcept
+                -> Cint&
             { return (a = a + b); }
 
-            constexpr auto operator++( in_out_<Ꜿint> x ) noexcept
-                -> Ꜿint&
-            { return (x += Ꜿ1); }
+            constexpr auto operator++( in_out_<Cint> x ) noexcept
+                -> Cint&
+            { return (x += C1); }
 
             [[nodiscard]]
-            constexpr auto operator++( in_out_<Ꜿint> x, int ) noexcept
-                -> Ꜿint
+            constexpr auto operator++( in_out_<Cint> x, int ) noexcept
+                -> Cint
             {
-                const Ꜿint result = x;
+                const Cint result = x;
                 ++x;
                 return result;
             }
 
-            constexpr auto operator-( const Ꜿint a, const Ꜿint b ) noexcept
-                -> Ꜿint
+            constexpr auto operator-( const Cint a, const Cint b ) noexcept
+                -> Cint
             {
                 assert( +a >= +b );
-                return Ꜿint( +a - +b );        // Checked.
+                return Cint( +a - +b );        // Checked.
             }
 
-            constexpr auto operator-=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
-                -> Ꜿint&
+            constexpr auto operator-=( in_out_<Cint> a, const Cint b ) noexcept
+                -> Cint&
             { return (a = a - b); }
 
-            constexpr auto operator--( in_out_<Ꜿint> x ) noexcept
-                -> Ꜿint&
-            { return (x -= Ꜿ1); }
+            constexpr auto operator--( in_out_<Cint> x ) noexcept
+                -> Cint&
+            { return (x -= C1); }
 
             [[nodiscard]]
-            constexpr auto operator--( in_out_<Ꜿint> x, int ) noexcept
-                -> Ꜿint
+            constexpr auto operator--( in_out_<Cint> x, int ) noexcept
+                -> Cint
             {
-                const Ꜿint result = x;
+                const Cint result = x;
                 --x;
                 return result;
             }
 
-            constexpr auto operator*( const Ꜿint a, const Ꜿint b ) noexcept
-                -> Ꜿint
-            { return Ꜿint( tag::Unchecked(), +a * +b ); }
+            constexpr auto operator*( const Cint a, const Cint b ) noexcept
+                -> Cint
+            { return Cint( tag::Unchecked(), +a * +b ); }
 
-            constexpr auto operator*=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
-                -> Ꜿint&
+            constexpr auto operator*=( in_out_<Cint> a, const Cint b ) noexcept
+                -> Cint&
             { return (a = a * b); }
 
-            constexpr auto operator/( const Ꜿint a, const Ꜿint b ) noexcept
-                -> Ꜿint
+            constexpr auto operator/( const Cint a, const Cint b ) noexcept
+                -> Cint
             {
                 assert( +b != 0 );
-                return Ꜿint( tag::Unchecked(), +a / +b );
+                return Cint( tag::Unchecked(), +a / +b );
             }
 
-            constexpr auto operator/=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
-                -> Ꜿint&
+            constexpr auto operator/=( in_out_<Cint> a, const Cint b ) noexcept
+                -> Cint&
             { return (a = a / b); }
 
-            constexpr auto operator%( const Ꜿint a, const Ꜿint b ) noexcept
-                -> Ꜿint
+            constexpr auto operator%( const Cint a, const Cint b ) noexcept
+                -> Cint
             {
                 assert( +b != 0 );
-                return Ꜿint( tag::Unchecked(), +a % +b );
+                return Cint( tag::Unchecked(), +a % +b );
             }
 
-            constexpr auto operator%=( in_out_<Ꜿint> a, const Ꜿint b ) noexcept
-                -> Ꜿint&
+            constexpr auto operator%=( in_out_<Cint> a, const Cint b ) noexcept
+                -> Cint&
             { return (a = a % b); }
 
             // In Pascal these were built-ins named `succ` and `pred`:
-            constexpr auto next_of( const Ꜿint x ) noexcept -> Ꜿint { return x + 1; }
-            constexpr auto prev_of( const Ꜿint x ) noexcept -> Ꜿint { return x - 1; }
+            constexpr auto next_of( const Cint x ) noexcept -> Cint { return x + 1; }
+            constexpr auto prev_of( const Cint x ) noexcept -> Cint { return x - 1; }
         }  // inline namespace cardinal_arithmetic
     }  // namespace basic_type
 }  // namespace fsm_definitions
