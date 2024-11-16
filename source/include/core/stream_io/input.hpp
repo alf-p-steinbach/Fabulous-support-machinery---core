@@ -66,8 +66,9 @@ namespace fsm_definitions {
             return the_line_reader;
         }
 
-        inline auto full_input_line( const Max_line_length max_line_length = max_full_line_length_default )
-            -> string
+        inline auto full_input_line(
+            const Max_line_length max_line_length = max_full_line_length_default
+            ) -> string
         { (void) max_line_length;  return stdin_lines().next(); }  // TODO:
 
         inline auto full_input_line(
