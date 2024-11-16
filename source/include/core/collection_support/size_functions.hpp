@@ -14,11 +14,6 @@ namespace fsm_definitions {
             std::distance, std::size;   // <iterator>
 
     namespace collection_support { inline namespace size_functions {
-        template< class Container >
-        constexpr auto is_empty( in_<Container> c ) noexcept
-            -> bool
-        { return c.empty(); }
-
         template< class Item, Size n >
         constexpr auto is_empty( in_<Item[n]> ) noexcept
             -> bool
@@ -26,6 +21,11 @@ namespace fsm_definitions {
             static_assert( n > 0 );
             return false;
         }
+
+        template< class Container >
+        constexpr auto is_empty( in_<Container> c ) noexcept
+            -> bool
+        { return c.empty(); }
 
         template< class Container >
         constexpr auto size_of( in_<Container> c ) noexcept
@@ -41,6 +41,11 @@ namespace fsm_definitions {
         constexpr auto cint_size_of( in_<Container> c ) noexcept
             -> Cint
         { return static_cast<int>( size_of( c ) ); }
+
+        template< class Item, Size n >                      // Use with care -- no range checking.
+        constexpr auto cint_capacity_of( in_<Item[n]> a ) noexcept
+            -> Cint
+        { return n; }
 
         template< class Container >                         // Use with care -- no range checking.
         constexpr auto cint_capacity_of( in_<Container> c ) noexcept
