@@ -5,11 +5,11 @@
 //
 // Example usage:
 //
-//     sort( FSM_ITS( items ) );
-//
-// Or with $-macros from header <fsm/$-macros.hpp>:
-//
 //     sort( $its( items ) );
+//
+// Or with classic uppercase prefixed macro name
+//
+//     sort( FSM_ITS( items ) );
 
 #define FSM_ITS( collection )                   \
     fsm_definitions::begin_of( collection ), fsm_definitions::end_of( collection )
@@ -20,6 +20,7 @@
 
 #include <iterator>         // std::(begin, end)
 
+// TODO: move to separate header and export:
 namespace fsm_definitions {
 
     template< class Collection >
