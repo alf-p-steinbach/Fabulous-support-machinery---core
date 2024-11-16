@@ -5,6 +5,7 @@
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>         // now, $fail
 #include <fsm/core/stream_io/put.hpp>                       // put
 #include <fsm/core/text/trimming.hpp>                       // trimmed
+#include <fsm/core/text/encoding/u8.hpp>                    // fsm::text::u8::*
 
 #include <cstdio>
 
@@ -17,24 +18,32 @@ namespace fsm_definitions {
     using   std::FILE;
 
     namespace input {
-        struct Max_line_length{ Cint value; };
-        constexpr auto n_max_chars_default = Max_line_length{ 256 };
+        struct Max_line_length{ Cint value;  operator Cint() const { return value; } };
+
+        constexpr auto minimum_max_line_length          = Max_line_length{ text::u8::max_seq_length };
+        constexpr auto max_line_length_default          = Max_line_length{ 256 };
+        constexpr auto max_full_line_length_default     = Max_line_length{ 16*1024 };
 
         class Line_reader
         {
-            FILE*       m_stream;
+            FILE*           m_stream;
+            Cint            m_max_line_length;
 
         public:
-            Line_reader( const_<FILE*> stream = stdin ):
-                m_stream( stream )
+            Line_reader(
+                const_<FILE*>           stream          = stdin,
+                const Max_line_length   max_line_length = max_line_length_default
+                ):
+                m_stream( stream ),
+                m_max_line_length( max_line_length )
             {
                 assert( m_stream );
+                assert( m_max_line_length > minimum_max_line_length );
             }
 
-            auto next( const Max_line_length n_max_chars = n_max_chars_default )
-                -> string
+            auto next() -> string
             {
-                (void) n_max_chars;     // TODO: Impose limit
+                // TODO: Impose limit
                 // const int chunk_size = 64;
                 string result;
                 for( ;; ) {
@@ -57,30 +66,28 @@ namespace fsm_definitions {
             return the_line_reader;
         }
 
-        inline auto full_input_line( const Max_line_length n_max_chars = n_max_chars_default )
+        inline auto full_input_line( const Max_line_length max_line_length = max_full_line_length_default )
             -> string
-        { return stdin_lines().next( n_max_chars ); }
+        { (void) max_line_length;  return stdin_lines().next(); }  // TODO:
 
         inline auto full_input_line(
             in_<string_view>        prompt,
-            const Max_line_length   n_max_chars = n_max_chars_default
+            const Max_line_length   max_line_length = max_full_line_length_default
             ) -> string
         {
             put( prompt );
-            return full_input_line( n_max_chars );
+            return full_input_line( max_line_length );
         }
 
-        inline auto input_line( const Max_line_length n_max_chars = n_max_chars_default )
+        inline auto input_line()
             -> string
-        { return trimmed( full_input_line( n_max_chars ) ); }
+        { return trimmed( stdin_lines().next() ); }
 
-        inline auto input_line(
-            in_<string_view>        prompt,
-            const Max_line_length   n_max_chars = n_max_chars_default
-            ) -> string
+        inline auto input_line( in_<string_view> prompt )
+            -> string
         {
             put( prompt );
-            return input_line( n_max_chars );
+            return input_line();
         }
     }  // namespace input
 }  // namespace fsm_definitions
