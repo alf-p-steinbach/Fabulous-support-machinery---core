@@ -10,8 +10,9 @@
 namespace fsm_definitions {
     using   fsm::in_,                   // type_builders.hpp
             fsm::Size;                  // basic_type/names/Index-and-size.hpp
-    using   std::size_t,                // <cstddef>
-            std::distance, std::size;   // <iterator>
+
+    using   std::size_t,                            // <cstddef>
+            std::empty, std::distance, std::size;   // <iterator>
 
     namespace collection_support { inline namespace size_functions {
         template< class Item, Size n >
@@ -22,10 +23,11 @@ namespace fsm_definitions {
             return false;
         }
 
+        // TODO: check if this is invoked for an initializer_list
         template< class Container >
         constexpr auto is_empty( in_<Container> c ) noexcept
             -> bool
-        { return c.empty(); }
+        { return empty( c ); }
 
         template< class Container >
         constexpr auto size_of( in_<Container> c ) noexcept
