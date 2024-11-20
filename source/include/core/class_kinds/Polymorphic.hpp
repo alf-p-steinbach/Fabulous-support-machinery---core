@@ -2,7 +2,6 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 namespace fsm_definitions {
-    using   fsm::in_;
 
     namespace class_kinds {
 

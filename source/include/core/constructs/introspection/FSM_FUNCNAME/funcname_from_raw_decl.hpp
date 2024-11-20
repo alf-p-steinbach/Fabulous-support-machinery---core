@@ -1,14 +1,15 @@
 #pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/basic_type/names/Index-and-Size.hpp>     // Index
-#include <fsm/core/type_builders.hpp>                       // in_
+#include <fsm/core/basic_type/names/Index-and-Size.hpp>             // Index
+#include <fsm/core/parameter_passing/data_flow_directions.hpp>      // in_
 
 #include <string_view>
 
 namespace fsm_definitions {
-    using   fsm::Index,                     // <basic_type/Index-and-Size.hpp>
-            fsm::in_;                       // <type_builders.hpp>
+    using   fsm::Index,                     // basic_type/Index-and-Size.hpp
+            fsm::in_;                       // type_builders.hpp
+
     using   std::string_view;               // <string_view>
 
     // Qualified function name, if available.

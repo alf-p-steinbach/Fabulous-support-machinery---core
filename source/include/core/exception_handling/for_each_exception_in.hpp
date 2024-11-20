@@ -11,7 +11,8 @@
 namespace fsm_definitions {
     using   fsm::rethrow_nested_if_any_in,      // excpetion_handling/rethrow_nested_if_any_in.hpp
              fsm::in_;                          // parameter_passing/in_
-    using   std::exception_ptr, std::make_exception_ptr, std::rethrow_exception,    // <exception>
+
+    using   std::current_exception, std::exception_ptr, std::make_exception_ptr, std::rethrow_exception,    // <exception>
             std::function,                      // <functional>
             std::exception;                     // <stdexcept>
 

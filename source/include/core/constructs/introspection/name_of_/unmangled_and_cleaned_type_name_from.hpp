@@ -15,7 +15,9 @@
 #endif
 
 namespace fsm_definitions {
-    using   fsm::in_;
+    using   fsm::C_str,             // basic_type/names/C_str
+            fsm::in_;               // parameter_passing/data_flow_directions.hpp
+
     using   std::string,            // <string>
             std::string_view;       // <string_view>
     using   std::free;              // <cstdlib>

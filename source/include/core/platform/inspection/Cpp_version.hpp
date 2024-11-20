@@ -9,7 +9,10 @@
 #include <string>
 
 namespace fsm_definitions {
-    using   fsm::in_, fsm::With_relops_from_compare_;
+    using   fsm::Cint,                              // basic_type/Cardinal_int.hpp
+            fsm::With_relops_from_compare_,         // mixins/With_relops_from_compare.hpp
+            fsm::in_;                               // parameter_passing/data_flow_directions.hpp
+
     using   std::string, std::to_string;        // <string>
 
     namespace platform {

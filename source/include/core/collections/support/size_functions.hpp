@@ -9,6 +9,7 @@
 
 namespace fsm_definitions {
     using   fsm::in_,                   // type_builders.hpp
+            fsm::Cint,                  // basic_type/Cardinal_int.hpp
             fsm::Size;                  // basic_type/names/Index-and-size.hpp
 
     using   std::size_t,                            // <cstddef>
