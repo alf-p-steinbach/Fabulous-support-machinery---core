@@ -7,14 +7,14 @@ namespace fsm_definitions {
     namespace collections{ inline namespace iterator_getters {
 
         template< class Collection >
-        auto begin_of( Collection& c )
+        constexpr auto begin_of( Collection& c )
             -> auto
         { using std::begin; return begin( c ); }
 
         template< class Collection > auto begin_of( Collection&& ) -> auto = delete;
 
         template< class Collection >
-        auto end_of( Collection& c )
+        constexpr auto end_of( Collection& c )
             -> auto
         { using std::end; return end( c ); }
 
