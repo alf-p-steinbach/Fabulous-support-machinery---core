@@ -1,6 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
+#include <fsm/core/parameter_passing/data_flow_directions.hpp>
 #include <fsm/core/platform/inspection/cpp_version_macros.hpp>
 #include <fsm/core/type_builders.hpp>           // const_, in_
 
@@ -18,7 +19,9 @@
 #undef FSM_BACKEND_PROVIDES_THE_FORMAT_STRING_TYPE      // May be defined below.
 
 namespace fsm_definitions {
-    using   fsm::in_, fsm::const_;
+    using   fsm::in_,                       // parameter_passing/data_flow_directions.hpp
+            fsm::const_;                    // type_builders.hpp
+
     using   std::convertible_to,            // <concepts> C++20
             std::iter_difference_t,         // <iterator> C++20
             std::string, std::wstring,      // <string>

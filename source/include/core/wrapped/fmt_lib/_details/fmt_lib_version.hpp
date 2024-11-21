@@ -4,10 +4,15 @@
 #include <fmt/core.h>       // FMT_VERSION
 #include <fsm/core/mixins/With_relops_from_compare_.hpp>
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>
+
 #include <string>
 
 namespace fsm_definitions {
-    using   fsm::in_, fsm::With_relops_from_compare_;
+    using   fmt::format;                                // <fmt/core.h>
+
+    using   fsm::With_relops_from_compare_,             // mixins/With_relops_from_compare_.hpp
+            fsm::in_;                                   // parameter_passing/data_flow_directions.hpp
+
     using   std::string;
 
     namespace fmt_lib {

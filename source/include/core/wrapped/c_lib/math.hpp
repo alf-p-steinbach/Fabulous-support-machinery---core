@@ -21,9 +21,9 @@
 #   endif
 #
 #   ifdef __GNUC__
-#       if defined( __STRICT_ANSI__ ) and not defined( FSM_REALLY_WANT_GCC_STRICT_ANSI )
-#           pragma GCC warning "__STRICT_ANSI__ may cause M_PI etc. to not be defined."
-#       endif
+// #       if defined( __STRICT_ANSI__ ) and not defined( FSM_REALLY_WANT_GCC_STRICT_ANSI )
+// #           pragma GCC warning "__STRICT_ANSI__ may cause M_PI etc. to not be defined."
+// #       endif
 #   endif
 #   undef   _USE_MATH_DEFINES           // Suppress sillywarning.
 #   define  _USE_MATH_DEFINES           // M_PI etc.
