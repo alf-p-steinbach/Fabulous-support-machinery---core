@@ -2,7 +2,7 @@ EXIT_TRUE=0
 EXIT_FALSE=1
 
 function should_ignore() {
-    if [[ $1 == */setjmp.hpp || $1 == */signal.hpp || $1 = *winapi* || $1 == */_* ]]; then
+    if [[ $1 == */setjmp.hpp || $1 == */signal.hpp || $1 == *winapi* || $1 == */_* ]]; then
         return $EXIT_TRUE;
     fi
     if [[ $1 == */assertions/has_posix_number_names.hpp ]]; then
