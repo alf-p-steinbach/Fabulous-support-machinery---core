@@ -7,6 +7,8 @@
 #include <fsm/core/text/trimming.hpp>                       // trimmed
 #include <fsm/core/text/encoding/u8.hpp>                    // fsm::text::u8::*
 
+#include <algorithm>
+
 #include <cstdio>
 
 namespace fsm_definitions {
@@ -15,19 +17,19 @@ namespace fsm_definitions {
             fsm::put,                   // stream_io/put.hpp
             fsm::trimmed;               // text/trimming.hpp
 
-    using   std::FILE;
+    using   std::max;           // <algorithm>
+    using   std::FILE;          // <cstdio>
 
     namespace stream_io {
         // Parameter type.
-        struct Max_line_length{ Cint value;  operator Cint() const { return value; } };
+        struct With_max_line_length{ Cint value;  operator Cint() const { return value; } };
 
         // Reasonable max line length may be different for interactive versus file input. In particular
-        // a Java exception message can run til several KB. A user would never type that interacively.
-        struct Input_source{ enum Enum{ interactive, file }; };     // "file" includes e.g. pipe.
+        // a Java exception message can run til several KB. A human would never type that interacively.
+        constexpr   Cint    minimum_max_line_length     = text::u8::max_seq_length;
+        constexpr   Cint    max_full_line_length        = 128*1024;
 
-        constexpr auto minimum_max_line_length          = Max_line_length{ text::u8::max_seq_length };
-        constexpr auto max_line_length_default          = Max_line_length{ 256 };
-        constexpr auto max_full_line_length_default     = Max_line_length{ 16*1024 };
+        struct Input_source{ enum Enum{ biological, machine }; };
 
         class Line_reader
         {
@@ -36,14 +38,13 @@ namespace fsm_definitions {
 
         public:
             explicit Line_reader(
-                const_<FILE*>           stream,
-                const Max_line_length   max_line_length     = max_line_length_default
+                const_<FILE*>               stream,
+                const With_max_line_length  max_line_length
                 ):
                 m_stream( stream ),
-                m_max_line_length( max_line_length )
+                m_max_line_length( max( minimum_max_line_length, max_line_length.value ) )
             {
                 assert( m_stream );
-                assert( m_max_line_length > minimum_max_line_length );
             }
 
             inline auto next() -> string;
