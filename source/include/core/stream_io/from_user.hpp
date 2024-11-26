@@ -1,4 +1,4 @@
-#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>      // in_
@@ -28,7 +28,7 @@ namespace fsm_definitions {
                 -> string
             { return lines().next(); }
 
-            inline auto line()
+            inline auto tokens()
                 -> string
             { return trimmed( raw_line() ); }       // TODO: "as tokens", removing consecutive whitespaces
         }  // inline namespace basic
@@ -43,13 +43,8 @@ namespace fsm_definitions {
 
         inline auto full_line( in_<Sv> prompt ) -> string   { return response_to( prompt, basic::full_line ); }
         inline auto raw_line( in_<Sv> prompt )  -> string   { return response_to( prompt, basic::raw_line ); }
-        inline auto line( in_<Sv> prompt )      -> string   { return response_to( prompt, basic::line ); }
+        inline auto tokens( in_<Sv> prompt )    -> string   { return response_to( prompt, basic::tokens ); }
     } }  // namespace stream_io / namespace from_user
-
-    namespace stream_io {
-        inline auto input() -> string { return from_user::line(); }
-        inline auto input( in_<string_view> prompt ) -> string { return from_user::line( prompt ); }
-    }  // namespace stream_io
 }  // namespace fsm_definitions
 
 namespace fsm {

@@ -1,4 +1,4 @@
-#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 
 // Mainly boolean `and`, `or` and `not`.
 // Mainly just a Visual C++ (MSVC) conformance issue.

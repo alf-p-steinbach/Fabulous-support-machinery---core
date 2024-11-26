@@ -1,4 +1,4 @@
-#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
+﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/exception_handling/rethrow_nested_if_any_in.hpp>     // rethrow_nested_if_any_in
