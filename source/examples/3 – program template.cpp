@@ -1,5 +1,7 @@
 // A general template for simple applications.
-// An exception (e.g. reading beyond EOF) is handled with a stderr message and failure exit code.
+//
+// The `app` namespace serves as container for the application logic, marking it as such.
+// `fsm::with_exceptions_displayed` handles an exception with a stderr message and `EXIT_FAILURE` return.
 //
 #include <fsm/core.hpp>
 #include <string>

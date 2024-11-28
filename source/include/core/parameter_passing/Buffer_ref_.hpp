@@ -10,11 +10,11 @@ namespace fsm_definitions {
         template< class Container >
         class Buffer_ref_
         {
-            Container&  m_object;
-            
+            Container&  m_ref_object;
+
         public:
-            Buffer_ref_( Container&& o ): m_object( o ) { m_object.clear(); }
-            auto rvref() -> Container&& { return move( m_object ); }
+            Buffer_ref_( Container&& o ): m_ref_object( o ) { m_ref_object.clear(); }
+            auto ref() const -> Container&& { return move( m_ref_object ); }
         };
     }  // namespace parameter_passing
 }  // namespace fsm_definitions
