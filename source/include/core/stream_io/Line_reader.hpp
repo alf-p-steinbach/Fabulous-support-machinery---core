@@ -60,8 +60,8 @@ namespace fsm_definitions {
             // TODO: const int chunk_size = 64; ?
             remove_buffer_of( m_retained_data );
             string result;
-            Cint n_codepoints = 0;
             try {
+                Cint n_codepoints = 0;
                 for( ;; ) {
                     const int ch_code = fgetc( m_stream );
                     if( ch_code == EOF or ch_code == '\n' ) {
