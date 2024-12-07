@@ -68,7 +68,7 @@ namespace fsm_definitions {
                 or $fail( "fwrite failed" );
         }
 
-        inline void put( in_<string_view> s ) { put_to( stdout, s ); }
+        inline void output( in_<string_view> s ) { put_to( stdout, s ); }
 
         inline void put_line_to( const Stream_handle stream, in_<string_view> s )
         {
@@ -76,7 +76,7 @@ namespace fsm_definitions {
             put_to( stream, "\n" );
         }
 
-        inline void put_line( in_<string_view> s ) { put_line_to( stdout, s ); }
+        inline void output_line( in_<string_view> s ) { put_line_to( stdout, s ); }
 
 
         //--------------------------------------------------------------- With formatting:
@@ -88,7 +88,7 @@ namespace fsm_definitions {
         }
 
         template< class... Args >
-        inline void put( format_string<Args...> fmt, Args&&... args )
+        inline void output( format_string<Args...> fmt, Args&&... args )
         {
             put_to( stdout, fmt, forward<Args>( args )... );
         }
@@ -100,7 +100,7 @@ namespace fsm_definitions {
         }
 
         template< class... Args >
-        inline void put_line( format_string<Args...> fmt, Args&&... args )
+        inline void output_line( format_string<Args...> fmt, Args&&... args )
         {
             put_line_to( stdout, fmt, forward<Args>( args )... );
         }

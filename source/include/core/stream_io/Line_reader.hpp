@@ -4,7 +4,6 @@
 #include <fsm/core/basic_type/Cardinal_int.hpp>                 // Cint
 #include <fsm/core/collections/support/remove_buffer_of.hpp>    // remove_buffer_of
 #include <fsm/core/exception_handling/FSM_FAIL.hpp>             // now, $fail
-#include <fsm/core/stream_io/put.hpp>                           // put
 #include <fsm/core/text/trimming.hpp>                           // trimmed
 #include <fsm/core/text/encoding/u8.hpp>                        // fsm::text::u8::*
 
@@ -18,7 +17,6 @@ namespace fsm_definitions {
     using   fsm::Cint,                  // basic_type/Cardinal_int.hpp
             fsm::remove_buffer_of,      // collections/support/remove_buffer_of
             fsm::now,                   // exception_handling/FSM_FAIL.hpp
-            fsm::put,                   // stream_io/put.hpp
             fsm::trimmed;               // text/trimming.hpp
 
     using   std::max;           // <algorithm>

@@ -3,9 +3,11 @@
 
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>      // in_
 #include <fsm/core/stream_io/Line_reader.hpp>                       // Line_reader
+#include <fsm/core/stream_io/output.hpp>                            // Line_reader
 
 namespace fsm_definitions {
-    using   fsm::in_;
+    using   fsm::in_,                           // parameter_passing/data_flow/directions.hpp
+            fsm::output;                        // stream_io/output.hpp
 
     using Sv = std::string_view;
 
@@ -37,7 +39,7 @@ namespace fsm_definitions {
         inline auto response_to( in_<Sv> prompt, in_<Input_func> get )
             -> auto
         {
-            put( prompt );
+            output( prompt );
             return get();
         }
 
