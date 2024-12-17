@@ -54,6 +54,14 @@ namespace fsm_definitions {
                 return (name.p? name.p : builtin_type_name);
             }
         #endif
+
+        inline auto unmangled_and_cleaned_type_name_from( in_<string> builtin_type_name )
+            -> string
+        { return unmangled_and_cleaned_type_name_from( builtin_type_name.c_str() ); }
+
+        inline auto unmangled_and_cleaned_type_name_from( in_<string_view> builtin_type_name )
+            -> string
+        { return unmangled_and_cleaned_type_name_from( string( builtin_type_name ) ); }
     }  // namespace introspection
 }  // namespace fsm_definitions
 

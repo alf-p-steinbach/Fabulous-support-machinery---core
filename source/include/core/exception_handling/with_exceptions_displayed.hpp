@@ -23,17 +23,29 @@ namespace fsm_definitions {
         inline auto with_exceptions_displayed( in_<function<void()>> f )
             -> int
         {
+            const auto output_message = [&]( in_<exception> x )
+            {
+                put_to( stderr, "\n" ); // TODO: restrict to stdout = console
+                // TODO: use named arguments? Problem: not in stdlib.
+                for_each_exception_in( x, [&]( in_<exception> each ) {
+                    put_to( stderr, "{}{} [{}]\n",
+                        (&each == &x? "!" : "    because: "),
+                        each.what(),
+                        exception_type_name_for( each )
+                        );
+                } );
+            };
+
+            // TODO: common exception translation?
             try{
                 f();
                 return EXIT_SUCCESS;
-            } catch( in_<exception> x0 ) {
-                put_to( stderr, "\n" ); // TODO: restrict to stdout = console
-                // TODO: use named arguments? Problem: not in stdlib.
-                for_each_exception_in( x0, [&]( in_<exception> x ) {
-                    put_to( stderr, "{}{} [{}]\n",
-                        (&x == &x0? "!" : "    because: "), x.what(), exception_type_name_for( x )
-                        );
-                } );
+            } catch( in_<exception> x ) {
+                output_message( x );
+            } catch( const C_str s ) {
+                output_message( Basic_type_exception_<C_str>( s ) );
+            } catch( const int v ) {
+                output_message( Basic_type_exception_<int>( v ) );
             } catch( ... ) {
                 put_to( stderr, "\n" ); // TODO: restrict to stdout = console
                 put_to( stderr, "!<unknown exception>\n" );

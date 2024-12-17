@@ -12,6 +12,7 @@ namespace app {
     {
         const string username = input( "Hi, what’s your name? " );  // Trimmed by default.
         output( "Pleased to meet you, {}!\n", is_empty( username )? "ℕ.ℕ." : username );
+        throw "Blah";
     }
 }  // namespace app
 
