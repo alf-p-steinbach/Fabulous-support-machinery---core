@@ -3,7 +3,7 @@
 
 #include <fsm/core/basic_type/Cardinal_int.hpp>                 // Cint
 #include <fsm/core/collections/support/remove_buffer_of.hpp>    // remove_buffer_of
-#include <fsm/core/exception_handling/FSM_FAIL.hpp>             // now, $fail
+#include <fsm/core/exception/throwing/FSM_FAIL.hpp>             // now, $fail
 #include <fsm/core/text/trimming.hpp>                           // trimmed
 #include <fsm/core/text/encoding/u8.hpp>                        // fsm::text::u8::*
 

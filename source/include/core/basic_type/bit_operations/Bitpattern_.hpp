@@ -4,7 +4,7 @@
 #include <fsm/core/basic_type/bit_operations/bits_per_.hpp>
 #include <fsm/core/basic_type/Cardinal_int.hpp>
 #include <fsm/core/basic_type/names/C_str.hpp>
-#include <fsm/core/exception_handling/FSM_FAIL.hpp>
+#include <fsm/core/exception/throwing/FSM_FAIL.hpp>
 #include <fsm/core/parameter_passing/enabled_if_.hpp>
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>
 

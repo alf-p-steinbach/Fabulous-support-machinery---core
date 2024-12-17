@@ -3,7 +3,7 @@
 
 #include <fsm/core/basic_type/names/C_str.hpp>                          // C_str
 #include <fsm/core/constructs/introspection/name_of_.hpp>               // name_of_
-#include <fsm/core/exception_handling/rethrow_nested_if_any_in.hpp>     // rethrow_nested_if_any_in
+#include <fsm/core/exception/throwing/rethrow_nested_if_any_in.hpp>     // rethrow_nested_if_any_in
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>          // in_
 
 #include <exception>

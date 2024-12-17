@@ -5,7 +5,7 @@
 #include <fsm/core/class_kinds.hpp>
 #include <fsm/core/collections.hpp>
 #include <fsm/core/constructs.hpp>
-#include <fsm/core/exception_handling.hpp>
+#include <fsm/core/exception.hpp>
 #include <fsm/core/FSM_.hpp>
 #include <fsm/core/mixins.hpp>
 #include <fsm/core/parameter_passing.hpp>

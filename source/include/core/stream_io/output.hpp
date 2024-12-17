@@ -3,7 +3,7 @@
 
 #include <fsm/core/basic_type/Cardinal_int.hpp>                         // Cint
 #include <fsm/core/class_kinds/No_copy_or_move.hpp>                     // No_copy_or_move
-#include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // $fail
+#include <fsm/core/exception/throwing/FSM_FAIL.hpp>                     // $fail
 #include <fsm/core/platform/inspection/os_id_macros.hpp>                // FSM_OS_...
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>          // in_
 #include <fsm/core/wrapped/fmt_lib/core.hpp>                            // -- {fmt} lib stuff.

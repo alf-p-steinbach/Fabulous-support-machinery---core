@@ -5,7 +5,7 @@
 #include <fsm/core/basic_type/byte_operations/byte_ptr_cast.hpp>        // byte_ptr_cast
 #include <fsm/core/basic_type/Cardinal_int.hpp>                         // Cint
 #include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
-#include <fsm/core/exception_handling/FSM_FAIL.hpp>                     // now, $fail
+#include <fsm/core/exception/throwing/FSM_FAIL.hpp>                     // now, $fail
 #include <fsm/core/type_builders.hpp>                                   // const_
 
 #include <cassert>      // assert macro

@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/exception_handling/now-and-fail.hpp>             // fsm::fail_
+#include <fsm/core/exception/throwing/now-and-fail.hpp>             // fsm::fail_
 #include <fsm/core/constructs/introspection/FSM_FUNCNAME.hpp>       // FSM_FUNCNAME
 #include <fsm/core/wrapped/fmt_lib/core.hpp>                        // fsm::format
 
