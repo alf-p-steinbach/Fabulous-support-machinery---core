@@ -42,14 +42,14 @@ namespace fsm_definitions {
             try{
                 f();
                 return EXIT_SUCCESS;
-            } catch( in_<Std_exception> x ) {
-                output_message( x );
             } catch( const C_str s ) {
                 output_message( Basic_type_exception_<C_str>( s ) );
             } catch( const int v ) {
                 output_message( Basic_type_exception_<int>( v ) );
             } catch( const double v ) {
                 output_message( Basic_type_exception_<double>( v ) );
+            } catch( in_<Std_exception> x ) {
+                output_message( x );
             } catch( ... ) {
                 put_to( stderr, "\n" ); // TODO: restrict to stdout = console
                 put_to( stderr, "!<unknown exception>\n" );
