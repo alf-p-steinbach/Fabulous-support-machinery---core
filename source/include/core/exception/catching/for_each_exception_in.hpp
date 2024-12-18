@@ -58,7 +58,6 @@ namespace fsm_definitions {
         public:
             static constexpr bool is_string = is_same_v<Basic_type, C_str>;
 
-            // TODO: string as just itself
             Basic_type_exception_( const Basic_type v ):
                 runtime_error( description_of( v ) ),
                 m_value( v )
