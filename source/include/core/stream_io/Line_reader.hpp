@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/basic_type/Cardinal_int.hpp>                 // Cint
+#include <fsm/core/basic_type/Natural_int.hpp>                 // Nat
 #include <fsm/core/collections/support/remove_buffer_of.hpp>    // remove_buffer_of
 #include <fsm/core/exception/throwing/FSM_FAIL.hpp>             // now, $fail
 #include <fsm/core/text/trimming.hpp>                           // trimmed
@@ -14,7 +14,7 @@
 namespace fsm_definitions {
     namespace u8 = fsm::text::u8;
 
-    using   fsm::Cint,                  // basic_type/Cardinal_int.hpp
+    using   fsm::Nat,                  // basic_type/Natural_int.hpp
             fsm::remove_buffer_of,      // collections/support/remove_buffer_of
             fsm::now,                   // exception_handling/FSM_FAIL.hpp
             fsm::trimmed;               // text/trimming.hpp
@@ -24,18 +24,18 @@ namespace fsm_definitions {
 
     namespace stream_io {
         // Parameter type.
-        struct With_max_line_length{ Cint value;  operator Cint() const { return value; } };
+        struct With_max_line_length{ Nat value;  operator Nat() const { return value; } };
 
         // Reasonable max line length may be different for interactive versus file input. In particular
         // a Java exception message can run til several KB. A human would never type that interacively.
         // These line lengths are measured in Unicode code points.
-        constexpr   Cint    minimum_max_line_length     = text::u8::max_seq_length;
-        constexpr   Cint    max_full_line_length        = 128*1024;
+        constexpr   Nat    minimum_max_line_length     = text::u8::max_seq_length;
+        constexpr   Nat    max_full_line_length        = 128*1024;
 
         class Line_reader
         {
             FILE*           m_stream;
-            Cint            m_max_line_length;
+            Nat            m_max_line_length;
             string          m_retained_data;        // Holds data from too long line.
 
         public:
@@ -59,7 +59,7 @@ namespace fsm_definitions {
             remove_buffer_of( m_retained_data );
             string result;
             try {
-                Cint n_codepoints = 0;
+                Nat n_codepoints = 0;
                 for( ;; ) {
                     const int ch_code = fgetc( m_stream );
                     if( ch_code == EOF or ch_code == '\n' ) {

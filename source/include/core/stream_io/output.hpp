@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/basic_type/Cardinal_int.hpp>                         // Cint
+#include <fsm/core/basic_type/Natural_int.hpp>                         // Nat
 #include <fsm/core/class_kinds/No_copy_or_move.hpp>                     // No_copy_or_move
 #include <fsm/core/exception/throwing/FSM_FAIL.hpp>                     // $fail
 #include <fsm/core/platform/inspection/os_id_macros.hpp>                // FSM_OS_...
@@ -23,7 +23,7 @@
 #endif
 
 namespace fsm_definitions {
-    using   fsm::Cint,                                                  // basic_type/Cardinal_int.hpp
+    using   fsm::Nat,                                                  // basic_type/Natural_int.hpp
             fsm::No_copy_or_move,                                       // class_kinds/No_copy_or_move.hpp
             fsm::now, fsm::fail,                                        // exception_handling/FSM_FAIL.hpp
             fsm::in_,                                                   // parameter_passing/data_flow_directions.hpp
@@ -63,7 +63,7 @@ namespace fsm_definitions {
             static const Console_encoding_fix   a_fix;  // In Windows sets active codepage 65001 (UTF-8).
 
             assert( s.size() <= INT_MAX );              // TODO: support > INT_MAX bytes?
-            const Cint n_bytes_written = fwrite( s.data(), 1, s.size(), stream );
+            const Nat n_bytes_written = fwrite( s.data(), 1, s.size(), stream );
             now( n_bytes_written == s.size() )
                 or $fail( "fwrite failed" );
         }

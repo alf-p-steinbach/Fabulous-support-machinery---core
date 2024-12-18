@@ -29,7 +29,7 @@ namespace fsm_definitions {
 
         constexpr auto capped_p_seq_after(
             const_<const char*>     p_seq,
-            const Cint              max_length = max_seq_length
+            const Nat              max_length = max_seq_length
             ) -> const char*
         { return byte_ptr_cast_<const char>( capped_p_seq_after( byte_ptr_cast( p_seq ), max_length ) ); }
 
@@ -39,7 +39,7 @@ namespace fsm_definitions {
 
         constexpr auto capped_p_seq_before(
             const_<const char*>     p_seq,
-            const Cint              max_length = max_seq_length
+            const Nat              max_length = max_seq_length
             ) -> const char*
         { return byte_ptr_cast_<const char>( capped_p_seq_before( byte_ptr_cast( p_seq ), max_length ) ); }
 
@@ -50,7 +50,7 @@ namespace fsm_definitions {
 
         constexpr void capped_move_to_next(
             const char*&    p_seq,
-            const Cint      max_length = max_seq_length
+            const Nat      max_length = max_seq_length
             )
         {
             p_seq = byte_ptr_cast_<const char>( capped_p_seq_after( byte_ptr_cast( p_seq ), max_length ) );
@@ -63,7 +63,7 @@ namespace fsm_definitions {
 
         constexpr void capped_move_to_prev(
             const char*&    p_seq,
-            const Cint      max_length = max_seq_length
+            const Nat      max_length = max_seq_length
             )
         {
             p_seq = byte_ptr_cast_<const char>( capped_p_seq_before( byte_ptr_cast( p_seq ), max_length ) );

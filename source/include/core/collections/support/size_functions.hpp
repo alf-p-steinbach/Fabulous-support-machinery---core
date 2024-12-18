@@ -2,14 +2,14 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/type_builders.hpp>                       // in_
-#include <fsm/core/basic_type/Cardinal_int.hpp>             // Cint
+#include <fsm/core/basic_type/Natural_int.hpp>             // Nat
 #include <fsm/core/basic_type/names/Index-and-Size.hpp>     // Index, Size (as ptrdiff_t)
 
 #include    <iterator>      // std::(distance, size)
 
 namespace fsm_definitions {
     using   fsm::in_,                   // type_builders.hpp
-            fsm::Cint,                  // basic_type/Cardinal_int.hpp
+            fsm::Nat,                  // basic_type/Natural_int.hpp
             fsm::Size;                  // basic_type/names/Index-and-size.hpp
 
     using   std::size_t,                            // <cstddef>
@@ -46,18 +46,18 @@ namespace fsm_definitions {
         { return size( c ); }
 
         template< class Container >                         // Use with care -- no range checking.
-        constexpr auto cint_size_of( in_<Container> c ) noexcept
-            -> Cint
+        constexpr auto Nat_size_of( in_<Container> c ) noexcept
+            -> Nat
         { return static_cast<int>( size_of( c ) ); }
 
         template< class Item, Size n >                      // Use with care -- no range checking.
-        constexpr auto cint_capacity_of( in_<Item[n]> a ) noexcept
-            -> Cint
+        constexpr auto Nat_capacity_of( in_<Item[n]> a ) noexcept
+            -> Nat
         { return n; }
 
         template< class Container >                         // Use with care -- no range checking.
-        constexpr auto cint_capacity_of( in_<Container> c ) noexcept
-            -> Cint
+        constexpr auto Nat_capacity_of( in_<Container> c ) noexcept
+            -> Nat
         { return static_cast<int>( c.capacity() ); }
 
         // Placed here because it belongs with the `int_size_of` function, even if not about collection.

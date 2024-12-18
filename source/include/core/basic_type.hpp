@@ -3,5 +3,5 @@
 
 #include <fsm/core/basic_type/bit_operations.hpp>
 #include <fsm/core/basic_type/byte_operations.hpp>
-#include <fsm/core/basic_type/Cardinal_int.hpp>
+#include <fsm/core/basic_type/Natural_int.hpp>
 #include <fsm/core/basic_type/names.hpp>

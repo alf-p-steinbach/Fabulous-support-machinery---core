@@ -10,7 +10,7 @@
 
 namespace app {
     $nsname_from( fsm, u8 );
-    using   fsm::Byte, fsm::Cint, fsm::format, fsm::put;
+    using   fsm::Byte, fsm::Nat, fsm::format, fsm::put;
     using   std::string, std::string_view, std::u32string_view;
 
     void run()
@@ -30,7 +30,7 @@ namespace app {
             put( "| " );
 
             char bytes[4];
-            const Cint length = u8::to_seq_at( bytes, code );
+            const Nat length = u8::to_seq_at( bytes, code );
             const auto generated_seq = string_view( bytes, +length );
             for( const Byte u8_code: generated_seq ) {
                 put( "{:0>2X} ", u8_code );

@@ -12,7 +12,7 @@ namespace fsm_definitions {
     using Sv = std::string_view;
 
     namespace stream_io { namespace from_user {
-        constexpr   Cint    max_line_length     = 256;
+        constexpr   Nat    max_line_length     = 256;
 
         inline auto lines()
             -> Line_reader&

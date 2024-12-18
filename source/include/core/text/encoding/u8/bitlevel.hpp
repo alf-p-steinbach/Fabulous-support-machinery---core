@@ -3,7 +3,7 @@
 
 #include <fsm/core/basic_type/bit_operations/Bitpattern_.hpp>           // Bitpattern_
 #include <fsm/core/basic_type/byte_operations/byte_ptr_cast.hpp>        // byte_ptr_cast
-#include <fsm/core/basic_type/Cardinal_int.hpp>                         // Cint
+#include <fsm/core/basic_type/Natural_int.hpp>                         // Nat
 #include <fsm/core/basic_type/names/Byte.hpp>                           // Byte
 #include <fsm/core/exception/throwing/FSM_FAIL.hpp>                     // now, $fail
 #include <fsm/core/type_builders.hpp>                                   // const_
@@ -11,23 +11,23 @@
 #include <cassert>      // assert macro
 
 namespace fsm_definitions {
-    using namespace fsm::cardinal_literals;
+    using namespace fsm::Nat_literals;
     using   fsm::Bitpattern_,                           // basic_type/bit_operations/Bitpattern_.hpp
             fsm::byte_ptr_cast,                         // basic_type/byte_operations/byte_ptr_cast.hpp
-            fsm::Cint,                                  // basic_type/Cardinal_int.hpp
+            fsm::Nat,                                  // basic_type/Natural_int.hpp
             fsm::Byte,                                  // basic_type/names/Byte.hpp
             fsm::now,                                   // exception_handling/FSM_FAIL.hpp
             fsm::const_;                                // type_builders.hpp
 
     namespace text::u8 {
-        constexpr Cint  max_seq_length      = 4;        // As of 2024. Could be up to and including 7.
-        constexpr Cint  max_tailbytes       = max_seq_length - 1;
+        constexpr Nat  max_seq_length      = 4;        // As of 2024. Could be up to and including 7.
+        constexpr Nat  max_tailbytes       = max_seq_length - 1;
 
         constexpr auto  asciibyte_pattern   = Bitpattern_<Byte>( "0xxx'xxxx" );
         constexpr auto  headbyte_pattern    = Bitpattern_<Byte>( "11xx'xxxx" );
         constexpr auto  tailbyte_pattern    = Bitpattern_<Byte>( "10xx'xxxx" );
 
-        constexpr Cint n_tailbyte_value_bits   = tailbyte_pattern.n_value_bits();      // 6
+        constexpr Nat n_tailbyte_value_bits   = tailbyte_pattern.n_value_bits();      // 6
 
         constexpr auto is_asciibyte( const Byte unit ) noexcept
             -> bool
@@ -62,7 +62,7 @@ namespace fsm_definitions {
 
         // The formal limit on number of tailbytes, 3, is not enforced.
         constexpr auto n_tailbytes_after( const Byte first_byte )
-            -> Cint
+            -> Nat
         {
             if( (first_byte & 0b1000'0000) == 0 ) { return 0; }
             if( (first_byte & 0b0010'0000) == 0 ) { return 1; }
@@ -77,7 +77,7 @@ namespace fsm_definitions {
 
         // The formal limit on number of tailbytes, 3, is not enforced.
         constexpr auto seq_length_of( const Byte first_byte )
-            -> Cint
+            -> Nat
         { return n_tailbytes_after( first_byte ) + 1; }
 
         constexpr auto is_valid_headbyte( const Byte unit )
@@ -88,7 +88,7 @@ namespace fsm_definitions {
             -> char32_t
         {
             const Byte  first_byte      = *p_first;
-            const Cint  n_tailbytes     = n_tailbytes_after( first_byte );
+            const Nat  n_tailbytes     = n_tailbytes_after( first_byte );
 
             if( n_tailbytes == 0 ) {
                 return first_byte;          // ASCII.
@@ -96,7 +96,7 @@ namespace fsm_definitions {
 
             const Byte* p = p_first;
             char32_t result = headbyte_value_of( first_byte );
-            for( Cint i = 1; i <= n_tailbytes; ++i ) {
+            for( Nat i = 1; i <= n_tailbytes; ++i ) {
                 ++p;
                 result <<= +n_tailbyte_value_bits;
                 result |= tailbyte_value_of( *p );
@@ -109,7 +109,7 @@ namespace fsm_definitions {
         { return codepoint_from( byte_ptr_cast( p_first ) ); }
 
         constexpr auto to_seq_at( const_<Byte*> p_start, const char32_t code )
-            -> Cint    // Length of sequence including head byte.
+            -> Nat    // Length of sequence including head byte.
         {
             const auto seq = p_start;
             if( code < 0x80 ) {                                             // 7 bits as 7
@@ -117,7 +117,7 @@ namespace fsm_definitions {
                 return 1;
             }
 
-            const auto n_tailbytes = Cint(
+            const auto n_tailbytes = Nat(
                 //  5 + 1×6 = 11          4 + 2×6 = 16            3 + 3×6 = 21
                     code < 0x800? 1     : code < 0x10000? 2     : code < 0x110000? 3
                 : 666
@@ -136,7 +136,7 @@ namespace fsm_definitions {
         }
 
         constexpr auto to_seq_at( const_<char*> p_start, const char32_t code )
-            -> Cint    // Length of sequence including head byte.
+            -> Nat    // Length of sequence including head byte.
         { return to_seq_at( byte_ptr_cast( p_start ), code ); }
     }  // namespace text::u8
 }  // namespace fsm_definitions

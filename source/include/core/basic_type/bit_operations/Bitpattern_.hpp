@@ -2,7 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/basic_type/bit_operations/bits_per_.hpp>
-#include <fsm/core/basic_type/Cardinal_int.hpp>
+#include <fsm/core/basic_type/Natural_int.hpp>
 #include <fsm/core/basic_type/names/C_str.hpp>
 #include <fsm/core/exception/throwing/FSM_FAIL.hpp>
 #include <fsm/core/parameter_passing/enabled_if_.hpp>
@@ -14,7 +14,7 @@
 
 namespace fsm_definitions {
     using   fsm::bits_per_,                 // basic_type/bit_operations/bits_per_.hpp
-            fsm::Cint,                      // basic_type/Cardinal_int.hpp
+            fsm::Nat,                      // basic_type/Natural_int.hpp
             fsm::C_str,                     // basic_type/names/C_Str
             fsm::now,                       // exception_handling/FSM_FAIL.hpp
             fsm::enabled_if_,               // parameter_passing/enabled_if_.hpp
@@ -51,7 +51,7 @@ namespace fsm_definitions {
         public:
             constexpr Bitpattern_( in_<string_view> spec )
             {
-                Cint n_bitspecs = 0;
+                Nat n_bitspecs = 0;
                 for( const char ch: spec ) {
                     switch( ch ) {
                         case '0':  case '1': case Spec::any: {
@@ -97,11 +97,11 @@ namespace fsm_definitions {
             { return bits & m_mask; }
 
             constexpr auto n_value_bits() const noexcept
-                -> Cint
+                -> Nat
             {
                 // std::bitset::count() was not constexpr before C++23.
                 // std::popcount not available until C++20.
-                Cint count = 0;
+                Nat count = 0;
                 for( Uint bits = m_mask; bits != 0; bits >>= 1 ) {
                     count += bits & 1;
                 }
