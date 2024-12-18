@@ -43,12 +43,16 @@ namespace fsm_definitions {
         class Basic_type_exception_:
             public runtime_error
         {
+        public:
+            static constexpr bool is_string = (is_same_v<Basic_type, C_str> or is_same_v<Basic_type, string>);
+
+        private:
             Basic_type      m_value;
 
             static auto description_of( const Basic_type v )
                 -> string
             {
-                if constexpr( is_same_v<Basic_type, C_str> or is_same_v<Basic_type, string> ) {
+                if constexpr( is_string ) {
                     return v;
                 } else {
                     return format( "<exception of type {} with value {}>", name_of_<Basic_type>(), v );
@@ -56,9 +60,7 @@ namespace fsm_definitions {
             }
 
         public:
-            static constexpr bool is_string = is_same_v<Basic_type, C_str>;
-
-            Basic_type_exception_( const Basic_type v ):
+            Basic_type_exception_( in_<Basic_type> v ):
                 runtime_error( description_of( v ) ),
                 m_value( v )
             {}
@@ -79,8 +81,8 @@ namespace fsm_definitions {
             }
 
             inline auto for_each_nested_exception_in(
-                in_<Std_exception>                      final_x,
-                function<void( in_<Std_exception> )>    f
+                in_<Std_exception>                          final_x,
+                in_<function<void( in_<Std_exception> )>>   f
                 ) -> bool
             {
                 exception_ptr p_current = nullptr;
@@ -104,8 +106,8 @@ namespace fsm_definitions {
         #endif
 
         inline auto for_each_nested_exception_in(
-            in_<Std_exception>                      x,
-            function<void( in_<Std_exception> )>    f
+            in_<Std_exception>                          x,
+            in_<function<void( in_<Std_exception> )>>   f
             ) -> bool
         {
             const auto ff = [&f]( const auto& nested ) -> bool { f( nested ); return false; };
@@ -126,8 +128,8 @@ namespace fsm_definitions {
         }
 
         inline auto for_each_exception_in(
-            in_<Std_exception>                      final_x,
-            function<void( in_<Std_exception> )>    f
+            in_<Std_exception>                          final_x,
+            in_<function<void( in_<Std_exception> )>>   f
             ) -> bool
         {
             f( final_x );
