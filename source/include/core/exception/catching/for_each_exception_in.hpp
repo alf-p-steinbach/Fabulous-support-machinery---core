@@ -11,6 +11,7 @@
 #include <exception>
 #include <functional>
 #include <stdexcept>
+#include <string>
 #include <type_traits>
 
 namespace fsm_definitions {
@@ -23,6 +24,7 @@ namespace fsm_definitions {
     using   std::current_exception, std::exception_ptr, std::make_exception_ptr, std::rethrow_exception,    // <exception>
             std::function,                      // <functional>
             std::runtime_error,                 // <stdexcept>
+            std::string,                        // <string>
             std::is_same_v;                     // <type_traits>
 
     namespace exception{ inline namespace catching{
@@ -46,7 +48,7 @@ namespace fsm_definitions {
             static auto description_of( const Basic_type v )
                 -> string
             {
-                if constexpr( is_same_v<Basic_type, C_str> ) {
+                if constexpr( is_same_v<Basic_type, C_str> or is_same_v<Basic_type, string> ) {
                     return v;
                 } else {
                     return format( "<exception of type {} with value {}>", name_of_<Basic_type>(), v );
