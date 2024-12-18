@@ -1,9 +1,11 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
+
 #include <fsm/core/basic_type/names/C_str.hpp>                          // C_str
 #include <fsm/core/constructs/introspection/name_of_.hpp>               // name_of_
 #include <fsm/core/exception/throwing/rethrow_nested_if_any_in.hpp>     // rethrow_nested_if_any_in
+#include <fsm/core/exception/types/Std_exception.hpp>                   // Std_exception
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>          // in_
 
 #include <exception>
@@ -12,20 +14,20 @@
 #include <type_traits>
 
 namespace fsm_definitions {
-    using   fsm::C_str,                         // basic_type/names/C_str.hpp
-            fsm::name_of_,                      // constructs/introspection/name_of_.hpp
-            fsm::rethrow_nested_if_any_in,      // excpetion_handling/rethrow_nested_if_any_in.hpp
-            fsm::in_;                           // parameter_passing/data_flow_directions.hpp
+    using   fsm::C_str,                         // basic_type/names/C_str
+            fsm::name_of_,                      // constructs/introspection/name_of_
+            fsm::rethrow_nested_if_any_in,      // exception/throwing/rethrow_nested_if_any_in
+            fsm::Std_exception,                 // exception/types/Std_exception
+            fsm::in_;                           // parameter_passing/data_flow_directions
 
     using   std::current_exception, std::exception_ptr, std::make_exception_ptr, std::rethrow_exception,    // <exception>
             std::function,                      // <functional>
-            std::exception, std::runtime_error, // <stdexcept>
+            std::runtime_error,                 // <stdexcept>
             std::is_same_v;                     // <type_traits>
 
-    namespace exception_handling
-    {
+    namespace exception{ inline namespace catching{
         class Unknown_exception:
-            public exception
+            public Std_exception
         {
             exception_ptr   m_ptr;
 
@@ -41,14 +43,22 @@ namespace fsm_definitions {
         {
             Basic_type      m_value;
 
+            static auto description_of( const Basic_type v )
+                -> string
+            {
+                if constexpr( is_same_v<Basic_type, C_str> ) {
+                    return v;
+                } else {
+                    return format( "<exception of type {} with value {}>", name_of_<Basic_type>(), v );
+                }
+            }
+
         public:
             static constexpr bool is_string = is_same_v<Basic_type, C_str>;
 
             // TODO: string as just itself
             Basic_type_exception_( const Basic_type v ):
-                runtime_error(
-                    format( "<exception of type {} with value {}>", name_of_<Basic_type>(), v )
-                    ),
+                runtime_error( description_of( v ) ),
                 m_value( v )
             {}
 
@@ -68,8 +78,8 @@ namespace fsm_definitions {
             }
 
             inline auto for_each_nested_exception_in(
-                in_<exception>                      final_x,
-                function<void( in_<exception> )>    f
+                in_<Std_exception>                      final_x,
+                function<void( in_<Std_exception> )>    f
                 ) -> bool
             {
                 exception_ptr p_current = nullptr;
@@ -81,7 +91,7 @@ namespace fsm_definitions {
                             rethrow_if_nested_pointee( p_current );
                         }
                         return true;
-                    } catch( in_<exception> x ) {
+                    } catch( in_<Std_exception> x ) {
                         f( x );
                         p_current = current_exception();
                     } catch( ... ) {
@@ -93,15 +103,15 @@ namespace fsm_definitions {
         #endif
 
         inline auto for_each_nested_exception_in(
-            in_<exception>                      x,
-            function<void( in_<exception> )>    f
+            in_<Std_exception>                      x,
+            function<void( in_<Std_exception> )>    f
             ) -> bool
         {
             const auto ff = [&f]( const auto& nested ) -> bool { f( nested ); return false; };
             try {
                 rethrow_nested_if_any_in( x );
                 return true;
-            } catch( in_<exception> nested_x ) {
+            } catch( in_<Std_exception> nested_x ) {
                 f( nested_x );
                 return for_each_nested_exception_in( nested_x, f );
             } catch( const C_str s ) {
@@ -115,16 +125,16 @@ namespace fsm_definitions {
         }
 
         inline auto for_each_exception_in(
-            in_<exception>                      final_x,
-            function<void( in_<exception> )>    f
+            in_<Std_exception>                      final_x,
+            function<void( in_<Std_exception> )>    f
             ) -> bool
         {
             f( final_x );
             return for_each_nested_exception_in( final_x, f );
         }
-    }  // namespace exception_handling
+    } }  // namespace exception_handling / inline namespace catching
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace exception_handling { using namespace fsm_definitions::exception_handling; }
+    inline namespace exception { using namespace fsm_definitions::exception; }
 }  // namespace fsm

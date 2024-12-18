@@ -2,6 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/constructs/introspection/name_of.hpp>        // name_of
+#include <fsm/core/exception/types/Std_exception.hpp>           // Std_exception
 #include <fsm/core/type_builders.hpp>                           // in_
 
 #include <exception>
@@ -9,15 +10,16 @@
 #include <string>
 
 namespace fsm_definitions {
-    using   fsm::name_of,
+    using   fsm::name_of,               // constructs/introspection/name_of
+            fsm::Std_exception,         // exception/types/Std_exception
             fsm::in_;                   // parameter_passing/in_
+
     using   std::nested_exception,      // <exception>
-            std::exception,             // <stdexcept>
             std::string;                // <string>
 
     namespace introspection {
 
-        inline auto exception_type_name_for( in_<exception> x, const bool add_nesting_indicator = true )
+        inline auto exception_type_name_for( in_<Std_exception> x, const bool add_nesting_indicator = true )
             -> string
         {
             const string raw_name = name_of( typeid( x ) );

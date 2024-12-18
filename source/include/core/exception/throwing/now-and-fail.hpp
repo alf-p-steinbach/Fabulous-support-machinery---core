@@ -18,8 +18,7 @@ namespace fsm_definitions {
             std::string,                                        // <string>
             std::forward;                                       // <utility>
 
-    namespace exception_handling
-    {
+    namespace exception { inline namespace throwing {
         constexpr auto now( const bool condition ) noexcept -> bool { return condition; }
         
         template< class X, class... Args >
@@ -53,10 +52,9 @@ namespace fsm_definitions {
         //     fail_<runtime_error>( format( message_format, forward<Args>( args )... ) );
         //     for( ;; ) {}        // Should never get here.
         // }
-
-    }
+    } }  // namespace exception / inline namespace throwing
 }  // namespace fsm_definitions
 
 namespace fsm {
-    inline namespace exception_handling { using namespace fsm_definitions::exception_handling; }
+    inline namespace exception { using namespace fsm_definitions::exception; }
 }  // namespace fsm
