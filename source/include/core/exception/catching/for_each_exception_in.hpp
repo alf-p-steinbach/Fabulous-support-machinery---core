@@ -6,6 +6,7 @@
 #include <fsm/core/constructs/introspection/name_of_.hpp>               // name_of_
 #include <fsm/core/exception/throwing/rethrow_nested_if_any_in.hpp>     // rethrow_nested_if_any_in
 #include <fsm/core/exception/types/Std_exception.hpp>                   // Std_exception
+#include <fsm/core/exception/types/Unknown_exception.hpp>               // Unknown_exception
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>          // in_
 
 #include <exception>
@@ -19,6 +20,7 @@ namespace fsm_definitions {
             fsm::name_of_,                      // constructs/introspection/name_of_
             fsm::rethrow_nested_if_any_in,      // exception/throwing/rethrow_nested_if_any_in
             fsm::Std_exception,                 // exception/types/Std_exception
+            fsm::Unknown_exception,             // exception/types/Unknown_exception
             fsm::in_;                           // parameter_passing/data_flow_directions
 
     using   std::current_exception, std::exception_ptr, std::make_exception_ptr, std::rethrow_exception,    // <exception>
@@ -28,17 +30,6 @@ namespace fsm_definitions {
             std::is_same_v;                     // <type_traits>
 
     namespace exception{ inline namespace catching{
-        class Unknown_exception:
-            public Std_exception
-        {
-            exception_ptr   m_ptr;
-
-        public:
-            Unknown_exception( in_<exception_ptr> p ): m_ptr( p ) {}
-            auto ptr() const -> exception_ptr { return m_ptr; }
-            auto what() const noexcept -> const char* override { return "<unknown exception>"; }
-        };
-
         template< class Basic_type >
         class Basic_type_exception_:
             public runtime_error

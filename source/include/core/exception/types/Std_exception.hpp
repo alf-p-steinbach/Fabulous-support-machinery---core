@@ -3,9 +3,9 @@
 
 #include <stdexcept>
 namespace fsm_definitions {
-    namespace exception {
+    namespace exception { inline namespace types {
         using Std_exception = std::exception;   // <stdexcept>
-    }
+    } }  // namespace exception / inline namespace types
 }  // namespace fsm_definitions
 
 namespace fsm {
