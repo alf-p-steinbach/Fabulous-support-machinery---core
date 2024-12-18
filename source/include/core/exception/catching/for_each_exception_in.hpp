@@ -1,10 +1,10 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-
 #include <fsm/core/basic_type/names/C_str.hpp>                          // C_str
 #include <fsm/core/constructs/introspection/name_of_.hpp>               // name_of_
 #include <fsm/core/exception/throwing/rethrow_nested_if_any_in.hpp>     // rethrow_nested_if_any_in
+#include <fsm/core/exception/types/Basic_type_exception_.hpp>           // Basic_type_exception_
 #include <fsm/core/exception/types/Std_exception.hpp>                   // Std_exception
 #include <fsm/core/exception/types/Unknown_exception.hpp>               // Unknown_exception
 #include <fsm/core/parameter_passing/data_flow_directions.hpp>          // in_
@@ -13,12 +13,12 @@
 #include <functional>
 #include <stdexcept>
 #include <string>
-#include <type_traits>
 
 namespace fsm_definitions {
     using   fsm::C_str,                         // basic_type/names/C_str
             fsm::name_of_,                      // constructs/introspection/name_of_
             fsm::rethrow_nested_if_any_in,      // exception/throwing/rethrow_nested_if_any_in
+            fsm::Basic_type_exception_,         // exception/types/Basic_type_exception_
             fsm::Std_exception,                 // exception/types/Std_exception
             fsm::Unknown_exception,             // exception/types/Unknown_exception
             fsm::in_;                           // parameter_passing/data_flow_directions
@@ -30,35 +30,6 @@ namespace fsm_definitions {
             std::is_same_v;                     // <type_traits>
 
     namespace exception{ inline namespace catching{
-        template< class Basic_type >
-        class Basic_type_exception_:
-            public runtime_error
-        {
-        public:
-            static constexpr bool is_string = (is_same_v<Basic_type, C_str> or is_same_v<Basic_type, string>);
-
-        private:
-            Basic_type      m_value;
-
-            static auto description_of( const Basic_type v )
-                -> string
-            {
-                if constexpr( is_string ) {
-                    return v;
-                } else {
-                    return format( "<exception of type {} with value {}>", name_of_<Basic_type>(), v );
-                }
-            }
-
-        public:
-            Basic_type_exception_( in_<Basic_type> v ):
-                runtime_error( description_of( v ) ),
-                m_value( v )
-            {}
-
-            auto value() const -> Basic_type { return m_value; }
-        };
-
         #if 0       // Iterative version.
             inline void rethrow_if_nested_pointee( in_<exception_ptr> p )
             {
@@ -101,17 +72,25 @@ namespace fsm_definitions {
             in_<function<void( in_<Std_exception> )>>   f
             ) -> bool
         {
-            const auto ff = [&f]( const auto& nested ) -> bool { f( nested ); return false; };
+            const auto ff = [&f]( const auto& nested ) -> bool
+            {
+                f( nested ); return false;
+            };
+
             try {
                 rethrow_nested_if_any_in( x );
                 return true;
+            } catch( const C_str s ) {
+                return ff( Basic_type_exception_<C_str>( s ) );
+            } catch( in_<string> s ) {
+                return ff( Basic_type_exception_<string>( s ) );
+            } catch( const int v ) {
+                return ff( Basic_type_exception_<int>( v ) );
+            } catch( const double v ) {
+                return ff( Basic_type_exception_<double>( v ) );
             } catch( in_<Std_exception> nested_x ) {
                 f( nested_x );
                 return for_each_nested_exception_in( nested_x, f );
-            } catch( const C_str s ) {
-                return ff( Basic_type_exception_<C_str>( s ) );
-            } catch( const int x ) {
-                return ff( Basic_type_exception_<int>( x ) );
             } catch( ... ) {
                 return ff( Unknown_exception{ current_exception() } );
             }
