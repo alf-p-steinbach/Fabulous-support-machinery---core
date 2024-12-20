@@ -30,10 +30,10 @@ namespace fsm_definitions {
     namespace introspection {
         #ifdef FSM_OS_IS_WINDOWS
             // TODO:
-            extern auto unmangled_and_cleaned_type_name_from( const C_str builtin_type_name )
+            extern auto unmangled_and_cleaned( const C_str builtin_type_name )
                 -> string;
         #else
-            inline auto unmangled_and_cleaned_type_name_from( const C_str builtin_type_name )
+            inline auto unmangled_and_cleaned( const C_str builtin_type_name )
                 -> string
             {
                 struct Name
@@ -55,13 +55,13 @@ namespace fsm_definitions {
             }
         #endif
 
-        inline auto unmangled_and_cleaned_type_name_from( in_<string> builtin_type_name )
+        inline auto unmangled_and_cleaned( in_<string> builtin_type_name )
             -> string
-        { return unmangled_and_cleaned_type_name_from( builtin_type_name.c_str() ); }
+        { return unmangled_and_cleaned( builtin_type_name.c_str() ); }
 
-        inline auto unmangled_and_cleaned_type_name_from( in_<string_view> builtin_type_name )
+        inline auto unmangled_and_cleaned( in_<string_view> builtin_type_name )
             -> string
-        { return unmangled_and_cleaned_type_name_from( string( builtin_type_name ) ); }
+        { return unmangled_and_cleaned( string( builtin_type_name ) ); }
     }  // namespace introspection
 }  // namespace fsm_definitions
 

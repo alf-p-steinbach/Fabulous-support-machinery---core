@@ -2,7 +2,7 @@
 #include <fsm/core/platform/std_core_language.hpp>
 
 #include <fsm/core/type_builders.hpp>       // in_
-#include <fsm/core/constructs/introspection/name_of_/unmangled_and_cleaned_type_name_from.hpp>
+#include <fsm/core/constructs/introspection/name_of_/unmangled_and_cleaned.hpp>
 
 #include <string>
 #include <typeindex>
@@ -10,7 +10,7 @@
 
 namespace fsm_definitions {
     using   fsm::in_,
-            fsm::unmangled_and_cleaned_type_name_from;
+            fsm::unmangled_and_cleaned;
     using   std::string,            // <string>
             std::type_index,        // <typeindex>
             std::type_info;         // <type_info>
@@ -19,11 +19,11 @@ namespace fsm_definitions {
 
         inline auto name_of( in_<type_index> info )
             -> string
-        { return unmangled_and_cleaned_type_name_from( info.name() ); }
+        { return unmangled_and_cleaned( info.name() ); }
 
         inline auto name_of( in_<type_info> info )
             -> string
-        { return unmangled_and_cleaned_type_name_from( info.name() ); }
+        { return unmangled_and_cleaned( info.name() ); }
 
     }  // namespace introspection
 }  // namespace fsm_definitions

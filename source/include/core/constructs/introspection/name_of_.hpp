@@ -1,7 +1,7 @@
 ﻿#pragma once    // Source encoding: UTF-8 with BOM (π is a lowercase Greek "pi").
 #include <fsm/core/platform/std_core_language.hpp>
 
-#include <fsm/core/constructs/introspection/name_of_/unmangled_and_cleaned_type_name_from.hpp>
+#include <fsm/core/constructs/introspection/name_of_/unmangled_and_cleaned.hpp>
 
 #include <string>
 #include <string_view>
@@ -14,7 +14,7 @@
 // type as a template parameter avoids these decays.
 
 namespace fsm_definitions {
-    using   fsm::unmangled_and_cleaned_type_name_from;
+    using   fsm::unmangled_and_cleaned;
     using   std::string,
             std::string_view;
 
@@ -27,7 +27,7 @@ namespace fsm_definitions {
             -> std::string
         {
             const string_view   raw_wrapped_name    = typeid( Wrapped_<Type> ).name();
-            const string        wrapped_name        = unmangled_and_cleaned_type_name_from( raw_wrapped_name );
+            const string        wrapped_name        = unmangled_and_cleaned( raw_wrapped_name );
 
             const size_t        i_first     = wrapped_name.find_first_of( '<' ) + 1;
             const size_t        i_beyond    = wrapped_name.find_last_of( '>' );
